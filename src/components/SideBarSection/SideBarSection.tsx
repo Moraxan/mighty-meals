@@ -1,33 +1,48 @@
-import Accordion from 'react-bootstrap/Accordion';
-import Button from 'react-bootstrap/Button';
-import {ReturnFilter} from './Filters';
-import './SideBarSection.css'
+import Accordion from "react-bootstrap/Accordion";
+import Button from "react-bootstrap/Button";
+import { ReturnFilters } from "./Filters";
+import "./SideBarSection.css";
+import "./SedeBarButtons.css";
 
-    //@ts-ignore
-    export default function SideBarSection({name, argument}) {
+//@ts-ignore
+export default function SideBarSection() {
+  return (
+    <Accordion>
+      <AccordionItem />
+    </Accordion>
+  );
+}
 
-        const tmpArray = ReturnFilter(argument);
-        return (
-          <Accordion>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header className="filter-section-header">{name}</Accordion.Header>
-              <Accordion.Body>
+function AccordionItem() {
+  return (
+    <ul>
+      {ReturnFilters().map((array) => (
+        <li key={ReturnFilters().indexOf(array)}>
+        <Accordion.Item eventKey={ReturnFilters().indexOf(array).toString()}>
+          <Accordion.Header className="filter-section-header">
+            {ArrayName(ReturnFilters().indexOf(array))}
+          </Accordion.Header>
+          <Accordion.Body>
+            {array.map(item => <Button key={item} className="filter-buttons">{item.toLowerCase()}</Button>)}
+          </Accordion.Body>
+        </Accordion.Item>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
-              </Accordion.Body>
-            </Accordion.Item>
-            {/* <Accordion.Item eventKey="1">
-              <Accordion.Header>cuisines</Accordion.Header>
-              <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
-              </Accordion.Body>
-            </Accordion.Item> */}
-          </Accordion>
-        );
-      }
-    
+function ArrayName(arrIndex: number) {
+  switch(arrIndex){
+    case 0:
+      return "meal types";
+    case 1:
+      return "cuisines";
+    case 2:
+      return "intolerances";
+    case 3:
+      return "diets";
+    default:
+      return "not found";
+  }
+}

@@ -17,12 +17,12 @@ export default function SideBar() {
         Filter
       </Button>
       <Offcanvas id="filter-canvas" show={show} onHide={handleClose} placement="end">
-        <Offcanvas.Header id="filter-header">
+        <Offcanvas.Header id="filter-header" className="d-flex align-items-start">
           <Offcanvas.Title id="filter-title" >Search & Filter</Offcanvas.Title>
           <Button className="filter-close-btn" onClick={handleClose}>X</Button>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <SideBarSection name="meal types" argument="meal" />
+          <SideBarSection />
         </Offcanvas.Body>
       </Offcanvas>
     </>

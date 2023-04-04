@@ -1,20 +1,13 @@
 //@ts-ignore
-export function ReturnFilter(name){
-    if(name === "meal"){
-        return mealTypes;
-    }
+export function ReturnFilters(){
+    const tmpArray = [
+        mealTypes,
+        cuisines,
+        intolerances,
+        diets
+    ];
 
-    if(name === "cuisine"){
-        return cuisines;
-    }
-
-    if(name === "intolerance"){
-        return intolerances;
-    }
-
-    if(name === "diet"){
-        return diets;
-    }
+    return tmpArray;
 }
 
 const mealTypes = [

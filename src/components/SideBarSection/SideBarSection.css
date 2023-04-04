@@ -1,3 +1,12 @@
+.accordion{
+    --bs-accordion-border-color: black;
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0 rgb(0, 0, 0);
+}
+
+.accordion-body{
+    padding: 16px 20px 16px 0px;
+}
+
 .accordion-collapse{
     background-color: #e42427;
 }
@@ -7,11 +16,14 @@
     border-bottom: 1px solid black;
 }
 
+.accordion-item:focus{
+    border-bottom: 1px solid black;
+}
+
 .accordion-button{
     background-color: #e42427;
     padding: 10px 0px 10px 10px;
-    font-size: 1.5rem;
-
+    font-size: 1.7rem;
 }
 
 .accordion-button:not(.collapsed){
