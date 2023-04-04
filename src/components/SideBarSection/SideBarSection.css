@@ -1,0 +1,36 @@
+.accordion-collapse{
+    background-color: #e42427;
+}
+
+.accordion-item{
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+.accordion-button{
+    background-color: #e42427;
+    padding: 10px 0px 10px 10px;
+    font-size: 1.5rem;
+
+}
+
+.accordion-button:not(.collapsed){
+    background-color: #e42427;
+    padding: 10px 0px 10px 10px;
+    color: black;
+}
+
+.accordion-item:first-of-type .accordion-button{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed{
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.accordion-item:last-of-type .accordion-collapse{
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
