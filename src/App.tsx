@@ -6,6 +6,7 @@ import './App.css'
 import SideBar from './components/SideBar/SideBar'
 import './fonts/AVENGEANCE HEROIC AVENGER.ttf';
 
+
 function App() {
 
   return (

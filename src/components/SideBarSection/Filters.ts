@@ -1,4 +1,3 @@
-//@ts-ignore
 export function ReturnFilters(){
     const tmpArray = [
         mealTypes,

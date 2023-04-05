@@ -6,10 +6,37 @@
     margin: 3px 3px 3px 3px;
     border: 2px solid black;
     border-radius: 12px;
+    display: block;
+}
+
+.selected-btn{
+    background-color: #7c5fb4;
 }
 
 .filter-buttons:hover{
     background-color: #7c5fb4;
     color: black;
     border: 2px solid black;
+}
+
+.selected-btn{
+    background-color: #7c5fb4;
+    color: black;
+    font-size: 1.2rem;
+    padding: 0px 15px 0px 8px;
+    margin: 3px 3px 3px 3px;
+    border: 2px solid black;
+    border-radius: 12px;
+}
+
+.selected-btn:hover{
+    background-color: #eda037;
+    color: black;
+    border: 2px solid black;
+}
+
+.x-btn{
+    width: auto;
+    max-height: 10px;
+    margin: 0px 0px 0px 10px;
 }
