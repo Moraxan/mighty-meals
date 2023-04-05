@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
 const SearchIngredients = () => {
-  const [ingredientArray, setIngredientArray] = useState([]);
-  const [ingredientChoices, setIngredientChoices] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
+  const [ingredientArray, setIngredientArray] = useState<string[]>([]);
+  const [ingredientChoices, setIngredientChoices] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   useEffect(() => {
     fetch('./src/components/commonIngredients.csv')
@@ -15,7 +15,7 @@ const SearchIngredients = () => {
       });
   }, []);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const userData = event.target.value;
     setSearchTerm(userData);
 
@@ -26,9 +26,9 @@ const SearchIngredients = () => {
     setSuggestions(emptyArray);
   };
 
-  const handleSelectFromList = (element) => {
-    const selectUserData = element.textContent.toLowerCase();
-    const updatedChoices = ingredientChoices.includes(selectUserData)
+  const handleSelectFromList = (element: HTMLElement) => {
+    const selectUserData = element.textContent?.toLowerCase();
+    const updatedChoices = selectUserData && ingredientChoices.includes(selectUserData)
       ? ingredientChoices.filter(choice => choice !== selectUserData)
       : [...ingredientChoices, selectUserData];
     setIngredientChoices(updatedChoices);
@@ -42,14 +42,14 @@ const SearchIngredients = () => {
     setSuggestions([]);
   };
 
-  const selectionFilter = (choices) => choices.join(', ');
+  const selectionFilter = (choices: string[]) => choices.join(', ');
 
   return (
     <div className="search-input">
       <input type="text" value={searchTerm} onChange={handleInputChange} />
       <ul className="autocom-box">
         {suggestions.map((data, index) => (
-          <li key={index} onClick={(event) => handleSelectFromList(event.target)}>
+          <li key={index} onClick={(event) => handleSelectFromList(event.currentTarget)}>
             {data.toLowerCase()}
           </li>
         ))}
