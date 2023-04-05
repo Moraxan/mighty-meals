@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+.autocom-box {
+  list-style: none;
+  text-align: left;
+  padding: 0;
+}
