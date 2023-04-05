@@ -46,3 +46,10 @@
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
 }
+
+.filter-footer{
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 7px;
+    width: 100%;
+}

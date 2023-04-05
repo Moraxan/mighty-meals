@@ -21,7 +21,7 @@ export default function SideBar() {
           <Offcanvas.Title id="filter-title" >Search & Filter</Offcanvas.Title>
           <Button className="filter-close-btn" onClick={handleClose}>X</Button>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body className="filter-body">
           <SideBarSection />
         </Offcanvas.Body>
       </Offcanvas>

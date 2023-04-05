@@ -21,10 +21,14 @@ export default function SideBarSection() {
   const [selected, setSelected] = useState(emptyArr);
 
   return (
-    <Accordion>
-      <AccordionSelectedFilters />
-      <AccordionFilterItem />
-    </Accordion>
+    <>
+      <Accordion>
+        <AccordionSelectedFilters />
+        <AccordionFilterItem />
+      </Accordion>
+      <FilterFooter />
+    </>
+
   );
 
   function AccordionSelectedFilters(){
@@ -68,7 +72,7 @@ export default function SideBarSection() {
             </Accordion.Header>
             <Accordion.Body>
               {/*//@ts-ignore*/}
-              {array.map(item => <Button key={item} id={item} onClick={event => HandleClick(event, ArrayName(index))} className={`filter-buttons ${selected === testTest(selected, item.toLocaleLowerCase()) && "btn-selected"}`}>{item.toLowerCase()}</Button>)}
+              {array.map(item => <Button key={item} id={item} onClick={event => HandleClick(event, ArrayName(index))} className={`filter-buttons ${isItemSelected(selected, item.toLocaleLowerCase()) && "btn-selected"}`}>{item.toLowerCase()}</Button>)}
             </Accordion.Body>
           </Accordion.Item>
           </li>
@@ -77,13 +81,31 @@ export default function SideBarSection() {
     );
   }
 
-  function testTest(testArr: string[], item: string){
-    if(testArr.includes(item)){
-      return testArr;
+  function FilterFooter(){
+    const tmpSpan = <span className="clear-btn-font">{` (${selected.length})`}</span>
+    return (
+      <footer className="filter-footer d-flex">
+        <Button className="clear-result-btn" onClick={clearAll}>clear{selected.length > 0 && tmpSpan}</Button>
+        <Button className="clear-result-btn">results</Button>
+      </footer>
+    )
+  }
+
+  function isItemSelected(inputArray: string[], item: string){
+    if(inputArray.includes(item)){
+      return true;
     }
     else{
-      return "";
+      return false;
     }
+  }
+
+  function clearAll(){
+    setMealChoice("");
+    setCuisineChoices(emptyArr);
+    setIntoleranceChoices(emptyArr);
+    setDietChoices(emptyArr);
+    setSelected(emptyArr);
   }
 
   function HandleClick(event: React.MouseEvent<HTMLButtonElement>, category: string){

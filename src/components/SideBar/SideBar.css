@@ -22,6 +22,10 @@
     border-bottom: 3px solid black;
 }
 
+.filter-body{
+    margin-bottom: 60px;
+}
+
 .offcanvas-header{
     padding: 10px 10px 3px 10px;
 }
