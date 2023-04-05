@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './SearchIngredients.css';
 
 const SearchIngredients = () => {
   const [ingredientArray, setIngredientArray] = useState<string[]>([]);
@@ -44,18 +45,18 @@ const SearchIngredients = () => {
   };
 
   const selectionFilter = (choices: string[]) => choices.join(', ');
-//autocom-box is styled with the app.css
+//autocom-box is styled with the the local SearchIngredient.css
   return (
     <div className="search-input">
       <input type="text" value={searchTerm} onChange={handleInputChange} />
-      <ul className="autocom-box"> 
-      {/* The code below handles the elements in the list and sends them as to the ingredientChoices, using the handleSelectFromList function */}
-        {suggestions.map((data, index) => (
-          <li key={index} onClick={(event) => handleSelectFromList(event.currentTarget)}> 
-            {data.toLowerCase()}
-          </li>
-        ))}
-      </ul>
+        <ul className="autocom-box">
+          {/* suggestiion.slice(0,10) makes the list only display a maximum of 10 results. */}
+            {suggestions.slice(0, 10).map((data, index) => (
+              <li key={index} onClick={(event) => handleSelectFromList(event.currentTarget)}>
+                {data.toLowerCase()}
+              </li>
+            ))}
+        </ul>
       <button className="clear-ingredients" onClick={handleClearIngredients}>Clear</button>
       <p id="selectedIngredients">{selectionFilter(ingredientChoices)}</p>
     </div>
