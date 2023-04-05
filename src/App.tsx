@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import SearchBar from './components/SearchBar'
+import IngredientSearch from './components/IngredientSearch'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -30,6 +31,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <SearchBar />
+      <IngredientSearch />
     </div>
   )
 }
