@@ -1,6 +1,8 @@
 .accordion{
     --bs-accordion-border-color: black;
     --bs-accordion-btn-focus-box-shadow: 0 0 0 0 rgb(0, 0, 0);
+    --bs-accordion-bg: none;
+    --bs-accordion-border-radius: 0px;
 }
 
 .accordion-body{
@@ -30,6 +32,7 @@
     background-color: #e42427;
     padding: 10px 0px 10px 10px;
     color: black;
+    box-shadow: none;
 }
 
 .accordion-item:first-of-type .accordion-button{

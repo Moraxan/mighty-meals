@@ -1,5 +1,6 @@
 .filter-buttons{
     background-color: #eda037;
+    min-width: 130px;
     color: black;
     font-size: 1.7rem;
     padding: 0px 15px 0px 8px;

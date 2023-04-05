@@ -141,6 +141,7 @@ export default function SideBarSection() {
     }
 
     if(category === "cuisines"){
+      console.log(tmpCuisineChoices);
       if(!tmpCuisineChoices.includes(buttonText)){
         tmpCuisineChoices.push(buttonText);
         let tmpArr = [buttonText];
@@ -152,6 +153,8 @@ export default function SideBarSection() {
 
       setCuisineChoices(tmpCuisineChoices);
       setSelected(tmpSelected);
+
+      console.log(tmpCuisineChoices);
     }
 
     if(category === "intolerances"){
