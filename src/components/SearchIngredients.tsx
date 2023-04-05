@@ -43,7 +43,7 @@ function handleSelectFromList(element: HTMLElement) {
     setSearchTerm('');
     setSuggestions([]);
   };
-//This is my array of all the selected ingredients.
+//This takes an array and outputs it as items followed by a comma. Ex "banana, apple, vinegar". Later in the code it parses the ingredientChoices Array.
   const selectionFilter = (choices: string[]) => choices.join(', ');
 //autocom-box is styled with the the local SearchIngredient.css
   return (
