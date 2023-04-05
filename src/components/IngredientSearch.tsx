@@ -7,6 +7,21 @@ const IngredientSearch = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [recipes, setRecipes] = useState([]);
 
+  const [apiKey, setApiKey] = useState('');
+
+  useEffect(() => {
+    const storedApiKey = localStorage.getItem('apiKey');
+    if (storedApiKey) {
+      setApiKey(storedApiKey);
+    }
+  }, []);
+
+  const handleApiKeyChange = (event) => {
+    const newApiKey = event.target.value;
+    setApiKey(newApiKey);
+    localStorage.setItem('apiKey', newApiKey);
+  };
+
   useEffect(() => {
     fetch("./src/components/commonIngredients.csv")
       .then((rawData) => rawData.text())
@@ -60,7 +75,7 @@ const IngredientSearch = () => {
   }
 
   function handleTvmhBtnClick() {
-    const apiKey = "f0486ec7f61543e19771bc59bf1750b7";
+    const apiKey = localStorage.getItem('apiKey');
     const tvmhHits = 4;
     const apiString = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${encodeURIComponent(
       ingredientChoices.join(",")
@@ -76,6 +91,12 @@ const IngredientSearch = () => {
 
   return (
     <div>
+      <div>
+      <label>
+        API Key:
+        <input type="text" value={apiKey} onChange={handleApiKeyChange} />
+      </label>
+    </div>
       <div className="search-input">
         <input type="text" value={searchText} onChange={handleInputChange} />
         <ul className="autocom-box">{suggestions}</ul>
