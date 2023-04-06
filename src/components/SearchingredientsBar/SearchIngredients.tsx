@@ -9,7 +9,7 @@ const SearchIngredients = () => {
 
 //This fetches the .csv. It reads the CSV and the response.text method parses it to text strings. The data.split breaks every row and tosses it into the setIngredientArray.
   useEffect(() => {
-    fetch('./src/components/commonIngredients.csv')
+    fetch('./src/components/SearchingredientsBar/commonIngredients.csv')
       .then(response => response.text())
       .then(data => {
         const ingrArr = data.split('\r\n');

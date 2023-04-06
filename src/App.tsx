@@ -2,8 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import SearchIngredients from './components/SearchIngredients'
-import IngredientSearch from './components/IngredientSearch'
+import SearchIngredients from './components/SearchingredientsBar/SearchIngredients'
+import IngredientSearch from './components/SearchingredientsBar/IngredientSearch'
 
 function App() {
   const [count, setCount] = useState(0)
