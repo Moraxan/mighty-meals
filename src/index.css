@@ -1,8 +1,13 @@
+#root{
+  max-width: 3840px;
+  margin: 0px;
+  padding: 0px;
+}
+
 @font-face{
   font-family: "Avengeance";
   src: local("AvengeanceHeroicAvenger"), url("./fonts/AVENGEANCE HEROIC AVENGER.ttf") format("truetype");
 }
-
 
 body{
   background-color: #7c5fb4;

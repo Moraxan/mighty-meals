@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import SideBarSection from '../SideBarSection/SideBarSection';
 import closeLogo from "../../images/close.png"
+import filterLogo from '../../images/filter.png'
 import './SideBar.css'
 
 //@ts-ignore
@@ -14,8 +15,8 @@ export default function SideBar() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Filter
+      <Button className="filter-button" variant="primary" onClick={handleShow}>
+        <img className="filter-logo" alt="filter" src={filterLogo} />
       </Button>
       <Offcanvas id="filter-canvas" show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header id="filter-header" className="d-flex align-items-start">

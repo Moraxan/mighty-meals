@@ -1,0 +1,19 @@
+.mighty-footer{
+    height: 40px;
+    background-color: #7c5fb4;
+    text-align: center;
+    border-top: 5px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mighty-footer-p{
+    margin: 0px;
+}
+
+@media screen and (max-width: 900px) and (max-height: 900px){
+    .mighty-footer{
+        display: none;
+    }
+}

@@ -36,3 +36,20 @@
     padding: 0px;
     margin: 0px;
 }
+
+.filter-logo{
+    height: auto;
+    width: 50px;
+    padding: 3px;
+}
+
+.filter-button{
+    background-color: #eda037;
+    border: 3px solid black;
+    border-radius: 50%;
+}
+
+.filter-button:hover{
+    background-color: #e42427;
+    border: 3px solid black;
+}
