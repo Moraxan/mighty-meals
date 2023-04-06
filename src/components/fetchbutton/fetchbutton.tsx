@@ -8,8 +8,6 @@ function FetchButton({ ingredientChoices, setRecipes }) {
     ingredientChoices.join(",")
   )}&ranking=2&ignorePantry=true&number=${tvmhHits}`;
 
-  console.log(encodeURI(apiString));
-
   //Lets us store our own API-keys for debugging puropses.
   const handleApiKeyChange = (event) => {
     setApiKey(event.target.value);
@@ -22,6 +20,7 @@ function FetchButton({ ingredientChoices, setRecipes }) {
       .then((response) => response.json())
       .then((data) => setRecipes(data))
       .catch(() => alert("Cannot connect, check your API key."));
+      console.log(apiString)
   };
 
   //Ths html for the component. The API-key input could be deleted later on or handled by another component.
