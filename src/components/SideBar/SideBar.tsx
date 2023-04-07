@@ -18,7 +18,7 @@ export default function SideBar() {
       <Button className="filter-button" variant="primary" onClick={handleShow}>
         <img className="filter-logo" alt="filter" src={filterLogo} />
       </Button>
-      <Offcanvas id="filter-canvas" show={show} onHide={handleClose} placement="end">
+      <Offcanvas id="filter-canvas" scroll={true} show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header id="filter-header" className="d-flex align-items-start">
           <Offcanvas.Title id="filter-title" >Search & Filter</Offcanvas.Title>
           <Button className="filter-close-btn" onClick={handleClose}>
