@@ -19,7 +19,7 @@ export function SearchIngredients({ setIngredientChoices }) {
   }, []);
 
   // Define the handleInputChange function to handle changes in the search box
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const userData = event.target.value;
     setSearchTerm(userData);
 
@@ -28,7 +28,7 @@ export function SearchIngredients({ setIngredientChoices }) {
       : [];
 
     setSuggestions(emptyArray);
-  };
+  }
 
   // Define the handleSelectFromList function to handle selecting items from the suggestion list
   function handleSelectFromList(element: HTMLElement) {
@@ -43,20 +43,21 @@ export function SearchIngredients({ setIngredientChoices }) {
   }
 
   // Define the handleClearIngredients function to clear the ingredientChoices state variable
-  const handleClearIngredients = () => {
+  function handleClearIngredients() {
     setIngredientChoices([]);
     setSearchTerm('');
     setSuggestions([]);
-  };
-
+  }
+  
   // Define the selectionFilter function to convert the ingredientChoices array to a string with comma-separated values
-  const selectionFilter = (choices: string[]) => {
+  function selectionFilter(choices: string[]): string {
     if (Array.isArray(choices)) {
       return choices.join(', ');
     } else {
       return '';
     }
-  };
+  }
+  
   
   // Render the component
   return (
