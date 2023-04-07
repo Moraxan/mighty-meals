@@ -1,0 +1,14 @@
+@font-face{
+    font-family: "Varela";
+    src: local("VarelaRoundRegular"), url("../../fonts/VarelaRound-Regular.ttf") format("truetype");
+}
+
+.card{
+    position: static;
+    padding: 0px;
+    border: 3px solid black;
+}
+
+.test-card{
+    font-family: "Varela";
+}
