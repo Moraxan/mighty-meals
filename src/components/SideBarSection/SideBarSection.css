@@ -5,6 +5,10 @@
     --bs-accordion-border-radius: 0px;
 }
 
+.collapsed:hover{
+    color: black;
+}
+
 .accordion-body{
     padding: 16px 20px 16px 0px;
 }
