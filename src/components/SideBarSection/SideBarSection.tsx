@@ -35,25 +35,25 @@ export default function SideBarSection() {
     return (
       <>
         {mealChoice.length > 0 &&
-          <Button key={`${mealChoice}-selected`} className="selected-btn" onClick={event => HandleClick(event, "meal types")}>
+          <Button key={`${mealChoice}-selected`} className="selected-btn" onClick={event => HandleClick(mealChoice, "meal types")}>
             {mealChoice}
             <img className="x-btn" src={xWhite} alt="x"></img>
           </Button>}
 
         {cuisineChoices.map(item =>
-          <Button key={`${item}-selected`} className="selected-btn" onClick={event => HandleClick(event, "cuisines")}>
+          <Button key={`${item}-selected`} className="selected-btn" onClick={event => HandleClick(item, "cuisines")}>
             {item}
             <img className="x-btn" src={xWhite} alt="x"></img>
           </Button>)}
 
         {intoleranceChoices.map(item =>
-          <Button key={`${item}-selected`} className="selected-btn" onClick={event => HandleClick(event, "intolerances")}>
+          <Button key={`${item}-selected`} className="selected-btn" onClick={event => HandleClick(item, "intolerances")}>
             {item}
             <img className="x-btn" src={xWhite} alt="x"></img>
           </Button>)}
 
         {dietChoices.map(item =>
-          <Button key={`${item}-selected`} className="selected-btn" onClick={event => HandleClick(event, "diets")}>
+          <Button key={`${item}-selected`} className="selected-btn" onClick={event => HandleClick(item, "diets")}>
             {item}
             <img className="x-btn" src={xWhite} alt="x"></img>
           </Button>)}
@@ -72,7 +72,7 @@ export default function SideBarSection() {
             </Accordion.Header>
             <Accordion.Body>
               {/*//@ts-ignore*/}
-              {array.map(item => <Button key={item} id={item} onClick={event => HandleClick(event, ArrayName(index))} className={`filter-buttons ${isItemSelected(selected, item.toLocaleLowerCase()) && "btn-selected"}`}>{item.toLowerCase()}</Button>)}
+              {array.map(item => <Button key={item} id={item} onClick={event => HandleClick(item, ArrayName(index))} className={`filter-buttons ${isItemSelected(selected, item.toLocaleLowerCase()) && "btn-selected"}`}>{item.toLowerCase()}</Button>)}
             </Accordion.Body>
           </Accordion.Item>
           </li>
@@ -108,7 +108,7 @@ export default function SideBarSection() {
     setSelected(emptyArr);
   }
 
-  function HandleClick(event: React.MouseEvent<HTMLButtonElement>, category: string){
+  function HandleClick(buttonText: string, category: string){
     let tmpMealChoice = mealChoice;
     let tmpCuisineChoices = [...cuisineChoices];
     let tmpIntoleranceChoices = [...intoleranceChoices];
@@ -116,8 +116,7 @@ export default function SideBarSection() {
 
     let tmpSelected = [...selected];
 
-    //@ts-ignore
-    let buttonText: string = event.target.innerText;
+    buttonText = buttonText.toLowerCase();
 
     if(category === "meal types"){
 
@@ -137,13 +136,12 @@ export default function SideBarSection() {
       }
 
       setMealChoice(tmpMealChoice);
-      setSelected(tmpSelected);
     }
 
     if(category === "cuisines"){
-      console.log(tmpCuisineChoices);
       if(!tmpCuisineChoices.includes(buttonText)){
         tmpCuisineChoices.push(buttonText);
+
         let tmpArr = [buttonText];
         tmpSelected.push(...tmpArr);
       } else{
@@ -152,14 +150,12 @@ export default function SideBarSection() {
       }
 
       setCuisineChoices(tmpCuisineChoices);
-      setSelected(tmpSelected);
-
-      console.log(tmpCuisineChoices);
     }
 
     if(category === "intolerances"){
       if(!tmpIntoleranceChoices.includes(buttonText)){
         tmpIntoleranceChoices.push(buttonText);
+
         let tmpArr = [buttonText];
         tmpSelected.push(...tmpArr);
       } else{
@@ -168,22 +164,22 @@ export default function SideBarSection() {
       }
 
       setIntoleranceChoices(tmpIntoleranceChoices);
-      setSelected(tmpSelected);
     }
 
     if(category === "diets"){
       if(!tmpDietChoices.includes(buttonText)){
         tmpDietChoices.push(buttonText);
+
         let tmpArr = [buttonText];
         tmpSelected.push(...tmpArr);
       } else{
         tmpDietChoices.splice(tmpDietChoices.indexOf(buttonText), 1)
         tmpSelected.splice(tmpSelected.indexOf(buttonText), 1);
       }
-
       setDietChoices(tmpDietChoices);
-      setSelected(tmpSelected);
+
     }
+    setSelected(tmpSelected);
   }
 }
 
