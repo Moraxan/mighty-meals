@@ -1,6 +1,6 @@
 @font-face{
   font-family: "Avengeance";
-  src: local("AvengeanceHeroicAvenger"), url("./fonts/AVENGEANCE HEROIC AVENGER.ttf") format("truetype");
+  src: local("AvengeanceHeroicAvenger"), url("./fonts/AVENGEANCE/AVENGEANCE HEROIC AVENGER.ttf") format("truetype");
 }
 
 body{

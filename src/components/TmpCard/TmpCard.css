@@ -1,6 +1,6 @@
 @font-face{
     font-family: "Varela";
-    src: local("VarelaRoundRegular"), url("../../fonts/VarelaRound-Regular.ttf") format("truetype");
+    src: local("VarelaRoundRegular"), url("../../fonts/Varela/VarelaRound-Regular.ttf") format("truetype");
 }
 
 .card{
