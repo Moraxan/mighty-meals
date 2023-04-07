@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import SearchIngredients from '../searchingredientsbar/SearchIngredients';
 
-function FetchButton({ ingredientChoices, setRecipes }) {
+//Gives the component 2 props which can be accessed.
+export function FetchButton({ ingredientChoices, setRecipes }) {
   const [apiKey, setApiKey] = useState(localStorage.getItem('apiKey') || '');
   const tvmhHits = 4;
   const apiString = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${encodeURIComponent(
@@ -33,4 +33,3 @@ function FetchButton({ ingredientChoices, setRecipes }) {
   );
 }
 
-export default FetchButton;
