@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './fonts/AVENGEANCE HEROIC AVENGER.ttf';
+import './fonts/AVENGEANCE/AVENGEANCE HEROIC AVENGER.ttf';
 import './App.css'
 import SideBar from './components/SideBar/SideBar'
 import NavigationBar from './components/NavigationBar/NavigationBar';
