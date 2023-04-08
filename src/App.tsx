@@ -40,6 +40,8 @@ function App() {
   const [intoleranceChoices, setIntoleranceChoices] = useState(emptyArr);
   const [dietChoices, setDietChoices] = useState(emptyArr);
   const [selected, setSelected] = useState(emptyArr);
+  // placeholder for searchbar ingredient choices
+  const [ingredientChoices, setIngredientChoices] = useState(emptyArr);
 
 
   useEffect(() => {

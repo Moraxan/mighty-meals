@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import { ReturnFilters } from "./Filters";
@@ -21,7 +20,6 @@ export default function SideBarSection(props) {
       </Accordion>
       <FilterFooter />
     </>
-
   );
 
   function AccordionSelectedFilters(){
