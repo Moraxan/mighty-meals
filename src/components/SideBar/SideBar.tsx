@@ -7,7 +7,7 @@ import filterLogo from '../../images/filter.png'
 import './SideBar.css'
 
 //@ts-ignore
-export default function SideBar() {
+export default function SideBar(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -26,7 +26,7 @@ export default function SideBar() {
           </Button>
         </Offcanvas.Header>
         <Offcanvas.Body className="filter-body">
-          <SideBarSection />
+          <SideBarSection mealChoice={props.mealChoice} setMealChoice={props.setMealChoice} cuisineChoices={props.cuisineChoices} setCuisineChoices={props.setCuisineChoices} intoleranceChoices={props.intoleranceChoices} setIntoleranceChoices={props.setIntoleranceChoices} dietChoices={props.dietChoices} setDietChoices={props.setDietChoices} selected={props.selected} setSelected={props.setSelected}/>
         </Offcanvas.Body>
       </Offcanvas>
     </>

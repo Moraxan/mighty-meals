@@ -9,16 +9,9 @@ import "./SideBarButtons.css";
 
 
 //@ts-ignore
-export default function SideBarSection() {
+export default function SideBarSection(props) {
 
   const emptyArr: string[] = [];
-
-  const [mealChoice, setMealChoice] = useState("");
-  const [cuisineChoices, setCuisineChoices] = useState(emptyArr);
-  const [intoleranceChoices, setIntoleranceChoices] = useState(emptyArr);
-  const [dietChoices, setDietChoices] = useState(emptyArr);
-
-  const [selected, setSelected] = useState(emptyArr);
 
   return (
     <>
@@ -34,25 +27,28 @@ export default function SideBarSection() {
   function AccordionSelectedFilters(){
     return (
       <>
-        {mealChoice.length > 0 &&
-          <Button key={`${mealChoice}-selected`} className="selected-btn" onClick={event => HandleClick(mealChoice, "meal types")}>
-            {mealChoice}
+        {props.mealChoice.length > 0 &&
+          <Button key={`${props.mealChoice}-selected`} className="selected-btn" onClick={event => HandleClick(props.mealChoice, "meal types")}>
+            {props.mealChoice}
             <img className="x-btn" src={xWhite} alt="x"></img>
           </Button>}
 
-        {cuisineChoices.map(item =>
+        {/*//@ts-ignore*/}
+        {props.cuisineChoices.map(item =>
           <Button key={`${item}-selected`} className="selected-btn" onClick={event => HandleClick(item, "cuisines")}>
             {item}
             <img className="x-btn" src={xWhite} alt="x"></img>
           </Button>)}
 
-        {intoleranceChoices.map(item =>
+        {/*//@ts-ignore*/}
+        {props.intoleranceChoices.map(item =>
           <Button key={`${item}-selected`} className="selected-btn" onClick={event => HandleClick(item, "intolerances")}>
             {item}
             <img className="x-btn" src={xWhite} alt="x"></img>
           </Button>)}
 
-        {dietChoices.map(item =>
+        {/*//@ts-ignore*/}
+        {props.dietChoices.map(item =>
           <Button key={`${item}-selected`} className="selected-btn" onClick={event => HandleClick(item, "diets")}>
             {item}
             <img className="x-btn" src={xWhite} alt="x"></img>
@@ -72,7 +68,7 @@ export default function SideBarSection() {
             </Accordion.Header>
             <Accordion.Body>
               {/*//@ts-ignore*/}
-              {array.map(item => <Button key={item} id={item} onClick={event => HandleClick(item, ArrayName(index))} className={`filter-buttons ${isItemSelected(selected, item.toLocaleLowerCase()) && "btn-selected"}`}>{item.toLowerCase()}</Button>)}
+              {array.map(item => <Button key={item} id={item} onClick={event => HandleClick(item, ArrayName(index))} className={`filter-buttons ${isItemSelected(props.selected, item.toLocaleLowerCase()) && "btn-selected"}`}>{item.toLowerCase()}</Button>)}
             </Accordion.Body>
           </Accordion.Item>
           </li>
@@ -82,10 +78,10 @@ export default function SideBarSection() {
   }
 
   function FilterFooter(){
-    const tmpSpan = <span className="clear-btn-font">{` (${selected.length})`}</span>
+    const tmpSpan = <span className="clear-btn-font">{` (${props.selected.length})`}</span>
     return (
       <footer className="filter-footer d-flex">
-        <Button className="clear-result-btn" onClick={clearAll}>clear{selected.length > 0 && tmpSpan}</Button>
+        <Button className="clear-result-btn" onClick={clearAll}>clear{props.selected.length > 0 && tmpSpan}</Button>
         <Button className="clear-result-btn">results</Button>
       </footer>
     )
@@ -101,20 +97,20 @@ export default function SideBarSection() {
   }
 
   function clearAll(){
-    setMealChoice("");
-    setCuisineChoices(emptyArr);
-    setIntoleranceChoices(emptyArr);
-    setDietChoices(emptyArr);
-    setSelected(emptyArr);
+    props.setMealChoice("");
+    props.setCuisineChoices(emptyArr);
+    props.setIntoleranceChoices(emptyArr);
+    props.setDietChoices(emptyArr);
+    props.setSelected(emptyArr);
   }
 
   function HandleClick(buttonText: string, category: string){
-    let tmpMealChoice = mealChoice;
-    let tmpCuisineChoices = [...cuisineChoices];
-    let tmpIntoleranceChoices = [...intoleranceChoices];
-    let tmpDietChoices = [...dietChoices];
+    let tmpMealChoice = props.mealChoice;
+    let tmpCuisineChoices = [...props.cuisineChoices];
+    let tmpIntoleranceChoices = [...props.intoleranceChoices];
+    let tmpDietChoices = [...props.dietChoices];
 
-    let tmpSelected = [...selected];
+    let tmpSelected = [...props.selected];
 
     buttonText = buttonText.toLowerCase();
 
@@ -135,7 +131,7 @@ export default function SideBarSection() {
         tmpSelected.push(...tmpArr);
       }
 
-      setMealChoice(tmpMealChoice);
+      props.setMealChoice(tmpMealChoice);
     }
 
     if(category === "cuisines"){
@@ -149,7 +145,7 @@ export default function SideBarSection() {
         tmpSelected.splice(tmpSelected.indexOf(buttonText), 1);
       }
 
-      setCuisineChoices(tmpCuisineChoices);
+      props.setCuisineChoices(tmpCuisineChoices);
     }
 
     if(category === "intolerances"){
@@ -163,7 +159,7 @@ export default function SideBarSection() {
         tmpSelected.splice(tmpSelected.indexOf(buttonText), 1);
       }
 
-      setIntoleranceChoices(tmpIntoleranceChoices);
+      props.setIntoleranceChoices(tmpIntoleranceChoices);
     }
 
     if(category === "diets"){
@@ -176,10 +172,10 @@ export default function SideBarSection() {
         tmpDietChoices.splice(tmpDietChoices.indexOf(buttonText), 1)
         tmpSelected.splice(tmpSelected.indexOf(buttonText), 1);
       }
-      setDietChoices(tmpDietChoices);
+      props.setDietChoices(tmpDietChoices);
 
     }
-    setSelected(tmpSelected);
+    props.setSelected(tmpSelected);
   }
 }
 

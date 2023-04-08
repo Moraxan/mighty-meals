@@ -31,7 +31,15 @@ interface Recipe  {
 
 function App() {
   const tmpRecipe: Recipe[] = [];
+  const emptyArr: string[] = [];
+
   const [recipes, setRecipes] = useState(tmpRecipe);
+
+  const [mealChoice, setMealChoice] = useState("");
+  const [cuisineChoices, setCuisineChoices] = useState(emptyArr);
+  const [intoleranceChoices, setIntoleranceChoices] = useState(emptyArr);
+  const [dietChoices, setDietChoices] = useState(emptyArr);
+  const [selected, setSelected] = useState(emptyArr);
 
 
   useEffect(() => {
@@ -80,7 +88,7 @@ function App() {
   return (
     <div>
       <NavigationBar />
-      <SideBar />
+      <SideBar mealChoice={mealChoice} setMealChoice={setMealChoice} cuisineChoices={cuisineChoices} setCuisineChoices={setCuisineChoices} intoleranceChoices={intoleranceChoices} setIntoleranceChoices={setIntoleranceChoices} dietChoices={dietChoices} setDietChoices={setDietChoices} selected={selected} setSelected={setSelected}/>
       <div className="div-text-test">
         <br />
         <div className="d-flex flex-wrap justify-content-center">
