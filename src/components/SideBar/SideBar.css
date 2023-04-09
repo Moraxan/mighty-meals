@@ -1,3 +1,8 @@
+@font-face{
+    font-family: "Varela";
+    src: local("VarelaRoundRegular"), url("../../fonts/Varela/VarelaRound-Regular.ttf") format("truetype");
+}
+
 .filter-close-btn{
     background-color: #eda037;
     padding: 0px;
@@ -53,4 +58,17 @@
 .filter-button:hover{
     background-color: #e42427;
     border: 3px solid black;
+}
+
+.temp-searchbar{
+    background-color: #eda037;
+    border: 3px solid black;
+    border-radius: 12px;
+    font-family: "Varela";
+}
+
+.temp-searchbar:focus{
+    background-color: #eda037;
+    border: 3px solid black;
+    border-radius: 12px;
 }

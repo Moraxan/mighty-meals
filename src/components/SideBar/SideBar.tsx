@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import Form from 'react-bootstrap/Form';
 import SideBarSection from '../SideBarSection/SideBarSection';
 import closeLogo from "../../images/close.png"
 import filterLogo from '../../images/filter.png'
@@ -26,6 +27,12 @@ export default function SideBar(props) {
           </Button>
         </Offcanvas.Header>
         <Offcanvas.Body className="filter-body">
+
+        {/* Temp placeholder for searchbar, to be replaced by searchbar component with logic */}
+        <Form className="d-flex">
+          <Form.Control type="search" placeholder="Search here..." className="me-1 mb-2 temp-searchbar" aria-label="Search" />
+        </Form>
+
           <SideBarSection mealChoice={props.mealChoice} setMealChoice={props.setMealChoice} cuisineChoices={props.cuisineChoices} setCuisineChoices={props.setCuisineChoices} intoleranceChoices={props.intoleranceChoices} setIntoleranceChoices={props.setIntoleranceChoices} dietChoices={props.dietChoices} setDietChoices={props.setDietChoices} selected={props.selected} setSelected={props.setSelected}/>
         </Offcanvas.Body>
       </Offcanvas>
