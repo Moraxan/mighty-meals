@@ -8,8 +8,8 @@ export default function NavigationBar() {
   return (
     <>
       <Navbar className="mighty-nabvar" variant="dark">
-        <Container className="">
-          <Navbar.Brand href="#home" className="">
+        <Container>
+          <Navbar.Brand href="/">
             <img
               alt="logo"
               src={logo}
