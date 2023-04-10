@@ -78,9 +78,9 @@ export default function SideBarSection(props) {
   function FilterFooter(){
     const tmpSpan = <span className="clear-btn-font">{` (${props.selected.length})`}</span>
     return (
-      <footer className="filter-footer d-flex">
+      <footer className="filter-footer d-flex pb-1">
         <Button className="clear-result-btn" onClick={clearAll}>clear{props.selected.length > 0 && tmpSpan}</Button>
-        <Button className="clear-result-btn">results</Button>
+        <Button className="clear-result-btn">go!</Button>
       </footer>
     )
   }

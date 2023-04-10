@@ -64,3 +64,12 @@
     font-weight: bold;
     font-size: 1.4rem;
 }
+
+
+@media screen and (max-width: 450px) and (max-height: 900px){
+    .clear-result-btn{
+        min-width: 120px;
+        padding: 0px 15px 0px 8px;
+        margin: 3px 20px 3px 3px;
+    }
+}
