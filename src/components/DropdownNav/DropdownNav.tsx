@@ -3,6 +3,9 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import burger from "../../images/burger.png";
 import "./DropdownNav.css";
 
+
+// Put this as its own component due to half-comlicated code to monitor screensize and upon that change state if it matches below variable matches.
+// Function is called useMediaQuery.
 export default function DropdownNav() {
     const matches = useMediaQuery('screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)')
 
