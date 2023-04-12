@@ -7,8 +7,8 @@ import "./SideBarButtons.css";
 
 //@ts-ignore
 export default function SideBarSection(props) {
-
-  const emptyArr: string[] = [];
+  // Taking in these props from SideBar.tsx: mealChoice, setMealChoice, cuisineChoices, setCuisineChoices, intoleranceChoices, setIntoleranceChoices
+  //                                     - dietChoices, setDietChoices, selected, setSelected, ingredientChoices, setIngredientChoices
 
   return (
     <>
@@ -21,6 +21,8 @@ export default function SideBarSection(props) {
   );
 
   function AccordionSelectedFilters(){
+    // Maps thru all states with the users filter/ingredient choices and displays them as buttons.
+    // All buttons have handleClick function which removes the choice from filter.
     return (
       <>
         {/*//@ts-ignore*/}
@@ -61,6 +63,10 @@ export default function SideBarSection(props) {
   }
 
   function AccordionFilterItem() {
+    // Nested mapping to create all filter sections.
+    // ReturnFilters function returns an array containing multiple arrays which represent all filters.
+
+    // Outer loop/map creates the section and inner loop adds all items as button to that section.
     return (
       <ul>
         {ReturnFilters().map((array, index) => (
@@ -81,6 +87,8 @@ export default function SideBarSection(props) {
   }
 
   function FilterFooter(){
+    // 2 buttons, 1 to clear and 1 to search. 
+
     const tmpSpan = <span className="clear-btn-font">{` (${props.selected.length + props.ingredientChoices.length})`}</span>
     return (
       <footer className="filter-footer d-flex pb-1">
@@ -91,6 +99,7 @@ export default function SideBarSection(props) {
   }
 
   function isItemSelected(inputArray: string[], item: string){
+    // function takes an array and an item and checks if item is included in the array. Using this to determine if button in filter sections is selected.
     if(inputArray.includes(item)){
       return true;
     }
@@ -100,6 +109,8 @@ export default function SideBarSection(props) {
   }
 
   function clearAll(){
+    const emptyArr: string[] = [];
+
     props.setIngredientChoices(emptyArr);
     props.setMealChoice("");
     props.setCuisineChoices(emptyArr);
@@ -109,22 +120,23 @@ export default function SideBarSection(props) {
   }
 
   function HandleClick(buttonText: string, category: string){
-    let tmpIngredientChoices = [...props.ingredientChoices];
-    let tmpMealChoice = props.mealChoice;
-    let tmpCuisineChoices = [...props.cuisineChoices];
-    let tmpIntoleranceChoices = [...props.intoleranceChoices];
-    let tmpDietChoices = [...props.dietChoices];
+    // Multiple sections for each filer type.
+    // Checking if current state have clicked button stored, if not id adds if to array, if already included it will be removed by splice.
+    // Either way state gets updated always when button is clicked.
 
     let tmpSelected = [...props.selected];
 
     buttonText = buttonText.toLowerCase();
 
     if(category === "ingredients"){
+      let tmpIngredientChoices = [...props.ingredientChoices];
+
       tmpIngredientChoices.splice(tmpIngredientChoices.indexOf(buttonText), 1)
       props.setIngredientChoices(tmpIngredientChoices);
     }
 
     if(category === "meal types"){
+      let tmpMealChoice = props.mealChoice;
 
       ReturnFilters()[0].forEach((item) => {
         if(tmpSelected.includes(item.toLowerCase())){
@@ -145,6 +157,8 @@ export default function SideBarSection(props) {
     }
 
     if(category === "cuisines"){
+      let tmpCuisineChoices = [...props.cuisineChoices];
+
       if(!tmpCuisineChoices.includes(buttonText)){
         tmpCuisineChoices.push(buttonText);
 
@@ -159,6 +173,8 @@ export default function SideBarSection(props) {
     }
 
     if(category === "intolerances"){
+      let tmpIntoleranceChoices = [...props.intoleranceChoices];
+
       if(!tmpIntoleranceChoices.includes(buttonText)){
         tmpIntoleranceChoices.push(buttonText);
 
@@ -173,6 +189,8 @@ export default function SideBarSection(props) {
     }
 
     if(category === "diets"){
+      let tmpDietChoices = [...props.dietChoices];
+
       if(!tmpDietChoices.includes(buttonText)){
         tmpDietChoices.push(buttonText);
 
@@ -190,6 +208,7 @@ export default function SideBarSection(props) {
 }
 
 function ArrayName(arrIndex: number) {
+  // Used when creating the filter sections, takes the nested array index and returns a proper name.
   switch(arrIndex){
     case 0:
       return "meal types";

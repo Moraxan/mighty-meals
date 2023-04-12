@@ -8,6 +8,7 @@ import Footer from './components/Footer/Footer';
 import TmpCard from './components/TmpCard/TmpCard';
 import SearchBar from './components/SearchBar/SearchBar';
 
+// Interface defining properties of recipe objects fetched from API.
 interface Recipe  {
   id: number;
 
@@ -31,22 +32,28 @@ interface Recipe  {
 }
 
 function App() {
+  // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
   const tmpRecipe: Recipe[] = [];
   const emptyArr: string[] = [];
 
+  // Storing recipe objects in this state.
   const [recipes, setRecipes] = useState(tmpRecipe);
 
+  // Button in search bar and X button in filter uses this state to show/hide filter.
+  const [show, setShow] = useState(false);
+
+  // States for all different type of filter/ingredient choices
+  const [ingredientChoices, setIngredientChoices] = useState(emptyArr);
   const [mealChoice, setMealChoice] = useState("");
   const [cuisineChoices, setCuisineChoices] = useState(emptyArr);
   const [intoleranceChoices, setIntoleranceChoices] = useState(emptyArr);
   const [dietChoices, setDietChoices] = useState(emptyArr);
+
+  // State for all filter choices (except ingredients since there are no predefines buttons) so we can make buttons purple if they are selected.
   const [selected, setSelected] = useState(emptyArr);
-  // placeholder for searchbar ingredient choices
-  const [ingredientChoices, setIngredientChoices] = useState(emptyArr);
-
-  const [show, setShow] = useState(false);
 
 
+  // useEffect hook that triggers when page first loads up, gives us the random recipes.
   useEffect(() => {
 
     // fetch(`https://api.spoonacular.com/recipes/random?apiKey=f4780df1170f41749bd24df676766198&tags=${getMealTypeByTime()}&number=3`)
@@ -55,6 +62,7 @@ function App() {
     //     createCards(data.recipes);
     //   })
 
+    // Sample recipes to use insteas of calling fetch method during development.
     let forTesting: Recipe[] = [{
       id: 637776,
       title: "Cherry Pancakes for One",
@@ -76,6 +84,7 @@ function App() {
   }, [])
 
 
+  // Used in random API call URL to define type of meal.
   function getMealTypeByTime(){
 
     const date: Date = new Date();
@@ -92,6 +101,7 @@ function App() {
     }
   }
 
+  // Receives data from API or the sample data and creates objects fit for start-page cards.
   function createCards(input: Recipe[]){
     let tmpTmp: Recipe[] = [];
     input.forEach((recipe) => {
@@ -108,10 +118,10 @@ function App() {
 
   return (
     <div>
-      <NavigationBar />
-      <SearchBar show={show} setShow={setShow} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices}/>
-      <SideBar show={show} setShow={setShow} mealChoice={mealChoice} setMealChoice={setMealChoice} cuisineChoices={cuisineChoices} setCuisineChoices={setCuisineChoices} intoleranceChoices={intoleranceChoices} setIntoleranceChoices={setIntoleranceChoices} dietChoices={dietChoices} setDietChoices={setDietChoices} selected={selected} setSelected={setSelected} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices}/>
-      <div className="div-text-test">
+      <div className="app-body">
+        <NavigationBar />
+        <SearchBar show={show} setShow={setShow} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices} showRed={true}/>
+        <SideBar show={show} setShow={setShow} mealChoice={mealChoice} setMealChoice={setMealChoice} cuisineChoices={cuisineChoices} setCuisineChoices={setCuisineChoices} intoleranceChoices={intoleranceChoices} setIntoleranceChoices={setIntoleranceChoices} dietChoices={dietChoices} setDietChoices={setDietChoices} selected={selected} setSelected={setSelected} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices} showRed={false}/>
         <br />
         <div className="d-flex flex-wrap justify-content-center">
         {recipes.length > 0 && recipes.map(recipe => <TmpCard className="test-card" key={recipe.id} recId={recipe.id} imgSrc={recipe.image} recipeTitle={recipe.title} readyInMin={recipe.readyInMinutes}/>)}
@@ -139,32 +149,8 @@ function App() {
         Mighty Meals<br/>
         Mighty Meals<br/>
         Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        Mighty Meals<br/>
-        <Footer />
       </div>
+      <Footer />
     </div>
   )
 }

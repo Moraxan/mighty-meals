@@ -66,6 +66,7 @@
         top: auto;
         bottom: 0;
         margin-bottom: 0px;
+        padding-bottom: 0px;
     }
 
     .mighty-navbar-text{
@@ -91,9 +92,5 @@
 
     .navbar-bottom-margin{
         margin-top: 10px;
-    }
-
-    .div-text-test{
-        margin-bottom: 70px;
     }
 }
