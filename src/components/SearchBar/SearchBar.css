@@ -1,0 +1,90 @@
+@font-face{
+    font-family: "Varela";
+    src: local("VarelaRoundRegular"), url("../../fonts/Varela/VarelaRound-Regular.ttf") format("truetype");
+}
+
+.wrapper{
+    max-width: 450px;
+    margin: 150px auto;
+    padding: 0;
+    text-align: start;
+    font-family: "Varela";
+}
+
+.wrapper .search-input{
+    position: relative;
+    background: #eda037;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.search-input input{
+    background: #eda037;
+    height: 55px;
+    width: 100%;
+    outline: none;
+    border: 3px solid black;
+    border-radius: 15px;
+    padding: 0 60px 0 20px;
+    font-size: 18px;
+}
+
+.icon{
+    width: auto;
+    height: 40px;
+    line-height: 50px;
+    border-radius: 50%;
+    border: 2px solid black;
+
+    margin-top: 7px;
+    margin-right: 8px;
+}
+
+.icon-filter{
+    width: auto;
+    height: 27px;
+    
+    margin-left: 10px;
+    margin-bottom: 16px;
+}
+
+.icon:hover{
+    background: #e42427;
+}
+
+.search-input .icon{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-right: 10px;
+    padding-top: 1px;
+    cursor: pointer;
+}
+
+.search-input .autocom-box{
+    padding: 0px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.autocom-box ul{
+    list-style-type: none;
+    padding: 0px;
+}
+
+.autocom-box li{
+
+    list-style: none;
+    padding: 8px 8px;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+}
+
+.autocom-box::-webkit-scrollbar{
+    display: none;
+}
+
+.autocom-box li:hover{
+    background: #7c5fb4;
+}

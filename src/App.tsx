@@ -6,6 +6,7 @@ import SideBar from './components/SideBar/SideBar'
 import NavigationBar from './components/NavigationBar/NavigationBar';
 import Footer from './components/Footer/Footer';
 import TmpCard from './components/TmpCard/TmpCard';
+import SearchBar from './components/SearchBar/SearchBar';
 
 interface Recipe  {
   id: number;
@@ -42,6 +43,8 @@ function App() {
   const [selected, setSelected] = useState(emptyArr);
   // placeholder for searchbar ingredient choices
   const [ingredientChoices, setIngredientChoices] = useState(emptyArr);
+
+  const [show, setShow] = useState(false);
 
 
   useEffect(() => {
@@ -106,7 +109,8 @@ function App() {
   return (
     <div>
       <NavigationBar />
-      <SideBar mealChoice={mealChoice} setMealChoice={setMealChoice} cuisineChoices={cuisineChoices} setCuisineChoices={setCuisineChoices} intoleranceChoices={intoleranceChoices} setIntoleranceChoices={setIntoleranceChoices} dietChoices={dietChoices} setDietChoices={setDietChoices} selected={selected} setSelected={setSelected}/>
+      <SearchBar show={show} setShow={setShow} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices}/>
+      <SideBar show={show} setShow={setShow} mealChoice={mealChoice} setMealChoice={setMealChoice} cuisineChoices={cuisineChoices} setCuisineChoices={setCuisineChoices} intoleranceChoices={intoleranceChoices} setIntoleranceChoices={setIntoleranceChoices} dietChoices={dietChoices} setDietChoices={setDietChoices} selected={selected} setSelected={setSelected} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices}/>
       <div className="div-text-test">
         <br />
         <div className="d-flex flex-wrap justify-content-center">

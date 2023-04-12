@@ -9,11 +9,11 @@
 }
 
 .mighty-nabvar{
+    z-index: 99;
     position: fixed;
     overflow: visible;
     top: 0;
     width: 100%;
-
     background-color: #7c5fb4;
     border-bottom: 5px solid black;
     margin-bottom: 10px;

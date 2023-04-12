@@ -5,8 +5,6 @@ import xWhite from "../../images/x_white.png"
 import "./SideBarSection.css";
 import "./SideBarButtons.css";
 
-
-
 //@ts-ignore
 export default function SideBarSection(props) {
 
@@ -25,6 +23,13 @@ export default function SideBarSection(props) {
   function AccordionSelectedFilters(){
     return (
       <>
+        {/*//@ts-ignore*/}
+        {props.ingredientChoices.map(item => 
+          <Button key={item} className="selected-btn" onClick={event => HandleClick(item, "ingredients")}>
+            {item}
+            <img className="x-btn" src={xWhite} alt="x"></img>
+          </Button>)}
+
         {props.mealChoice.length > 0 &&
           <Button key={`${props.mealChoice}-selected`} className="selected-btn" onClick={event => HandleClick(props.mealChoice, "meal types")}>
             {props.mealChoice}
@@ -76,10 +81,10 @@ export default function SideBarSection(props) {
   }
 
   function FilterFooter(){
-    const tmpSpan = <span className="clear-btn-font">{` (${props.selected.length})`}</span>
+    const tmpSpan = <span className="clear-btn-font">{` (${props.selected.length + props.ingredientChoices.length})`}</span>
     return (
       <footer className="filter-footer d-flex pb-1">
-        <Button className="clear-result-btn" onClick={clearAll}>clear{props.selected.length > 0 && tmpSpan}</Button>
+        <Button className="clear-result-btn" onClick={clearAll}>clear{props.selected.length + props.ingredientChoices.length > 0 && tmpSpan}</Button>
         <Button className="clear-result-btn">go!</Button>
       </footer>
     )
@@ -95,6 +100,7 @@ export default function SideBarSection(props) {
   }
 
   function clearAll(){
+    props.setIngredientChoices(emptyArr);
     props.setMealChoice("");
     props.setCuisineChoices(emptyArr);
     props.setIntoleranceChoices(emptyArr);
@@ -103,6 +109,7 @@ export default function SideBarSection(props) {
   }
 
   function HandleClick(buttonText: string, category: string){
+    let tmpIngredientChoices = [...props.ingredientChoices];
     let tmpMealChoice = props.mealChoice;
     let tmpCuisineChoices = [...props.cuisineChoices];
     let tmpIntoleranceChoices = [...props.intoleranceChoices];
@@ -111,6 +118,11 @@ export default function SideBarSection(props) {
     let tmpSelected = [...props.selected];
 
     buttonText = buttonText.toLowerCase();
+
+    if(category === "ingredients"){
+      tmpIngredientChoices.splice(tmpIngredientChoices.indexOf(buttonText), 1)
+      props.setIngredientChoices(tmpIngredientChoices);
+    }
 
     if(category === "meal types"){
 
