@@ -11,8 +11,6 @@ export default function SideBarSection(props) {
   // Taking in these props from SideBar.tsx: mealChoice, setMealChoice, cuisineChoices, setCuisineChoices, intoleranceChoices, setIntoleranceChoices
   // - dietChoices, setDietChoices, selected, setSelected, ingredientChoices, setIngredientChoices, createCards, standardSearch, setStandardSearch
 
-  const [returnedData, setReturnedData] = useState([]);
-
   return (
     <>
       <Accordion>

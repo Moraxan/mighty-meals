@@ -2,6 +2,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../../images/logo.png";
 import DropdownNav from "../DropdownNav/DropdownNav";
+import questionIcon from "../../images/question_mark.png"
 import "./NavigationBar.css";
 
 //@ts-ignore
@@ -10,10 +11,10 @@ export default function NavigationBar(props) {
 
   const SearchSwitch = () => {
     return (
-      <div className="d-flex">
-        adsd
+      <div className="d-flex switch-content">
+        <img className="question-icon" src={questionIcon} alt="more info" />
         <div className="form-check form-switch ms-2">
-          <input className="form-check-input" type="checkbox" role="switch" defaultChecked />
+          <input id="mighty-switch" className="form-check-input" type="checkbox" role="switch" defaultChecked />
         </div>
       </div>
 
@@ -32,7 +33,7 @@ export default function NavigationBar(props) {
             />
           </Navbar.Brand>
           <span className="mighty-navbar-text">Mighty Meals</span>
-          <SearchSwitch />
+          {/* <SearchSwitch /> */}
           <DropdownNav />
         </Container>
       </Navbar>
