@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import { ReturnFilters } from "./Filters";
@@ -8,7 +9,9 @@ import "./SideBarButtons.css";
 //@ts-ignore
 export default function SideBarSection(props) {
   // Taking in these props from SideBar.tsx: mealChoice, setMealChoice, cuisineChoices, setCuisineChoices, intoleranceChoices, setIntoleranceChoices
-  //                                     - dietChoices, setDietChoices, selected, setSelected, ingredientChoices, setIngredientChoices
+  // - dietChoices, setDietChoices, selected, setSelected, ingredientChoices, setIngredientChoices, createCards, standardSearch, setStandardSearch
+
+  const [returnedData, setReturnedData] = useState([]);
 
   return (
     <>
@@ -93,7 +96,7 @@ export default function SideBarSection(props) {
     return (
       <footer className="filter-footer d-flex pb-1">
         <Button className="clear-result-btn" onClick={clearAll}>clear{props.selected.length + props.ingredientChoices.length > 0 && tmpSpan}</Button>
-        <Button className="clear-result-btn">go!</Button>
+        <Button className="clear-result-btn" onClick={getApiData}>go!</Button>
       </footer>
     )
   }
@@ -205,6 +208,49 @@ export default function SideBarSection(props) {
     }
     props.setSelected(tmpSelected);
   }
+
+  async function getApiData(){
+    // Function that fetches / GET data back from the API.
+    // 2 endpoints which are controlled på state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
+
+    // Settings, read spoonacular documentation for more info.
+    const apiKey: string = "f4780df1170f41749bd24df676766198";
+    const maxHits: number = 1;
+    const addRecipeNutrition: boolean = false;
+
+    // Settings only for MTVMH
+    const ranking: number = 1;    //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
+    const ignorePantry: boolean = true;   //Whether to ignore typical pantry items, such as water, salt, flour, etc.
+
+    if(props.standardSearch === true){
+
+      const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&type=${props.mealChoice}&cuisine=${createURIString(props.cuisineChoices)}&includeIngredients=${createURIString(props.ingredientChoices)}&intolerance=${createURIString(props.intoleranceChoices)}&diet=${createURIString(props.dietChoices)}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}`;
+
+      try{
+        const response = await fetch(encodeURI(url));
+        const result = await response.json();
+
+        props.createCards(result.results)
+      }
+      catch (e){
+        console.log(e);
+      }
+    } else{
+
+      const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(props.ingredientChoices)}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
+
+      try{
+        const response = await fetch(encodeURI(url));
+        const result = await response.json();
+
+        props.createCards(result)
+      }
+      catch (e){
+        console.log(e);
+      }
+    }
+
+  }
 }
 
 function ArrayName(arrIndex: number) {
@@ -222,3 +268,28 @@ function ArrayName(arrIndex: number) {
       return "not found";
   }
 }
+
+// Takes all choices from the source array and creates a string appropriate for the API URI.
+function createURIString(inputArray: string[]){
+  let returnString: string = "";
+
+  if(inputArray.length <= 0){
+      return "";
+  } else{
+      if(inputArray.length == 1){
+          return inputArray[0];
+      } else{
+          inputArray.forEach((item: string, index: number) => {
+              if(index + 1 < inputArray.length){
+                  returnString += `${item},`;
+              } else{
+                  returnString += item;
+              }
+          });
+
+          return returnString.toLowerCase();
+      }
+  }
+}
+
+

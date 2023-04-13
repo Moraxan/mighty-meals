@@ -4,7 +4,22 @@ import logo from "../../images/logo.png";
 import DropdownNav from "../DropdownNav/DropdownNav";
 import "./NavigationBar.css";
 
-export default function NavigationBar() {
+//@ts-ignore
+export default function NavigationBar(props) {
+  // Taking in these props from App.tsx: standardSearch, setStandardSearch
+
+  const SearchSwitch = () => {
+    return (
+      <div className="d-flex">
+        adsd
+        <div className="form-check form-switch ms-2">
+          <input className="form-check-input" type="checkbox" role="switch" defaultChecked />
+        </div>
+      </div>
+
+    );
+  };
+  
   return (
     <>
       <Navbar className="mighty-nabvar" variant="dark">
@@ -17,10 +32,13 @@ export default function NavigationBar() {
             />
           </Navbar.Brand>
           <span className="mighty-navbar-text">Mighty Meals</span>
+          <SearchSwitch />
           <DropdownNav />
         </Container>
       </Navbar>
       <div className="navbar-bottom-margin"></div>
     </>
   );
+
+
 }

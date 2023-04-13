@@ -7,37 +7,15 @@ import NavigationBar from './components/NavigationBar/NavigationBar';
 import Footer from './components/Footer/Footer';
 import TmpCard from './components/TmpCard/TmpCard';
 import SearchBar from './components/SearchBar/SearchBar';
-
-// Interface defining properties of recipe objects fetched from API.
-interface Recipe  {
-  id: number;
-
-  title: string;
-  // summary: string;
-  image: string;
-
-  readyInMinutes: number;
-  // servings: number;
-
-  // vegetarian: boolean;
-  // vegan: boolean;
-  // glutenFree: boolean;
-  // dairyFree: boolean;
-
-  // cuisines: string[];
-  // dishTypes: string[];
-  // diets: string[];
-
-  // analyzedInstructions: string[];
-}
+import {RecipeFrontST} from './components/Interface/Interface'
 
 function App() {
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
-  const tmpRecipe: Recipe[] = [];
+  const tmpRecipeST: RecipeFrontST[] = [];
   const emptyArr: string[] = [];
 
   // Storing recipe objects in this state.
-  const [recipes, setRecipes] = useState(tmpRecipe);
+  const [recipesST, setRecipesST] = useState(tmpRecipeST);
 
   // Button in search bar and X button in filter uses this state to show/hide filter.
   const [show, setShow] = useState(false);
@@ -52,6 +30,9 @@ function App() {
   // State for all filter choices (except ingredients since there are no predefines buttons) so we can make buttons purple if they are selected.
   const [selected, setSelected] = useState(emptyArr);
 
+  // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
+  const [standardSearch, setStandardSearch] = useState(true);
+
 
   // useEffect hook that triggers when page first loads up, gives us the random recipes.
   useEffect(() => {
@@ -62,8 +43,8 @@ function App() {
     //     createCards(data.recipes);
     //   })
 
-    // Sample recipes to use insteas of calling fetch method during development.
-    let forTesting: Recipe[] = [{
+    // Sample recipes to use instead of calling fetch method during development.
+    let forTesting: RecipeFrontST[] = [{
       id: 637776,
       title: "Cherry Pancakes for One",
       image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
@@ -102,10 +83,10 @@ function App() {
   }
 
   // Receives data from API or the sample data and creates objects fit for start-page cards.
-  function createCards(input: Recipe[]){
-    let tmpTmp: Recipe[] = [];
+  function createCards(input: RecipeFrontST[]){
+    let tmpTmp: RecipeFrontST[] = [];
     input.forEach((recipe) => {
-      let tmp: Recipe = {
+      let tmp: RecipeFrontST = {
         id: recipe.id,
         title: recipe.title,
         image: recipe.image,
@@ -113,18 +94,18 @@ function App() {
       }
       tmpTmp.push(tmp);
     })
-    setRecipes(tmpTmp);
+    setRecipesST(tmpTmp);
   }
 
   return (
     <div>
       <div className="app-body">
-        <NavigationBar />
+        <NavigationBar standardSearch={standardSearch} setStandardSearch={setStandardSearch}/>
         <SearchBar show={show} setShow={setShow} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices} showRed={true}/>
-        <SideBar show={show} setShow={setShow} mealChoice={mealChoice} setMealChoice={setMealChoice} cuisineChoices={cuisineChoices} setCuisineChoices={setCuisineChoices} intoleranceChoices={intoleranceChoices} setIntoleranceChoices={setIntoleranceChoices} dietChoices={dietChoices} setDietChoices={setDietChoices} selected={selected} setSelected={setSelected} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices} showRed={false}/>
+        <SideBar show={show} setShow={setShow} mealChoice={mealChoice} setMealChoice={setMealChoice} cuisineChoices={cuisineChoices} setCuisineChoices={setCuisineChoices} intoleranceChoices={intoleranceChoices} setIntoleranceChoices={setIntoleranceChoices} dietChoices={dietChoices} setDietChoices={setDietChoices} selected={selected} setSelected={setSelected} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices} showRed={false} createCards={createCards} standardSearch={standardSearch} setStandardSearch={setStandardSearch}/>
         <br />
         <div className="d-flex flex-wrap justify-content-center">
-        {recipes.length > 0 && recipes.map(recipe => <TmpCard className="test-card" key={recipe.id} recId={recipe.id} imgSrc={recipe.image} recipeTitle={recipe.title} readyInMin={recipe.readyInMinutes}/>)}
+        {recipesST.length > 0 && recipesST.map(recipe => <TmpCard className="test-card" key={recipe.id} recId={recipe.id} imgSrc={recipe.image} recipeTitle={recipe.title} readyInMin={recipe.readyInMinutes}/>)}
         </div>
         <div className="random-generated">Random: {getMealTypeByTime()}</div><br/>
         Mighty Meals<br/>
