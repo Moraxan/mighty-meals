@@ -1,21 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './fonts/AVENGEANCE/AVENGEANCE HEROIC AVENGER.ttf';
-import './App.css'
-import SideBar from './components/SideBar/SideBar'
+import './App.css';
+import SideBar from './components/SideBar/SideBar';
 import NavigationBar from './components/NavigationBar/NavigationBar';
 import Footer from './components/Footer/Footer';
 import TmpCard from './components/TmpCard/TmpCard';
+import TmpCardMTVMH from './components/TmpCard/TmpCardMTVMH';
 import SearchBar from './components/SearchBar/SearchBar';
-import {RecipeFrontST} from './components/Interface/Interface'
+import SearchSwitch from './components/SearchSwitch/SearchSwitch';
+import {RecipeFrontST} from './components/Interface/Interface';
+import {RecipeMTVMH} from './components/Interface/Interface';
+import {useMediaQuery} from "./components/DropdownNav/DropdownNav";
 
-function App() {
+export default function App() {
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
-  const tmpRecipeST: RecipeFrontST[] = [];
+  const emptyRecipeST: RecipeFrontST[] = [];
+  const emptyRecipeMTVMH: RecipeMTVMH[] = [];
   const emptyArr: string[] = [];
 
   // Storing recipe objects in this state.
-  const [recipesST, setRecipesST] = useState(tmpRecipeST);
+  const [recipesST, setRecipesST] = useState(emptyRecipeST);
+  const [recipesMTVMH, setRecipesMTVMH] = useState(emptyRecipeMTVMH);
 
   // Button in search bar and X button in filter uses this state to show/hide filter.
   const [show, setShow] = useState(false);
@@ -65,47 +71,60 @@ function App() {
   }, [])
 
 
-  // Used in random API call URL to define type of meal.
-  function getMealTypeByTime(){
 
-    const date: Date = new Date();
-    const hours: number = date.getHours();
 
-    if(hours > 3 && hours < 11){
-        return "breakfast";
-    } else if(hours > 10 && hours < 16){
-        return "lunch";
-    } else if(hours > 15 && hours < 23){
-        return "dinner";
+  // Receives data from API or the sample data and creates objects fit for start-page cards.
+  function createCards(input: RecipeFrontST[] | RecipeMTVMH[]){
+
+    if(standardSearch === true){
+      setRecipesMTVMH(emptyRecipeMTVMH);
+
+      let tmpTmp: RecipeFrontST[] = [];
+      input.forEach((recipe) => {
+        let tmp: RecipeFrontST = {
+          id: recipe.id,
+          title: recipe.title,
+          image: recipe.image,
+          //@ts-ignore
+          readyInMinutes: recipe.readyInMinutes
+        }
+        tmpTmp.push(tmp);
+        setRecipesST(tmpTmp);
+      })
     } else{
-        return "snack";
+      setRecipesST(emptyRecipeST);
+
+      let tmpTmp: RecipeMTVMH[] = [];
+      input.forEach((recipe) => {
+        let tmp: RecipeMTVMH = {
+          id: recipe.id,
+          title: recipe.title,
+          image: recipe.image,
+          //@ts-ignore
+          usedIngredientCount: recipe.usedIngredientCount,
+          //@ts-ignore
+          missedIngredientCount: recipe.missedIngredientCount
+        }
+        tmpTmp.push(tmp);
+        setRecipesMTVMH(tmpTmp);
+      })
     }
   }
 
-  // Receives data from API or the sample data and creates objects fit for start-page cards.
-  function createCards(input: RecipeFrontST[]){
-    let tmpTmp: RecipeFrontST[] = [];
-    input.forEach((recipe) => {
-      let tmp: RecipeFrontST = {
-        id: recipe.id,
-        title: recipe.title,
-        image: recipe.image,
-        readyInMinutes: recipe.readyInMinutes
-      }
-      tmpTmp.push(tmp);
-    })
-    setRecipesST(tmpTmp);
-  }
+  // importing useMediaQuery function to make SearchSwith appear based on if condition is met or not.
+  const matches = useMediaQuery('screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)')
 
   return (
     <div>
-      <div className="app-body">
-        <NavigationBar standardSearch={standardSearch} setStandardSearch={setStandardSearch}/>
+      {matches === true && <SearchSwitch standardSearch={standardSearch} setStandardSearch={setStandardSearch} setMealChoice={setMealChoice} setCuisineChoices={setCuisineChoices} setIntoleranceChoices={setIntoleranceChoices} setDietChoices={setDietChoices} setSelected={setSelected}/>}
+      <div className="app-body d-flex flex-column">
+        <NavigationBar standardSearch={standardSearch} setStandardSearch={setStandardSearch} setMealChoice={setMealChoice} setCuisineChoices={setCuisineChoices} setIntoleranceChoices={setIntoleranceChoices} setDietChoices={setDietChoices} setSelected={setSelected}/>
         <SearchBar show={show} setShow={setShow} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices} showRed={true}/>
         <SideBar show={show} setShow={setShow} mealChoice={mealChoice} setMealChoice={setMealChoice} cuisineChoices={cuisineChoices} setCuisineChoices={setCuisineChoices} intoleranceChoices={intoleranceChoices} setIntoleranceChoices={setIntoleranceChoices} dietChoices={dietChoices} setDietChoices={setDietChoices} selected={selected} setSelected={setSelected} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices} showRed={false} createCards={createCards} standardSearch={standardSearch} setStandardSearch={setStandardSearch}/>
         <br />
-        <div className="d-flex flex-wrap justify-content-center">
-        {recipesST.length > 0 && recipesST.map(recipe => <TmpCard className="test-card" key={recipe.id} recId={recipe.id} imgSrc={recipe.image} recipeTitle={recipe.title} readyInMin={recipe.readyInMinutes}/>)}
+        <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
+        {recipesST.length > 0 && recipesST.map(recipe => <TmpCard key={recipe.id} recId={recipe.id} imgSrc={recipe.image} recipeTitle={recipe.title} readyInMin={recipe.readyInMinutes}/>)}
+        {recipesMTVMH.length > 0 && recipesMTVMH.map(recipe => <TmpCardMTVMH key={recipe.id} recId={recipe.id} imgSrc={recipe.image} recipeTitle={recipe.title} usedIngredientCount={recipe.usedIngredientCount} missedIngredientCount={recipe.missedIngredientCount}/>)}
         </div>
         <div className="random-generated">Random: {getMealTypeByTime()}</div><br/>
         Mighty Meals<br/>
@@ -136,4 +155,19 @@ function App() {
   )
 }
 
-export default App
+  // Used in random API call URL to define type of meal.
+  function getMealTypeByTime(){
+
+    const date: Date = new Date();
+    const hours: number = date.getHours();
+
+    if(hours > 3 && hours < 11){
+        return "breakfast";
+    } else if(hours > 10 && hours < 16){
+        return "lunch";
+    } else if(hours > 15 && hours < 23){
+        return "dinner";
+    } else{
+        return "snack";
+    }
+  }

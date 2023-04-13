@@ -4,9 +4,9 @@ export interface RecipeFrontST  {
     title: string;
     image: string;
     readyInMinutes: number;
-  }
+}
 
-  interface RecipeDetails {
+export interface RecipeDetails {
     id: number;
   
     title: string;
@@ -26,4 +26,19 @@ export interface RecipeFrontST  {
     diets: string[];
   
     analyzedInstructions: string[];
-  }
+}
+
+export interface RecipeMTVMH {
+    id: number;
+
+    title: string;
+    image: string;
+
+    missedIngredientCount: number;
+    // missedIngredients: string[];
+
+    usedIngredientCount: number;
+    // usedIngredients: string[];
+
+    // unusedIngredients: string[];
+}

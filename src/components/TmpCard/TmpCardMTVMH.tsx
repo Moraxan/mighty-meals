@@ -2,7 +2,7 @@ import './TmpCard.css';
 import Card from 'react-bootstrap/Card';
 
 //@ts-ignore
-export default function TmpCard(props) {
+export default function TmpCardMTVMH(props) {
   return (
     <Card style={{ width: '24rem', height: '14rem' }} className="me-4 ms-4 mb-4">
       {/* <Card.Img variant="top" src={props.imgSrc} /> */}
@@ -10,7 +10,8 @@ export default function TmpCard(props) {
         <Card.Title className="testcard-text">{props.recipeTitle}</Card.Title>
         <Card.Text className="testcard-text">
             Recipe ID: {props.recId}<br/>
-            Ready in minutes: {props.readyInMin}
+            Used ingredient: {props.usedIngredientCount}<br/>
+            Missed ingredients: {props.missedIngredientCount}
         </Card.Text>
       </Card.Body>
     </Card>

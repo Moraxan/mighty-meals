@@ -2,44 +2,32 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../../images/logo.png";
 import DropdownNav from "../DropdownNav/DropdownNav";
-import questionIcon from "../../images/question_mark.png"
+import SearchSwitch from "../SearchSwitch/SearchSwitch";
+import {useMediaQuery} from "../DropdownNav/DropdownNav";
 import "./NavigationBar.css";
 
 //@ts-ignore
 export default function NavigationBar(props) {
-  // Taking in these props from App.tsx: standardSearch, setStandardSearch
+  // Taking in these props from App.tsx: standardSearch, setStandardSearch, setMealChoice, setCuisineChoices, setIntoleranceChoices, setDietChoices
 
-  const SearchSwitch = () => {
-    return (
-      <div className="d-flex switch-content">
-        <img className="question-icon" src={questionIcon} alt="more info" />
-        <div className="form-check form-switch ms-2">
-          <input id="mighty-switch" className="form-check-input" type="checkbox" role="switch" defaultChecked />
-        </div>
-      </div>
+  // importing useMediaQuery function to make SearchSwith appear based on if condition is met or not.
+  const matches = useMediaQuery('screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)')
 
-    );
-  };
-  
   return (
     <>
       <Navbar className="mighty-nabvar" variant="dark">
         <Container>
           <Navbar.Brand href="/">
-            <img
-              alt="logo"
-              src={logo}
-              className="d-inline-block align-top navbar-logo"
-            />
+            <img alt="logo" src={logo} className="d-inline-block align-top navbar-logo" />
           </Navbar.Brand>
           <span className="mighty-navbar-text">Mighty Meals</span>
-          {/* <SearchSwitch /> */}
-          <DropdownNav />
+          <div className="d-flex flex-row">
+            {matches === false && <SearchSwitch standardSearch={props.standardSearch} setStandardSearch={props.setStandardSearch} setMealChoice={props.setMealChoice} setCuisineChoices={props.setCuisineChoices} setIntoleranceChoices={props.setIntoleranceChoices} setDietChoices={props.setDietChoices} setSelected={props.setSelected}/>}
+            <DropdownNav />
+          </div>
         </Container>
       </Navbar>
       <div className="navbar-bottom-margin"></div>
     </>
   );
-
-
 }

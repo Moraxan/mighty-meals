@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import { ReturnFilters } from "./Filters";
@@ -15,7 +14,7 @@ export default function SideBarSection(props) {
     <>
       <Accordion>
         <AccordionSelectedFilters />
-        <AccordionFilterItem />
+        {props.standardSearch === true && <AccordionFilterItem />}
       </Accordion>
       <FilterFooter />
     </>
@@ -209,11 +208,11 @@ export default function SideBarSection(props) {
 
   async function getApiData(){
     // Function that fetches / GET data back from the API.
-    // 2 endpoints which are controlled på state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
+    // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
 
     // Settings, read spoonacular documentation for more info.
-    const apiKey: string = "f4780df1170f41749bd24df676766198";
-    const maxHits: number = 1;
+    const apiKey: string = "6d398aefc8b6440286cd4509f45075c5";
+    const maxHits: number = 3;
     const addRecipeNutrition: boolean = false;
 
     // Settings only for MTVMH
@@ -234,20 +233,26 @@ export default function SideBarSection(props) {
         console.log(e);
       }
     } else{
+      // This search requires at least 1 ingredient, if none are selected an alert will pop-up telling the user to select at least 1..
+      if(props.ingredientChoices.length > 0){
 
-      const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(props.ingredientChoices)}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
+        const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(props.ingredientChoices)}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
 
-      try{
-        const response = await fetch(encodeURI(url));
-        const result = await response.json();
-
-        props.createCards(result)
-      }
-      catch (e){
-        console.log(e);
+        try{
+          const response = await fetch(encodeURI(url));
+          const result = await response.json();
+  
+          console.log(result);
+  
+          props.createCards(result)
+        }
+        catch (e){
+          console.log(e);
+        }
+      } else{
+        alert("Please select at least 1 ingredient...")
       }
     }
-
   }
 }
 
