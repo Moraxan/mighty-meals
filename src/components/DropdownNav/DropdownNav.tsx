@@ -24,7 +24,7 @@ export default function DropdownNav() {
   );
 }
 
-function useMediaQuery(query: string): boolean {
+export function useMediaQuery(query: string): boolean {
     const getMatches = (query: string): boolean => {
       // Prevents SSR issues
       if (typeof window !== 'undefined') {

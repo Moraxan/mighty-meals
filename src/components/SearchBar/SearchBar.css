@@ -36,6 +36,10 @@
     border-radius: 15px;
 }
 
+.ingredient-selected{
+    background: #7c5fb4;
+}
+
 .search-input input{
     background: #eda037;
     height: 45px;
@@ -111,6 +115,16 @@
 
 .autocom-box li:hover{
     background: #7c5fb4;
+}
+
+.autocom-box .ingredient-selected:hover{
+    background: #e42427;
+}
+
+@media screen and (max-width: 570px){
+    .red-fluff{
+        width: 480px;
+    }
 }
 
 @media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
