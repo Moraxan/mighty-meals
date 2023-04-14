@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import './App.css'
-import { IngredientSearch2 } from './components/ingredientsearch/IngredientSearch2';
-
-function App() {
- 
- return (
-    <div>
-      <IngredientSearch2
-       
-      />
-     
-        
-=======
 import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './fonts/AVENGEANCE/AVENGEANCE HEROIC AVENGER.ttf';
@@ -165,7 +151,6 @@ function App() {
         Mighty Meals<br/>
       </div>
       <Footer />
->>>>>>> origin/development
     </div>
   );
 }

@@ -1,0 +1,12 @@
+@font-face{
+  font-family: "Varela";
+  src: local("VarelaRoundRegular"), url("../../fonts/Varela/VarelaRound-Regular.ttf") format("truetype");
+}
+
+.recipe-body {
+  background-color: red;
+
+  height: 100%;
+}
+
+
