@@ -7,6 +7,7 @@ import NavigationBar from './components/NavigationBar/NavigationBar';
 import Footer from './components/Footer/Footer';
 import TmpCard from './components/TmpCard/TmpCard';
 import SearchBar from './components/SearchBar/SearchBar';
+import { RecipePage } from './components/RecipePage/RecipePage';
 
 // Interface defining properties of recipe objects fetched from API.
 interface Recipe  {
@@ -211,7 +212,10 @@ function App() {
           <Footer />
         </div>
       ) : (
-        <div>calles komponent</div>
+        <div>
+          <NavigationBar/>
+          <RecipePage/>
+        </div>
       )}
     </>
   );
