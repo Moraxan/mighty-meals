@@ -212,9 +212,12 @@ function App() {
           <Footer />
         </div>
       ) : (
-        <div>
+        <div className='recipe-page'>
+          <div className='app-body'>
           <NavigationBar/>
           <RecipePage/>
+          </div>
+          <Footer />
         </div>
       )}
     </>

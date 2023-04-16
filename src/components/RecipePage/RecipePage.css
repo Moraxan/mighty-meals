@@ -3,10 +3,26 @@
   src: local("VarelaRoundRegular"), url("../../fonts/Varela/VarelaRound-Regular.ttf") format("truetype");
 }
 
-.recipe-body {
-  background-color: red;
-
-  height: 100%;
+.ingredients-box {
+  display: inline-block;
+  background-color: #eda037;
+  font-family: "Avengeance", sans-serif;
+  font-size: 30px;
+  font-weight: italic;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 
+
+.ingredients-outer {
+  background-color: #e42427;
+  font-family: 'Varela', sans-serif;
+}
+
+
+.ingredients-body {
+  
+  font-size: 20px;
+  line-height: 1.5;
+}
