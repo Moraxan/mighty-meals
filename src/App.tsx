@@ -9,6 +9,7 @@ import TmpCard from "./components/TmpCard/TmpCard";
 import TmpCardMTVMH from "./components/TmpCard/TmpCardMTVMH";
 import SearchBar from "./components/SearchBar/SearchBar";
 import SearchSwitch from "./components/SearchSwitch/SearchSwitch";
+import NoResult from "./components/NoResult/NoResult";
 import { RecipeFrontST } from "./components/Interface/Interface";
 import { RecipeMTVMH } from "./components/Interface/Interface";
 import { useMediaQuery } from "./components/DropdownNav/DropdownNav";
@@ -77,43 +78,42 @@ export default function App() {
     if (input.length < 1) {
       setRecipesST(emptyRecipeST);
       setRecipesMTVMH(emptyRecipeMTVMH);
-    }
-
-    if (standardSearch === true) {
-      setRecipesMTVMH(emptyRecipeMTVMH);
-
-      let tmpTmp: RecipeFrontST[] = [];
-      input.forEach((recipe) => {
-        let tmp: RecipeFrontST = {
-          id: recipe.id,
-          title: recipe.title,
-          image: recipe.image,
-          //@ts-ignore
-          readyInMinutes: recipe.readyInMinutes,
-        };
-        tmpTmp.push(tmp);
-        setRecipesST(tmpTmp);
-      });
     } else {
-      setRecipesST(emptyRecipeST);
+      if (standardSearch === true) {
+        setRecipesMTVMH(emptyRecipeMTVMH);
 
-      let tmpTmp: RecipeMTVMH[] = [];
-      input.forEach((recipe) => {
-        let tmp: RecipeMTVMH = {
-          id: recipe.id,
-          title: recipe.title,
-          image: recipe.image,
-          //@ts-ignore
-          usedIngredientCount: recipe.usedIngredientCount,
-          //@ts-ignore
-          missedIngredientCount: recipe.missedIngredientCount,
-        };
-        tmpTmp.push(tmp);
-        setRecipesMTVMH(tmpTmp);
-      });
+        let tmpTmp: RecipeFrontST[] = [];
+        input.forEach((recipe) => {
+          let tmp: RecipeFrontST = {
+            id: recipe.id,
+            title: recipe.title,
+            image: recipe.image,
+            //@ts-ignore
+            readyInMinutes: recipe.readyInMinutes,
+          };
+          tmpTmp.push(tmp);
+          setRecipesST(tmpTmp);
+        });
+      } else {
+        setRecipesST(emptyRecipeST);
+
+        let tmpTmp: RecipeMTVMH[] = [];
+        input.forEach((recipe) => {
+          let tmp: RecipeMTVMH = {
+            id: recipe.id,
+            title: recipe.title,
+            image: recipe.image,
+            //@ts-ignore
+            usedIngredientCount: recipe.usedIngredientCount,
+            //@ts-ignore
+            missedIngredientCount: recipe.missedIngredientCount,
+          };
+          tmpTmp.push(tmp);
+          setRecipesMTVMH(tmpTmp);
+        });
+      }
     }
   }
-
   // importing useMediaQuery function to make SearchSwith appear based on if condition is met or not.
   const matches = useMediaQuery(
     "screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)"
@@ -196,7 +196,7 @@ export default function App() {
                 ))}
             </>
           ) : (
-            <div>No results to display</div>
+            <NoResult />
           )}
         </div>
         <div className="random-generated">Random: {getMealTypeByTime()}</div>
