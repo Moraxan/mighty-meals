@@ -78,7 +78,7 @@ export default function App() {
       setRecipesST(emptyRecipeST);
       setRecipesMTVMH(emptyRecipeMTVMH);
     }
-    
+
     if (standardSearch === true) {
       setRecipesMTVMH(emptyRecipeMTVMH);
 
@@ -171,30 +171,30 @@ export default function App() {
         />
         <br />
         <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
-          {recipesST.length > 0 ? (
-            recipesST.map((recipe) => (
-              <TmpCard
-                key={recipe.id}
-                recId={recipe.id}
-                imgSrc={recipe.image}
-                recipeTitle={recipe.title}
-                readyInMin={recipe.readyInMinutes}
-              />
-            ))
-          ) : (
-            <div>No results to display</div>
-          )}
-          {recipesMTVMH.length > 0 ? (
-            recipesMTVMH.map((recipe) => (
-              <TmpCardMTVMH
-                key={recipe.id}
-                recId={recipe.id}
-                imgSrc={recipe.image}
-                recipeTitle={recipe.title}
-                usedIngredientCount={recipe.usedIngredientCount}
-                missedIngredientCount={recipe.missedIngredientCount}
-              />
-            ))
+          {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
+            <>
+              {recipesST.length > 0 &&
+                recipesST.map((recipe) => (
+                  <TmpCard
+                    key={recipe.id}
+                    recId={recipe.id}
+                    imgSrc={recipe.image}
+                    recipeTitle={recipe.title}
+                    readyInMin={recipe.readyInMinutes}
+                  />
+                ))}
+              {recipesMTVMH.length > 0 &&
+                recipesMTVMH.map((recipe) => (
+                  <TmpCardMTVMH
+                    key={recipe.id}
+                    recId={recipe.id}
+                    imgSrc={recipe.image}
+                    recipeTitle={recipe.title}
+                    usedIngredientCount={recipe.usedIngredientCount}
+                    missedIngredientCount={recipe.missedIngredientCount}
+                  />
+                ))}
+            </>
           ) : (
             <div>No results to display</div>
           )}
