@@ -1,4 +1,9 @@
 import { useEffect, useState } from 'react';
+import { BackButton } from './BackButton';
+import { DishSummary } from './DishSummary';
+import { Ingredients } from './Ingredients';
+import { Directions } from './Directions';
+import { DishImage } from './DishImage';
 import './RecipePage.css';
 
 export const RecipePage = () => {
@@ -10,7 +15,7 @@ export const RecipePage = () => {
     if (storedData) {
       setRecipeData(storedData);
     } else {
-      const apiKey = '62351b97ce5e483ab975407ba6e4bdb9';
+      const apiKey = 'your api key here';
       const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
 
       fetch(url)
@@ -31,55 +36,25 @@ export const RecipePage = () => {
     }
   }, [recipeId]);
 
-  const handleSwitchRecipe = () => {
-    if (recipeId === 660697) {
-      setRecipeId(634091);
-    } else {
-      setRecipeId(660697);
-    }
-  };
+  if (!recipeData) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <>
-      <button onClick={handleSwitchRecipe}>Switch Recipe</button>
-      {recipeData && (
-        <div className="recipe-container">
-          <div className="dish-image-container">
-            <img src={recipeData.image} alt="Your dish" />
-          </div>
-          <div className="ingredients-directions-container">
-            <div className="ingredients-body">
-              <div className="ingredients-container">
-                <div className="ingredients-box">
-                  <p>INGREDIENTS</p>
-                </div>
-                <br />
-                <ul>
-                  {recipeData.extendedIngredients.map((ingredient) => (
-                    <li key={ingredient.id}>{ingredient.original}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="directions-container">
-              <div className="directions-box">
-                <p>DIRECTIONS</p>
-              </div>
-              <br />
-              <ul>
-                {recipeData.analyzedInstructions[0].steps.map((step) => (
-                  <li key={step.number}>
-                    <label>
-                      <input type="checkbox" />
-                      {step.step}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+    <div className="RecipePage">
+      <div className="RecipePage-left-column">
+        <BackButton className="RecipePage-back-button" />
+      </div>
+      <div className="RecipePage-right-column">
+        <div className="RecipePage-top-row">
+          <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
+          <DishSummary recipeData={recipeData} />
         </div>
-      )}
-    </>
+        <div className="RecipePage-bottom-row">
+          <Ingredients ingredients={recipeData?.extendedIngredients} />
+          <Directions directions={recipeData.analyzedInstructions} />
+        </div>
+      </div>
+    </div>
   );
 };
