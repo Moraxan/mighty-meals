@@ -1,0 +1,88 @@
+@font-face{
+    font-family: "Varela";
+    src: local("VarelaRoundRegular"), url("../../fonts/Varela/VarelaRound-Regular.ttf") format("truetype");
+}
+
+.filter-close-btn{
+    background-color: #eda037;
+    padding: 0px;
+    border: none;
+    border-radius:50%;
+}
+
+.filter-close-logo{
+    height: 54px;
+    width: auto;
+}
+
+.filter-close-btn:hover{
+    background-color: #7c5fb4;
+    border: none;
+}
+
+#filter-canvas{
+    background-color: #e42427;
+    border: 5px solid black;
+    border-radius: 20px;
+}
+
+#filter-header{
+    padding-left: 30%;
+    border-bottom: 5px solid black;
+}
+
+.filter-body{
+    margin-bottom: 60px;
+}
+
+.offcanvas-header{
+    padding: 10px 10px 3px 10px;
+}
+
+.offcanvas-body{
+    border-bottom: 5px solid black;
+}
+
+#filter-title{
+    color: black;
+    font-size: 2.5rem;
+    padding: 0px;
+    margin: 0px;
+}
+
+.filter-logo{
+    height: auto;
+    width: 50px;
+    padding: 3px;
+}
+
+.filter-button{
+    background-color: #eda037;
+    border: 3px solid black;
+    border-radius: 50%;
+}
+
+.filter-button:hover{
+    background-color: #e42427;
+    border: 3px solid black;
+}
+
+.temp-searchbar{
+    background-color: #eda037;
+    border: 3px solid black;
+    border-radius: 12px;
+    font-family: "Varela";
+}
+
+.temp-searchbar:focus{
+    background-color: #eda037;
+    border: 3px solid black;
+    border-radius: 12px;
+}
+
+@media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
+    #filter-canvas{
+        max-width: 80%;
+        border-radius: 14px;
+    }
+}

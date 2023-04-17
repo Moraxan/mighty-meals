@@ -1,0 +1,62 @@
+.accordion{
+    --bs-accordion-border-color: black;
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0 rgb(0, 0, 0);
+    --bs-accordion-bg: none;
+    --bs-accordion-border-radius: 0px;
+}
+
+.collapsed:hover{
+    color: black;
+}
+
+.accordion-body{
+    padding: 16px 20px 16px 0px;
+}
+
+.accordion-collapse{
+    background-color: #e42427;
+}
+
+.accordion-item{
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+.accordion-item:focus{
+    border-bottom: 1px solid black;
+}
+
+.accordion-button{
+    background-color: #e42427;
+    padding: 10px 0px 10px 10px;
+    font-size: 1.7rem;
+}
+
+.accordion-button:not(.collapsed){
+    background-color: #e42427;
+    padding: 10px 0px 10px 10px;
+    color: black;
+    box-shadow: none;
+}
+
+.accordion-item:first-of-type .accordion-button{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed{
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.accordion-item:last-of-type .accordion-collapse{
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.filter-footer{
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 7px;
+    width: 100%;
+}
