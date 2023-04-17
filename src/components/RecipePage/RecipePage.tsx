@@ -15,7 +15,7 @@ export const RecipePage = () => {
     if (storedData) {
       setRecipeData(storedData);
     } else {
-      const apiKey = '62351b97ce5e483ab975407ba6e4bdb9';
+      const apiKey = 'your api key here';
       const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
 
       fetch(url)
