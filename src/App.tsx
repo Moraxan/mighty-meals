@@ -12,7 +12,6 @@ import SearchSwitch from './components/SearchSwitch/SearchSwitch';
 import {RecipeFrontST} from './components/Interface/Interface';
 import {RecipeMTVMH} from './components/Interface/Interface';
 import {useMediaQuery} from "./components/DropdownNav/DropdownNav";
-import { RecipePage } from './components/RecipePage/RecipePage';
 
 export default function App() {
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
@@ -115,113 +114,60 @@ export default function App() {
   // importing useMediaQuery function to make SearchSwith appear based on if condition is met or not.
   const matches = useMediaQuery('screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)')
 
-  
-  const showChrisCode : string = "hide";
-     
   return (
-
-    <>
-      {showChrisCode === "show" ? (
-        <div>
-          <div className="app-body">
-            <NavigationBar />
-            <SearchBar
-              show={show}
-              setShow={setShow}
-              ingredientChoices={ingredientChoices}
-              setIngredientChoices={setIngredientChoices}
-              showRed={true}
-            />
-            <SideBar
-              show={show}
-              setShow={setShow}
-              mealChoice={mealChoice}
-              setMealChoice={setMealChoice}
-              cuisineChoices={cuisineChoices}
-              setCuisineChoices={setCuisineChoices}
-              intoleranceChoices={intoleranceChoices}
-              setIntoleranceChoices={setIntoleranceChoices}
-              dietChoices={dietChoices}
-              setDietChoices={setDietChoices}
-              selected={selected}
-              setSelected={setSelected}
-              ingredientChoices={ingredientChoices}
-              setIngredientChoices={setIngredientChoices}
-              showRed={false}
-            />
-            <br />
-            <div className="d-flex flex-wrap justify-content-center">
-              {recipes.length > 0 &&
-                recipes.map((recipe) => (
-                  <TmpCard
-                    className="test-card"
-                    key={recipe.id}
-                    recId={recipe.id}
-                    imgSrc={recipe.image}
-                    recipeTitle={recipe.title}
-                    readyInMin={recipe.readyInMinutes}
-                  />
-                ))}
-            </div>
-            <div className="random-generated">
-              Random: {getMealTypeByTime()}
-            </div>
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-            <br />
-            Mighty Meals
-          </div>
-          <Footer />
+    <div>
+      {matches === true && <SearchSwitch standardSearch={standardSearch} setStandardSearch={setStandardSearch} setMealChoice={setMealChoice} setCuisineChoices={setCuisineChoices} setIntoleranceChoices={setIntoleranceChoices} setDietChoices={setDietChoices} setSelected={setSelected}/>}
+      <div className="app-body d-flex flex-column">
+        <NavigationBar standardSearch={standardSearch} setStandardSearch={setStandardSearch} setMealChoice={setMealChoice} setCuisineChoices={setCuisineChoices} setIntoleranceChoices={setIntoleranceChoices} setDietChoices={setDietChoices} setSelected={setSelected}/>
+        <SearchBar show={show} setShow={setShow} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices} showRed={true}/>
+        <SideBar show={show} setShow={setShow} mealChoice={mealChoice} setMealChoice={setMealChoice} cuisineChoices={cuisineChoices} setCuisineChoices={setCuisineChoices} intoleranceChoices={intoleranceChoices} setIntoleranceChoices={setIntoleranceChoices} dietChoices={dietChoices} setDietChoices={setDietChoices} selected={selected} setSelected={setSelected} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices} showRed={false} createCards={createCards} standardSearch={standardSearch} setStandardSearch={setStandardSearch}/>
+        <br />
+        <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
+        {recipesST.length > 0 && recipesST.map(recipe => <TmpCard key={recipe.id} recId={recipe.id} imgSrc={recipe.image} recipeTitle={recipe.title} readyInMin={recipe.readyInMinutes}/>)}
+        {recipesMTVMH.length > 0 && recipesMTVMH.map(recipe => <TmpCardMTVMH key={recipe.id} recId={recipe.id} imgSrc={recipe.image} recipeTitle={recipe.title} usedIngredientCount={recipe.usedIngredientCount} missedIngredientCount={recipe.missedIngredientCount}/>)}
         </div>
-      ) : (
-        <div className='recipe-page'>
-          <div className='app-body'>
-          <NavigationBar/>
-          <RecipePage/>
-          </div>
-          <Footer />
-        </div>
-      )}
-    </>
-  );
+        <div className="random-generated">Random: {getMealTypeByTime()}</div><br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+        Mighty Meals<br/>
+      </div>
+      <Footer />
+    </div>
+  )
 }
 
+  // Used in random API call URL to define type of meal.
+  function getMealTypeByTime(){
 
+    const date: Date = new Date();
+    const hours: number = date.getHours();
+
+    if(hours > 3 && hours < 11){
+        return "breakfast";
+    } else if(hours > 10 && hours < 16){
+        return "lunch";
+    } else if(hours > 15 && hours < 23){
+        return "dinner";
+    } else{
+        return "snack";
+    }
+  }
