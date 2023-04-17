@@ -115,13 +115,13 @@ export default function App() {
   // importing useMediaQuery function to make SearchSwith appear based on if condition is met or not.
   const matches = useMediaQuery('screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)')
 
-//If this variable is set to show it shows the start page rather than the recipe page.  
-  const showStartPage : string = "hide";
+  
+  const showChrisCode : string = "hide";
      
   return (
 
     <>
-      {showStartPage === "show" ? (
+      {showChrisCode === "show" ? (
         <div>
           <div className="app-body">
             <NavigationBar />
