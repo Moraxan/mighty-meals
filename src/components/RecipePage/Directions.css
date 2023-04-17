@@ -1,0 +1,19 @@
+.directions-box{
+    font-family: "Avengeance", sans-serif;
+  }
+  
+  
+  .directions-container {
+    background-color: #eda037;
+    flex-basis: 300px;
+    text-align: left;
+    font-family: "Varela";
+  }
+  
+  .directions-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  
+  }
+  
