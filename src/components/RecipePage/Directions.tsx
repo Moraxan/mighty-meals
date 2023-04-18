@@ -18,18 +18,20 @@ export const Directions = ({ directions }) => {
         <p>DIRECTIONS</p>
       </div>
       <br />
-      <ol>
+      <ul className="directions-list">
         {directions[0].steps.map((step) => (
           <li key={step.number}>
             <label>
               <input type="checkbox" />
-              {step.step}
+              <span>{step.step}</span>
             </label>
           </li>
         ))}
-      </ol>
+      </ul>
     </div>
   );
+  
+  
 };
 
   
