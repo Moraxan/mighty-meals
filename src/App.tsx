@@ -8,6 +8,7 @@ import Footer from "./components/Footer/Footer";
 import TmpCard from "./components/TmpCard/TmpCard";
 import TmpCardMTVMH from "./components/TmpCard/TmpCardMTVMH";
 import SearchBar from "./components/SearchBar/SearchBar";
+import SearchBarFreeText from './components/SearchBar/SearchBarFreeText';
 import SearchSwitch from "./components/SearchSwitch/SearchSwitch";
 import NoResult from "./components/NoResult/NoResult";
 import { RecipeFrontST } from "./components/Interface/Interface";
@@ -192,33 +193,13 @@ export default function App() {
           setDietChoices={setDietChoices}
           setSelected={setSelected}
         />
-        <SearchBar
-          show={show}
-          setShow={setShow}
-          ingredientChoices={ingredientChoices}
-          setIngredientChoices={setIngredientChoices}
-          showRed={true}
-        />
-        <SideBar
-          show={show}
-          setShow={setShow}
-          mealChoice={mealChoice}
-          setMealChoice={setMealChoice}
-          cuisineChoices={cuisineChoices}
-          setCuisineChoices={setCuisineChoices}
-          intoleranceChoices={intoleranceChoices}
-          setIntoleranceChoices={setIntoleranceChoices}
-          dietChoices={dietChoices}
-          setDietChoices={setDietChoices}
-          selected={selected}
-          setSelected={setSelected}
-          ingredientChoices={ingredientChoices}
-          setIngredientChoices={setIngredientChoices}
-          showRed={false}
-          createCards={createCards}
-          standardSearch={standardSearch}
-          setStandardSearch={setStandardSearch}
-        />
+
+        {standardSearch ?
+          <SearchBarFreeText freeTextSearch={freeTextSearch} setFreeTextSearch={setFreeTextSearch} show={show} setShow={setShow} showRed={true} getApiData={getApiData}/> : 
+          <SearchBar show={show} setShow={setShow} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices} showRed={true}/>
+        }
+
+        <SideBar show={show} setShow={setShow} mealChoice={mealChoice} setMealChoice={setMealChoice} cuisineChoices={cuisineChoices} setCuisineChoices={setCuisineChoices} intoleranceChoices={intoleranceChoices} setIntoleranceChoices={setIntoleranceChoices} dietChoices={dietChoices} setDietChoices={setDietChoices} selected={selected} setSelected={setSelected} ingredientChoices={ingredientChoices} setIngredientChoices={setIngredientChoices} showRed={false} createCards={createCards} standardSearch={standardSearch} setStandardSearch={setStandardSearch} getApiData={getApiData}/>
         <br />
         <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
           {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
@@ -315,6 +296,7 @@ function getMealTypeByTime() {
   } else {
     return "snack";
   }
+}
 
   // Takes all choices from the source array and creates a string appropriate for the API URI.
 function createURIString(inputArray: string[]){
