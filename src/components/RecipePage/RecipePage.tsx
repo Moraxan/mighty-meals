@@ -7,7 +7,7 @@ import { DishImage } from './DishImage';
 import './RecipePage.css';
 
 export const RecipePage = () => {
-  const [recipeId, setRecipeId] = useState(660697);
+  const [recipeId, setRecipeId] = useState(637776);
   const [recipeData, setRecipeData] = useState(null);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export const RecipePage = () => {
     if (storedData) {
       setRecipeData(storedData);
     } else {
-      const apiKey = 'your api key here';
+      const apiKey = 'ee013e8020684691b2832a5da2f51b00';
       const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
 
       fetch(url)
@@ -49,6 +49,7 @@ export const RecipePage = () => {
         <div className="RecipePage-top-row">
           <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
           <DishSummary recipeData={recipeData} />
+        
         </div>
         <div className="RecipePage-bottom-row">
           <Ingredients ingredients={recipeData?.extendedIngredients} />
