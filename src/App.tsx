@@ -28,6 +28,7 @@ export default function App() {
   const [show, setShow] = useState(false);
 
   // States for all different type of filter/ingredient choices
+  const [freeTextSearch, setFreeTextSearch] = useState("");
   const [ingredientChoices, setIngredientChoices] = useState(emptyArr);
   const [mealChoice, setMealChoice] = useState("");
   const [cuisineChoices, setCuisineChoices] = useState(emptyArr);
@@ -71,7 +72,56 @@ export default function App() {
     ];
 
     createCards(forTesting);
-  }, []);
+  }, [])
+
+  async function getApiData(){
+    // Function that fetches / GET data back from the API.
+    // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
+
+    // Settings, read spoonacular documentation for more info.
+    const apiKey: string = "6d398aefc8b6440286cd4509f45075c5";
+    const maxHits: number = 3;
+    const addRecipeNutrition: boolean = false;
+
+    // Settings only for MTVMH
+    const ranking: number = 1;    //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
+    const ignorePantry: boolean = true;   //Whether to ignore typical pantry items, such as water, salt, flour, etc.
+
+    if(standardSearch === true){
+
+      const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&type=${mealChoice}&cuisine=${createURIString(cuisineChoices)}&includeIngredients=${createURIString(ingredientChoices)}&intolerance=${createURIString(intoleranceChoices)}&diet=${createURIString(dietChoices)}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}`;
+      console.log(url);
+      try{
+        const response = await fetch(encodeURI(url));
+        const result = await response.json();
+
+        createCards(result.results)
+      }
+      catch (e){
+        console.log(e);
+      }
+    } else{
+      // This search requires at least 1 ingredient, if none are selected an alert will pop-up telling the user to select at least 1..
+      if(ingredientChoices.length > 0){
+
+        const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(ingredientChoices)}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
+
+        try{
+          const response = await fetch(encodeURI(url));
+          const result = await response.json();
+  
+          console.log(result);
+  
+          createCards(result)
+        }
+        catch (e){
+          console.log(e);
+        }
+      } else{
+        alert("Please select at least 1 ingredient...")
+      }
+    }
+  }
 
   // Receives data from API or the sample data and creates objects fit for start-page cards.
   function createCards(input: RecipeFrontST[] | RecipeMTVMH[]) {
@@ -264,5 +314,27 @@ function getMealTypeByTime() {
     return "dinner";
   } else {
     return "snack";
+  }
+
+  // Takes all choices from the source array and creates a string appropriate for the API URI.
+function createURIString(inputArray: string[]){
+  let returnString: string = "";
+
+  if(inputArray.length <= 0){
+      return "";
+  } else{
+      if(inputArray.length == 1){
+          return inputArray[0];
+      } else{
+          inputArray.forEach((item: string, index: number) => {
+              if(index + 1 < inputArray.length){
+                  returnString += `${item},`;
+              } else{
+                  returnString += item;
+              }
+          });
+
+          return returnString.toLowerCase();
+      }
   }
 }
