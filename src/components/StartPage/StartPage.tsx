@@ -80,7 +80,7 @@ export default function StartPage() {
 
     // Settings, read spoonacular documentation for more info.
     const apiKey: string = "6d398aefc8b6440286cd4509f45075c5";
-    const maxHits: number = 3;
+    const maxHits: number = 6;
     const addRecipeNutrition: boolean = false;
 
     // Settings only for MTVMH
@@ -273,23 +273,6 @@ export default function StartPage() {
         </div>
 
         <div className="random-generated">Random: {getMealTypeByTime()}</div>
-        <br />
-        Mighty Meals
-        <br />
-        Mighty Meals
-        <br />
-        Mighty Meals
-        <br />
-        Mighty Meals
-        <br />
-        Mighty Meals
-        <br />
-        Mighty Meals
-        <br />
-        Mighty Meals
-        <br />
-        Mighty Meals
-        <br />
     </div>
   );
 }

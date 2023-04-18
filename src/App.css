@@ -8,6 +8,10 @@
   min-height: 96vh;
 }
 
+.app-body-recipe{
+  min-height: 86.8vh;
+}
+
 @media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
   .app-body{
     margin-bottom: 135px;

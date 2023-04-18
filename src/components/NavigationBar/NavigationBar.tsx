@@ -22,7 +22,7 @@ export default function NavigationBar(props) {
           </Navbar.Brand>
           <span className="mighty-navbar-text">Mighty Meals</span>
           <div className="d-flex flex-row">
-            {matches === false && <SearchSwitch standardSearch={props.standardSearch} setStandardSearch={props.setStandardSearch} setMealChoice={props.setMealChoice} setCuisineChoices={props.setCuisineChoices} setIntoleranceChoices={props.setIntoleranceChoices} setDietChoices={props.setDietChoices} setSelected={props.setSelected}/>}
+            {props.hideSwitch === true ? <div className="hiddenSwitch-margin"></div> : matches === false && <SearchSwitch standardSearch={props.standardSearch} setStandardSearch={props.setStandardSearch} setMealChoice={props.setMealChoice} setCuisineChoices={props.setCuisineChoices} setIntoleranceChoices={props.setIntoleranceChoices} setDietChoices={props.setDietChoices} setSelected={props.setSelected}/>}
             <DropdownNav />
           </div>
         </Container>
