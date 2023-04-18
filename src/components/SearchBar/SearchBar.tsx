@@ -1,6 +1,7 @@
 import { useState ,useEffect } from "react";
 import "./SearchBar.css";
 import filterLogo from '../../images/filter.png'
+import searchLogo from '../../images/search.png'
 
 //@ts-ignore
 export default function SearchBar(props){
@@ -88,6 +89,7 @@ export default function SearchBar(props){
                             </ul>
                         )}
                     </div>
+                    {props.ingredientChoices.length > 0 && <div className="search-icon" onClick={() => {props.getApiData()}}><img className="icon-search" src={searchLogo} /></div>}
                     <div className="icon" onClick={openFilter}><img className="icon-filter" src={filterLogo} /></div>
                 </div>
             </div>

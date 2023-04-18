@@ -11,12 +11,12 @@ export default function SearchSwitch(props){
         <div className="d-flex" id="switch-content">
           {/* <img className="question-icon" src={questionIcon} alt="more info" /> */}
 
-          <OverlayTrigger trigger={Array('hover', 'click')} key="bottom" placement="bottom" rootClose={true} overlay={
+          <OverlayTrigger trigger="click" key="bottom" placement="bottom" rootClose={true} overlay={
             <Popover id="popover">
               <Popover.Header as="h3">{props.standardSearch ? "Standard search" : "MTVMH search"}</Popover.Header>
               <Popover.Body>
               {props.standardSearch ?
-              "All filters activated. Free text search on fron page." :
+              "All filters activated. Free text search on front page." :
               "Filters de-activated. Only ingredients available for selection."}
               </Popover.Body>
             </Popover>
