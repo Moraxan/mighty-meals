@@ -1,0 +1,20 @@
+#switch-content{
+    align-self: center;
+    margin-right: 30px;
+}
+
+.question-icon{
+    margin-top: 2px;
+    height: 30px;
+    width: 30px;
+}
+
+#mighty-switch{
+    background-color: #7c5fb4;
+    height: 25px;
+    width: 55px;
+}
+
+#mighty-switch:checked{
+    background-color: #eda037;
+}
