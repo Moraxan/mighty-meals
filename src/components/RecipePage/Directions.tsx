@@ -1,7 +1,12 @@
+import checkedImg from "../../images/checked.png";
+import uncheckedImg from "../../images/unchecked.png";
 import "./Directions.css";
+import { useState } from "react";
 
 export const Directions = ({ directions }) => {
-  if (!directions || directions.length === 0) {
+  const [directionsState, setDirectionsState] = useState(directions);
+
+  if (!directionsState || directionsState.length === 0) {
     return (
       <div className="directions-container">
         <div className="directions-box">
@@ -12,6 +17,13 @@ export const Directions = ({ directions }) => {
     );
   }
 
+  const handleImageClick = (step) => {
+    const newSteps = directionsState[0].steps.map((s) =>
+      s.number === step.number ? { ...s, checked: !s.checked } : s
+    );
+    setDirectionsState([{ ...directionsState[0], steps: newSteps }]);
+  };
+
   return (
     <div className="directions-container">
       <div className="directions-box">
@@ -19,19 +31,20 @@ export const Directions = ({ directions }) => {
       </div>
       <br />
       <ul className="directions-list">
-        {directions[0].steps.map((step) => (
+        {directionsState[0].steps.map((step) => (
           <li key={step.number}>
-            <label>
-              <input type="checkbox" />
+            <button className="image-button">
+              <img
+                src={step.checked ? checkedImg : uncheckedImg}
+                alt={step.checked ? "Checked" : "Unchecked"}
+                onClick={() => handleImageClick(step)}
+                className="directions-image"
+              />
               <span>{step.step}</span>
-            </label>
+            </button>
           </li>
         ))}
       </ul>
     </div>
   );
-  
-  
 };
-
-  
