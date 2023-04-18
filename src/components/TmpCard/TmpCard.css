@@ -11,6 +11,7 @@
 
 .test-card{
     font-family: "Varela";
+    cursor: pointer;
 }
 
 .testcard-text{

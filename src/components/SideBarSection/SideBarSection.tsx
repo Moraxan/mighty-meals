@@ -8,7 +8,7 @@ import "./SideBarButtons.css";
 //@ts-ignore
 export default function SideBarSection(props) {
   // Taking in these props from SideBar.tsx: mealChoice, setMealChoice, cuisineChoices, setCuisineChoices, intoleranceChoices, setIntoleranceChoices
-  // - dietChoices, setDietChoices, selected, setSelected, ingredientChoices, setIngredientChoices, createCards, standardSearch, setStandardSearch
+  // - dietChoices, setDietChoices, selected, setSelected, ingredientChoices, setIngredientChoices, createCards, standardSearch, setStandardSearch, getApiData
 
   return (
     <>
@@ -93,7 +93,7 @@ export default function SideBarSection(props) {
     return (
       <footer className="filter-footer d-flex pb-1">
         <Button className="clear-result-btn" onClick={clearAll}>clear{props.selected.length + props.ingredientChoices.length > 0 && tmpSpan}</Button>
-        <Button className="clear-result-btn" onClick={getApiData}>go!</Button>
+        <Button className="clear-result-btn" onClick={props.getApiData}>go!</Button>
       </footer>
     )
   }
@@ -205,55 +205,6 @@ export default function SideBarSection(props) {
     }
     props.setSelected(tmpSelected);
   }
-
-  async function getApiData(){
-    // Function that fetches / GET data back from the API.
-    // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
-
-    // Settings, read spoonacular documentation for more info.
-    const apiKey: string = "6d398aefc8b6440286cd4509f45075c5";
-    const maxHits: number = 3;
-    const addRecipeNutrition: boolean = false;
-
-    // Settings only for MTVMH
-    const ranking: number = 1;    //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
-    const ignorePantry: boolean = true;   //Whether to ignore typical pantry items, such as water, salt, flour, etc.
-
-    if(props.standardSearch === true){
-
-      const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&type=${props.mealChoice}&cuisine=${createURIString(props.cuisineChoices)}&includeIngredients=${createURIString(props.ingredientChoices)}&intolerance=${createURIString(props.intoleranceChoices)}&diet=${createURIString(props.dietChoices)}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}`;
-
-      try{
-        const response = await fetch(encodeURI(url));
-        const result = await response.json();
-
-        props.createCards(result.results)
-      }
-      catch (e){
-        console.log(e);
-      }
-    } else{
-      // This search requires at least 1 ingredient, if none are selected an alert will pop-up telling the user to select at least 1..
-      if(props.ingredientChoices.length > 0){
-
-        const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(props.ingredientChoices)}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
-
-        try{
-          const response = await fetch(encodeURI(url));
-          const result = await response.json();
-  
-          console.log(result);
-  
-          props.createCards(result)
-        }
-        catch (e){
-          console.log(e);
-        }
-      } else{
-        alert("Please select at least 1 ingredient...")
-      }
-    }
-  }
 }
 
 function ArrayName(arrIndex: number) {
@@ -271,28 +222,4 @@ function ArrayName(arrIndex: number) {
       return "not found";
   }
 }
-
-// Takes all choices from the source array and creates a string appropriate for the API URI.
-function createURIString(inputArray: string[]){
-  let returnString: string = "";
-
-  if(inputArray.length <= 0){
-      return "";
-  } else{
-      if(inputArray.length == 1){
-          return inputArray[0];
-      } else{
-          inputArray.forEach((item: string, index: number) => {
-              if(index + 1 < inputArray.length){
-                  returnString += `${item},`;
-              } else{
-                  returnString += item;
-              }
-          });
-
-          return returnString.toLowerCase();
-      }
-  }
-}
-
 

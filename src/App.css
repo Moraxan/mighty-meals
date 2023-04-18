@@ -4,36 +4,16 @@
   text-align: center;
 }
 
-.random-generated{
-  color: #eda037;
-  font-size: 2rem;
+.app-body{
+  min-height: 96vh;
 }
 
-.app-body{
+.app-body-recipe{
   min-height: 86.8vh;
 }
-
-.cardArea-styling{
-  max-width: 1300px;
-}
-
 
 @media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
   .app-body{
     margin-bottom: 135px;
   }
-
-  .cardArea-styling{
-    width: 350px;
-  }
-
-  #switch-content{
-    position: absolute;
-    /* background-color: #7c5fb4;
-    width: 100vw; */
-
-    top: 0px;
-    left: 10px;
-    padding-top: 3px;
-}
 }
