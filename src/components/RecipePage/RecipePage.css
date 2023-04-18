@@ -1,0 +1,49 @@
+@font-face{
+  font-family: "Varela";
+  src: local("VarelaRoundRegular"), url("../../fonts/Varela/VarelaRound-Regular.ttf") format("truetype");
+}
+.RecipePage {
+  display: flex;
+  flex-direction: row;
+}
+
+.RecipePage-left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.RecipePage-right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.RecipePage-top-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.RecipePage-bottom-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.RecipePage-back-button {
+  margin-right: 16px;
+}
+
+@media (max-width: 768px) {
+  .RecipePage {
+    flex-direction: column;
+  }
+}
+
+
+
+
+
