@@ -9,7 +9,7 @@ import { RecipePage } from './components/RecipePage/RecipePage';
 export default function App() {
 
   //Set this constant to show to view the Start Page
-  const showStartPage: string = "show";
+  const showStartPage: string = "hide";
 
   return (
     <>
