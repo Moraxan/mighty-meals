@@ -10,7 +10,7 @@
 .RecipePage-left-column {
   display: flex;
   flex-direction: column;
-  justify-content: top;
+  justify-content: center;
 }
 
 .RecipePage-right-column {
@@ -21,7 +21,6 @@
 
 .RecipePage-top-row {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -43,7 +42,6 @@
     flex-direction: column;
   }
 }
-
 
 
 
