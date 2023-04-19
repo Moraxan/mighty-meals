@@ -4,11 +4,13 @@
   }
 
 .dish-summary-container{
-    width: 800px;
+    width: 70%; /*from 800px*/
     background-color: #e42427;
     padding: 10px;
     border:5px solid black;
     border-radius: 10px;
+    margin-right: 7%;
+    margin-left: 20px;
     margin-top: 20px;
     
 }

@@ -5,7 +5,9 @@
   font-family: "Varela";
   padding: 10px;
   text-align: left;
-  width: 800px;
+  width: 70%; /*changed to percentage*/
+  margin-top:20px;
+  margin-right: 7%;
 }
 
 .directions-box {

@@ -2,4 +2,8 @@
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  width: 30%;
+}
+.dish-image{
+  width: 100%;
 }
