@@ -1,6 +1,7 @@
 import { useState ,useEffect } from "react";
 import "./SearchBar.css";
 import filterLogo from '../../images/filter.png'
+import searchLogo from '../../images/search.png'
 
 //@ts-ignore
 export default function SearchBar(props){
@@ -74,7 +75,7 @@ export default function SearchBar(props){
         <div className={props.showRed === true ? "red-fluff" : ""}>
             <div className={props.showRed === true ? "wrapper wrapper-padding" : "wrapper no-fluff"}>
                 <div className="search-input">
-                    <input type="text" placeholder="Search ingredients.." onChange={handleChange} value={searchText}/>
+                    <input type="text" placeholder={props.ingredientChoices.length > 0 ? `Search ingredients (${props.ingredientChoices.length})` : "Search ingredients"} onChange={handleChange} value={searchText}/>
                     {/* If showRed is true our fileted result div gets a second class allowing us to change direction from down to up when displayed on phone. */}
                     <div className={props.showRed === true ? "autocom-box mobile-change-direction" : "autocom-box"}>
                         {/* Checks that our filteredData.length is longer than 0 and if true display the results. */}
@@ -82,15 +83,26 @@ export default function SearchBar(props){
                             <ul>
                                 {filteredData.map((ingredient: string, index: number) => {
                                     return (
-                                        <li key={index} onClick={ingredientClick}>{ingredient}</li>     
+                                        <li key={index} onClick={ingredientClick} className={`${isItemSelected(props.ingredientChoices, ingredient.toLocaleLowerCase()) && "ingredient-selected"}`}>{ingredient}</li>     
                                     )
                                 })}
                             </ul>
                         )}
                     </div>
+                    {props.ingredientChoices.length > 0 && <div className="search-icon" onClick={() => {props.getApiData()}}><img className="icon-search" src={searchLogo} /></div>}
                     <div className="icon" onClick={openFilter}><img className="icon-filter" src={filterLogo} /></div>
                 </div>
             </div>
         </div>
     );
+
+    function isItemSelected(inputArray: string[], item: string){
+        // function takes an array and an item and checks if item is included in the array. Using this to determine if list item in search is selected.
+        if(inputArray.includes(item)){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
 };

@@ -4,12 +4,11 @@
   text-align: center;
 }
 
-.random-generated{
-  color: #eda037;
-  font-size: 2rem;
+.app-body{
+  min-height: 96vh;
 }
 
-.app-body{
+.app-body-recipe{
   min-height: 86.8vh;
 }
 
@@ -17,25 +16,4 @@
   .app-body{
     margin-bottom: 135px;
   }
-
-  to {
-    transform: rotate(360deg);
-  }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-
-

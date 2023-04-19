@@ -8,13 +8,13 @@ import "./SideBarButtons.css";
 //@ts-ignore
 export default function SideBarSection(props) {
   // Taking in these props from SideBar.tsx: mealChoice, setMealChoice, cuisineChoices, setCuisineChoices, intoleranceChoices, setIntoleranceChoices
-  //                                     - dietChoices, setDietChoices, selected, setSelected, ingredientChoices, setIngredientChoices
+  // - dietChoices, setDietChoices, selected, setSelected, ingredientChoices, setIngredientChoices, createCards, standardSearch, setStandardSearch, getApiData
 
   return (
     <>
       <Accordion>
         <AccordionSelectedFilters />
-        <AccordionFilterItem />
+        {props.standardSearch === true && <AccordionFilterItem />}
       </Accordion>
       <FilterFooter />
     </>
@@ -93,7 +93,7 @@ export default function SideBarSection(props) {
     return (
       <footer className="filter-footer d-flex pb-1">
         <Button className="clear-result-btn" onClick={clearAll}>clear{props.selected.length + props.ingredientChoices.length > 0 && tmpSpan}</Button>
-        <Button className="clear-result-btn">go!</Button>
+        <Button className="clear-result-btn" onClick={props.getApiData}>go!</Button>
       </footer>
     )
   }
@@ -222,3 +222,4 @@ function ArrayName(arrIndex: number) {
       return "not found";
   }
 }
+

@@ -11,5 +11,11 @@
 
 .test-card{
     font-family: "Varela";
+    cursor: pointer;
+}
+
+.testcard-text{
+    background-color: rgba(0, 0, 0, 0.5);
+    color:white;
 }
 
