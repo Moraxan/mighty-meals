@@ -1,16 +1,16 @@
 .directions-container {
   background-color: #eda037;
-  border: 3px solid black;
+  border: 5px solid black;
   border-radius: 10px;
   font-family: "Varela";
   padding: 10px;
   text-align: left;
-  flex-basis: 300px;
+  width: 800px;
 }
 
 .directions-box {
   font-family: "Avengeance";
-  font-size: 34px;
+  font-size: 34pt;
   margin-top: 20px;
 }
 

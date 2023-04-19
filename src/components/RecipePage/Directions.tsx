@@ -28,8 +28,8 @@ export const Directions = ({ directions }) => {
 
   return (
     <div className="directions-container">
-      <div className="directions-box">
-        <p>DIRECTIONS</p>
+      <div >
+        <h2 className="directions-box">directions</h2>
       </div>
       <br />
       <ul className="directions-list">
