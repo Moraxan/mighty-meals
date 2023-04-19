@@ -42,11 +42,12 @@ export const Directions = ({ directions }) => {
                 onClick={() => handleImageClick(step)}
                 className="directions-image"
               />
-              <span>{step.step}</span>
+              <span style={{ textAlign: 'left' }}>{step.step}</span>
             </button>
           </li>
         ))}
       </ul>
     </div>
   );
+  
 };

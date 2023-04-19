@@ -32,6 +32,7 @@
 }
 
 .directions-image {
+  text-align: left;
   background: transparent;
   height: 20px;
   margin-right: 10px;
