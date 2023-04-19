@@ -22,14 +22,7 @@
   padding-left: 0;
 }
 
-.image-button {
-  align-items: flex-start;
-  background: transparent;
-  border: none;
-  display: flex;
-  margin-bottom: 10px;
-  padding: 0;
-}
+
 
 .directions-image {
   text-align: left;
@@ -39,3 +32,20 @@
   margin-top: 3px;
 }
 
+.image-button {
+  align-items: flex-start;
+  background: transparent;
+  border: none;
+  display: flex;
+  margin-bottom: 10px;
+  padding: 0;
+  text-align: left;
+}
+
+.image-button .step-text {
+  color: black;
+}
+
+.image-button .step-text.checked {
+  color: grey;
+}
