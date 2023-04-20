@@ -17,7 +17,7 @@
 }
 
 .RecipePage-top-row {
-  display: flex;
+  display: flex;  
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -34,12 +34,26 @@
 
 .RecipePage-back-button {
   margin-right: 16px;
+  margin-bottom: 20px;
+  margin-left: 16px;
 }
 
 @media (max-width: 768px) {
   .RecipePage {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
+  .RecipePage-top-row {
+    flex-direction: column;
+    width: 90%;
+    margin-left: 5%;
+  }
+  .RecipePage-bottom-row {
+    flex-direction: column;
+    width: 90%;
+    margin-left: 5%;
+  }
+
 }
   
 
