@@ -1,37 +1,51 @@
-.directions-box{
-    font-family: "Avengeance", sans-serif;
-    font-size: 34px;
-    margin-top: 20px;
+.directions-container {
+  background-color: #eda037;
+  border: 5px solid black;
+  border-radius: 10px;
+  font-family: "Varela";
+  padding: 10px;
+  text-align: left;
+  width: 800px;
 }
-  
-  
-  
-  .directions-container {
-    background-color: #eda037;
-    flex-basis: 300px;
-    text-align: left;
-    font-family: "Varela";
-    border: 3px solid black;
-    border-radius: 10px;
-    padding: 10px;
-    
-  }
-  
-  .directions-container ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  
-  }
-  
-  .directions-list {
-    font-size: 16px;
-    list-style-type: none;
-    padding-left: 0px;
-    overflow-y: auto;
-  }
-  
-  .directions-list input[type="checkbox"]:checked + span {
-    color: gray;
-  }
-  
+
+.directions-box {
+  font-family: "Avengeance";
+  font-size: 34pt;
+  margin-top: 20px;
+}
+
+.directions-list {
+  font-size: 16px;
+  list-style: none;
+  margin: 0;
+  overflow-y: auto;
+  padding-left: 0;
+}
+
+
+
+.directions-image {
+  text-align: left;
+  background: transparent;
+  height: 20px;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+.image-button {
+  align-items: flex-start;
+  background: transparent;
+  border: none;
+  display: flex;
+  margin-bottom: 10px;
+  padding: 0;
+  text-align: left;
+}
+
+.image-button .step-text {
+  color: black;
+}
+
+.image-button .step-text.checked {
+  color: grey;
+}

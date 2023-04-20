@@ -1,3 +1,4 @@
+
 import "./DishImage.css"
 
 export const DishImage = ({ imageUrl, altText }) => {
