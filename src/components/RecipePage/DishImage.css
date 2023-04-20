@@ -1,7 +1,8 @@
 .dish-image-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  /* /* margin-bottom: 10px; */
+  margin-right: 20px; 
   width: 30%;
 }
 .dish-image{

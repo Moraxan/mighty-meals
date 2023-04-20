@@ -1,12 +1,13 @@
 .RecipePage {
   display: flex;
   flex-direction: row;
+  height: 100vh;
 }
 
 .RecipePage-left-column {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content:baseline;
 }
 
 .RecipePage-right-column {
@@ -20,6 +21,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  flex-basis: 30%
 }
 
 .RecipePage-bottom-row {
@@ -27,6 +29,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  flex-basis: 70%
 }
 
 .RecipePage-back-button {
@@ -38,6 +41,7 @@
     flex-direction: column;
   }
 }
+  
 
 
 
