@@ -10,9 +10,17 @@ export const Ingredients = ({ ingredients }) => {
       <br />
       <ul>
         {/* @ts-ignore */}
-        {ingredients.map((ingredient) => (
-          <li key={ingredient.id}>{ingredient.original}</li>
-        ))}
+        {ingredients.map((ingredient) => {
+          // splits the amount of ingredients from name of the ingredient and makes the amount bold
+          const [amount, ...rest] = ingredient.original.split(" ");
+          return (
+            <li key={ingredient.id}>
+              <span>
+                <strong>{amount}</strong> {rest.join(" ")}
+              </span>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
