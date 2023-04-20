@@ -8,8 +8,8 @@ export const Ingredients = ({ ingredients }) => {
       </div>
       <br />
       <ul>
-        {ingredients.map((ingredient) => (
-          <li key={ingredient.id}>{ingredient.original}</li>
+        {ingredients.map((ingredient: string, index: number) => (
+          <li key={index}>{ingredient.original}</li>
         ))}
       </ul>
     </div>
