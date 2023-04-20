@@ -14,7 +14,8 @@ import { useMediaQuery } from "../DropdownNav/DropdownNav";
 
 import "./StartPage.css";
 
-export default function StartPage() {
+//@ts-ignore
+export default function StartPage(props) {
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
   const emptyRecipeST: RecipeFrontST[] = [];
   const emptyRecipeMTVMH: RecipeMTVMH[] = [];
@@ -253,6 +254,7 @@ export default function StartPage() {
                     imgSrc={recipe.image}
                     recipeTitle={recipe.title}
                     readyInMin={recipe.readyInMinutes}
+                    handleRecipeClick={props.handleRecipeClick}
                   />
                 ))}
               {recipesMTVMH.length > 0 &&
@@ -264,6 +266,7 @@ export default function StartPage() {
                     recipeTitle={recipe.title}
                     usedIngredientCount={recipe.usedIngredientCount}
                     missedIngredientCount={recipe.missedIngredientCount}
+                    handleRecipeClick={props.handleRecipeClick}
                   />
                 ))}
             </>

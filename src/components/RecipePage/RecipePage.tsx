@@ -12,9 +12,18 @@ import './RecipePage.css';
 //to make this component more reusable
 //If you want to try another recipe, just put in another ID from the API
 //A suggestion is to use one of these IDs: 637776 or 634091 only because it's them that are used on the StartPage
-export const RecipePage = () => {
-  const [recipeId, setRecipeId] = useState(660697);
+
+//@ts-ignore
+export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID}) => {
+  //  ***************   |Change default state of below object to a static ID if you desire.   |***************
+  //  ***************   |For example set below recipeID default state to = useState(637776);  |***************
+  const [recipeId, setRecipeId] = useState(clickedRecipeID);
   const [recipeData, setRecipeData] = useState(null);
+
+  const handleBackClick = () => {
+    setShowStartPage(!showStartPage);
+    console.log(showStartPage)
+  }
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem(`recipeFetch_${recipeId}`));
@@ -51,7 +60,7 @@ export const RecipePage = () => {
   return (
     <div className="RecipePage">
       <div className="RecipePage-left-column">
-        <BackButton className="RecipePage-back-button" />
+        <BackButton handleBackClick={handleBackClick} />
       </div>
       <div className="RecipePage-right-column">
         <div className="RecipePage-top-row">
