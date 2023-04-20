@@ -9,12 +9,14 @@
 }
 
 .directions-box {
+  border: 1px solid black;
   font-family: "Avengeance";
   font-size: 34pt;
   margin-top: 20px;
 }
 
 .directions-list {
+  overflow-y: auto;
   font-size: 16px;
   list-style: none;
   margin: 0;
