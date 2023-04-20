@@ -5,6 +5,7 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Footer from "./components/Footer/Footer";
 import StartPage from "./components/StartPage/StartPage";
 import { RecipePage } from './components/RecipePage/RecipePage';
+import { Ingredients } from "./components/RecipePage/Ingredients";
 
 export default function App() {
 
@@ -13,21 +14,21 @@ export default function App() {
 
   return (
     <>
-      {showStartPage === "show" ? (
-        <>
-          <StartPage />
+    {showStartPage === "show" ? (
+      <>
+        <StartPage />
+        <Footer />
+      </>
+    ) : (
+      <>
+        <div className="app-body-recipe">
+          <NavigationBar hideSwitch={true}/>
+          <RecipePage />
+        </div>
           <Footer />
-        </>
-      ) : (
-        <>
-          <div className="app-body-recipe">
-            <NavigationBar hideSwitch={true}/>
-            <RecipePage />
-          </div>
-            <Footer />
-        </>
-      )}
-    </>
+      </>
+    )}
+  </>
   );
 }
 

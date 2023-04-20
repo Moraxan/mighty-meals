@@ -23,7 +23,7 @@ export const RecipePage = () => {
     } else {
 //Remember to put in your own API key here the first time you run this code
 //If you see the middle component of the page saying Loading... then you've probably forgotten to put in your API key
-      const apiKey = 'your api key here';
+      const apiKey = '305d23589e4347a5803ef32176c630e0';
       const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
 
       fetch(url)
