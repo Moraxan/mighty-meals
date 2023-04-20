@@ -1,6 +1,16 @@
 import "./Ingredients.css";
 
-//@ts-ignore
+//regex filtering out all integers and fractions to make them bold/strong
+const boldNumbers = (str) => {
+   const pattern = /(\d+|\d+\s*(?:\/\s*\d+)?)/g;
+
+  // below is optional pattern to also include measurments (not working 100%)
+  // const pattern = /(\d+[\s\d]*(?:\/\s*\d+)?|\d*\.\d+)\s*(cup[s]?|teaspoon[s]?|tablespoon[s]?|ounce[s]?|gallon[s]?|pint[s]?|quart[s]?|pound[s]?|milliliter[s]?|liter[s]?|gram[s]?|kilogram[s]?)/gi;
+
+  // Replaces matches with bold/strong HTML tags
+  return str.replace(pattern, (match) => `<strong>${match}</strong>`);
+};
+
 export const Ingredients = ({ ingredients }) => {
   return (
     <div className="ingredients-container">
@@ -9,17 +19,12 @@ export const Ingredients = ({ ingredients }) => {
       </div>
       <br />
       <ul>
-        {/* @ts-ignore */}
         {ingredients.map((ingredient) => {
-          // splits the amount of ingredients from name of the ingredient and makes the amount bold
           const [amount, ...rest] = ingredient.original.split(" ");
-          return (
-            <li key={ingredient.id}>
-              <span>
-                <strong>{amount}</strong> {rest.join(" ")}
-              </span>
-            </li>
+          const formattedIngredient = boldNumbers(
+            `${amount} ${rest.join(" ")}`
           );
+          return <li key={ingredient.id} dangerouslySetInnerHTML={{ __html: formattedIngredient }} />;
         })}
       </ul>
     </div>
