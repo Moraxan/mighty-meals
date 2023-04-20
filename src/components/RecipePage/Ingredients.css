@@ -23,12 +23,10 @@
     width: fit-content;
     height: fit-content;
     z-index: 1;
-
   }
   
   .ingredients-box p {
     margin: 0; /* remove margin around p tag */
-    /* padding: 5px; */
     padding-right: 10px;
     padding-left: 5px;
   }
