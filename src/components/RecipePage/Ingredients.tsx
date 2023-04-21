@@ -24,7 +24,7 @@ export const Ingredients = ({ ingredients }) => {
           const formattedIngredient = boldNumbers(
             `${amount} ${rest.join(" ")}`
           );
-          return <li key={ingredient.id} dangerouslySetInnerHTML={{ __html: formattedIngredient }} />;
+          return <li key={ingredient.id} dangerouslySetInnerHTML={{ __html: formattedIngredient }}/>;
         })}
       </ul>
     </div>

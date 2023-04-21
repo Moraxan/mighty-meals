@@ -13,7 +13,7 @@ import './RecipePage.css';
 //If you want to try another recipe, just put in another ID from the API
 //A suggestion is to use one of these IDs: 637776 or 634091 only because it's them that are used on the StartPage
 export const RecipePage = () => {
-  const [recipeId, setRecipeId] = useState(660697);
+  const [recipeId, setRecipeId] = useState(637776);
   const [recipeData, setRecipeData] = useState(null);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export const RecipePage = () => {
     } else {
 //Remember to put in your own API key here the first time you run this code
 //If you see the middle component of the page saying Loading... then you've probably forgotten to put in your API key
-      const apiKey = '305d23589e4347a5803ef32176c630e0';
+      const apiKey = 'ENTER YOUR API KEY HERE';
       const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
 
       fetch(url)
