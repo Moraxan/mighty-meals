@@ -1,3 +1,4 @@
+
 import backbtn from "../../images/return-button.png";
 //@ts-ignore
 export const BackButton = ({ handleBackClick }) => {
@@ -7,3 +8,4 @@ export const BackButton = ({ handleBackClick }) => {
     </div>
   );
 };
+

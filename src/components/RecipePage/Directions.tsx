@@ -28,7 +28,7 @@ export const Directions = ({ directions }) => {
 
   return (
     <div className="directions-container">
-      <div >
+      <div>
         <h2 className="directions-box">directions</h2>
       </div>
       <br />
@@ -42,12 +42,13 @@ export const Directions = ({ directions }) => {
                 onClick={() => handleImageClick(step)}
                 className="directions-image"
               />
-              <span style={{ textAlign: 'left' }}>{step.step}</span>
+              <span className={`step-text ${step.checked ? 'checked' : ''}`}>{step.step}</span>
             </button>
           </li>
         ))}
       </ul>
     </div>
   );
+  
   
 };
