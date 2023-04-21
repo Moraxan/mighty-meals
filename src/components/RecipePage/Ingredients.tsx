@@ -19,12 +19,12 @@ export const Ingredients = ({ ingredients }) => {
       </div>
       <br />
       <ul>
-        {ingredients.map((ingredient) => {
+        {ingredients.map((ingredient: string, index: number) => {
           const [amount, ...rest] = ingredient.original.split(" ");
           const formattedIngredient = boldNumbers(
             `${amount} ${rest.join(" ")}`
           );
-          return <li key={ingredient.id} dangerouslySetInnerHTML={{ __html: formattedIngredient }}/>;
+          return <li key={index} dangerouslySetInnerHTML={{ __html: formattedIngredient }}/>;
         })}
       </ul>
     </div>
