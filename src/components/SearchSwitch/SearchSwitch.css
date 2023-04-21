@@ -1,0 +1,42 @@
+@font-face{
+    font-family: "Varela";
+    src: local("VarelaRoundRegular"), url("../../fonts/Varela/VarelaRound-Regular.ttf") format("truetype");
+}
+
+#switch-content{
+    align-self: center;
+    margin-right: 30px;
+}
+
+.questionMark-span{
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    border-radius: 50%;
+    border: 2px solid black;
+
+    font-size: 1.1rem;
+    padding: 1px 9px 0px 9px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+.questionMark-span:hover{
+    background-color: #eda037;
+}
+
+.question-icon{
+    margin-top: 2px;
+    height: 30px;
+    width: 30px;
+}
+
+#mighty-switch{
+    background-color: #7c5fb4;
+    height: 25px;
+    width: 55px;
+    cursor: pointer;
+}
+
+#mighty-switch:checked{
+    background-color: #eda037;
+}

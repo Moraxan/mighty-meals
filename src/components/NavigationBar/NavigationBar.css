@@ -1,0 +1,137 @@
+.navbar-logo{
+    height: 70px;
+    width: auto;
+}
+
+.container{
+    max-width: 3840px;
+    margin: 0px;
+}
+
+.mighty-nabvar{
+    z-index: 99;
+    position: fixed;
+    overflow: visible;
+    top: 0;
+    width: 100%;
+    background-color: #7c5fb4;
+    border-bottom: 5px solid black;
+    margin-bottom: 10px;
+    padding: 3px 0px 3px 0px;
+}
+
+.mighty-navbar-text{
+    color: #eda037;
+    font-size: 3rem;
+    -webkit-text-stroke: 1px black;
+    margin-right: -80px;
+}
+
+.burger-button{
+    background-color: #eda037;
+    border: 3px solid black;
+    border-radius: 20px;
+}
+
+.burger-button:hover{
+    background-color: #e42427;
+    border: 3px solid black;
+}
+
+.burger-button.show{
+    background-color: #e42427;
+    border: 3px solid black;
+}
+
+.burger-logo{
+    height: 50px;
+    width: auto;
+}
+
+.navbar-bottom-margin{
+    margin-top: 100px;
+}
+
+.hiddenSwitch-margin{
+    margin-right: 130px;
+}
+
+@media screen and (max-width: 570px){
+    .mighty-navbar-text{
+        font-size: 1.7rem;
+        padding-right: 40px;
+    }
+}
+
+@media screen and (max-width: 720px){
+    .hiddenSwitch-margin{
+        margin-right: 40px;
+    }
+
+    .mighty-navbar-text{
+        margin: 0;
+    }
+
+    #switch-content{
+        margin-right: 5px;
+    }
+
+    .questionMark-span{
+        font-size: 0.8rem;
+        padding: 1px 6px 0px 6px;
+        margin-top: 2px;
+        margin-right: 0px;
+    }
+
+    .question-icon{
+        margin-top: 7px;
+        height: 15px;
+        width: 15px;
+    }
+    
+    #mighty-switch{
+        background-color: #7c5fb4;
+        height: 20px;
+        width: 35px;
+    }
+}
+
+@media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
+    .hiddenSwitch-margin{
+        margin-right: 0px;
+    }
+
+    .mighty-nabvar{
+        border: none;
+        border-top: 3px solid black;
+        top: auto;
+        bottom: 0;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
+
+    .mighty-navbar-text{
+        font-size: 2rem;
+        padding-right: 40px;
+    }
+
+    .navbar-logo{
+        height: 50px;
+        width: auto;
+    }
+
+    .burger-logo{
+        height: 30px;
+        width: auto;
+    }
+
+    .burger-button{
+        background-color: #eda037;
+        border: 2px solid black;
+        border-radius: 13px;
+    }
+
+    .navbar-bottom-margin{
+        margin-top: 10px;
+    }
+}
