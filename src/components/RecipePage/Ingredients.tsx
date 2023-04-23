@@ -1,4 +1,6 @@
 import "./Ingredients.css";
+import { useState } from 'react';
+
 
 //regex filtering out all integers and fractions to make them bold/strong
 const boldNumbers = (str) => {
@@ -10,6 +12,8 @@ const boldNumbers = (str) => {
   // Replaces matches with bold/strong HTML tags
   return str.replace(pattern, (match) => `<strong>${match}</strong>`);
 };
+
+
 
 export const Ingredients = ({ ingredients }) => {
   return (
@@ -27,6 +31,12 @@ export const Ingredients = ({ ingredients }) => {
           return <li key={index} dangerouslySetInnerHTML={{ __html: formattedIngredient }}/>;
         })}
       </ul>
+      <div className="servings-container">
+        {/* <button className="decrease">-</button> */}
+        <p>servings</p>
+        {/* <button className="increase">+</button> */}
+      </div>
+
     </div>
   );
 };

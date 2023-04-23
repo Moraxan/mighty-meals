@@ -1,7 +1,6 @@
 .ingredients-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   font-family: "Varela", sans-serif;
   font-size: 16pt;
   color: black;
@@ -10,10 +9,8 @@
   border: 5px solid black;
   padding: 10px;
   width: fit-content;
-  /* margin: 10px; */
-  max-width: 400px;
+  max-width: 350px;
   position: relative;
-  /* max-height: 600px; */
   height: 95%; /*added height*/
   margin-right: 20px;
   overflow: auto;
@@ -44,7 +41,9 @@
   display: flex;
   flex-direction: column;
   max-height: fit-content;
-  margin-top: 120px; /* add some padding to create space for the ingredients-box */
+  align-items: flex-start;
+  padding-left: 0;
+  padding-top: 55px;
 }
 
 .ingredients-box {
@@ -52,18 +51,36 @@
   font-family: "Avengeance", sans-serif;
   font-size: 34pt;
   border-radius: 5px;
-  width: fit-content;
-  height: fit-content;
-  z-index: 1;
   position: absolute;
   top: 0;
   left: 0;
-  margin: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .ingredients-box p {
   margin: 0;
   padding-right: 10px;
   padding-left: 5px;
+}
 
+.servings-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #eda037;
+  font-family: "Avengeance", sans-serif;
+  font-size: 18pt;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+}
+
+.servings-container p {
+  margin: 0;
+  padding-right: 10px;
+  padding-left: 5px;
 }
