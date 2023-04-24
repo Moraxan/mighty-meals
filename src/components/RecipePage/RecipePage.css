@@ -1,76 +1,52 @@
-@import url('../../index.css');
-
 .RecipePage {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto 1fr auto;
   grid-template-rows: auto 1fr;
   grid-template-areas:
     "backbutton dishimage summary"
     "blank ingredients directions";
   grid-row-gap: 20px;
-  
+  padding: 0 20px;
 }
 
 .RecipePage-left-column {
   grid-area: backbutton;
-  
+  margin-right: 20px;
 }
 
-.RecipePage-right-column {
+.Recipe-center-column {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas:
-    "dishimage summary"
-    "ingredients directions";
-  grid-column-gap: 20px;
+    "dishimage"
+    "summary";
+  grid-row-gap: 20px;
 }
 
-.RecipePage-image-container {
+.recipe-image-container {
   grid-area: dishimage;
 }
 
-.RecipePage-summary-container {
+.recipe-summary-container {
   grid-area: summary;
 }
 
-.RecipePage-ingredients-container {
+.Recipe-right-column {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "blank"
+    "ingredients"
+    "directions";
+  grid-row-gap: 20px;
+}
+
+.recipe-ingredients-container {
   grid-area: ingredients;
 }
 
-.RecipePage-directions-container {
+.recipe-directions-container {
   grid-area: directions;
-}
-
-
-
-@media screen and (max-width: 768px) {
-  .RecipePage {
-    display: block;
-  }
-
-  .RecipePage-left-column {
-    text-align: center;
-  }
-
-  .RecipePage-image-container {
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
-
-  .RecipePage-top-row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .RecipePage-bottom-row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .RecipePage-right-column {
-    display: block;
-  }
 }

@@ -55,27 +55,28 @@ export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID}) =
   if (!recipeData) {
     return <div>Loading...</div>;
   }
-
   return (
-    <div class="RecipePage">
-    <div class="RecipePage-left-column">
-      <BackButton handleBackClick={handleBackClick} />
+    <div className="RecipePage">
+      <div className="RecipePage-left-column">
+        <BackButton handleBackClick={handleBackClick} />
+      </div>
+      <div className="RecipePage-center-column">
+        <div className="dishImage-container">
+          <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
+        </div>
+        <div className="ingredients-container">
+          <Ingredients ingredients={recipeData?.extendedIngredients} />
+        </div>
+      </div>
+      <div className="RecipePage-right-column">
+        <div className="dishSummary-container">
+          <DishSummary recipeData={recipeData} />
+        </div>
+        <div className="directions-container">
+          <Directions directions={recipeData.analyzedInstructions} />
+        </div>
+      </div>
     </div>
-    <div class="RecipePage-right-column">
-      <div class="dishImage-container">
-        <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
-      </div>
-      <div class="ingredients-container">
-        <Ingredients ingredients={recipeData?.extendedIngredients} />
-      </div>
-      <div class="dishSummary-container">
-        <DishSummary recipeData={recipeData} />
-      </div>
-      <div class="directions-container">
-        <Directions directions={recipeData.analyzedInstructions} />
-      </div>
-    </div>
-  </div>
   );
   
 };

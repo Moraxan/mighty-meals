@@ -26,7 +26,9 @@ export default function App() {
       {showStartPage === true ? (
         <>
           <StartPage handleRecipeClick={handleRecipeClick} />
+          <div className='footer'>
           <Footer />
+          </div>
         </>
       ) : (
         <>
@@ -34,7 +36,9 @@ export default function App() {
             <NavigationBar hideSwitch={true}/>
             <RecipePage setShowStartPage={setShowStartPage} showStartPage={showStartPage} clickedRecipeID={clickedRecipeID} />
           </div>
-            <Footer />
+          <div className='footer'>
+          <Footer />
+          </div>
         </>
       )}
     </>
