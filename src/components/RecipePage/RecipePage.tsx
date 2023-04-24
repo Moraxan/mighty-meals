@@ -14,7 +14,7 @@ import './RecipePage.css';
 //A suggestion is to use one of these IDs: 637776 or 634091 only because it's them that are used on the StartPage
 
 //@ts-ignore
-export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID}) => {
+export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID, storedApiKey, setBackButtonClicked}) => {
   //  ***************   |Change default state of below object to a static ID if you desire.   |***************
   //  ***************   |For example set below recipeID default state to = useState(637776);  |***************
   const [recipeId, setRecipeId] = useState(clickedRecipeID);
@@ -22,6 +22,7 @@ export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID}) =
 
   const handleBackClick = () => {
     setShowStartPage(!showStartPage);
+    setBackButtonClicked(true);
   }
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID}) =
     } else {
 //Remember to put in your own API key here the first time you run this code
 //If you see the middle component of the page saying Loading... then you've probably forgotten to put in your API key
-      const apiKey = 'ENTER YOUR API KEY HERE';
+      const apiKey = storedApiKey;
       const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
 
       fetch(url)

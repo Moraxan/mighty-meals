@@ -1,0 +1,12 @@
+@font-face{
+    font-family: "Varela";
+    src: local("VarelaRoundRegular"), url("../../fonts/Varela/VarelaRound-Regular.ttf") format("truetype");
+}
+
+.ModalAPI{
+    font-family: "Varela";
+}
+
+.input-API{
+    width: 100%;
+}

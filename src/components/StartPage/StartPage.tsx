@@ -16,6 +16,7 @@ import "./StartPage.css";
 
 //@ts-ignore
 export default function StartPage(props) {
+
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
   const emptyRecipeST: RecipeFrontST[] = [];
   const emptyRecipeMTVMH: RecipeMTVMH[] = [];
@@ -27,6 +28,8 @@ export default function StartPage(props) {
 
   // Button in search bar and X button in filter uses this state to show/hide filter.
   const [show, setShow] = useState(false);
+
+  const onstartup = true;
 
   // States for all different type of filter/ingredient choices
   const [freeTextSearch, setFreeTextSearch] = useState("");
@@ -42,13 +45,34 @@ export default function StartPage(props) {
   // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
   const [standardSearch, setStandardSearch] = useState(true);
 
-  // useEffect hook that triggers when page first loads up, gives us the random recipes.
+  // Stored API Key in localStorage
+  const apiKey: string | null = localStorage.getItem("storedApiKey");
+
   useEffect(() => {
-    // fetch(`https://api.spoonacular.com/recipes/random?apiKey=f4780df1170f41749bd24df676766198&tags=${getMealTypeByTime()}&number=3`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     createCards(data.recipes);
-    //   })
+    //@ts-ignore
+    const persistedData = JSON.parse(sessionStorage.getItem("persisted-search-data"));
+    
+    if(props.backButtonClicked){
+      setStandardSearch(persistedData.searchMode);
+      setRecipesST(persistedData.recipes);
+      setRecipesMTVMH(persistedData.recipesByIngredients);
+      setIngredientChoices(persistedData.ingridients);
+      setMealChoice(persistedData.meal);
+      setCuisineChoices(persistedData.cuisines);
+      setIntoleranceChoices(persistedData.intolerances);
+      setDietChoices(persistedData.diets);
+      setSelected(persistedData.selectedFilters);
+    }
+  }, [props.backButtonClicked]);
+
+  //useEffect hook that triggers when page first loads up, gives us the random recipes.
+  useEffect(() => {
+    if(!props.backButtonClicked){
+      //     fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=3`)
+      // .then((response) => response.json())
+      // .then((data) => {
+      //   createCards(data.recipes);
+      // })
 
     // Sample recipes to use instead of calling fetch method during development.
     let forTesting: RecipeFrontST[] = [
@@ -73,14 +97,15 @@ export default function StartPage(props) {
     ];
 
     createCards(forTesting);
+    }
   }, []);
 
   async function getApiData() {
+
     // Function that fetches / GET data back from the API.
     // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
 
     // Settings, read spoonacular documentation for more info.
-    const apiKey: string = "6d398aefc8b6440286cd4509f45075c5";
     const maxHits: number = 6;
     const addRecipeNutrition: boolean = false;
 
@@ -130,7 +155,30 @@ export default function StartPage(props) {
     }
   }
 
+  const persistSearchData = () => {
+    const currentSearchState = {
+      searchMode: standardSearch,
+
+      recipes: recipesST,
+      recipesByIngredients: recipesMTVMH,
+
+      ingridients: ingredientChoices,
+      meal: mealChoice,
+      cuisines: cuisineChoices,
+      intolerances: intoleranceChoices,
+      diets: dietChoices,
+      selectedFilters: selected
+    }
+
+    sessionStorage.setItem("persisted-search-data", JSON.stringify(currentSearchState));
+  }
+
   function createCards(input: RecipeFrontST[] | RecipeMTVMH[]) {
+    if (input === undefined){
+      alert("Fetch unsuccessful, check your API key.")
+      return;
+    }
+
     if (input.length < 1) {
       setRecipesST(emptyRecipeST);
       setRecipesMTVMH(emptyRecipeMTVMH);
@@ -255,6 +303,7 @@ export default function StartPage(props) {
                     recipeTitle={recipe.title}
                     readyInMin={recipe.readyInMinutes}
                     handleRecipeClick={props.handleRecipeClick}
+                    persistSearchData={persistSearchData}
                   />
                 ))}
               {recipesMTVMH.length > 0 &&
@@ -267,6 +316,7 @@ export default function StartPage(props) {
                     usedIngredientCount={recipe.usedIngredientCount}
                     missedIngredientCount={recipe.missedIngredientCount}
                     handleRecipeClick={props.handleRecipeClick}
+                    persistSearchData={persistSearchData}
                   />
                 ))}
             </>
@@ -274,8 +324,6 @@ export default function StartPage(props) {
             <NoResult />
           )}
         </div>
-
-        <div className="random-generated">Random: {getMealTypeByTime()}</div>
     </div>
   );
 }
