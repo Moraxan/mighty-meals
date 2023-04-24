@@ -47,14 +47,29 @@ export default function StartPage(props) {
   const [standardSearch, setStandardSearch] = useState(searchSettingsBool);
 
   // API Settings, read spoonacular documentation for more info.
+  const defaultSettings = {
+    storedMaxHits: 6,
+    storeAddRecipeNutrition: false,
+    storedMaxRandomHits: 3,
+    storedRanking: 1,
+    storedIgnorePantry: true
+  }
+
+  if(localStorage.getItem("mightySettings") === null){
+    localStorage.setItem("mightySettings", JSON.stringify(defaultSettings));
+  }
+
+  //@ts-ignore
+  const persistedSettings = JSON.parse(localStorage.getItem("mightySettings"));
+  
   const apiKey: string | null = localStorage.getItem("storedApiKey");
-  const maxHits: number = 6;
-  const addRecipeNutrition: boolean = false;
+  const maxHits: number = persistedSettings.storedMaxHits;
+  const addRecipeNutrition: boolean = persistedSettings.storeAddRecipeNutrition;
   // ** Settings only for Random recipes **
-  const maxRandomHits: number = 3;
+  const maxRandomHits: number = persistedSettings.storedMaxRandomHits;
   // ** Settings only for MTVMH **
-  const ranking: number = 1; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
-  const ignorePantry: boolean = true; //Whether to ignore typical pantry items, such as water, salt, flour, etc.
+  const ranking: number = persistedSettings.storedRanking; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
+  const ignorePantry: boolean = persistedSettings.storedIgnorePantry; //Whether to ignore typical pantry items, such as water, salt, flour, etc.
 
   //useEffect hook that renders when the page load/reload.
   useEffect(() => {
@@ -111,11 +126,6 @@ export default function StartPage(props) {
 
     // Function that fetches / GET data back from the API.
     // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
-
-
-
-
-
 
     if (standardSearch === true) {
       const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&type=${mealChoice}&cuisine=${createURIString(

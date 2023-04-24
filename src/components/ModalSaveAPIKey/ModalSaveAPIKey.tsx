@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState } from 'react';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
@@ -6,7 +6,6 @@ import "./ModalSaveAPIKey.css";
 
 //@ts-ignore
 export default function ModalSaveAPIKey(props) {
-  //setStoredApiKey={setStoredApiKey} setShowModal={setShowModal}
 
   const [show, setShow] = useState(true);
   const [inputBox, setInputBox] = useState("");
