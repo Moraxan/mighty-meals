@@ -1,52 +1,18 @@
 .RecipePage {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "backbutton dishimage summary"
-    "blank ingredients directions";
-  grid-row-gap: 20px;
-  padding: 0 20px;
+  grid-template-columns: minmax(min-content, auto) 1fr 3fr; /* update column widths */
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 20px;
+  margin: 0 120px 0 5px;
 }
-
 .RecipePage-left-column {
-  grid-area: backbutton;
-  margin-right: 20px;
+  grid-column: 1 / 2;
 }
 
-.Recipe-center-column {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "dishimage"
-    "summary";
-  grid-row-gap: 20px;
+.RecipePage-center-column {
+  grid-column: 2 / 3;
 }
 
-.recipe-image-container {
-  grid-area: dishimage;
-}
-
-.recipe-summary-container {
-  grid-area: summary;
-}
-
-.Recipe-right-column {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "blank"
-    "ingredients"
-    "directions";
-  grid-row-gap: 20px;
-}
-
-.recipe-ingredients-container {
-  grid-area: ingredients;
-}
-
-.recipe-directions-container {
-  grid-area: directions;
+.RecipePage-right-column {
+  grid-column: 3 / 4;
 }
