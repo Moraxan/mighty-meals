@@ -21,8 +21,8 @@ export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID, st
   const [recipeData, setRecipeData] = useState(null);
 
   const handleBackClick = () => {
-    setShowStartPage(!showStartPage);
     setBackButtonClicked(true);
+    setShowStartPage(!showStartPage);
   }
 
   useEffect(() => {

@@ -29,8 +29,6 @@ export default function StartPage(props) {
   // Button in search bar and X button in filter uses this state to show/hide filter.
   const [show, setShow] = useState(false);
 
-  const onstartup = true;
-
   // States for all different type of filter/ingredient choices
   const [freeTextSearch, setFreeTextSearch] = useState("");
   const [ingredientChoices, setIngredientChoices] = useState(emptyArr);
@@ -43,39 +41,34 @@ export default function StartPage(props) {
   const [selected, setSelected] = useState(emptyArr);
 
   // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
-  const [standardSearch, setStandardSearch] = useState(true);
+  //@ts-ignore
+  const persistedSearchSettings = JSON.parse(sessionStorage.getItem("persisted-search-data"));
+  const searchSettingsBool: boolean = !props.backButtonClicked ? true : persistedSearchSettings.searchMode;
+  const [standardSearch, setStandardSearch] = useState(searchSettingsBool);
 
-  // Stored API Key in localStorage
+  // API Settings, read spoonacular documentation for more info.
   const apiKey: string | null = localStorage.getItem("storedApiKey");
+  const maxHits: number = 6;
+  const addRecipeNutrition: boolean = false;
+  // ** Settings only for Random recipes **
+  const maxRandomHits: number = 3;
+  // ** Settings only for MTVMH **
+  const ranking: number = 1; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
+  const ignorePantry: boolean = true; //Whether to ignore typical pantry items, such as water, salt, flour, etc.
 
+  //useEffect hook that renders when the page load/reload.
   useEffect(() => {
-    //@ts-ignore
-    const persistedData = JSON.parse(sessionStorage.getItem("persisted-search-data"));
-    
-    if(props.backButtonClicked){
-      setStandardSearch(persistedData.searchMode);
-      setRecipesST(persistedData.recipes);
-      setRecipesMTVMH(persistedData.recipesByIngredients);
-      setIngredientChoices(persistedData.ingridients);
-      setMealChoice(persistedData.meal);
-      setCuisineChoices(persistedData.cuisines);
-      setIntoleranceChoices(persistedData.intolerances);
-      setDietChoices(persistedData.diets);
-      setSelected(persistedData.selectedFilters);
-    }
-  }, [props.backButtonClicked]);
 
-  //useEffect hook that triggers when page first loads up, gives us the random recipes.
-  useEffect(() => {
+    //If only by render and no backbutton click random recipes are fetched.
     if(!props.backButtonClicked){
-      //     fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=3`)
+      //     fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`)
       // .then((response) => response.json())
       // .then((data) => {
       //   createCards(data.recipes);
       // })
 
     // Sample recipes to use instead of calling fetch method during development.
-    let forTesting: RecipeFrontST[] = [
+    const forTesting: RecipeFrontST[] = [
       {
         id: 637776,
         title: "Cherry Pancakes for One",
@@ -95,8 +88,22 @@ export default function StartPage(props) {
         readyInMinutes: 45,
       },
     ];
-
     createCards(forTesting);
+    }
+
+    // If back button is clicked previous persited states are being loaded back.
+    if(props.backButtonClicked){
+      //@ts-ignore
+      const persistedData = JSON.parse(sessionStorage.getItem("persisted-search-data"));
+
+      setRecipesST(persistedData.recipes);
+      setRecipesMTVMH(persistedData.recipesByIngredients);
+      setIngredientChoices(persistedData.ingridients);
+      setMealChoice(persistedData.meal);
+      setCuisineChoices(persistedData.cuisines);
+      setIntoleranceChoices(persistedData.intolerances);
+      setDietChoices(persistedData.diets);
+      setSelected(persistedData.selectedFilters);
     }
   }, []);
 
@@ -105,13 +112,10 @@ export default function StartPage(props) {
     // Function that fetches / GET data back from the API.
     // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
 
-    // Settings, read spoonacular documentation for more info.
-    const maxHits: number = 6;
-    const addRecipeNutrition: boolean = false;
 
-    // Settings only for MTVMH
-    const ranking: number = 1; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
-    const ignorePantry: boolean = true; //Whether to ignore typical pantry items, such as water, salt, flour, etc.
+
+
+
 
     if (standardSearch === true) {
       const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&type=${mealChoice}&cuisine=${createURIString(
@@ -123,7 +127,6 @@ export default function StartPage(props) {
       )}&diet=${createURIString(
         dietChoices
       )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}`;
-      console.log(url);
       try {
         const response = await fetch(encodeURI(url));
         const result = await response.json();
@@ -143,8 +146,6 @@ export default function StartPage(props) {
           const response = await fetch(encodeURI(url));
           const result = await response.json();
 
-          console.log(result);
-
           createCards(result);
         } catch (e) {
           console.log(e);
@@ -155,6 +156,7 @@ export default function StartPage(props) {
     }
   }
 
+  // Function called when recipe card is clicked, persisting current filters/result.
   const persistSearchData = () => {
     const currentSearchState = {
       searchMode: standardSearch,
