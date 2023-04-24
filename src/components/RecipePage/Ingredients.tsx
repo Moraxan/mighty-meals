@@ -5,10 +5,12 @@ import increaseBtn from "../../images/increaseBtn.png";
 
 
 //regex filtering out all integers and fractions to make them bold/strong
+//@ts-ignore
 const boldNumbers = (str) => {
   const pattern = /(\d+|\d+\s*(?:\/\s*\d+)?)/g;
   
   // Replaces matches with bold/strong HTML tags
+  //@ts-ignore
   return str.replace(pattern, (match) => `<strong>${match}</strong>`);
 };
 
@@ -21,7 +23,7 @@ const handleDecreaseButtonClick = () => {
 const handleIncreaseButtonClick = () => {
   console.log("handled increase!");
 };
-
+//@ts-ignore
 export const Ingredients = ({ ingredients }) => {
   
   const [servings, setServings] = useState(4) //här ska antalet servings från api-anrop läggas in, nu hårdkodad 4 bara för testing
@@ -34,6 +36,7 @@ export const Ingredients = ({ ingredients }) => {
       <br />
       <ul>
         {ingredients.map((ingredient: string, index: number) => {
+          // @ts-ignore
           const [amount, ...rest] = ingredient.original.split(" ");
           const formattedIngredient = boldNumbers(
             `${amount} ${rest.join(" ")}`
