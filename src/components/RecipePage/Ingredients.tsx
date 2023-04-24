@@ -1,28 +1,31 @@
 import "./Ingredients.css";
-import { useState } from 'react';
-import decreaseBtn from '../../images/decreaseBtn.png';
-import increaseBtn from '../../images/increaseBtn.png';
+import { useState } from "react";
+import decreaseBtn from "../../images/decreaseBtn.png";
+import increaseBtn from "../../images/increaseBtn.png";
 
 
 //regex filtering out all integers and fractions to make them bold/strong
 const boldNumbers = (str) => {
-   const pattern = /(\d+|\d+\s*(?:\/\s*\d+)?)/g;
-
+  const pattern = /(\d+|\d+\s*(?:\/\s*\d+)?)/g;
+  
   // Replaces matches with bold/strong HTML tags
   return str.replace(pattern, (match) => `<strong>${match}</strong>`);
 };
 
+//logic for decreasing portion size here
 const handleDecreaseButtonClick = () => {
-  //logic for decreasing portion size here
-}
+  console.log("handled decrease!");
+};
 
-const handleIncreseButtonClick = () => {
-  //logic for increasing portion size here
-}
-
-
+//logic for increasing portion size here
+const handleIncreaseButtonClick = () => {
+  console.log("handled increase!");
+};
 
 export const Ingredients = ({ ingredients }) => {
+  
+  const [servings, setServings] = useState(4) //här ska antalet servings från api-anrop läggas in, nu hårdkodad 4 bara för testing
+  
   return (
     <div className="ingredients-container">
       <div className="ingredients-box">
@@ -35,19 +38,31 @@ export const Ingredients = ({ ingredients }) => {
           const formattedIngredient = boldNumbers(
             `${amount} ${rest.join(" ")}`
           );
-          return <li key={index} dangerouslySetInnerHTML={{ __html: formattedIngredient }}/>;
+          return (
+            <li
+              key={index}
+              dangerouslySetInnerHTML={{ __html: formattedIngredient }}
+            />
+          );
         })}
       </ul>
       <div className="servings-container">
         <button className="decrease-btn">
-          <img src={decreaseBtn} alt="Decrease button" />
+          <img
+            src={decreaseBtn}
+            alt="Decrease button"
+            onClick={() => handleDecreaseButtonClick()}
+          />
         </button>
-        <p>4 servings</p>
+        <p>{servings} servings</p>
         <button className="increase-btn">
-          <img src={increaseBtn} alt="Increase button" />
+          <img
+            src={increaseBtn}
+            alt="Increase button"
+            onClick={() => handleIncreaseButtonClick()}
+          />
         </button>
       </div>
-
     </div>
   );
 };
