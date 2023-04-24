@@ -1,13 +1,10 @@
+@import url('../../index.css');
 .dish-summary-container{
-    width: 70%; /*from 800px*/
-    background-color: #e42427;
+    background-color: var(--accentcolourred);
     padding: 10px;
     border:5px solid black;
     border-radius: 10px;
-    margin-left: 10px; 
-    margin-bottom: 10px;
-    margin-right: 7%;
-    
+    grid-area: summary;
 }
 .recipe-time{
     font-family: "Avengeance", sans-serif;
@@ -22,7 +19,7 @@
 }
 
 .recipe-time span{
-    background-color: #eda037;
+    background-color: var(--accentcolouryellow);
     padding-left: 5px;
     padding-right: 12px;
     padding-top: 5px;
@@ -38,7 +35,7 @@
 }
 
 .recipe-title span{
-    background-color: #eda037;
+    background-color: var(--accentcolouryellow);
     padding-left: 5px;
     padding-right: 12px;
     padding-top: 5px;

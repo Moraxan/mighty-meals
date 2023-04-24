@@ -1,16 +1,15 @@
+@import url('../../index.css');
+
+
 .directions-container {
-  background-color: #eda037;
+  background-color: var(--accentcolouryellow);
   border: 5px solid black;
   border-radius: 10px;
   font-family: "Varela";
   padding: 10px;
   text-align: left;
-  width: 800px;
-  height: 95%;   /*added height*/
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
-  margin-right: 7%;
+  grid-area: directions;
 }
 
 .directions-box {
@@ -70,23 +69,3 @@
   }
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 5px;
-}
-
-::-webkit-scrollbar-button {
-  display: none;
-}
-
-
-::-webkit-scrollbar-track {
-  background-color: #eda037;
-  border-radius: 10px;
-}
-
-
-::-webkit-scrollbar-thumb {
-  background-color: #000000; 
-  border-radius: 10px;
-}

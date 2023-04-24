@@ -57,20 +57,25 @@ export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID}) =
   }
 
   return (
-    <div className="RecipePage">
-      <div className="RecipePage-left-column">
-        <BackButton handleBackClick={handleBackClick} />
+    <div class="RecipePage">
+    <div class="RecipePage-left-column">
+      <BackButton handleBackClick={handleBackClick} />
+    </div>
+    <div class="RecipePage-right-column">
+      <div class="dishImage-container">
+        <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
       </div>
-      <div className="RecipePage-right-column">
-        <div className="RecipePage-top-row">
-          <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
-          <DishSummary recipeData={recipeData} />
-        </div>
-        <div className="RecipePage-bottom-row">
-          <Ingredients ingredients={recipeData?.extendedIngredients} />
-          <Directions directions={recipeData.analyzedInstructions} />
-        </div>
+      <div class="ingredients-container">
+        <Ingredients ingredients={recipeData?.extendedIngredients} />
+      </div>
+      <div class="dishSummary-container">
+        <DishSummary recipeData={recipeData} />
+      </div>
+      <div class="directions-container">
+        <Directions directions={recipeData.analyzedInstructions} />
       </div>
     </div>
+  </div>
   );
+  
 };
