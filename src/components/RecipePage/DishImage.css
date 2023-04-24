@@ -5,10 +5,7 @@
 }
 
 .dish-image-container {
-  grid-area: dishimage;
   border: 5px solid black;
   border-radius: 10px;
   overflow: hidden;
-  display: block;
-
 }

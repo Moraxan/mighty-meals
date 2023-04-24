@@ -1,7 +1,6 @@
 @import url('../../index.css');
 
 .ingredients-container {
-  grid-area: ingredients;
   font-family: "Varela", sans-serif;
   font-size: 16pt;
   color: black;

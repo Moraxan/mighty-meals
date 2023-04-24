@@ -57,15 +57,19 @@ export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID}) =
   }
   return (
     <div className="RecipePage">
-      <div className="RecipePage-left-column">
+      <div className="BackButton">
         <BackButton handleBackClick={handleBackClick} />
       </div>
-      <div className="RecipePage-center-column">
+      <div className="DishImage">
           <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
+      </div>
+      <div className="Ingredients">
           <Ingredients ingredients={recipeData?.extendedIngredients} />
       </div>
-      <div className="RecipePage-right-column">
+      <div className="DishSummary">
           <DishSummary recipeData={recipeData} />
+      </div>
+      <div className="Directions">
           <Directions directions={recipeData.analyzedInstructions} />
         </div>
       </div>

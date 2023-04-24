@@ -9,8 +9,7 @@
   padding: 10px;
   text-align: left;
   overflow: hidden;
-  grid-area: directions;
-  box-sizing: border-box;
+
 }
 
 .directions-box {
