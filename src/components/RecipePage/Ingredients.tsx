@@ -18,7 +18,9 @@ export const Ingredients = ({ ingredients }) => {
         <p>ingredients</p>
       </div>
       <br />
+      <div className="ingredients-list">
       <ul>
+        
         {ingredients.map((ingredient: string, index: number) => {
           const [amount, ...rest] = ingredient.original.split(" ");
           const formattedIngredient = boldNumbers(
@@ -27,6 +29,7 @@ export const Ingredients = ({ ingredients }) => {
           return <li key={index} dangerouslySetInnerHTML={{ __html: formattedIngredient }}/>;
         })}
       </ul>
+      </div>
     </div>
   );
 };
