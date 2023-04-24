@@ -1,17 +1,24 @@
 import "./Ingredients.css";
 import { useState } from 'react';
+import decreaseBtn from '../../images/decreaseBtn.png';
+import increaseBtn from '../../images/increaseBtn.png';
 
 
 //regex filtering out all integers and fractions to make them bold/strong
 const boldNumbers = (str) => {
    const pattern = /(\d+|\d+\s*(?:\/\s*\d+)?)/g;
 
-  // below is optional pattern to also include measurments (not working 100%)
-  // const pattern = /(\d+[\s\d]*(?:\/\s*\d+)?|\d*\.\d+)\s*(cup[s]?|teaspoon[s]?|tablespoon[s]?|ounce[s]?|gallon[s]?|pint[s]?|quart[s]?|pound[s]?|milliliter[s]?|liter[s]?|gram[s]?|kilogram[s]?)/gi;
-
   // Replaces matches with bold/strong HTML tags
   return str.replace(pattern, (match) => `<strong>${match}</strong>`);
 };
+
+const handleDecreaseButtonClick = () => {
+  //logic for decreasing portion size here
+}
+
+const handleIncreseButtonClick = () => {
+  //logic for increasing portion size here
+}
 
 
 
@@ -32,9 +39,13 @@ export const Ingredients = ({ ingredients }) => {
         })}
       </ul>
       <div className="servings-container">
-        {/* <button className="decrease">-</button> */}
-        <p>servings</p>
-        {/* <button className="increase">+</button> */}
+        <button className="decrease-btn">
+          <img src={decreaseBtn} alt="Decrease button" />
+        </button>
+        <p>4 servings</p>
+        <button className="increase-btn">
+          <img src={increaseBtn} alt="Increase button" />
+        </button>
       </div>
 
     </div>
