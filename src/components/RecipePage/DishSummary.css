@@ -30,9 +30,8 @@
     width: 34px;
 }
 .recipe-title{
-    font-family: "Avengeance", sans-serif;
+    font: var(--heading-font);
     padding-top: 8px;
-    font-size: 34pt;
 }
 
 .recipe-title span{
@@ -43,9 +42,8 @@
     border-radius: 5px;
 }
 .summary-text{
-    font-family: "Varela";
+    font: var(--big-varela-font);
     text-align: left;
-    font-size: 18pt;
 }
 
 @media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){

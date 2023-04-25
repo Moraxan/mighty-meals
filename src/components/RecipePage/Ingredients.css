@@ -1,8 +1,6 @@
 @import url('../../index.css');
 
 .ingredients-container {
-  font-family: "Varela", sans-serif;
-  font-size: 16pt;
   color: black;
   background-color: var(--accentcolourred);
   border-radius: 10px;
@@ -15,6 +13,7 @@
 
 
 .ingredients-container ul {
+  font: var(--medium-varela-font);
   text-align: left;
   list-style: none;
   display: flex;
@@ -22,12 +21,12 @@
   max-height: fit-content;
   margin-top: 120px; /* add some padding to create space for the ingredients-box */
   overflow: auto;
+  padding-left: 0;
 }
 
 .ingredients-box {
   background-color: var(--accentcolouryellow);
-  font-family: "Avengeance", sans-serif;
-  font-size: 34pt;
+  font: var(--heading-font);
   border-radius: 5px;
   width: fit-content;
   height: fit-content;
