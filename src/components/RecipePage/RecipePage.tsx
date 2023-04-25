@@ -5,6 +5,7 @@ import { Ingredients } from './Ingredients';
 import { Directions } from './Directions';
 import { DishImage } from './DishImage';
 import {useLoaderData} from "react-router-dom";
+import './RecipePage.css';
 
 //This function fetches the recipe data from the API and stores it in local storage
 //so that it can be used later without making another API call
@@ -15,8 +16,7 @@ import {useLoaderData} from "react-router-dom";
 
 //@ts-ignore
 export const RecipePage = () => {
-  //  ***************   |Change default state of below object to a static ID if you desire.   |***************
-  //  ***************   |For example set below recipeID default state to = useState(637776);  |***************
+//  ***************   |This loads the id to the router via useLoaderData and the loader in the route |***************
   const recipeId = useLoaderData();
   const [recipeData, setRecipeData] = useState(null);
 
