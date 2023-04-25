@@ -4,6 +4,7 @@ import { DishSummary } from './DishSummary';
 import { Ingredients } from './Ingredients';
 import { Directions } from './Directions';
 import { DishImage } from './DishImage';
+import {useLoaderData} from "react-router-dom";
 import './RecipePage.css';
 
 //This function fetches the recipe data from the API and stores it in local storage
@@ -14,16 +15,10 @@ import './RecipePage.css';
 //A suggestion is to use one of these IDs: 637776 or 634091 only because it's them that are used on the StartPage
 
 //@ts-ignore
-export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID, setBackButtonClicked}) => {
-  //  ***************   |Change default state of below object to a static ID if you desire.   |***************
-  //  ***************   |For example set below recipeID default state to = useState(637776);  |***************
-  const [recipeId, setRecipeId] = useState(clickedRecipeID);
+export const RecipePage = () => {
+//  ***************   |This loads the id to the router via useLoaderData and the loader in the route |***************
+  const recipeId = useLoaderData();
   const [recipeData, setRecipeData] = useState(null);
-
-  const handleBackClick = () => {
-    setBackButtonClicked(true);
-    setShowStartPage(!showStartPage);
-  }
 
   useEffect(() => {
     const persistedSettings = JSON.parse(localStorage.getItem("mightySettings")!);
@@ -62,7 +57,7 @@ export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID, se
   return (
     <div className="RecipePage">
       <div className="RecipePage-left-column">
-        <BackButton handleBackClick={handleBackClick} />
+        <BackButton />
       </div>
       <div className="RecipePage-right-column">
         <div className="RecipePage-top-row">
