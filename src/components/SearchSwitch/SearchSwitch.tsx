@@ -1,4 +1,3 @@
-import questionIcon from "../../images/question_mark.png"
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import "./SearchSwitch.css"
@@ -9,7 +8,6 @@ export default function SearchSwitch(props){
 
     return (
         <div className="d-flex" id="switch-content">
-          {/* <img className="question-icon" src={questionIcon} alt="more info" /> */}
 
           <OverlayTrigger trigger="click" key="bottom" placement="bottom" rootClose={true} overlay={
             <Popover id="popover">
@@ -26,8 +24,8 @@ export default function SearchSwitch(props){
 
           <div className="form-check form-switch ms-2">
             {props.standardSearch === true ?
-            <input id="mighty-switch" onChange={flipSwitch} className="form-check-input" type="checkbox" role="switch" defaultChecked /> : 
-            <input id="mighty-switch" onChange={flipSwitch} className="form-check-input" type="checkbox" role="switch" />
+            <input id="mighty-switch" onChange={flipSwitch} className="form-check-input" type="checkbox" role="switch" defaultChecked={props.standardSearch} /> : 
+            <input id="mighty-switch" onChange={flipSwitch} className="form-check-input" type="checkbox" role="switch" defaultChecked={props.standardSearch} />
             }
           </div>
 

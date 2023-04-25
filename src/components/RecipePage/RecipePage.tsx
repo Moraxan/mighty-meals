@@ -21,14 +21,15 @@ export const RecipePage = () => {
   const [recipeData, setRecipeData] = useState(null);
 
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem(`recipeFetch_${recipeId}`));
+    const persistedSettings = JSON.parse(localStorage.getItem("mightySettings")!);
+    const storedData = JSON.parse(localStorage.getItem(`recipeFetch_${recipeId}`)!);
     if (storedData) {
       setRecipeData(storedData);
     } else {
 //Remember to put in your own API key here the first time you run this code
 //If you see the middle component of the page saying Loading... then you've probably forgotten to put in your API key
-      const apiKey = 'ENTER YOUR API KEY HERE';
-      const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
+      const apiKey: string | null = localStorage.getItem("storedApiKey");
+      const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=${persistedSettings.storeAddRecipeNutrition}`;
 
       fetch(url)
         .then((response) => {
@@ -41,6 +42,7 @@ export const RecipePage = () => {
         .then((recipeData) => {
           localStorage.setItem(`recipeFetch_${recipeId}`, JSON.stringify(recipeData));
           setRecipeData(recipeData);
+          console.log(recipeData);
         })
         .catch((error) => {
           console.error(error);
@@ -59,11 +61,14 @@ export const RecipePage = () => {
       </div>
       <div className="RecipePage-right-column">
         <div className="RecipePage-top-row">
+          {/*//@ts-ignore*/}
           <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
           <DishSummary recipeData={recipeData} />
         </div>
         <div className="RecipePage-bottom-row">
+          {/*//@ts-ignore*/}
           <Ingredients ingredients={recipeData?.extendedIngredients} />
+          {/*//@ts-ignore*/}
           <Directions directions={recipeData.analyzedInstructions} />
         </div>
       </div>

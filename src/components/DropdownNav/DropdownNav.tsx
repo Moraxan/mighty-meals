@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import ModalSettings from '../ModalSettings/ModalSettings';
 import burger from "../../images/burger.png";
 import "./DropdownNav.css";
 
@@ -8,19 +9,26 @@ import "./DropdownNav.css";
 // Function is called useMediaQuery.
 export default function DropdownNav() {
     const matches = useMediaQuery('screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)')
+    const [showSettings, setShowSettings] = useState(false);
+
+    const handleClick = () => {
+      setShowSettings(true);
+    }
 
   return (
+    <>
     <Dropdown align="end" drop={matches ? "up" : "down"}>
       <Dropdown.Toggle bsPrefix='dropdown' className="burger-button" variant="danger" id="dropdown-basic">
       <img className="burger-logo" alt="burger-menu" src={burger} />
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="dropdown-text">
-        <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        <Dropdown.Item>Profile</Dropdown.Item>
+        <Dropdown.Item onClick={handleClick}>Settings</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
+    {showSettings && <ModalSettings setShowSettings={setShowSettings} />}
+    </>
   );
 }
 
