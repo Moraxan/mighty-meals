@@ -77,34 +77,34 @@ export default function StartPage(props) {
 
     //If only by render and no backbutton click random recipes are fetched.
     if(!props.backButtonClicked){
-      //     fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`)
-      // .then((response) => response.json())
-      // .then((data) => {
-      //   createCards(data.recipes);
-      // })
+          fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`)
+      .then((response) => response.json())
+      .then((data) => {
+        createCards(data.recipes);
+      })
 
     // Sample recipes to use instead of calling fetch method during development.
-    const forTesting: RecipeFrontST[] = [
-      {
-        id: 637776,
-        title: "Cherry Pancakes for One",
-        image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
-        readyInMinutes: 45,
-      },
-      {
-        id: 660697,
-        title: "Southern Fried Catfish",
-        image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
-        readyInMinutes: 45,
-      },
-      {
-        id: 634091,
-        title: "Banana Foster Bread Pudding",
-        image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
-        readyInMinutes: 45,
-      },
-    ];
-    createCards(forTesting);
+    // const forTesting: RecipeFrontST[] = [
+    //   {
+    //     id: 637776,
+    //     title: "Cherry Pancakes for One",
+    //     image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+    //     readyInMinutes: 45,
+    //   },
+    //   {
+    //     id: 660697,
+    //     title: "Southern Fried Catfish",
+    //     image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
+    //     readyInMinutes: 45,
+    //   },
+    //   {
+    //     id: 634091,
+    //     title: "Banana Foster Bread Pudding",
+    //     image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
+    //     readyInMinutes: 45,
+    //   },
+    // ];
+    // createCards(forTesting);
     }
 
     // If back button is clicked previous persited states are being loaded back.

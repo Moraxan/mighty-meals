@@ -56,7 +56,7 @@ export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID, se
   }, [recipeId]);
 
   if (!recipeData) {
-    return <div>Loading...</div>;
+    return <div>Fetch unsuccesful, check your API key</div>;
   }
 
   return (
