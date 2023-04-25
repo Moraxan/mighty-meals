@@ -5,6 +5,7 @@
     border:5px solid black;
     border-radius: 10px;
     height: 100%;
+    color: black;
 }
 .recipe-time{
     font-family: "Avengeance", sans-serif;

@@ -4,6 +4,7 @@
   grid-template-rows: auto 1fr; /* set the first row height to "auto" to fit the content */
   gap: 10px;
   margin-right: 120px;
+  margin-bottom: 45px;
 }
 
 .BackButton {
@@ -31,4 +32,41 @@
 .Directions {
   grid-column: 3 / -1; /* span from column 3 to the end of the grid */
   grid-row: 2 / -1; /* span from row 2 to the end of the grid */
+}
+
+@media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
+
+.RecipePage {
+  display: grid;
+  grid-template-columns:  1fr;
+  grid-template-rows: 1fr; /* set the first row height to "auto" to fit the content */
+  gap: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 75px;
+}
+
+.BackButton {
+  grid-column: 1 / 1; /* span 1 column */
+  grid-row: 1 / 1; /* span 1 row */
+  
+}
+.DishImage {
+  grid-column: 1 / 1; /* span 1 column */
+  grid-row: 2 / 2; /* span 1 row */
+}
+.DishSummary {
+  grid-column: 1 / 1;
+  grid-row: 3 / 3;
+  height: 100%; /* fill the height of its grid area */
+}
+.Ingredients {
+  grid-column: 1 / 1; /* span 1 column */
+  grid-row: 4 / 4; /* span 1 row */
+}
+.Directions {
+  grid-column: 1 / 1; /* span from column 3 to the end of the grid */
+  grid-row: 5 / 5; /* span from row 2 to the end of the grid */
+}
+
 }
