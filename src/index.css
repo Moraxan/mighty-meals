@@ -20,7 +20,7 @@ body{
   --medium-varela-font: 16pt "Varela", sans-serif;
   --small-varela-font: 12pt "Varela", sans-serif; 
 
-    
+/* At the moment this variable is crap, since it doesn't work with @media var(--small-meda) which I think it should */
   --small-media: screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px);
 
   
