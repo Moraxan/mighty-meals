@@ -20,7 +20,7 @@ body{
   --medium-varela-font: 16pt "Varela", sans-serif;
   --small-varela-font: 12pt "Varela", sans-serif; 
 
-/* Here isthe global media query variables */
+    
   --small-media: screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px);
 
   
@@ -47,7 +47,7 @@ body{
   border-radius: 10px;
 }
 
-@media var(--small-media){
+@media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
   :root {
     --heading-font: 24pt "Avengeance", sans-serif;
     --big-varela-font: 14pt "Varela", sans-serif;
