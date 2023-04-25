@@ -21,18 +21,17 @@ export default function ModalSaveAPIKey(props) {
 
   const handleSubmitApi = () => {
     localStorage.setItem("storedApiKey", inputBox);
-    props.setStoredApiKey(localStorage.getItem("storedApiKey"));
     props.setShowModal(false);
   };
 
   return (
     <>
-      <Modal className="ModalAPI" show={show} onHide={handleClose}>
+      <Modal className="ModalSettings" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>No API Key found, please enter below to store in localStorage</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <input className="input-API" type="text" placeholder="Enter API Key" onChange={handleChange} />
+          <input className="input-Modal" type="text" placeholder="Enter API Key" onChange={handleChange} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

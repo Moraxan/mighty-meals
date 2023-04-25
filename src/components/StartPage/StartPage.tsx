@@ -61,8 +61,9 @@ export default function StartPage(props) {
 
   //@ts-ignore
   const persistedSettings = JSON.parse(localStorage.getItem("mightySettings"));
-  
+
   const apiKey: string | null = localStorage.getItem("storedApiKey");
+  
   const maxHits: number = persistedSettings.storedMaxHits;
   const addRecipeNutrition: boolean = persistedSettings.storeAddRecipeNutrition;
   // ** Settings only for Random recipes **
@@ -142,6 +143,7 @@ export default function StartPage(props) {
         const result = await response.json();
 
         createCards(result.results);
+        console.log(result.results);
       } catch (e) {
         console.log(e);
       }

@@ -3,10 +3,11 @@
     src: local("VarelaRoundRegular"), url("../../fonts/Varela/VarelaRound-Regular.ttf") format("truetype");
 }
 
-.ModalAPI{
+.ModalSettings{
     font-family: "Varela";
 }
 
 .input-Modal{
     width: 100%;
+    margin-bottom: 10px;
 }
