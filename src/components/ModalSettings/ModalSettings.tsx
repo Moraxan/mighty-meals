@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import {useApiCheckerStore} from "../Stores/checkIfApiExists";
 
 import "./ModalSettings.css";
 
@@ -8,6 +9,9 @@ import "./ModalSettings.css";
 export default function ModalSaveAPIKey(props) {
   //@ts-ignore
   const persistedSettings = JSON.parse(localStorage.getItem("mightySettings"));
+
+  //@ts-ignore // global zustand variable/state to set state of api key
+  const setApiKey = useApiCheckerStore((state) => state.updateApiKey);
 
   const [show, setShow] = useState(true);
   const [apiInputBox, setApiInputBox] = useState(localStorage.getItem("storedApiKey"));
@@ -57,6 +61,7 @@ export default function ModalSaveAPIKey(props) {
     persistedSettings.storedRanking = ranking;
 
     localStorage.setItem("storedApiKey", apiInputBox!);
+    setApiKey(localStorage.getItem("storedApiKey"));
     localStorage.setItem("mightySettings", JSON.stringify(persistedSettings));
 
     handleClose();
@@ -93,7 +98,7 @@ export default function ModalSaveAPIKey(props) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSubmit} disabled={apiInputBox!.length < 25 ? true : false}>
+          <Button variant="primary" onClick={handleSubmit} disabled={apiInputBox === null ? true : apiInputBox!.length < 25 ? true : false}>
             Save settings
           </Button>
         </Modal.Footer>

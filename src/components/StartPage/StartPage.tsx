@@ -7,11 +7,13 @@ import SearchBar from "../SearchBar/SearchBar";
 import SearchBarFreeText from "../SearchBar/SearchBarFreeText";
 import SearchSwitch from "../SearchSwitch/SearchSwitch";
 import NoResult from "../NoResult/NoResult";
+import ModalSaveAPIKey from "../ModalSaveAPIKey/ModalSaveAPIKey"
 
 import { RecipeFrontST } from "../Interface/Interface";
 import { RecipeMTVMH } from "../Interface/Interface";
 import { useMediaQuery } from "../DropdownNav/DropdownNav";
 import {useBackButtonStore} from "../Stores/backButtonClick";
+import {useApiCheckerStore} from "../Stores/checkIfApiExists";
 
 import "./StartPage.css";
 
@@ -54,7 +56,7 @@ export default function StartPage(props) {
   // API Settings, read spoonacular documentation for more info.
   const defaultSettings = {
     storedMaxHits: 6,
-    storeAddRecipeNutrition: false,
+    storeAddRecipeNutrition: true,
     storedMaxRandomHits: 3,
     storedRanking: 1,
     storedIgnorePantry: true
@@ -67,7 +69,8 @@ export default function StartPage(props) {
   //@ts-ignore
   const persistedSettings = JSON.parse(localStorage.getItem("mightySettings"));
 
-  const apiKey: string | null = localStorage.getItem("storedApiKey");
+  //@ts-ignore
+  const apiKey: string | null = useApiCheckerStore((state) => state.apiKey);
   
   const maxHits: number = persistedSettings.storedMaxHits;
   const addRecipeNutrition: boolean = persistedSettings.storeAddRecipeNutrition;
@@ -82,34 +85,34 @@ export default function StartPage(props) {
 
     //If only by render and no backbutton click random recipes are fetched.
     if(!backButtonClicked){
-    //       fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     createCards(data.recipes);
-    //   })
+          fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`)
+      .then((response) => response.json())
+      .then((data) => {
+        createCards(data.recipes);
+      })
 
     // Sample recipes to use instead of calling fetch method during development.
-    const forTesting: RecipeFrontST[] = [
-      {
-        id: 637776,
-        title: "Cherry Pancakes for One",
-        image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
-        readyInMinutes: 45,
-      },
-      {
-        id: 660697,
-        title: "Southern Fried Catfish",
-        image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
-        readyInMinutes: 45,
-      },
-      {
-        id: 634091,
-        title: "Banana Foster Bread Pudding",
-        image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
-        readyInMinutes: 45,
-      },
-    ];
-    createCards(forTesting);
+    // const forTesting: RecipeFrontST[] = [
+    //   {
+    //     id: 637776,
+    //     title: "Cherry Pancakes for One",
+    //     image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+    //     readyInMinutes: 45,
+    //   },
+    //   {
+    //     id: 660697,
+    //     title: "Southern Fried Catfish",
+    //     image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
+    //     readyInMinutes: 45,
+    //   },
+    //   {
+    //     id: 634091,
+    //     title: "Banana Foster Bread Pudding",
+    //     image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
+    //     readyInMinutes: 45,
+    //   },
+    // ];
+    // createCards(forTesting);
     }
 
     //If back button is clicked previous persited states are being loaded back.
@@ -148,7 +151,6 @@ export default function StartPage(props) {
         const result = await response.json();
 
         createCards(result.results);
-        console.log(result.results);
       } catch (e) {
         console.log(e);
       }
@@ -257,6 +259,8 @@ export default function StartPage(props) {
   );
 
   return (
+    <>
+    {apiKey === null && <ModalSaveAPIKey />}
     <div className="app-body d-flex flex-column">
       {matches === true && (
         <SearchSwitch
@@ -360,6 +364,7 @@ export default function StartPage(props) {
           )}
         </div>
     </div>
+    </>
   );
 }
 

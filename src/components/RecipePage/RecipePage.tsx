@@ -46,7 +46,6 @@ export const RecipePage = () => {
         .then((recipeData) => {
           localStorage.setItem(`recipeFetch_${recipeId}`, JSON.stringify(recipeData));
           setRecipeData(recipeData);
-          console.log(recipeData);
         })
         .catch((error) => {
           console.error(error);

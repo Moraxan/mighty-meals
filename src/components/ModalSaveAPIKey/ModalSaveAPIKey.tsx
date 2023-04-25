@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import {useApiCheckerStore} from "../Stores/checkIfApiExists";
 
 import "./ModalSaveAPIKey.css";
 
 //@ts-ignore
-export default function ModalSaveAPIKey(props) {
+export default function ModalSaveAPIKey() {
+
+  //@ts-ignore // global zustand variable/state to set state of api key
+  const setApiKey = useApiCheckerStore((state) => state.updateApiKey);
 
   const [show, setShow] = useState(true);
   const [inputBox, setInputBox] = useState("");
@@ -16,12 +20,12 @@ export default function ModalSaveAPIKey(props) {
   const handleChange = (event) => {
     // searchbar / input fields calls this function to filter ingredients based on user input.
     setInputBox(event.target.value.toLowerCase());
-    console.log(inputBox);
   };
 
   const handleSubmitApi = () => {
     localStorage.setItem("storedApiKey", inputBox);
-    props.setShowModal(false);
+    setApiKey(localStorage.getItem("storedApiKey"));
+    handleClose();
   };
 
   return (

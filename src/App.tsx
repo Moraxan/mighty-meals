@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Footer from "./components/Footer/Footer";
 import StartPage from "./components/StartPage/StartPage";
-import ModalSaveAPIKey from "./components/ModalSaveAPIKey/ModalSaveAPIKey"
 import { RecipePage } from "./components/RecipePage/RecipePage";
 import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
