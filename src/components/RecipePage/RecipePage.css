@@ -29,6 +29,6 @@
 }
 
 .Directions {
-  grid-column: 3 / 4; /* span 1 column */
-  grid-row: 2 / 3; /* span 1 row */
+  grid-column: 3 / -1; /* span from column 3 to the end of the grid */
+  grid-row: 2 / -1; /* span from row 2 to the end of the grid */
 }
