@@ -13,6 +13,7 @@ import { RecipeMTVMH } from "../Interface/Interface";
 import { useMediaQuery } from "../DropdownNav/DropdownNav";
 
 import "./StartPage.css";
+import Sort from "../Sort/Sort";
 
 //@ts-ignore
 export default function StartPage(props) {
@@ -42,37 +43,42 @@ export default function StartPage(props) {
   // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
   const [standardSearch, setStandardSearch] = useState(true);
 
+  // State for sorting function
+  const [sortedBy, setSortedBy] = useState("");
+
   // useEffect hook that triggers when page first loads up, gives us the random recipes.
   useEffect(() => {
-    // fetch(`https://api.spoonacular.com/recipes/random?apiKey=f4780df1170f41749bd24df676766198&tags=${getMealTypeByTime()}&number=3`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     createCards(data.recipes);
-    //   })
+    fetch(
+      `https://api.spoonacular.com/recipes/random?apiKey=f699d273aec14d68b31ee54247c360bf&tags=${getMealTypeByTime()}&number=20`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        createCards(data.recipes);
+      });
 
     // Sample recipes to use instead of calling fetch method during development.
-    let forTesting: RecipeFrontST[] = [
-      {
-        id: 637776,
-        title: "Cherry Pancakes for One",
-        image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
-        readyInMinutes: 45,
-      },
-      {
-        id: 660697,
-        title: "Southern Fried Catfish",
-        image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
-        readyInMinutes: 45,
-      },
-      {
-        id: 634091,
-        title: "Banana Foster Bread Pudding",
-        image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
-        readyInMinutes: 45,
-      },
-    ];
+    // let forTesting: RecipeFrontST[] = [
+    //   {
+    //     id: 637776,
+    //     title: "Cherry Pancakes for One",
+    //     image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+    //     readyInMinutes: 45,
+    //   },
+    //   {
+    //     id: 660697,
+    //     title: "Southern Fried Catfish",
+    //     image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
+    //     readyInMinutes: 45,
+    //   },
+    //   {
+    //     id: 634091,
+    //     title: "Banana Foster Bread Pudding",
+    //     image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
+    //     readyInMinutes: 45,
+    //   },
+    // ];
 
-    createCards(forTesting);
+    // createCards(forTesting);
   }, []);
 
   async function getApiData() {
@@ -80,8 +86,8 @@ export default function StartPage(props) {
     // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
 
     // Settings, read spoonacular documentation for more info.
-    const apiKey: string = "6d398aefc8b6440286cd4509f45075c5";
-    const maxHits: number = 6;
+    const apiKey: string = "f699d273aec14d68b31ee54247c360bf";
+    const maxHits: number = 20;
     const addRecipeNutrition: boolean = false;
 
     // Settings only for MTVMH
@@ -97,7 +103,8 @@ export default function StartPage(props) {
         intoleranceChoices
       )}&diet=${createURIString(
         dietChoices
-      )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}`;
+      )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}
+      &sort=${sortedBy}`;
       console.log(url);
       try {
         const response = await fetch(encodeURI(url));
@@ -112,7 +119,7 @@ export default function StartPage(props) {
       if (ingredientChoices.length > 0) {
         const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(
           ingredientChoices
-        )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
+        )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}&sort=${sortedBy}`;
 
         try {
           const response = await fetch(encodeURI(url));
@@ -171,6 +178,9 @@ export default function StartPage(props) {
     }
   }
 
+  function handleSortChange(sortKey: string) {
+    setSortedBy(sortKey);
+  }
   // importing useMediaQuery function to make SearchSwith appear based on if condition is met or not.
   const matches = useMediaQuery(
     "screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)"
@@ -219,7 +229,6 @@ export default function StartPage(props) {
           getApiData={getApiData}
         />
       )}
-
       <SideBar
         show={show}
         setShow={setShow}
@@ -241,41 +250,42 @@ export default function StartPage(props) {
         setStandardSearch={setStandardSearch}
         getApiData={getApiData}
       />
+        <Sort onSortChange={handleSortChange} getApiData={getApiData} />
       <br />
 
-        <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
-          {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
-            <>
-              {recipesST.length > 0 &&
-                recipesST.map((recipe) => (
-                  <TmpCard
-                    key={recipe.id}
-                    recId={recipe.id}
-                    imgSrc={recipe.image}
-                    recipeTitle={recipe.title}
-                    readyInMin={recipe.readyInMinutes}
-                    handleRecipeClick={props.handleRecipeClick}
-                  />
-                ))}
-              {recipesMTVMH.length > 0 &&
-                recipesMTVMH.map((recipe) => (
-                  <TmpCardMTVMH
-                    key={recipe.id}
-                    recId={recipe.id}
-                    imgSrc={recipe.image}
-                    recipeTitle={recipe.title}
-                    usedIngredientCount={recipe.usedIngredientCount}
-                    missedIngredientCount={recipe.missedIngredientCount}
-                    handleRecipeClick={props.handleRecipeClick}
-                  />
-                ))}
-            </>
-          ) : (
-            <NoResult />
-          )}
-        </div>
+      <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
+        {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
+          <>
+            {recipesST.length > 0 &&
+              recipesST.map((recipe) => (
+                <TmpCard
+                  key={recipe.id}
+                  recId={recipe.id}
+                  imgSrc={recipe.image}
+                  recipeTitle={recipe.title}
+                  readyInMin={recipe.readyInMinutes}
+                  handleRecipeClick={props.handleRecipeClick}
+                />
+              ))}
+            {recipesMTVMH.length > 0 &&
+              recipesMTVMH.map((recipe) => (
+                <TmpCardMTVMH
+                  key={recipe.id}
+                  recId={recipe.id}
+                  imgSrc={recipe.image}
+                  recipeTitle={recipe.title}
+                  usedIngredientCount={recipe.usedIngredientCount}
+                  missedIngredientCount={recipe.missedIngredientCount}
+                  handleRecipeClick={props.handleRecipeClick}
+                />
+              ))}
+          </>
+        ) : (
+          <NoResult />
+        )}
+      </div>
 
-        <div className="random-generated">Random: {getMealTypeByTime()}</div>
+      <div className="random-generated">Random: {getMealTypeByTime()}</div>
     </div>
   );
 }
