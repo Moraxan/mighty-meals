@@ -168,6 +168,19 @@ export default function StartPage(props) {
     }
   }
 
+  function countMatches(){
+    let matches: number = 0;
+  
+    if(recipesST.length > 1){
+      matches = recipesST.length;
+    }
+    else if (recipesMTVMH.length > 1){
+      matches = recipesMTVMH.length
+    }
+  
+    return matches;
+  }
+  
   // Function called when recipe card is clicked, persisting current filters/result.
   const persistSearchData = () => {
     const currentSearchState = {
@@ -304,6 +317,9 @@ export default function StartPage(props) {
         getApiData={getApiData}
       />
       <br />
+      <div className="matches">
+          <p>matches&nbsp;&nbsp;&nbsp;<span className="matches-parentes">({countMatches()})</span></p>
+        </div>
 
         <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
           {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
