@@ -17,7 +17,7 @@ import {useLoaderData} from "react-router-dom";
 export const RecipePage = () => {
   //  ***************   |Change default state of below object to a static ID if you desire.   |***************
   //  ***************   |For example set below recipeID default state to = useState(637776);  |***************
-  const [recipeId, setRecipeId] = useState(useLoaderData());
+  const recipeId = useLoaderData();
   const [recipeData, setRecipeData] = useState(null);
 
   useEffect(() => {
