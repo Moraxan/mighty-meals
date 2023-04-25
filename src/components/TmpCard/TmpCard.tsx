@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 //@ts-ignore
 export default function TmpCard(props) {
   return (
-    <Link to={`recipe/${props.recId}`} style={{textDecoration:"none"}}>
+    <Link to={`recipe/${props.recId}`} style={{textDecoration:"none"}} onClick={() => {props.persistSearchData()}}>
       <Card style={{ width: '24rem', height: '14rem' }} className="me-4 ms-4 mb-4">
         <Card.Body className="d-flex flex-column justify-content-between test-card" style={{backgroundImage: `url(${props.imgSrc})`}}>
           <Card.Title className="testcard-text">{props.recipeTitle}</Card.Title>

@@ -5,6 +5,7 @@ import { Ingredients } from './Ingredients';
 import { Directions } from './Directions';
 import { DishImage } from './DishImage';
 import {useLoaderData} from "react-router-dom";
+import {useBackButtonStore} from "../Stores/backButtonClick";
 import './RecipePage.css';
 
 //This function fetches the recipe data from the API and stores it in local storage
@@ -19,6 +20,9 @@ export const RecipePage = () => {
 //  ***************   |This loads the id to the router via useLoaderData and the loader in the route |***************
   const recipeId = useLoaderData();
   const [recipeData, setRecipeData] = useState(null);
+
+  //@ts-ignore //global zustand variable/state to monitor back button click and persist state.
+  const handleBackClick = useBackButtonStore((state) => state.clickBackButton);
 
   useEffect(() => {
     const persistedSettings = JSON.parse(localStorage.getItem("mightySettings")!);
@@ -54,10 +58,11 @@ export const RecipePage = () => {
     return <div>Fetch unsuccesful, check your API key</div>;
   }
 
+
   return (
     <div className="RecipePage">
       <div className="RecipePage-left-column">
-        <BackButton />
+        <BackButton handleBackClick={handleBackClick} />
       </div>
       <div className="RecipePage-right-column">
         <div className="RecipePage-top-row">

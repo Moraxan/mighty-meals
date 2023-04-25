@@ -1,4 +1,3 @@
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Footer from "./components/Footer/Footer";
@@ -9,12 +8,14 @@ import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
 
 //This is the router for the app. It is not used yet, but will be used in the future.
-
 export const Router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <StartPage />
+      <>
+        <StartPage />
+        <Footer />
+      </>
     ),
   },
   {

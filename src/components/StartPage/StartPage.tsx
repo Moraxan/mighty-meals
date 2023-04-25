@@ -11,6 +11,7 @@ import NoResult from "../NoResult/NoResult";
 import { RecipeFrontST } from "../Interface/Interface";
 import { RecipeMTVMH } from "../Interface/Interface";
 import { useMediaQuery } from "../DropdownNav/DropdownNav";
+import {useBackButtonStore} from "../Stores/backButtonClick";
 
 import "./StartPage.css";
 
@@ -21,6 +22,10 @@ export default function StartPage(props) {
   const emptyRecipeST: RecipeFrontST[] = [];
   const emptyRecipeMTVMH: RecipeMTVMH[] = [];
   const emptyArr: string[] = [];
+
+  //@ts-ignore // global zustand variable/state to monitor back button click and persist state
+  const backButtonClicked = useBackButtonStore((state) => state.clicked);
+
 
   // Storing recipe objects in this state.
   const [recipesST, setRecipesST] = useState(emptyRecipeST);
@@ -43,7 +48,7 @@ export default function StartPage(props) {
   // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
   //@ts-ignore
   const persistedSearchSettings = JSON.parse(sessionStorage.getItem("persisted-search-data"));
-  const searchSettingsBool: boolean = !props.backButtonClicked ? true : persistedSearchSettings.searchMode;
+  const searchSettingsBool: boolean = !backButtonClicked ? true : persistedSearchSettings.searchMode;
   const [standardSearch, setStandardSearch] = useState(searchSettingsBool);
 
   // API Settings, read spoonacular documentation for more info.
@@ -76,39 +81,39 @@ export default function StartPage(props) {
   useEffect(() => {
 
     //If only by render and no backbutton click random recipes are fetched.
-    if(!props.backButtonClicked){
-          fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`)
-      .then((response) => response.json())
-      .then((data) => {
-        createCards(data.recipes);
-      })
+    if(!backButtonClicked){
+    //       fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     createCards(data.recipes);
+    //   })
 
     // Sample recipes to use instead of calling fetch method during development.
-    // const forTesting: RecipeFrontST[] = [
-    //   {
-    //     id: 637776,
-    //     title: "Cherry Pancakes for One",
-    //     image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
-    //     readyInMinutes: 45,
-    //   },
-    //   {
-    //     id: 660697,
-    //     title: "Southern Fried Catfish",
-    //     image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
-    //     readyInMinutes: 45,
-    //   },
-    //   {
-    //     id: 634091,
-    //     title: "Banana Foster Bread Pudding",
-    //     image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
-    //     readyInMinutes: 45,
-    //   },
-    // ];
-    // createCards(forTesting);
+    const forTesting: RecipeFrontST[] = [
+      {
+        id: 637776,
+        title: "Cherry Pancakes for One",
+        image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+        readyInMinutes: 45,
+      },
+      {
+        id: 660697,
+        title: "Southern Fried Catfish",
+        image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
+        readyInMinutes: 45,
+      },
+      {
+        id: 634091,
+        title: "Banana Foster Bread Pudding",
+        image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
+        readyInMinutes: 45,
+      },
+    ];
+    createCards(forTesting);
     }
 
-    // If back button is clicked previous persited states are being loaded back.
-    if(props.backButtonClicked){
+    //If back button is clicked previous persited states are being loaded back.
+    if(backButtonClicked){
       //@ts-ignore
       const persistedData = JSON.parse(sessionStorage.getItem("persisted-search-data"));
 

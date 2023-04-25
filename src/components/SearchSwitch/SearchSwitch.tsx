@@ -28,9 +28,7 @@ export default function SearchSwitch(props){
             <input id="mighty-switch" onChange={flipSwitch} className="form-check-input" type="checkbox" role="switch" defaultChecked={props.standardSearch} />
             }
           </div>
-
-
-
+          
         </div>
       );
 
