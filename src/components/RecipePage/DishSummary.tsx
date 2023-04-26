@@ -4,10 +4,11 @@ import clock from "../../images/clock.png";
 // Cleans the input string and shortens it to specified number of sentences
 function TruncateString(string: string, numberOfSentences: number) {
   const indexes: number[] = [];
-  const editedString = string.replaceAll('<b>','').replaceAll('</b>','')
+  const editedString = string.replaceAll('<b>','').replaceAll('</b>','').replaceAll('<a href=','').replaceAll('/a>','')
 
   for (let index = 0; index < editedString.length; index++) {
   if (editedString[index] === '.') {
+    if(editedString[index+1] === ' ')
     indexes.push(index+1);
   }
 }
@@ -33,7 +34,7 @@ export function DishSummary(props){
     </div>
 
     <div className="summary-text">
-      <p>{TruncateString(props.recipeData.summary, 3)}</p>
+      <p>{TruncateString(props.recipeData.summary, 4)}</p> 
     </div>
   </div>
   );  
