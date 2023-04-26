@@ -14,21 +14,19 @@ const boldNumbers = (str) => {
 export const Ingredients = ({ ingredients }) => {
   return (
     <div className="ingredients-container">
-      <div className="ingredients-box">
-        <p>ingredients</p>
-      </div>
-      <br />
+        <div className="ingredients-box">
+          ingredients
+        </div>
       <div className="ingredients-list">
-      <ul>
-        
-        {ingredients.map((ingredient: string, index: number) => {
-          const [amount, ...rest] = ingredient.original.split(" ");
-          const formattedIngredient = boldNumbers(
-            `${amount} ${rest.join(" ")}`
-          );
-          return <li key={index} dangerouslySetInnerHTML={{ __html: formattedIngredient }}/>;
-        })}
-      </ul>
+        <ul>
+          {ingredients.map((ingredient: string, index: number) => {
+            const [amount, ...rest] = ingredient.original.split(" ");
+            const formattedIngredient = boldNumbers(
+              `${amount} ${rest.join(" ")}`
+            );
+            return <li key={index} dangerouslySetInnerHTML={{ __html: formattedIngredient }}/>;
+          })}
+        </ul>
       </div>
     </div>
   );

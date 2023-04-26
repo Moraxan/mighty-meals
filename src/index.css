@@ -49,7 +49,7 @@ body{
 
 @media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
   :root {
-    --heading-font: 24pt "Avengeance", sans-serif;
+    --heading-font: 20pt "Avengeance", sans-serif;
     --big-varela-font: 14pt "Varela", sans-serif;
     --medium-varela-font: 12pt "Varela", sans-serif;
     --small-varela-font: 10pt "Varela", sans-serif;   
