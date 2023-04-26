@@ -149,8 +149,7 @@ export default function StartPage(props) {
         intoleranceChoices
       )}&diet=${createURIString(
         dietChoices
-      )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}
-      &sort=${sortedBy}`;
+      )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}&sort=${sortedBy}`;
       try {
         const response = await fetch(encodeURI(url));
         const result = await response.json();
@@ -164,7 +163,7 @@ export default function StartPage(props) {
       if (ingredientChoices.length > 0) {
         const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(
           ingredientChoices
-        )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}&sort=${sortedBy}`;
+        )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
 
         try {
           const response = await fetch(encodeURI(url));
@@ -332,7 +331,7 @@ export default function StartPage(props) {
         setStandardSearch={setStandardSearch}
         getApiData={getApiData}
       />
-        <Sort onSortChange={handleSortChange} getApiData={getApiData} />
+        <Sort onSortChange={handleSortChange} />
       <br />
       <div className="matches">
           <p>matches&nbsp;&nbsp;&nbsp;<span className="matches-parentes">({countMatches()})</span></p>
