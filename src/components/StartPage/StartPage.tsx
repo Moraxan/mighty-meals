@@ -16,6 +16,7 @@ import {useBackButtonStore} from "../Stores/backButtonClick";
 import {useApiCheckerStore} from "../Stores/checkIfApiExists";
 
 import "./StartPage.css";
+import Sort from "../Sort/Sort";
 
 //@ts-ignore
 export default function StartPage(props) {
@@ -79,6 +80,9 @@ export default function StartPage(props) {
   // ** Settings only for MTVMH **
   const ranking: number = persistedSettings.storedRanking; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
   const ignorePantry: boolean = persistedSettings.storedIgnorePantry; //Whether to ignore typical pantry items, such as water, salt, flour, etc.
+  
+  // State for sorting function
+  const [sortedBy, setSortedBy] = useState("");
 
   //useEffect hook that renders when the page load/reload.
   useEffect(() => {
@@ -145,7 +149,8 @@ export default function StartPage(props) {
         intoleranceChoices
       )}&diet=${createURIString(
         dietChoices
-      )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}`;
+      )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}
+      &sort=${sortedBy}`;
       try {
         const response = await fetch(encodeURI(url));
         const result = await response.json();
@@ -159,7 +164,7 @@ export default function StartPage(props) {
       if (ingredientChoices.length > 0) {
         const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(
           ingredientChoices
-        )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
+        )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}&sort=${sortedBy}`;
 
         try {
           const response = await fetch(encodeURI(url));
@@ -253,6 +258,9 @@ export default function StartPage(props) {
     }
   }
 
+  function handleSortChange(sortKey: string) {
+    setSortedBy(sortKey);
+  }
   // importing useMediaQuery function to make SearchSwith appear based on if condition is met or not.
   const matches = useMediaQuery(
     "screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)"
@@ -303,7 +311,6 @@ export default function StartPage(props) {
           getApiData={getApiData}
         />
       )}
-
       <SideBar
         show={show}
         setShow={setShow}
@@ -325,6 +332,7 @@ export default function StartPage(props) {
         setStandardSearch={setStandardSearch}
         getApiData={getApiData}
       />
+        <Sort onSortChange={handleSortChange} getApiData={getApiData} />
       <br />
       <div className="matches">
           <p>matches&nbsp;&nbsp;&nbsp;<span className="matches-parentes">({countMatches()})</span></p>
