@@ -67,7 +67,7 @@ export const RecipePage = ({showStartPage, setShowStartPage, clickedRecipeID}) =
           <DishSummary recipeData={recipeData} />
         </div>
         <div className="RecipePage-bottom-row">
-          <Ingredients ingredients={recipeData?.extendedIngredients} />
+          <Ingredients ingredients={recipeData?.extendedIngredients} noOfServings={recipeData?.servings}/>
           <Directions directions={recipeData.analyzedInstructions} />
         </div>
       </div>

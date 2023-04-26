@@ -24,9 +24,9 @@ const handleIncreaseButtonClick = () => {
 };
 
 //@ts-ignore
-export const Ingredients = ({ ingredients }) => {
+export const Ingredients = ({ ingredients, noOfServings }) => {
   
-  const [servings, setServings] = useState() //här ska antalet servings från api-anrop läggas in, nu hårdkodad 4 bara för testing
+  const [servings, setServings] = useState(noOfServings)
   
   return (
     <div className="ingredients-container">
