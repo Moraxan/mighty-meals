@@ -1,19 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Sort.css"
 
 //@ts-ignore
 export default function Sort(props) {
   const [sortKey, setSortKey] = useState("");
 
+  //@ts-ignore
   function handleSortChange(e) {
     const newSortKey = e.target.value;
     setSortKey(newSortKey);
     props.onSortChange(newSortKey);
   }
-
-  useEffect(() => {
-    props.getApiData();
-  }, [sortKey]);
   
   return (
     <div className="sort-dropdown">
