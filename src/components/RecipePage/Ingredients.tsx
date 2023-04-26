@@ -3,31 +3,34 @@ import { useState } from "react";
 import decreaseBtn from "../../images/decreaseBtn.png";
 import increaseBtn from "../../images/increaseBtn.png";
 
-//regex filtering out all integers and fractions to make them bold/strong
-//@ts-ignore
-const boldNumbers = (str) => {
-  const pattern = /(\d+|\d+\s*(?:\/\s*\d+)?)/g;
-  
-  // Replaces matches with bold/strong HTML tags
-  //@ts-ignore
-  return str.replace(pattern, (match) => `<strong>${match}</strong>`);
-};
-
-//logic for decreasing portion size here
-const handleDecreaseButtonClick = () => {
-  console.log("handled decrease!");
-};
-
-//logic for increasing portion size here
-const handleIncreaseButtonClick = () => {
-  console.log("handled increase!");
-};
-
 //@ts-ignore
 export const Ingredients = ({ ingredients, noOfServings }) => {
-  
-  const [servings, setServings] = useState(noOfServings)
-  
+  const [servings, setServings] = useState(noOfServings);
+
+  //@ts-ignore
+  const boldNumbers = (str) => {
+    //regex filtering out all integers and fractions to make them bold/strong
+    const pattern = /(\d+|\d+\s*(?:\/\s*\d+)?)/g;
+
+    //@ts-ignore
+    // Replaces matches with bold/strong HTML tags
+    return str.replace(pattern, (match) => `<strong>${match}</strong>`);
+  };
+
+  //logic for decreasing portion size
+  const handleDecreaseButtonClick = () => {
+    // for testing purposes
+    setServings(() => servings - 1)
+    console.log("handled decrease!");
+  };
+
+  //logic for increasing portion size
+  const handleIncreaseButtonClick = () => {
+    // for testing purposes
+    setServings(() => servings + 1)
+    console.log("handled increase!");
+  };
+
   return (
     <div className="ingredients-container">
       <div className="ingredients-box">
