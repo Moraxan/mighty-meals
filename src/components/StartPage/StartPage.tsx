@@ -161,9 +161,7 @@ export default function StartPage(props) {
     } else {
       // This search requires at least 1 ingredient, if none are selected an alert will pop-up telling the user to select at least 1..
       if (ingredientChoices.length > 0) {
-        const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(
-          ingredientChoices
-        )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
+        const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(ingredientChoices)}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
 
         try {
           const response = await fetch(encodeURI(url));
