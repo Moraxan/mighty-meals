@@ -1,38 +1,36 @@
+@import url('../../index.css');
+
+
 .directions-container {
-  background-color: #eda037;
+  background-color: var(--accentcolouryellow);
   border: 5px solid black;
   border-radius: 10px;
-  font-family: "Varela";
   padding: 10px;
   text-align: left;
-  width: 800px;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
-  
+  height: 100%;
 }
 
 .directions-box {
   border: 1px solid black;
   border-radius: 5px;
-  font-family: "Avengeance";
-  font-size: 34pt;
+  font: var(--heading-font);
   display: inline-block;
+  padding-top: 10px;
   padding-left: 5px;
   padding-right: 10px;
+  color: black;
 }
 
 
 .directions-list {
+  font: var(--small-varela-font);
   overflow-y: auto;
-  font-size: 16px;
   list-style: none;
   margin: 0;
   overflow-y: auto;
   padding-left: 0;
 }
-
-
 
 .directions-image {
   text-align: left;
@@ -54,8 +52,23 @@
 
 .image-button .step-text {
   color: black;
+
 }
 
 .image-button .step-text.checked {
   color: grey;
+}
+
+
+@media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
+  .dish-summary-container{
+      width: 100%;
+      padding: 10px;
+      border:5px solid black;
+      border-radius: 10px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-bottom: 0px;
+      margin-right: 0px;
+  }
 }

@@ -1,16 +1,16 @@
+@import url('../../index.css');
 .dish-summary-container{
-    width: 800px;
-    background-color: #e42427;
+    background-color: var(--accentcolourred);
     padding: 10px;
     border:5px solid black;
     border-radius: 10px;
-    margin-top: 20px;
-    
+    height: 100%;
+    color: black;
 }
 .recipe-time{
-    font-family: "Avengeance", sans-serif;
+    font: var(--time-varela-font);
     padding-top: 8px;
-    font-size: 24pt;
+
 }
 
 .title-time{
@@ -20,7 +20,7 @@
 }
 
 .recipe-time span{
-    background-color: #eda037;
+    background-color: var(--accentcolouryellow);
     padding-left: 5px;
     padding-right: 12px;
     padding-top: 5px;
@@ -30,32 +30,31 @@
     width: 34px;
 }
 .recipe-title{
-    font-family: "Avengeance", sans-serif;
+    font: var(--heading-font);
     padding-top: 8px;
-    font-size: 34pt;
 }
 
 .recipe-title span{
-    background-color: #eda037;
+    background-color: var(--accentcolouryellow);
     padding-left: 5px;
     padding-right: 12px;
     padding-top: 5px;
     border-radius: 5px;
 }
 .summary-text{
-    font-family: "Varela";
+    font: var(--big-varela-font);
     text-align: left;
-    font-size: 18pt;
 }
 
 @media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
     .dish-summary-container{
         width: 100%;
-        background-color: #24e444;
         padding: 10px;
         border:5px solid black;
         border-radius: 10px;
         margin-top: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+        margin-right: 0px;
     }
-
 }
