@@ -57,25 +57,25 @@ export const RecipePage = () => {
     return <div>Fetch unsuccesful, check your API key</div>;
   }
 
-
   return (
     <div className="RecipePage">
-      <div className="RecipePage-left-column">
+      <div className="BackButton">
         <BackButton handleBackClick={handleBackClick} />
       </div>
-      <div className="RecipePage-right-column">
-        <div className="RecipePage-top-row">
-          {/*//@ts-ignore*/}
+      <div className="DishImage">
           <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
-          <DishSummary recipeData={recipeData} />
-        </div>
-        <div className="RecipePage-bottom-row">
-          {/*//@ts-ignore*/}
+      </div>
+      <div className="Ingredients">
           <Ingredients ingredients={recipeData?.extendedIngredients} />
-          {/*//@ts-ignore*/}
+      </div>
+      <div className="DishSummary">
+          <DishSummary recipeData={recipeData} />
+      </div>
+      <div className="Directions">
+
           <Directions directions={recipeData.analyzedInstructions} />
         </div>
       </div>
-    </div>
   );
+  
 };

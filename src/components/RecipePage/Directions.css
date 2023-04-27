@@ -1,32 +1,31 @@
+@import url('../../index.css');
+
+
 .directions-container {
-  background-color: #eda037;
+  background-color: var(--accentcolouryellow);
   border: 5px solid black;
   border-radius: 10px;
-  font-family: "Varela";
   padding: 10px;
   text-align: left;
-  width: 800px;
-  height: 95%;   /*added height*/
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
-  margin-right: 7%;
+  height: 100%;
 }
 
 .directions-box {
   border: 1px solid black;
   border-radius: 5px;
-  font-family: "Avengeance";
-  font-size: 34pt;
+  font: var(--heading-font);
   display: inline-block;
+  padding-top: 10px;
   padding-left: 5px;
   padding-right: 10px;
+  color: black;
 }
 
 
 .directions-list {
+  font: var(--small-varela-font);
   overflow-y: auto;
-  font-size: 16px;
   list-style: none;
   margin: 0;
   overflow-y: auto;
@@ -60,33 +59,16 @@
   color: grey;
 }
 
+
 @media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
-  .directions-container {
-    /* width: 100%; */
-    margin-top:0px;
-    margin-left:0px;
-    margin-right: 0px;
-    margin-bottom: 10px;
+  .dish-summary-container{
+      width: 100%;
+      padding: 10px;
+      border:5px solid black;
+      border-radius: 10px;
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-bottom: 0px;
+      margin-right: 0px;
   }
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-  height: 5px;
-}
-
-::-webkit-scrollbar-button {
-  display: none;
-}
-
-
-::-webkit-scrollbar-track {
-  background-color: #eda037;
-  border-radius: 10px;
-}
-
-
-::-webkit-scrollbar-thumb {
-  background-color: #000000; 
-  border-radius: 10px;
 }

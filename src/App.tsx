@@ -6,6 +6,7 @@ import { RecipePage } from "./components/RecipePage/RecipePage";
 import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
 
+
 //This is the router for the app. It is not used yet, but will be used in the future.
 export const Router = createBrowserRouter([
   {
@@ -26,8 +27,10 @@ export const Router = createBrowserRouter([
             <NavigationBar hideSwitch={true}/>
             <RecipePage />
           </div>
-            <Footer />
-      </>
-    ),
-  },
+          <div className='footer'>
+          <Footer />
+          </div>
+        </>
+      )
+  }
 ]);
