@@ -1,0 +1,9 @@
+.sort-dropdown {
+    position: relative;
+  }
+  
+.select {
+    position: absolute;
+    right: 0; 
+    background-color: #eda037
+  }

@@ -1,19 +1,11 @@
-.dish-image-container {
-  display: flex;
-  justify-content: center;
-  /* /* margin-bottom: 10px; */
-  margin-right: 20px; 
-  margin-bottom: 20px;
-  width: 30%;
-  border:5px solid black;
-  border-radius: 10px;
-}
-.dish-image{
+.dish-image {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-@media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
-  .dish-image-container {
-    width: 100%;
-    margin-right: 0px; 
-  }
+
+.dish-image-container {
+  border: 5px solid black;
+  border-radius: 10px;
+  overflow: hidden;
 }
