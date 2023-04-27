@@ -7,7 +7,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import SearchBarFreeText from "../SearchBar/SearchBarFreeText";
 import SearchSwitch from "../SearchSwitch/SearchSwitch";
 import NoResult from "../NoResult/NoResult";
-
+import HaveCook from "../HaveCooked/HaveCooked";
 import { RecipeFrontST } from "../Interface/Interface";
 import { RecipeMTVMH } from "../Interface/Interface";
 import { useMediaQuery } from "../DropdownNav/DropdownNav";
@@ -190,6 +190,7 @@ export default function StartPage(props) {
   );
 
   return (
+    
     <div className="app-body d-flex flex-column">
       {matches === true && (
         <SearchSwitch
@@ -202,7 +203,7 @@ export default function StartPage(props) {
           setSelected={setSelected}
         />
       )}
-
+  
       <NavigationBar
         standardSearch={standardSearch}
         setStandardSearch={setStandardSearch}
