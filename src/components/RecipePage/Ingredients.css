@@ -33,18 +33,6 @@
 }
 
 .servings-container {
-  /* display: flex;
-  flex-direction: row;
-  background-color: #eda037;
-  font-family: "Avengeance", sans-serif;
-  font-size: 18pt;
-  border-radius: 10px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  border: 2px solid black; */
   display: inline-flex;
   flex-direction: row;
   background-color: #eda037;

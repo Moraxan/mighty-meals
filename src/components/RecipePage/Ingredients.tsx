@@ -26,11 +26,13 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
   //logic for decreasing portion size
   const handleDecreaseButtonClick = () => {
     if (servings === 1) return;
+    //@ts-ignore
     setServings((prevServings) => prevServings - 1);
   };
 
   //logic for increasing portion size
   const handleIncreaseButtonClick = () => {
+    //@ts-ignore
     setServings((prevServings) => prevServings + 1);
   };
 
@@ -43,7 +45,10 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
             return (
               <li key={index}>
                 <strong>
-                  {((ingredientAmounts[index] * servings) / noOfServings).toFixed(1)}
+                  {/* if amount contains decimal value then display decimal, otherwise display without decimal*/}
+                {ingredientAmounts[index] % 1 !== 0
+                  ? ((ingredientAmounts[index] * servings) / noOfServings).toFixed(1)
+                  : (ingredientAmounts[index] * servings) / noOfServings}
                 </strong>
                 {" "}
                 {ingredientUnits[index]}
