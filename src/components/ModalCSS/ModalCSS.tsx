@@ -8,10 +8,8 @@ import "./ModalCSS.css";
 //@ts-ignore
 export default function ModalCSS(props) {
   const [show, setShow] = useState(true);
-
-
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  
   return (
     <>
       <Modal className="ModalSettings" show={show} onHide={handleClose} onExit={() => {props.setShowCSS(false)}}>
