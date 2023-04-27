@@ -86,7 +86,7 @@ export default function StartPage(props) {
     // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
 
     // Settings, read spoonacular documentation for more info.
-    const apiKey: string = "f699d273aec14d68b31ee54247c360bf";
+    const apiKey: string = "c698061db12847bdb5ff970f87034268";
     const maxHits: number = 20;
     const addRecipeNutrition: boolean = false;
 
