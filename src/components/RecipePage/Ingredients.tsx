@@ -43,9 +43,10 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
             return (
               <li key={index}>
                 <strong>
-                  {((ingredientAmounts[index] * servings) / noOfServings).toFixed(1)}{" "}
+                  {((ingredientAmounts[index] * servings) / noOfServings).toFixed(1)}
                 </strong>
-                  {ingredientUnits[index]}
+                {" "}
+                {ingredientUnits[index]}
                 {" "}
                 {ingredientNames[index]}
               </li>
