@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ModalSettings from '../ModalSettings/ModalSettings';
+import ModalCSS from '../ModalCSS/ModalCSS';
 import burger from "../../images/burger.png";
 import "./DropdownNav.css";
 
@@ -10,9 +11,13 @@ import "./DropdownNav.css";
 export default function DropdownNav() {
     const matches = useMediaQuery('screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)')
     const [showSettings, setShowSettings] = useState(false);
+    const [showCSS, setShowCSS] = useState(false);
 
-    const handleClick = () => {
+    const handleClickSettings = () => {
       setShowSettings(true);
+    }
+    const handleClickCSS = () => {
+      setShowCSS(true);
     }
 
   return (
@@ -24,10 +29,12 @@ export default function DropdownNav() {
 
       <Dropdown.Menu className="dropdown-text">
         <Dropdown.Item>Profile</Dropdown.Item>
-        <Dropdown.Item onClick={handleClick}>Settings</Dropdown.Item>
+        <Dropdown.Item onClick={handleClickSettings}>Settings</Dropdown.Item>
+        <Dropdown.Item onClick={handleClickCSS}>CSS Guidelines/Help</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
     {showSettings && <ModalSettings setShowSettings={setShowSettings} />}
+    {showCSS && <ModalCSS setShowCSS={setShowCSS} />}
     </>
   );
 }
