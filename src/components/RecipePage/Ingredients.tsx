@@ -1,57 +1,58 @@
 import "./Ingredients.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import decreaseBtn from "../../images/decreaseBtn.png";
 import increaseBtn from "../../images/increaseBtn.png";
 
 //@ts-ignore
 export const Ingredients = ({ ingredients, noOfServings }) => {
+
   const [servings, setServings] = useState(noOfServings);
+  const [ingredientAmounts, setIngredientAmounts] = useState([]);
+  const [ingredientUnits, setIngredientUnits] = useState([]);
+  const ingredientNames = ingredients.map((ingredient: any) => ingredient.originalName);
 
-  //@ts-ignore
-  const boldNumbers = (str) => {
-    //regex filtering out all integers and fractions to make them bold/strong
-    const pattern = /(\d+|\d+\s*(?:\/\s*\d+)?)/g;
+  useEffect(() => {
+    const amounts = ingredients.map((ingredient: any) => {
+      return ingredient.measures.metric.amount;
+    });
+    setIngredientAmounts(amounts);
 
-    //@ts-ignore
-    // Replaces matches with bold/strong HTML tags
-    return str.replace(pattern, (match) => `<strong>${match}</strong>`);
-  };
+    const units = ingredients.map((ingredient: any) => {
+      return ingredient.measures.metric.unitShort;
+    });
+    setIngredientUnits(units);
+  }, [ingredients]);
 
   //logic for decreasing portion size
   const handleDecreaseButtonClick = () => {
-    // for testing purposes
-    setServings(() => servings - 1)
-    console.log("handled decrease!");
+    if (servings === 1) return;
+    setServings((prevServings) => prevServings - 1);
   };
 
   //logic for increasing portion size
   const handleIncreaseButtonClick = () => {
-    // for testing purposes
-    setServings(() => servings + 1)
-    console.log("handled increase!");
+    setServings((prevServings) => prevServings + 1);
   };
 
   return (
     <div className="ingredients-container">
-      <div className="ingredients-box">
-        <p>ingredients</p>
+      <div className="ingredients-box">ingredients</div>
+      <div className="ingredients-list">
+        <ul>
+          {ingredients.map((ingredient: any, index: number) => {
+            return (
+              <li key={index}>
+                <strong>
+                  {((ingredientAmounts[index] * servings) / noOfServings).toFixed(1)}{" "}
+                </strong>
+                  {ingredientUnits[index]}
+                {" "}
+                {ingredientNames[index]}
+              </li>
+            );
+          })}
+        </ul>
       </div>
-      <br />
-      <ul>
-        {ingredients.map((ingredient: string, index: number) => {
-          // @ts-ignore
-          const [amount, ...rest] = ingredient.original.split(" ");
-          const formattedIngredient = boldNumbers(
-            `${amount} ${rest.join(" ")}`
-          );
-          return (
-            <li
-              key={index}
-              dangerouslySetInnerHTML={{ __html: formattedIngredient }}
-            />
-          );
-        })}
-      </ul>
       <div className="servings-container">
         <button className="decrease-btn">
           <img

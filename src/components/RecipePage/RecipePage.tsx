@@ -66,7 +66,7 @@ export const RecipePage = () => {
           <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
       </div>
       <div className="Ingredients">
-          <Ingredients ingredients={recipeData?.extendedIngredients} />
+          <Ingredients ingredients={recipeData?.extendedIngredients} noOfServings={recipeData?.servings} />
       </div>
       <div className="DishSummary">
           <DishSummary recipeData={recipeData} />
