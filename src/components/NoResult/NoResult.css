@@ -1,4 +1,12 @@
 .no-results img {
     width: 400px;
     height: 400px;
+}
+
+@media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
+    .no-results img{
+        margin-top: 100px;
+        height: auto;
+        width: 350px;
     }
+}
