@@ -1,7 +1,10 @@
-.card {
-    --card-bg-color: hsl(35, 77%, 56%);
+@import url('../../index.css');
+
+  .card {
+    --card-bg-color: var(--accentcolouryellow);
     --color-black: #000000;
     height: 14rem;
+    margin: 10px;
   }
   
   .card__wrapper {
@@ -10,14 +13,14 @@
     position: relative;
     display: flex;
     overflow: hidden;
-  
     /* This is something temporary to force to a small width */
-    max-width: 20rem;
+    max-width: 320px;
   }
   
   .card__bg-image {
-    object-fit: cover;
+    object-fit:cover;
     width: 100%;
+    height: 100%;
   }
   
   .card__container {
@@ -34,10 +37,11 @@
     padding: 0.5rem;
     margin: 0.25rem;
     border: 1px solid var(--color-black);
+    opacity: 0.9;
   }
   
   .card__title {
-    max-width: 75%;
+    max-width: 95%;
     position: relative;
   }
   
@@ -49,25 +53,29 @@
     width: 2rem;
     top: 100%;
     right: 1rem;
+    
     clip-path: polygon(10% 0, 0 100%, 100% 0);
+    
   }
   
   .card__title::before {
     background: var(--card-bg-color);
     margin-right: 1px;
     z-index: 1;
+    
   }
   
   .card__title::after {
-    background-color: var(--color-black);
-    padding: 1px;
+    background-color: var(--color-black);    
   }
   
   .card__title-text {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow:clip;
     margin: 0;
+    color: black;
+    font: var(--recipecard-title-font);
   }
   
   .card__time {
@@ -76,17 +84,31 @@
     display: flex;
     width: min-content;
   }
-  
-  .card__time-icon {
-    width: 1rem;
-    height: 1rem;
+  .ingredients{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:clip;
+    margin: 0;
+    color: black;
+    font: var(--recipecard-title-font);
+
+
+    align-items: center;
+    padding: 0.25rem;
+    display: flex;
+    width: 200px
   }
   
-  .card__time-text {
-    font-size: 0.75rem;
-    font-weight: 700;
+  .card__time-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .card__time-text {    
     margin: 0;
     padding: 0 0.25rem;
+    color: black;
+    font: var(--recipecard-title-font);
   }
   
   .card__time-text span {

@@ -168,6 +168,7 @@
     }
 
     .red-fluff{
+        z-index: 1;
         position: fixed;
         top: auto;
         bottom: 65px;
