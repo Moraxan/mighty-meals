@@ -5,6 +5,7 @@ import { Ingredients } from './Ingredients';
 import { Directions } from './Directions';
 import { DishImage } from './DishImage';
 import {useLoaderData} from "react-router-dom";
+import {useBackButtonStore} from "../Stores/backButtonClick";
 import './RecipePage.css';
 
 //This function fetches the recipe data from the API and stores it in local storage
@@ -20,15 +21,19 @@ export const RecipePage = () => {
   const recipeId = useLoaderData();
   const [recipeData, setRecipeData] = useState(null);
 
+  //@ts-ignore //global zustand variable/state to monitor back button click and persist state.
+  const handleBackClick = useBackButtonStore((state) => state.clickBackButton);
+
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem(`recipeFetch_${recipeId}`));
+    const persistedSettings = JSON.parse(localStorage.getItem("mightySettings")!);
+    const storedData = JSON.parse(localStorage.getItem(`recipeFetch_${recipeId}`)!);
     if (storedData) {
       setRecipeData(storedData);
     } else {
 //Remember to put in your own API key here the first time you run this code
 //If you see the middle component of the page saying Loading... then you've probably forgotten to put in your API key
-      const apiKey = 'ENTER YOUR API KEY HERE';
-      const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
+      const apiKey: string | null = localStorage.getItem("storedApiKey");
+      const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=${persistedSettings.storeAddRecipeNutrition}`;
 
       fetch(url)
         .then((response) => {
@@ -49,24 +54,28 @@ export const RecipePage = () => {
   }, [recipeId]);
 
   if (!recipeData) {
-    return <div>Loading...</div>;
+    return <div>Fetch unsuccesful, check your API key</div>;
   }
 
   return (
     <div className="RecipePage">
-      <div className="RecipePage-left-column">
-        <BackButton />
+      <div className="BackButton">
+        <BackButton handleBackClick={handleBackClick} />
       </div>
-      <div className="RecipePage-right-column">
-        <div className="RecipePage-top-row">
+      <div className="DishImage">
           <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
+      </div>
+      <div className="Ingredients">
+          <Ingredients ingredients={recipeData?.extendedIngredients} noOfServings={recipeData?.servings} />
+      </div>
+      <div className="DishSummary">
           <DishSummary recipeData={recipeData} />
-        </div>
-        <div className="RecipePage-bottom-row">
-          <Ingredients ingredients={recipeData?.extendedIngredients} />
+      </div>
+      <div className="Directions">
+
           <Directions directions={recipeData.analyzedInstructions} />
         </div>
       </div>
-    </div>
   );
+  
 };

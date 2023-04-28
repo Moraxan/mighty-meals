@@ -71,6 +71,7 @@ export default function StartPage(props) {
   const persistedSettings = JSON.parse(localStorage.getItem("mightySettings"));
 
   //@ts-ignore
+  
   const apiKey: string | null = useApiCheckerStore((state) => state.apiKey);
   
   const maxHits: number = persistedSettings.storedMaxHits;
