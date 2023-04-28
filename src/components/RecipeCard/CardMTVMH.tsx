@@ -12,7 +12,7 @@ const CardMTVMH = ( props ) => {
 
       <div className="card__container">
         <div className="card__pill card__title">
-          <p className="card__title-text">{props.recipeTitle}</p>
+          <p className="card__title-text">{props.recipeTitle.length < 36 ? props.recipeTitle.toLowerCase() : props.recipeTitle.substring(0, 35).toLowerCase() + "..."}</p>
         </div>
         <div>
           <div className="card__pill card__time">            
