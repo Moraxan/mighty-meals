@@ -8,7 +8,7 @@ import SearchBarFreeText from "../SearchBar/SearchBarFreeText";
 import SearchSwitch from "../SearchSwitch/SearchSwitch";
 import NoResult from "../NoResult/NoResult";
 import ModalSaveAPIKey from "../ModalSaveAPIKey/ModalSaveAPIKey"
-
+import HaveCook from "../HaveCooked/HaveCooked";
 import { RecipeFrontST } from "../Interface/Interface";
 import { RecipeMTVMH } from "../Interface/Interface";
 import { useMediaQuery } from "../DropdownNav/DropdownNav";
@@ -71,6 +71,7 @@ export default function StartPage(props) {
   const persistedSettings = JSON.parse(localStorage.getItem("mightySettings"));
 
   //@ts-ignore
+  
   const apiKey: string | null = useApiCheckerStore((state) => state.apiKey);
   
   const maxHits: number = persistedSettings.storedMaxHits;
