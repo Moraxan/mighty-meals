@@ -23,7 +23,7 @@ export default function SearchBar(props){
         fetch("./src/components/SearchBar/commonIngredients.csv")
           .then((response) => response.text())
           .then((data) => {
-            const parsedIngredients: string[] = data.toLowerCase().split("\r\n");
+            const parsedIngredients: string[] = data.toLowerCase().split("\n");
             setIngredientArray(parsedIngredients);
         });
     }, []);

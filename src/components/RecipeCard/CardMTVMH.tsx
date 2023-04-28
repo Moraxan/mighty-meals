@@ -1,9 +1,11 @@
+import { useState } from "react";
 import "./card.css";
 import {Link} from 'react-router-dom';
 
 //@ts-ignore
 const CardMTVMH = ( props ) => {
   return (
+    const [ingredientChoices, setIngredientChoices] = useState([]);
     <div className="topCard">
     <Link to={`recipe/${props.recId}`} onClick={() => {props.persistSearchData()}}>
     <div className="card card__wrapper">
@@ -16,7 +18,7 @@ const CardMTVMH = ( props ) => {
         <div>
           <div className="card__pill card__time">            
             <p className="ingredients">                        
-              <span>matching ingredients: {props.usedIngredientCount}</span>
+              <span>matching ingredients: {props.usedIngredientCount}/{props.ingredientChoices.length}</span>
             </p>
           </div>
         </div>
