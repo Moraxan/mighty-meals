@@ -1,20 +1,16 @@
-import { useState } from "react";
 import "./Sort.css"
 
 //@ts-ignore
 export default function Sort(props) {
-  const [sortKey, setSortKey] = useState("");
 
   //@ts-ignore
   function handleSortChange(e) {
-    const newSortKey = e.target.value;
-    setSortKey(newSortKey);
-    props.onSortChange(newSortKey);
+    props.setSortedBy(e.target.value);
   }
   
   return (
     <div className="sort-dropdown">
-      <select className="select" value={sortKey} onChange={handleSortChange}>
+      <select className="select" value={props.sortedBy} onChange={handleSortChange}>
         <option value="">Sort by:</option>
         <option value="popularity">Popularity</option>
         <option value="time">Prep Time</option>

@@ -45,6 +45,9 @@ export default function StartPage(props) {
   const [intoleranceChoices, setIntoleranceChoices] = useState(emptyArr);
   const [dietChoices, setDietChoices] = useState(emptyArr);
 
+  // State for sorting function
+  const [sortedBy, setSortedBy] = useState("");
+
   // State for all filter choices (except ingredients since there are no predefines buttons) so we can make buttons purple if they are selected.
   const [selected, setSelected] = useState(emptyArr);
 
@@ -89,9 +92,6 @@ export default function StartPage(props) {
   // ** Settings only for MTVMH **
   const ranking: number = persistedSettings.storedRanking; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
   const ignorePantry: boolean = persistedSettings.storedIgnorePantry; //Whether to ignore typical pantry items, such as water, salt, flour, etc.
-
-  // State for sorting function
-  const [sortedBy, setSortedBy] = useState("");
 
   //useEffect hook that renders when the page load/reload.
   useEffect(() => {
@@ -138,6 +138,7 @@ export default function StartPage(props) {
 
       setRecipesST(persistedData.recipes);
       setRecipesMTVMH(persistedData.recipesByIngredients);
+      setSortedBy(persistedData.sortedBy)
       setIngredientChoices(persistedData.ingridients);
       setMealChoice(persistedData.meal);
       setCuisineChoices(persistedData.cuisines);
@@ -209,6 +210,8 @@ export default function StartPage(props) {
 
       recipes: recipesST,
       recipesByIngredients: recipesMTVMH,
+
+      sortedBy: sortedBy,
 
       ingridients: ingredientChoices,
       meal: mealChoice,
@@ -354,7 +357,7 @@ export default function StartPage(props) {
             </p>
           </div>
           <div className="sorting">
-            <Sort onSortChange={handleSortChange} />
+            <Sort sortedBy={sortedBy} setSortedBy={setSortedBy} />
           </div>
         </div>
 
