@@ -1,6 +1,6 @@
 import "./card.css";
 
-
+//@ts-ignore
 const Card = ({ title, time, bgImgUrl }) => {
   return (
     <div className="card card__wrapper">
