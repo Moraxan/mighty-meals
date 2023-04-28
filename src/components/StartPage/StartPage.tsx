@@ -7,20 +7,21 @@ import SearchBar from "../SearchBar/SearchBar";
 import SearchBarFreeText from "../SearchBar/SearchBarFreeText";
 import SearchSwitch from "../SearchSwitch/SearchSwitch";
 import NoResult from "../NoResult/NoResult";
-import ModalSaveAPIKey from "../ModalSaveAPIKey/ModalSaveAPIKey"
+import ModalSaveAPIKey from "../ModalSaveAPIKey/ModalSaveAPIKey";
 import HaveCook from "../HaveCooked/HaveCooked";
+import Card from "../RecipeCard/Card";
+import CardMTVMH from "../RecipeCard/CardMTVMH";
 import { RecipeFrontST } from "../Interface/Interface";
 import { RecipeMTVMH } from "../Interface/Interface";
 import { useMediaQuery } from "../DropdownNav/DropdownNav";
-import {useBackButtonStore} from "../Stores/backButtonClick";
-import {useApiCheckerStore} from "../Stores/checkIfApiExists";
+import { useBackButtonStore } from "../Stores/backButtonClick";
+import { useApiCheckerStore } from "../Stores/checkIfApiExists";
 
 import "./StartPage.css";
 import Sort from "../Sort/Sort";
 
 //@ts-ignore
 export default function StartPage(props) {
-
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
   const emptyRecipeST: RecipeFrontST[] = [];
   const emptyRecipeMTVMH: RecipeMTVMH[] = [];
@@ -28,7 +29,6 @@ export default function StartPage(props) {
 
   //@ts-ignore // global zustand variable/state to monitor back button click and persist state
   const backButtonClicked = useBackButtonStore((state) => state.clicked);
-
 
   // Storing recipe objects in this state.
   const [recipesST, setRecipesST] = useState(emptyRecipeST);
@@ -51,7 +51,9 @@ export default function StartPage(props) {
   // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
   //@ts-ignore
   const persistedSearchSettings = JSON.parse(sessionStorage.getItem("persisted-search-data"));
-  const searchSettingsBool: boolean = !backButtonClicked ? true : persistedSearchSettings.searchMode;
+  const searchSettingsBool: boolean = !backButtonClicked
+    ? true
+    : persistedSearchSettings.searchMode;
   const [standardSearch, setStandardSearch] = useState(searchSettingsBool);
 
   // API Settings, read spoonacular documentation for more info.
@@ -60,20 +62,26 @@ export default function StartPage(props) {
     storeAddRecipeNutrition: true,
     storedMaxRandomHits: 3,
     storedRanking: 1,
-    storedIgnorePantry: true
-  }
+    storedIgnorePantry: true,
+  };
 
-  if(localStorage.getItem("mightySettings") === null){
+  if (localStorage.getItem("mightySettings") === null) {
     localStorage.setItem("mightySettings", JSON.stringify(defaultSettings));
   }
+
+  if (localStorage.getItem("mightyRandomOrStatic") === null) {
+    localStorage.setItem("mightyRandomOrStatic", "true");
+  }
+
+  //@ts-ignore
+  const useStatic = JSON.parse(localStorage.getItem("mightyRandomOrStatic"));
 
   //@ts-ignore
   const persistedSettings = JSON.parse(localStorage.getItem("mightySettings"));
 
   //@ts-ignore
-  
   const apiKey: string | null = useApiCheckerStore((state) => state.apiKey);
-  
+
   const maxHits: number = persistedSettings.storedMaxHits;
   const addRecipeNutrition: boolean = persistedSettings.storeAddRecipeNutrition;
   // ** Settings only for Random recipes **
@@ -81,47 +89,50 @@ export default function StartPage(props) {
   // ** Settings only for MTVMH **
   const ranking: number = persistedSettings.storedRanking; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
   const ignorePantry: boolean = persistedSettings.storedIgnorePantry; //Whether to ignore typical pantry items, such as water, salt, flour, etc.
-  
+
   // State for sorting function
   const [sortedBy, setSortedBy] = useState("");
 
   //useEffect hook that renders when the page load/reload.
   useEffect(() => {
-
     //If only by render and no backbutton click random recipes are fetched.
-    if(!backButtonClicked){
-          fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`)
-      .then((response) => response.json())
-      .then((data) => {
-        createCards(data.recipes);
-      })
-
-    // Sample recipes to use instead of calling fetch method during development.
-    // const forTesting: RecipeFrontST[] = [
-    //   {
-    //     id: 637776,
-    //     title: "Cherry Pancakes for One",
-    //     image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
-    //     readyInMinutes: 45,
-    //   },
-    //   {
-    //     id: 660697,
-    //     title: "Southern Fried Catfish",
-    //     image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
-    //     readyInMinutes: 45,
-    //   },
-    //   {
-    //     id: 634091,
-    //     title: "Banana Foster Bread Pudding",
-    //     image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
-    //     readyInMinutes: 45,
-    //   },
-    // ];
-    // createCards(forTesting);
+    if (!backButtonClicked) {
+      if (!useStatic) {
+        fetch(
+          `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            createCards(data.recipes);
+          });
+      } else {
+        // Sample recipes to use instead of calling fetch method during development.
+        const forTesting: RecipeFrontST[] = [
+          {
+            id: 637776,
+            title: "Cherry Pancakes for One",
+            image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+            readyInMinutes: 45,
+          },
+          {
+            id: 660697,
+            title: "Southern Fried Catfish",
+            image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
+            readyInMinutes: 45,
+          },
+          {
+            id: 634091,
+            title: "Banana Foster Bread Pudding",
+            image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
+            readyInMinutes: 45,
+          },
+        ];
+        createCards(forTesting);
+      }
     }
 
     //If back button is clicked previous persited states are being loaded back.
-    if(backButtonClicked){
+    if (backButtonClicked) {
       //@ts-ignore
       const persistedData = JSON.parse(sessionStorage.getItem("persisted-search-data"));
 
@@ -137,7 +148,6 @@ export default function StartPage(props) {
   }, []);
 
   async function getApiData() {
-
     // Function that fetches / GET data back from the API.
     // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
 
@@ -162,7 +172,9 @@ export default function StartPage(props) {
     } else {
       // This search requires at least 1 ingredient, if none are selected an alert will pop-up telling the user to select at least 1..
       if (ingredientChoices.length > 0) {
-        const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(ingredientChoices)}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
+        const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(
+          ingredientChoices
+        )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
 
         try {
           const response = await fetch(encodeURI(url));
@@ -178,19 +190,18 @@ export default function StartPage(props) {
     }
   }
 
-  function countMatches(){
+  function countMatches() {
     let matches: number = 0;
-  
-    if(recipesST.length > 1){
+
+    if (recipesST.length > 1) {
       matches = recipesST.length;
+    } else if (recipesMTVMH.length > 1) {
+      matches = recipesMTVMH.length;
     }
-    else if (recipesMTVMH.length > 1){
-      matches = recipesMTVMH.length
-    }
-  
+
     return matches;
   }
-  
+
   // Function called when recipe card is clicked, persisting current filters/result.
   const persistSearchData = () => {
     const currentSearchState = {
@@ -204,15 +215,18 @@ export default function StartPage(props) {
       cuisines: cuisineChoices,
       intolerances: intoleranceChoices,
       diets: dietChoices,
-      selectedFilters: selected
-    }
+      selectedFilters: selected,
+    };
 
-    sessionStorage.setItem("persisted-search-data", JSON.stringify(currentSearchState));
-  }
+    sessionStorage.setItem(
+      "persisted-search-data",
+      JSON.stringify(currentSearchState)
+    );
+  };
 
   function createCards(input: RecipeFrontST[] | RecipeMTVMH[]) {
-    if (input === undefined){
-      alert("Fetch unsuccessful, check your API key.")
+    if (input === undefined) {
+      alert("Fetch unsuccessful, check your API key.");
       return;
     }
 
@@ -266,10 +280,21 @@ export default function StartPage(props) {
 
   return (
     <>
-    {apiKey === null && <ModalSaveAPIKey />}
-    <div className="app-body d-flex flex-column">
-      {matches === true && (
-        <SearchSwitch
+      {apiKey === null && <ModalSaveAPIKey />}
+      <div className="app-body d-flex flex-column">
+        {matches === true && (
+          <SearchSwitch
+            standardSearch={standardSearch}
+            setStandardSearch={setStandardSearch}
+            setMealChoice={setMealChoice}
+            setCuisineChoices={setCuisineChoices}
+            setIntoleranceChoices={setIntoleranceChoices}
+            setDietChoices={setDietChoices}
+            setSelected={setSelected}
+          />
+        )}
+
+        <NavigationBar
           standardSearch={standardSearch}
           setStandardSearch={setStandardSearch}
           setMealChoice={setMealChoice}
@@ -278,62 +303,59 @@ export default function StartPage(props) {
           setDietChoices={setDietChoices}
           setSelected={setSelected}
         />
-      )}
 
-      <NavigationBar
-        standardSearch={standardSearch}
-        setStandardSearch={setStandardSearch}
-        setMealChoice={setMealChoice}
-        setCuisineChoices={setCuisineChoices}
-        setIntoleranceChoices={setIntoleranceChoices}
-        setDietChoices={setDietChoices}
-        setSelected={setSelected}
-      />
-
-      {standardSearch ? (
-        <SearchBarFreeText
-          freeTextSearch={freeTextSearch}
-          setFreeTextSearch={setFreeTextSearch}
+        {standardSearch ? (
+          <SearchBarFreeText
+            freeTextSearch={freeTextSearch}
+            setFreeTextSearch={setFreeTextSearch}
+            show={show}
+            setShow={setShow}
+            showRed={true}
+            getApiData={getApiData}
+          />
+        ) : (
+          <SearchBar
+            show={show}
+            setShow={setShow}
+            ingredientChoices={ingredientChoices}
+            setIngredientChoices={setIngredientChoices}
+            showRed={true}
+            getApiData={getApiData}
+          />
+        )}
+        <SideBar
           show={show}
           setShow={setShow}
-          showRed={true}
-          getApiData={getApiData}
-        />
-      ) : (
-        <SearchBar
-          show={show}
-          setShow={setShow}
+          mealChoice={mealChoice}
+          setMealChoice={setMealChoice}
+          cuisineChoices={cuisineChoices}
+          setCuisineChoices={setCuisineChoices}
+          intoleranceChoices={intoleranceChoices}
+          setIntoleranceChoices={setIntoleranceChoices}
+          dietChoices={dietChoices}
+          setDietChoices={setDietChoices}
+          selected={selected}
+          setSelected={setSelected}
           ingredientChoices={ingredientChoices}
           setIngredientChoices={setIngredientChoices}
-          showRed={true}
+          showRed={false}
+          createCards={createCards}
+          standardSearch={standardSearch}
+          setStandardSearch={setStandardSearch}
           getApiData={getApiData}
         />
-      )}
-      <SideBar
-        show={show}
-        setShow={setShow}
-        mealChoice={mealChoice}
-        setMealChoice={setMealChoice}
-        cuisineChoices={cuisineChoices}
-        setCuisineChoices={setCuisineChoices}
-        intoleranceChoices={intoleranceChoices}
-        setIntoleranceChoices={setIntoleranceChoices}
-        dietChoices={dietChoices}
-        setDietChoices={setDietChoices}
-        selected={selected}
-        setSelected={setSelected}
-        ingredientChoices={ingredientChoices}
-        setIngredientChoices={setIngredientChoices}
-        showRed={false}
-        createCards={createCards}
-        standardSearch={standardSearch}
-        setStandardSearch={setStandardSearch}
-        getApiData={getApiData}
-      />
-        <Sort onSortChange={handleSortChange} />
-      <br />
-      <div className="matches">
-          <p>matches&nbsp;&nbsp;&nbsp;<span className="matches-parentes">({countMatches()})</span></p>
+
+        <br />
+        <div className="d-flex justify-content-evenly match-and-sort">
+          <div className="matches">
+            <p>
+              matches&nbsp;&nbsp;&nbsp;
+              <span className="matches-parentes">({countMatches()})</span>
+            </p>
+          </div>
+          <div className="sorting">
+            <Sort onSortChange={handleSortChange} />
+          </div>
         </div>
 
         <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
@@ -341,7 +363,7 @@ export default function StartPage(props) {
             <>
               {recipesST.length > 0 &&
                 recipesST.map((recipe) => (
-                  <TmpCard
+                  <Card
                     key={recipe.id}
                     recId={recipe.id}
                     imgSrc={recipe.image}
@@ -349,11 +371,11 @@ export default function StartPage(props) {
                     readyInMin={recipe.readyInMinutes}
                     handleRecipeClick={props.handleRecipeClick}
                     persistSearchData={persistSearchData}
-                  />
+                  ></Card>
                 ))}
               {recipesMTVMH.length > 0 &&
                 recipesMTVMH.map((recipe) => (
-                  <TmpCardMTVMH
+                  <CardMTVMH
                     key={recipe.id}
                     recId={recipe.id}
                     imgSrc={recipe.image}
@@ -369,7 +391,7 @@ export default function StartPage(props) {
             <NoResult />
           )}
         </div>
-    </div>
+      </div>
     </>
   );
 }

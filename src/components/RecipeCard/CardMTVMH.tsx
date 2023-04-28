@@ -2,9 +2,9 @@ import "./card.css";
 import {Link} from 'react-router-dom';
 
 //@ts-ignore
-const Card = ( props ) => {
+const CardMTVMH = ( props ) => {
   return (
-    <div>
+    <div className="topCard">
     <Link to={`recipe/${props.recId}`} onClick={() => {props.persistSearchData()}}>
     <div className="card card__wrapper">
       <img className="card__bg-image" src={props.imgSrc} alt="" />
@@ -14,15 +14,9 @@ const Card = ( props ) => {
           <p className="card__title-text">{props.recipeTitle}</p>
         </div>
         <div>
-          <div className="card__pill card__time">
-            <img
-              className="card__time-icon"
-              src="https://img.freepik.com/free-icon/stopwatch_318-873357.jpg"
-              alt="clock icon"
-            />
-            <p className="card__time-text">
-              {props.readyInMin}
-              <span>min</span>
+          <div className="card__pill card__time">            
+            <p className="ingredients">                        
+              <span>matching ingredients: {props.usedIngredientCount}</span>
             </p>
           </div>
         </div>
@@ -33,4 +27,4 @@ const Card = ( props ) => {
   );
 };
 
-export default Card;
+export default CardMTVMH;
