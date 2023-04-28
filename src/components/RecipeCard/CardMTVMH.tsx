@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 //@ts-ignore
 const CardMTVMH = ( props ) => {
   return (
-    const [ingredientChoices, setIngredientChoices] = useState([]);
     <div className="topCard">
     <Link to={`recipe/${props.recId}`} onClick={() => {props.persistSearchData()}}>
     <div className="card card__wrapper">

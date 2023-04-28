@@ -384,6 +384,7 @@ export default function StartPage(props) {
                     missedIngredientCount={recipe.missedIngredientCount}
                     handleRecipeClick={props.handleRecipeClick}
                     persistSearchData={persistSearchData}
+                    ingredientChoices={ingredientChoices}
                   />
                 ))}
             </>
