@@ -9,6 +9,8 @@ import SearchSwitch from "../SearchSwitch/SearchSwitch";
 import NoResult from "../NoResult/NoResult";
 import ModalSaveAPIKey from "../ModalSaveAPIKey/ModalSaveAPIKey"
 import HaveCook from "../HaveCooked/HaveCooked";
+import Card from "../RecipeCard/Card";
+import CardMTVMH from "../RecipeCard/CardMTVMH";
 import { RecipeFrontST } from "../Interface/Interface";
 import { RecipeMTVMH } from "../Interface/Interface";
 import { useMediaQuery } from "../DropdownNav/DropdownNav";
@@ -330,30 +332,35 @@ export default function StartPage(props) {
         setStandardSearch={setStandardSearch}
         getApiData={getApiData}
       />
-        <Sort onSortChange={handleSortChange} />
+        
       <br />
-      <div className="matches">
+      <div className="d-flex justify-content-evenly match-and-sort">
+          <div className="matches">
           <p>matches&nbsp;&nbsp;&nbsp;<span className="matches-parentes">({countMatches()})</span></p>
-        </div>
-
+          </div>
+          <div className="sorting"><Sort onSortChange={handleSortChange} /></div>
+      </div>
+      
+        
         <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
-          {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
+          
+        {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
             <>
               {recipesST.length > 0 &&
                 recipesST.map((recipe) => (
-                  <TmpCard
-                    key={recipe.id}
-                    recId={recipe.id}
-                    imgSrc={recipe.image}
-                    recipeTitle={recipe.title}
-                    readyInMin={recipe.readyInMinutes}
-                    handleRecipeClick={props.handleRecipeClick}
-                    persistSearchData={persistSearchData}
-                  />
+                  <Card 
+                    key={recipe.id} 
+                    recId={recipe.id} 
+                    imgSrc={recipe.image} 
+                    recipeTitle={recipe.title} 
+                    readyInMin={recipe.readyInMinutes} 
+                    handleRecipeClick={props.handleRecipeClick} 
+                    persistSearchData={persistSearchData}>                          
+                  </Card>                  
                 ))}
               {recipesMTVMH.length > 0 &&
                 recipesMTVMH.map((recipe) => (
-                  <TmpCardMTVMH
+                  <CardMTVMH
                     key={recipe.id}
                     recId={recipe.id}
                     imgSrc={recipe.image}
