@@ -38,7 +38,7 @@ const ShowSplashFirstSession = () => {
     setShowSplash(false);
     sessionStorage.setItem("showSplash", "false");
   };
-
+//Here we can set when the splash page will show.
   if (showSplash && window.innerWidth <= 768) {
 //@ts-ignore
     return <SplashPage closeSplash={closeSplash} />
