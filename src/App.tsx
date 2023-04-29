@@ -8,16 +8,6 @@ import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
 import { SplashPage } from "./components/SplashPage/SplashPage";
 
-//I needed to add this to have the logic for the SplashPage and the Page behind it.
-const MainPage = () => {
-  return (
-    <>
-      <StartPage />
-      <Footer />
-    </>
-  );
-};
-
 //Now I just need to add the fade out animation to the splash page.
 const ShowSplashFirstSession = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -30,7 +20,7 @@ const ShowSplashFirstSession = () => {
       setTimeout(() => {
         setShowSplash(false);
         sessionStorage.setItem("showSplash", "false");
-      }, 1500);
+      }, 2000);
     }
   }, []);
 
@@ -38,13 +28,24 @@ const ShowSplashFirstSession = () => {
     setShowSplash(false);
     sessionStorage.setItem("showSplash", "false");
   };
-//Here we can set when the splash page will show.
+//Here we can set when the splash page will show. Now it shows is sceenwidth is less than 768px.
   if (showSplash && window.innerWidth <= 768) {
 //@ts-ignore
-    return <SplashPage closeSplash={closeSplash} />
+    return (
+    <>
+    <div className="fade-out">
+      <SplashPage closeSplash={closeSplash} />
+    </div>
+    </>
+    )
   } 
   else {
-    return <MainPage />;
+    return (
+      <>
+        <StartPage />
+        <Footer />
+      </>
+    );
   }
 };
 
