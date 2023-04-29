@@ -34,7 +34,7 @@ const ShowSplashFirstSession = () => {
 //The fade out is an animation to purple. Not to a page behind.
     return (
     <>
-    <div className="fade-out">
+    <div className="splash-front">
       <SplashPage closeSplash={closeSplash} />
     </div>
     </>
@@ -44,7 +44,9 @@ const ShowSplashFirstSession = () => {
     return (
       <>
         <StartPage />
-        <Footer />
+        <div className='footer'>
+          <Footer />
+          </div>
       </>
     );
   }
