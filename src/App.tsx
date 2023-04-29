@@ -8,7 +8,7 @@ import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
 import { SplashPage } from "./components/SplashPage/SplashPage";
 
-//Now I just need to add the fade out animation to the splash page.
+
 const ShowSplashFirstSession = () => {
   const [showSplash, setShowSplash] = useState(true);
 
@@ -31,6 +31,7 @@ const ShowSplashFirstSession = () => {
 //Here we can set when the splash page will show. Now it shows is sceenwidth is less than 768px.
   if (showSplash && window.innerWidth <= 768) {
 //@ts-ignore
+//The fade out is an animation to purple. Not to a page behind.
     return (
     <>
     <div className="fade-out">
