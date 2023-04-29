@@ -1,11 +1,12 @@
 @font-face{
   font-family: "Avengeance";
   src: local("AvengeanceHeroicAvenger"), url("./fonts/AVENGEANCE/AVENGEANCE HEROIC AVENGER.ttf") format("truetype");
+  unicode-range: U+0020-007E;
 }
 
 body{
   background-color: var(--accentcolourpurple);
-  font-family: "Avengeance";
+  font-family: 'Avengeance', 'Varela', sans-serif;
 }
 
 :root {
