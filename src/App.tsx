@@ -5,6 +5,7 @@ import StartPage from "./pages/StartPage/StartPage";
 import { RecipePage } from "./pages/RecipePage/RecipePage";
 import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
+import { SplashPage } from "./components/SplashPage/SplashPage";
 
 
 //This is the router for the app. It is not used yet, but will be used in the future.
@@ -13,9 +14,12 @@ export const Router = createBrowserRouter([
     path: "/",
     element: (
       <>
-        <StartPage />
-        <Footer />
+      <SplashPage />
       </>
+      // <>
+      //   <StartPage />
+      //   <Footer />
+      // </>
     ),
   },
   {

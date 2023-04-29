@@ -1,0 +1,32 @@
+@import url('../../index.css');
+
+
+.splash-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--accentcolourred);
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .splash-image img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    padding: 4rem;
+    padding-bottom: 2rem;
+
+  }
+  
+  .splash-text {
+    font-family: var(--heading-font);
+    color: var(--accentcolouryellow);
+    font-size: 3.7rem;
+    -webkit-text-stroke: 1.5px black; /* width and color */
+    margin-top: 0.5rem;
+    transform: rotate(-10deg);
+  }
+  
+  
