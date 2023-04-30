@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
-import NavigationBar from "../NavigationBar/NavigationBar";
-import SideBar from "../SideBar/SideBar";
-import TmpCard from "../TmpCard/TmpCard";
-import TmpCardMTVMH from "../TmpCard/TmpCardMTVMH";
-import SearchBar from "../SearchBar/SearchBar";
-import SearchBarFreeText from "../SearchBar/SearchBarFreeText";
-import SearchSwitch from "../SearchSwitch/SearchSwitch";
-import NoResult from "../NoResult/NoResult";
-import ModalSaveAPIKey from "../ModalSaveAPIKey/ModalSaveAPIKey";
-import HaveCook from "../HaveCooked/HaveCooked";
-import Card from "../RecipeCard/Card";
-import CardMTVMH from "../RecipeCard/CardMTVMH";
-import { RecipeFrontST } from "../Interface/Interface";
-import { RecipeMTVMH } from "../Interface/Interface";
-import { useMediaQuery } from "../DropdownNav/DropdownNav";
-import { useBackButtonStore } from "../Stores/backButtonClick";
-import { useApiCheckerStore } from "../Stores/checkIfApiExists";
+import NavigationBar from "../../components/NavigationBar/NavigationBar";
+import SideBar from "../../components/SideBar/SideBar";
+import TmpCard from "../../components/TmpCard/TmpCard";
+import TmpCardMTVMH from "../../components/TmpCard/TmpCardMTVMH";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import SearchBarFreeText from "../../components/SearchBar/SearchBarFreeText";
+import SearchSwitch from "../../components/SearchSwitch/SearchSwitch";
+import NoResult from "../../components/NoResult/NoResult";
+import ModalSaveAPIKey from "../../components/ModalSaveAPIKey/ModalSaveAPIKey";
+import HaveCook from "../../components/HaveCooked/HaveCooked";
+import Card from "../../components/RecipeCard/Card";
+import CardMTVMH from "../../components/RecipeCard/CardMTVMH";
+import { RecipeFrontST } from "../../components/Interface/Interface";
+import { RecipeMTVMH } from "../../components/Interface/Interface";
+import { useMediaQuery } from "../../components/DropdownNav/DropdownNav";
+import { useBackButtonStore } from "../../components/Stores/backButtonClick";
+import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
 
 import "./StartPage.css";
-import Sort from "../Sort/Sort";
+import Sort from "../../components/Sort/Sort";
 
 //@ts-ignore
 export default function StartPage(props) {
