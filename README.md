@@ -3,6 +3,7 @@
 ## Mighty Meals
 
 Want to spend quality time with your kids while cooking together? Need inspiration for what to make? Maybe you’d like to see what you can cook with the ingredients you have at hand? Then this is the app for you!
+
 Mighty Meals is a recipe app with superhero theme specifically aimed for adults cooking with children, but can be used by any superhero fan, or just anyone who would love a fantastic food app that is unlike any other. 
 We hope you have a marvelous time cooking with us! 
 
@@ -21,7 +22,7 @@ Click the `switch` button next to the menu in the top right corner to switch bet
 
 ## Features
 
-- Here we can add the features (at a later stage) that make our app unique.
+- At a later stage we can add the features that make our app unique.
 
 ## How to run:
 
