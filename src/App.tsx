@@ -31,7 +31,6 @@ const ShowSplashFirstSession = () => {
 //Here we can set when the splash page will show. Now it shows is sceenwidth is less than 768px.
   if (showSplash && window.innerWidth <= 768) {
 //@ts-ignore
-//The fade out is an animation to purple. Not to a page behind.
     return (
     <>
     <div className="splash-front">
