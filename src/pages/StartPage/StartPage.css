@@ -1,48 +1,67 @@
-
-.cardArea-styling{
+.cardArea-styling {
     max-width: 1000px;
     flex-direction: row;
     align-self: center;
     justify-content: space-between;
 }
 
- /*d-flex flex-wrap justify-content-start align-self-center */
-.matches{
+/*d-flex flex-wrap justify-content-start align-self-center */
+.matches {
     width: 100px;
     height: 30px;
     background-color: #eda037;
-    border:3px solid black;
+    border: 3px solid black;
     border-radius: 10px;
     text-align: left;
     text-indent: 5px;
     color: black;
 }
-.matches-parentes{
+
+.matches-parentes {
     font-family: "Varela";
     font-weight: bold;
     color: black;
 }
 
-.match-and-sort{
+.match-and-sort {
     justify-content: space-around;
 }
-  
-@media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
-.cardArea-styling{
-    width: 350px;
+
+.show-more-button-container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 50px;
 }
-.matches{
-    margin-left: 43px;
-    margin-bottom: 5px;
+
+.show-more-button {
+    background-color: #eda037;
+    border: 3px solid black;
+    border-radius: 10px;
+    text-indent: 5px;
+    color: black;
+    padding: 8px 4px 0px;
+    width: 140px;
+    text-align: center;
 }
-  
-#switch-content{
-    position: absolute;
-    /* background-color: #7c5fb4;
+
+@media screen and (max-width: 900px) and (max-height: 450px),
+screen and (max-width: 450px) and (max-height: 900px) {
+    .cardArea-styling {
+        width: 350px;
+    }
+
+    .matches {
+        margin-left: 43px;
+        margin-bottom: 5px;
+    }
+
+    #switch-content {
+        position: absolute;
+        /* background-color: #7c5fb4;
     width: 100vw; */
-  
-    top: 0px;
-    left: 10px;
-    padding-top: 3px;
-}
+
+        top: 0px;
+        left: 10px;
+        padding-top: 3px;
+    }
 }

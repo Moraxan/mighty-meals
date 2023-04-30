@@ -93,6 +93,9 @@ export default function StartPage(props) {
   const ranking: number = persistedSettings.storedRanking; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
   const ignorePantry: boolean = persistedSettings.storedIgnorePantry; //Whether to ignore typical pantry items, such as water, salt, flour, etc.
 
+  // State for pagination
+  const [offset, setOffset] = useState(0);
+
   //useEffect hook that renders when the page load/reload.
   useEffect(() => {
     //If only by render and no backbutton click random recipes are fetched.
@@ -161,12 +164,12 @@ export default function StartPage(props) {
         intoleranceChoices
       )}&diet=${createURIString(
         dietChoices
-      )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}&sort=${sortedBy}`;
+      )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}&sort=${sortedBy}&offset=${offset}`;
       try {
         const response = await fetch(encodeURI(url));
         const result = await response.json();
-
-        createCards(result.results);
+        setOffset(offset + result.number)
+        createCards([...recipesST, ...result.results]);
       } catch (e) {
         console.log(e);
       }
@@ -180,7 +183,6 @@ export default function StartPage(props) {
         try {
           const response = await fetch(encodeURI(url));
           const result = await response.json();
-
           createCards(result);
         } catch (e) {
           console.log(e);
@@ -280,6 +282,10 @@ export default function StartPage(props) {
   const matches = useMediaQuery(
     "screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)"
   );
+
+  useEffect(() => {
+    setOffset(0);
+  }, [mealChoice, cuisineChoices, ingredientChoices, intoleranceChoices, dietChoices, freeTextSearch, maxHits, addRecipeNutrition, sortedBy])
 
   return (
     <>
@@ -395,6 +401,8 @@ export default function StartPage(props) {
             <NoResult />
           )}
         </div>
+
+        {standardSearch && recipesST.length ? <div className="show-more-button-container"> <button onClick={getApiData} className="show-more-button"><span>SHOW &nbsp; MORE</span></button> </div> : null}
       </div>
     </>
   );
