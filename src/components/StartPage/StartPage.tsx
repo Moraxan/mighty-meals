@@ -349,7 +349,9 @@ export default function StartPage(props) {
         />
 
         <br />
-        <div className="d-flex justify-content-evenly match-and-sort">
+
+      <div className="d-flex flex-column align-self-center justify-content-evenly">
+        <div className="d-flex justify-content-between match-and-sort">
           <div className="matches">
             <p>
               matches&nbsp;&nbsp;&nbsp;
@@ -360,8 +362,7 @@ export default function StartPage(props) {
             <Sort sortedBy={sortedBy} setSortedBy={setSortedBy} />
           </div>
         </div>
-
-        <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
+          <div className="d-flex flex-wrap justify-content-center cardArea-styling">
           {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
             <>
               {recipesST.length > 0 &&
@@ -395,6 +396,7 @@ export default function StartPage(props) {
             <NoResult />
           )}
         </div>
+      </div>
       </div>
     </>
   );

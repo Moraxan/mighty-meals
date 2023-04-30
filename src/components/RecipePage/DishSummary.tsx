@@ -18,15 +18,23 @@ function TruncateString(string: string, numberOfSentences: number) {
   return editedString.slice(0, indexes[numberOfSentences-1]);
 }
 
+
+
 export function DishSummary(props){
   const summary: string = props.recipeData.summary;
-  
+  function removeSymbolsFromString(){
+    const title = props.recipeData.title
+    var regex = /[^A-Za-z0-9\s\&\-\']/g;
+    var editedString = title.replace(regex, "");
+    return editedString;
+
+  }
   return(
     
     <div className="dish-summary-container">
     <div className="title-time">
         <div>
-          <h2 className="recipe-title"><span>{props.recipeData.title}</span></h2>
+          <h2 className="recipe-title"><span>{removeSymbolsFromString().toLowerCase()}</span></h2>
         </div>
         <div>
           <h2 className="recipe-time"><span><img className="time" alt="time" src={clock} />{props.recipeData.readyInMinutes} min</span></h2>

@@ -1,12 +1,13 @@
 
 .cardArea-styling{
-    max-width: 1000px;
+    max-width: 980px;
     flex-direction: row;
     align-self: center;
     justify-content: space-between;
+    row-gap: 10px;
+    column-gap: 10px;
 }
 
- /*d-flex flex-wrap justify-content-start align-self-center */
 .matches{
     width: 100px;
     height: 30px;
@@ -24,25 +25,30 @@
 }
 
 .match-and-sort{
+    max-width: 980px;
     justify-content: space-around;
 }
-  
+@media screen and (max-width: 987px)and (min-height: 450px){    
+    .cardArea-styling{
+        width: 650px;
+    }
+}
+
 @media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
 .cardArea-styling{
-    width: 350px;
+    width: 320px;
 }
-.matches{
-    margin-left: 43px;
-    margin-bottom: 5px;
-}
-  
 #switch-content{
     position: absolute;
     /* background-color: #7c5fb4;
     width: 100vw; */
   
-    top: 0px;
-    left: 10px;
+    top: 32px;
+    left: 35px;
+    
     padding-top: 3px;
+}
+.matches{
+    margin-left: 100px;
 }
 }
