@@ -37,6 +37,12 @@ const ShowSplashFirstSession = () => {
     <div className="splash-front">
       <SplashPage closeSplash={closeSplash} />
     </div>
+    <div className="splash-behind">
+        <StartPage />
+        <div className='footer'>
+        <Footer />
+        </div>
+    </div>
     </>
     )
   } 
