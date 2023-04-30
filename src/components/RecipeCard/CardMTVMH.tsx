@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./card.css";
 import {Link} from 'react-router-dom';
 
@@ -11,12 +12,12 @@ const CardMTVMH = ( props ) => {
 
       <div className="card__container">
         <div className="card__pill card__title">
-          <p className="card__title-text">{props.recipeTitle}</p>
+          <p className="card__title-text">{props.recipeTitle.length < 36 ? props.recipeTitle.toLowerCase() : props.recipeTitle.substring(0, 35).toLowerCase() + "..."}</p>
         </div>
         <div>
           <div className="card__pill card__time">            
             <p className="ingredients">                        
-              <span>matching ingredients: {props.usedIngredientCount}</span>
+              <span>matching ingredients: {props.usedIngredientCount}/{props.ingredientChoices.length}</span>
             </p>
           </div>
         </div>
