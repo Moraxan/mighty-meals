@@ -93,9 +93,6 @@ export default function StartPage(props) {
   const ranking: number = persistedSettings.storedRanking; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
   const ignorePantry: boolean = persistedSettings.storedIgnorePantry; //Whether to ignore typical pantry items, such as water, salt, flour, etc.
 
-  // State for pagination
-  const [offset, setOffset] = useState(0);
-
   //useEffect hook that renders when the page load/reload.
   useEffect(() => {
     //If only by render and no backbutton click random recipes are fetched.
@@ -151,10 +148,9 @@ export default function StartPage(props) {
     }
   }, []);
 
-  async function getApiData() {
+  async function getApiData(isMore: boolean = false) {
     // Function that fetches / GET data back from the API.
     // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
-
     if (standardSearch === true) {
       const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&type=${mealChoice}&cuisine=${createURIString(
         cuisineChoices
@@ -164,12 +160,11 @@ export default function StartPage(props) {
         intoleranceChoices
       )}&diet=${createURIString(
         dietChoices
-      )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}&sort=${sortedBy}&offset=${offset}`;
+      )}&query=${freeTextSearch}&number=${isMore ? 50 : maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}&sort=${sortedBy}`;
       try {
         const response = await fetch(encodeURI(url));
         const result = await response.json();
-        setOffset(offset + result.number)
-        createCards([...recipesST, ...result.results]);
+        createCards(result.results);
       } catch (e) {
         console.log(e);
       }
@@ -178,7 +173,7 @@ export default function StartPage(props) {
       if (ingredientChoices.length > 0) {
         const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(
           ingredientChoices
-        )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
+        )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${isMore ? 50 : maxHits}`;
 
         try {
           const response = await fetch(encodeURI(url));
@@ -282,10 +277,6 @@ export default function StartPage(props) {
   const matches = useMediaQuery(
     "screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)"
   );
-
-  useEffect(() => {
-    setOffset(0);
-  }, [mealChoice, cuisineChoices, ingredientChoices, intoleranceChoices, dietChoices, freeTextSearch, maxHits, addRecipeNutrition, sortedBy])
 
   return (
     <>
@@ -402,7 +393,7 @@ export default function StartPage(props) {
           )}
         </div>
 
-        {standardSearch && recipesST.length ? <div className="show-more-button-container"> <button onClick={getApiData} className="show-more-button"><span>SHOW &nbsp; MORE</span></button> </div> : null}
+        {recipesST.length < 7 && recipesMTVMH.length < 7 ? <div className="show-more-button-container"> <button onClick={() => getApiData(true)} className="show-more-button"><span>SHOW &nbsp; MORE</span></button> </div> : null}
       </div>
     </>
   );
