@@ -22,7 +22,7 @@ const Card = ( props ) => {
 
       <div className="card__container">
         <div className="card__pill card__title">
-          <p className="card__title-text">{removeSymbolsFromString().length < 36 ? props.recipeTitle.toLowerCase() : props.recipeTitle.substring(0, 35).toLowerCase() + "..."}</p>
+          <p className="card__title-text">{removeSymbolsFromString().length < 36 ? removeSymbolsFromString().toLowerCase() : removeSymbolsFromString().substring(0, 35).toLowerCase() + "..."}</p>
         </div>
         <div>
           <div className="card__pill card__time">
