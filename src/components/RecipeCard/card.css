@@ -1,23 +1,13 @@
-@import url('../../index.css');
-
-  .card {
-    
-    --card-bg-color: var(--accentcolouryellow);
-    --color-black: #000000;
-    height: 14rem;
-    
-  }
-  
+@import url('../../index.css'); 
   .card__wrapper {
-    border-radius: 0.5rem;
-    border: 3px solid var(--color-black);
+    border:3px solid black;
+    border-radius: 10px;
     position: relative;
     display: flex;
     overflow: hidden;
-    /* This is something temporary to force to a small width */
     max-width: 320px;
   }
-  
+
   .card__bg-image {
     object-fit:cover;
     width: 100%;
@@ -33,18 +23,17 @@
   }
   
   .card__pill {
-    background-color: var(--card-bg-color);
+    background-color: var(--accentcolouryellow);
     border-radius: 100vmax;
     padding: 0.5rem;
     width: fit-content;
     max-width: 300px;
     margin: .25rem;
-    border: 1px solid var(--color-black);
+    border: 1px solid black;
     opacity: 0.9;
   }
   
   .card__title {
-    max-width: 95%;
     position: relative;
   }
   
@@ -55,21 +44,18 @@
     height: 2rem;
     width: 2rem;
     top: 100%;
-    right: 1rem;
-    
-    clip-path: polygon(10% 0, 0 100%, 100% 0);
-    
+    right: 1rem;    
+    clip-path: polygon(10% 0, 0 100%, 100% 0);    
   }
   
   .card__title::before {
-    background: var(--card-bg-color);
+    background: var(--accentcolouryellow);
     margin-right: 1px;
-    z-index: 1;
-    
+    z-index: 1;    
   }
   
   .card__title::after {
-    background-color: var(--color-black);    
+    background-color: black;    
   }
   
   .card__title-text {
@@ -84,9 +70,9 @@
   
   .card__time {
     align-items: center;
-    padding: 0.25rem;
     display: flex;
     width: min-content;
+    height: 40px;
   }
   
   .ingredients{
@@ -102,12 +88,7 @@
     padding: 0.25rem;
     display: flex;
     width: 200px
-  }
-  
-  .card__time-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+  }  
   
   .card__time-text {    
     margin: 0;

@@ -350,7 +350,7 @@ export default function StartPage(props) {
 
         <br />
 
-      <div className="d-flex flex-column align-self-center justify-content-evenly">
+      <div className="d-flex flex-column align-self-center justify-content-evenly main-div">
         <div className="d-flex justify-content-between match-and-sort">
           <div className="matches">
             <p>
