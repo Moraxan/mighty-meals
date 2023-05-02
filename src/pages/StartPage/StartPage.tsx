@@ -357,9 +357,12 @@ export default function StartPage(props) {
               <span className="matches-parentes">({countMatches()})</span>
             </p>
           </div>
+
+          {standardSearch && 
           <div className="sorting">
             <Sort sortedBy={sortedBy} setSortedBy={setSortedBy} />
-          </div>
+          </div>}
+          
         </div>
           <div className="d-flex flex-wrap justify-content-center cardArea-styling">
 
