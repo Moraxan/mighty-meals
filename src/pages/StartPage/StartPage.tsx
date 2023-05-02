@@ -271,9 +271,7 @@ export default function StartPage(props) {
     }
   }
 
-  function handleSortChange(sortKey: string) {
-    setSortedBy(sortKey);
-  }
+
   // importing useMediaQuery function to make SearchSwith appear based on if condition is met or not.
   const matches = useMediaQuery(
     "screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)"

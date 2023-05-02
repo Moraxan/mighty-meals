@@ -1,4 +1,3 @@
-import React from "react";
 import "./NoResult.css";
 import noMatchImg from "../../images/no-matching-recipe.png";
 
