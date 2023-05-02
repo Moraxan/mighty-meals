@@ -1,5 +1,6 @@
-import { useState ,useEffect } from "react";
+import { useState } from "react";
 import "./SearchBar.css";
+import { staticIngredientList } from "./commonIngredients";
 import filterLogo from '../../images/filter.png'
 import searchLogo from '../../images/search.png'
 
@@ -13,20 +14,10 @@ export default function SearchBar(props){
     const [filteredData, setFilteredData] = useState(emptyStringArr);
 
     // content from .csv is parsed into here.
-    const [ingredientArray, setIngredientArray] = useState(emptyStringArr);
+    const ingredientArray = staticIngredientList;
 
     // state for searchbar text, use variable to clear upon ingredient selection.
     const [searchText, setSearchtext] = useState("");
-
-    // Similar to start page we use effect hook to read .csv file when component loads up.
-    useEffect(() => {
-        fetch("./src/components/SearchBar/commonIngredients.csv")
-          .then((response) => response.text())
-          .then((data) => {
-            const parsedIngredients: string[] = data.toLowerCase().split("\r\n");
-            setIngredientArray(parsedIngredients);
-        });
-    }, []);
 
         //@ts-ignore
         const handleChange = (event) => {

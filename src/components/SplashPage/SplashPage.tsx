@@ -1,7 +1,8 @@
 import './SplashPage.css';
 import Image from '../../images/logo.png'
 
-export const SplashPage = () => {
+//@ts-ignore
+export const SplashPage = (props) => {
 
     return (
         <div className="splash-page">

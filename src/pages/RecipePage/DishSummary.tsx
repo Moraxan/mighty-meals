@@ -18,7 +18,7 @@ function TruncateString(string: string, numberOfSentences: number) {
   return editedString.slice(0, indexes[numberOfSentences-1]);
 }
 
-
+//@ts-ignore
 export function DishSummary(props){
   const summary: string = props.recipeData.summary;
   function removeSymbolsFromString(){

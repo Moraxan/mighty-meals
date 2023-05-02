@@ -11,8 +11,8 @@ const Card = ( props ) => {
     var regex = /[^A-Za-z0-9\s\&\-\']/g;
     var editedString = title.replace(regex, "");
     return editedString;
-
   }
+
   return (
     
     <div>

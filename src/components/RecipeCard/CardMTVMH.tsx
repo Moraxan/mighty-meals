@@ -1,9 +1,17 @@
-import { useState } from "react";
 import "./card.css";
 import {Link} from 'react-router-dom';
+import alt_image from "../../images/alt_image.png";
 
 //@ts-ignore
 const CardMTVMH = ( props ) => {
+
+  function removeSymbolsFromString(){
+    const title = props.recipeTitle
+    var regex = /[^A-Za-z0-9\s\&\-\']/g;
+    var editedString = title.replace(regex, "");
+    return editedString;
+  }
+
   return (
     <div className="topCard">
     <Link to={`recipe/${props.recId}`} onClick={() => {props.persistSearchData()}}>
@@ -13,7 +21,7 @@ const CardMTVMH = ( props ) => {
 
       <div className="card__container">
         <div className="card-title-background">
-          <p className="card-title-text">{props.recipeTitle.length < 36 ? props.recipeTitle.toLowerCase() : props.recipeTitle.substring(0, 35).toLowerCase() + "..."}</p>
+          <p className="card-title-text">{removeSymbolsFromString().length < 36 ? removeSymbolsFromString().toLowerCase() : removeSymbolsFromString().substring(0, 35).toLowerCase() + "..."}</p>
         </div>
         <div>
           <div className="card__ingredients">            
