@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import NavigationBar from "../../components/NavigationBar/NavigationBar";
 import SideBar from "../../components/SideBar/SideBar";
-import TmpCard from "../../components/TmpCard/TmpCard";
-import TmpCardMTVMH from "../../components/TmpCard/TmpCardMTVMH";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import SearchBarFreeText from "../../components/SearchBar/SearchBarFreeText";
 import SearchSwitch from "../../components/SearchSwitch/SearchSwitch";
@@ -349,19 +347,25 @@ export default function StartPage(props) {
         />
 
         <br />
-        <div className="d-flex justify-content-evenly match-and-sort">
+
+      <div className="d-flex flex-column align-self-center justify-content-evenly main-div">
+        <div className="d-flex justify-content-between match-and-sort">
+
           <div className="matches">
             <p>
               matches&nbsp;&nbsp;&nbsp;
               <span className="matches-parentes">({countMatches()})</span>
             </p>
           </div>
+
+          {standardSearch && 
           <div className="sorting">
             <Sort sortedBy={sortedBy} setSortedBy={setSortedBy} />
-          </div>
+          </div>}
+          
         </div>
+          <div className="d-flex flex-wrap justify-content-center cardArea-styling">
 
-        <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
           {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
             <>
               {recipesST.length > 0 &&
@@ -396,6 +400,8 @@ export default function StartPage(props) {
           )}
         </div>
       </div>
+      </div>
+
     </>
   );
 }

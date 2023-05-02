@@ -1,22 +1,11 @@
-@import url('../../index.css');
-
-  .card {
-    --card-bg-color: var(--accentcolouryellow);
-    --color-black: #000000;
-    height: 14rem;
-    margin: 10px;
-  }
-  
+@import url('../../index.css'); 
   .card__wrapper {
-    border-radius: 0.5rem;
-    border: 3px solid var(--color-black);
-    position: relative;
-    display: flex;
+    border:3px solid black;
+    border-radius: 10px;
     overflow: hidden;
-    /* This is something temporary to force to a small width */
     max-width: 320px;
   }
-  
+
   .card__bg-image {
     object-fit:cover;
     width: 100%;
@@ -31,48 +20,18 @@
     justify-content: space-between;
   }
   
-  .card__pill {
-    background-color: var(--card-bg-color);
-    border-radius: 100vmax;
-    padding: 0.5rem;
-    margin: 0.25rem;
-    border: 1px solid var(--color-black);
-    opacity: 0.9;
+  .card-title-background {
+    background-image: url('../../images/foodcard-title-image.png');
+    width: 300px;
+    height: 95px;
+    padding: 0.5rem;    
+    max-width: 300px;
+    margin-left: 7px;
+    margin-top: 0.25rem;
   }
   
-  .card__title {
-    max-width: 95%;
-    position: relative;
-  }
-  
-  .card__title::before,
-  .card__title::after {
-    content: "";
-    position: absolute;
-    height: 2rem;
-    width: 2rem;
-    top: 100%;
-    right: 1rem;
-    
-    clip-path: polygon(10% 0, 0 100%, 100% 0);
-    
-  }
-  
-  .card__title::before {
-    background: var(--card-bg-color);
-    margin-right: 1px;
-    z-index: 1;
-    
-  }
-  
-  .card__title::after {
-    background-color: var(--color-black);    
-  }
-  
-  .card__title-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow:clip;
+  .card-title-text {
+    padding-top: 2px;
     margin: 0;
     color: black;
     font: var(--recipecard-title-font);
@@ -80,38 +39,49 @@
   
   .card__time {
     align-items: center;
-    padding: 0.25rem;
     display: flex;
-    width: min-content;
+    width: 110px;
+    height: 45px;
+    margin-left: 7px;
+    margin-bottom: 0.25rem;
+    padding: 0.5rem;
+    background-color: var(--accentcolouryellow);
+    border:3px solid rgba(0, 0, 0, 0.9);
+    border-radius: 23px;
+    opacity: 0.9;
   }
-  .ingredients{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow:clip;
-    margin: 0;
-    color: black;
-    font: var(--recipecard-title-font);
+  
+.card__ingredients{
+    background-color: var(--accentcolouryellow);
+    border:3px solid rgba(0, 0, 0, 0.9);
+    border-radius: 23px;
+    width: 200px;
+    height: 35px;
+    opacity: 0.9;
+    padding-top: 2px;
+    margin-left: 7px;
+    margin-bottom: 0.25rem;
+}
 
+.ingredients{
+  color: black;
+  font: var(--recipecard-title-font);
+} 
 
-    align-items: center;
-    padding: 0.25rem;
-    display: flex;
-    width: 200px
-  }
-  
-  .card__time-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  
-  .card__time-text {    
-    margin: 0;
-    padding: 0 0.25rem;
+.divider{
+  font-family: "Varela";
+    font-weight: bold;
     color: black;
-    font: var(--recipecard-title-font);
-  }
+}
+
+.card__time-text {    
+  margin: 0;
+  padding: 0 0.25rem;
+  color: black;
+  font: var(--recipecard-title-font);
+}
   
-  .card__time-text span {
-    padding-left: 0.125rem;
-  }
+.card__time-text span {
+  padding-left: 0.125rem;
+}
   
