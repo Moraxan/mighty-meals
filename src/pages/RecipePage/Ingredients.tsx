@@ -12,6 +12,7 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
   const ingredientNames = ingredients.map((ingredient: any) => ingredient.originalName);
 
   useEffect(() => {
+    
     const amounts = ingredients.map((ingredient: any) => {
       return ingredient.measures.metric.amount;
     });
@@ -41,14 +42,15 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
       <div className="ingredients-box">ingredients</div>
       <div className="ingredients-list">
         <ul>
-          {ingredients.map((ingredient: any, index: number) => {
+          {ingredientAmounts.map((amount: number, index: number) => {
+            let calculatedAmount = (amount * servings) / noOfServings;
+            if (calculatedAmount < 0.1){
+              calculatedAmount = 0.1;
+            }
             return (
               <li key={index}>
                 <strong>
-                  {/* if amount contains decimal value then display decimal, otherwise display without decimal*/}
-                {ingredientAmounts[index] % 1 !== 0
-                  ? ((ingredientAmounts[index] * servings) / noOfServings).toFixed(1)
-                  : (ingredientAmounts[index] * servings) / noOfServings}
+                  {calculatedAmount % 1 !== 0 ? calculatedAmount.toFixed(1) : calculatedAmount}
                 </strong>
                 {" "}
                 {ingredientUnits[index]}
@@ -67,7 +69,7 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
             onClick={() => handleDecreaseButtonClick()}
           />
         </button>
-        {servings == 1 ? <p>{servings} serving</p> : <p>{servings} servings</p>}
+        {servings === 1 ? <p>{servings} serving</p> : <p>{servings} servings</p>}
         <button className="increase-btn">
           <img
             src={increaseBtn}
