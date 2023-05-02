@@ -21,12 +21,13 @@ const Card = ( props ) => {
       <img className="card__bg-image" src={props.imgSrc} alt="" />
 
       <div className="card__container">
-        <div className="card__pill card__title">
-          <p className="card__title-text">{removeSymbolsFromString().length < 36 ? removeSymbolsFromString().toLowerCase() : removeSymbolsFromString().substring(0, 35).toLowerCase() + "..."}</p>
+        <div className="card-title-background">
+          <p className="card-title-text">{removeSymbolsFromString().length < 36 ? removeSymbolsFromString().toLowerCase() : removeSymbolsFromString().substring(0, 35).toLowerCase() + "..."}</p>
         </div>
+        
         <div>
-          <div className="card__pill card__time">
-          <img className="time" alt="time" src={clock} />
+          <div className="card__time">
+            <img className="time" alt="time" src={clock} />
             <p className="card__time-text">
               {props.readyInMin}
               <span>min</span>

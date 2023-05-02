@@ -2,8 +2,6 @@
   .card__wrapper {
     border:3px solid black;
     border-radius: 10px;
-    position: relative;
-    display: flex;
     overflow: hidden;
     max-width: 320px;
   }
@@ -22,47 +20,18 @@
     justify-content: space-between;
   }
   
-  .card__pill {
-    background-color: var(--accentcolouryellow);
-    border-radius: 100vmax;
-    padding: 0.5rem;
-    width: fit-content;
+  .card-title-background {
+    background-image: url('../../images/foodcard-title-image.png');
+    width: 300px;
+    height: 95px;
+    padding: 0.5rem;    
     max-width: 300px;
-    margin: .25rem;
-    border: 1px solid black;
-    opacity: 0.9;
+    margin-left: 7px;
+    margin-top: 0.25rem;
   }
   
-  .card__title {
-    position: relative;
-  }
-  
-  .card__title::before,
-  .card__title::after {
-    content: "";
-    position: absolute;
-    height: 2rem;
-    width: 2rem;
-    top: 100%;
-    right: 1rem;    
-    clip-path: polygon(10% 0, 0 100%, 100% 0);    
-  }
-  
-  .card__title::before {
-    background: var(--accentcolouryellow);
-    margin-right: 1px;
-    z-index: 1;    
-  }
-  
-  .card__title::after {
-    background-color: black;    
-  }
-  
-  .card__title-text {
-    white-space: nowrap;
-    overflow:hidden;
-    text-overflow:clip;
-    padding-right: 5px;
+  .card-title-text {
+    padding-top: 2px;
     margin: 0;
     color: black;
     font: var(--recipecard-title-font);
@@ -71,33 +40,48 @@
   .card__time {
     align-items: center;
     display: flex;
-    width: min-content;
-    height: 40px;
+    width: 110px;
+    height: 45px;
+    margin-left: 7px;
+    margin-bottom: 0.25rem;
+    padding: 0.5rem;
+    background-color: var(--accentcolouryellow);
+    border:3px solid rgba(0, 0, 0, 0.9);
+    border-radius: 23px;
+    opacity: 0.9;
   }
   
-  .ingredients{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow:clip;
-    margin: 0;
-    color: black;
-    font: var(--recipecard-title-font);
+.card__ingredients{
+    background-color: var(--accentcolouryellow);
+    border:3px solid rgba(0, 0, 0, 0.9);
+    border-radius: 23px;
+    width: 200px;
+    height: 35px;
+    opacity: 0.9;
+    padding-top: 2px;
+    margin-left: 7px;
+    margin-bottom: 0.25rem;
+}
 
+.ingredients{
+  color: black;
+  font: var(--recipecard-title-font);
+} 
 
-    align-items: center;
-    padding: 0.25rem;
-    display: flex;
-    width: 200px
-  }  
-  
-  .card__time-text {    
-    margin: 0;
-    padding: 0 0.25rem;
+.divider{
+  font-family: "Varela";
+    font-weight: bold;
     color: black;
-    font: var(--recipecard-title-font);
-  }
+}
+
+.card__time-text {    
+  margin: 0;
+  padding: 0 0.25rem;
+  color: black;
+  font: var(--recipecard-title-font);
+}
   
-  .card__time-text span {
-    padding-left: 0.125rem;
-  }
+.card__time-text span {
+  padding-left: 0.125rem;
+}
   

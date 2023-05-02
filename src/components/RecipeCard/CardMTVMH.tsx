@@ -11,13 +11,13 @@ const CardMTVMH = ( props ) => {
       <img className="card__bg-image" src={props.imgSrc} alt="" />
 
       <div className="card__container">
-        <div className="card__pill card__title">
-          <p className="card__title-text">{props.recipeTitle.length < 36 ? props.recipeTitle.toLowerCase() : props.recipeTitle.substring(0, 35).toLowerCase() + "..."}</p>
+        <div className="card-title-background">
+          <p className="card-title-text">{props.recipeTitle.length < 36 ? props.recipeTitle.toLowerCase() : props.recipeTitle.substring(0, 35).toLowerCase() + "..."}</p>
         </div>
         <div>
-          <div className="card__pill card__time">            
+          <div className="card__ingredients">            
             <p className="ingredients">                        
-              <span>matching ingredients: {props.usedIngredientCount}/{props.ingredientChoices.length}</span>
+              <span>matching ingredients:&nbsp;&nbsp;{props.usedIngredientCount}<span className="divider">&nbsp;/</span>{props.ingredientChoices.length}</span>
             </p>
           </div>
         </div>
