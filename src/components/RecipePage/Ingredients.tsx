@@ -67,7 +67,7 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
             onClick={() => handleDecreaseButtonClick()}
           />
         </button>
-        <p>{servings} servings</p>
+        {servings == 1 ? <p>{servings} serving</p> : <p>{servings} servings</p>}
         <button className="increase-btn">
           <img
             src={increaseBtn}
