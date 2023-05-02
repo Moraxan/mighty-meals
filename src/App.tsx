@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Footer from "./components/Footer/Footer";
@@ -5,16 +6,68 @@ import StartPage from "./pages/StartPage/StartPage";
 import { RecipePage } from "./pages/RecipePage/RecipePage";
 import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
+import { SplashPage } from "./components/SplashPage/SplashPage";
 
 
-//This is the router for the app. It is not used yet, but will be used in the future.
+const ShowSplashFirstSession = () => {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const showSplash = sessionStorage.getItem("showSplash");
+    if (showSplash === "false") {
+      setShowSplash(false);
+    } else {
+      setTimeout(() => {
+        setShowSplash(false);
+        sessionStorage.setItem("showSplash", "false");
+      }, 2000);
+    }
+  }, []);
+
+  const closeSplash = () => {
+    setShowSplash(false);
+    sessionStorage.setItem("showSplash", "false");
+  };
+//Here we can set when the splash page will show. Now it shows is sceenwidth is less than 768px.
+  if (showSplash && window.innerWidth <= 768) {
+//@ts-ignore
+    return (
+    <>
+    <div className="splash-front">
+      <SplashPage closeSplash={closeSplash} />
+    </div>
+    <div className="splash-behind">
+        <StartPage />
+        <div className='footer'>
+        <Footer />
+        </div>
+    </div>
+    </>
+    )
+  } 
+  else {
+    return (
+      <>
+        <StartPage />
+        <div className='footer'>
+          <Footer />
+          </div>
+      </>
+    );
+  }
+};
+
+
+
+//This is the router for the app. 
 export const Router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        <StartPage />
-        <Footer />
+      <div className="splashPage">
+     <ShowSplashFirstSession />
+     </div>
       </>
     ),
   },

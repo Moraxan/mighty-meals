@@ -19,7 +19,6 @@ function TruncateString(string: string, numberOfSentences: number) {
 }
 
 
-
 export function DishSummary(props){
   const summary: string = props.recipeData.summary;
   function removeSymbolsFromString(){
@@ -29,12 +28,14 @@ export function DishSummary(props){
     return editedString;
 
   }
+
   return(
     
     <div className="dish-summary-container">
     <div className="title-time">
         <div>
           <h2 className="recipe-title"><span>{removeSymbolsFromString().toLowerCase()}</span></h2>
+
         </div>
         <div>
           <h2 className="recipe-time"><span><img className="time" alt="time" src={clock} />{props.recipeData.readyInMinutes} min</span></h2>

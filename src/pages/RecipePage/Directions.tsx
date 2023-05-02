@@ -5,8 +5,8 @@ import { useState } from "react";
 
 export const Directions = ({ directions }) => {
   const [directionsState, setDirectionsState] = useState(directions);
-//This part of the code checks if there are any directions available.
-//If they aren't, it will return a message saying that there are no directions available.
+
+//Checks if there are no directions available. Displays message to the user.
   if (!directionsState || directionsState.length === 0) {
     return (
       <div className="directions-container">
@@ -17,12 +17,19 @@ export const Directions = ({ directions }) => {
       </div>
     );
   }
-//This logic is needed to make the images clickable
+
+//This function handles the click on the image. If the image is checked, it will uncheck it. If it is unchecked, it will check it.
   const handleImageClick = (step) => {
     const newSteps = directionsState[0].steps.map((s) =>
-      s.number === step.number ? { ...s, checked: !s.checked } : s
+      s.number === step.number
+        ? {
+            ...s,
+            checked: !s.checked,
+//This is the code sets a truncated flag to the s.checked
+            truncated: s.checked ? false : true,
+          }
+        : s
     );
-
     setDirectionsState([{ ...directionsState[0], steps: newSteps }]);
   };
 
@@ -42,13 +49,16 @@ export const Directions = ({ directions }) => {
                 onClick={() => handleImageClick(step)}
                 className="directions-image"
               />
-              <span className={`step-text ${step.checked ? 'checked' : ''}`}>{step.step}</span>
+
+              <span className={`step-text ${step.checked ? 'checked' : ''}`}>
+{/* Here the text is truncated to 20 chars if the truncated flag is true */}
+                {step.truncated ? `${step.step.slice(0, 20)}...` : step.step}
+              </span>
             </button>
           </li>
         ))}
       </ul>
     </div>
   );
-  
-  
+
 };

@@ -14,6 +14,7 @@ import { RecipeMTVMH } from "../../components/Interface/Interface";
 import { useMediaQuery } from "../../components/DropdownNav/DropdownNav";
 import { useBackButtonStore } from "../../components/Stores/backButtonClick";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
+
 import "./StartPage.css";
 import Sort from "../../components/Sort/Sort";
 
@@ -349,6 +350,7 @@ export default function StartPage(props) {
 
       <div className="d-flex flex-column align-self-center justify-content-evenly main-div">
         <div className="d-flex justify-content-between match-and-sort">
+
           <div className="matches">
             <p>
               matches&nbsp;&nbsp;&nbsp;
@@ -360,6 +362,7 @@ export default function StartPage(props) {
           </div>
         </div>
           <div className="d-flex flex-wrap justify-content-center cardArea-styling">
+
           {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
             <>
               {recipesST.length > 0 &&
@@ -395,6 +398,7 @@ export default function StartPage(props) {
         </div>
       </div>
       </div>
+
     </>
   );
 }
