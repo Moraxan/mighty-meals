@@ -5,7 +5,7 @@ import { Ingredients } from './Ingredients';
 import { Directions } from './Directions';
 import { DishImage } from './DishImage';
 import {useLoaderData} from "react-router-dom";
-import {useBackButtonStore} from "../Stores/backButtonClick";
+import {useBackButtonStore} from "../../components/Stores/backButtonClick";
 import './RecipePage.css';
 
 //This function fetches the recipe data from the API and stores it in local storage
@@ -63,16 +63,18 @@ export const RecipePage = () => {
         <BackButton handleBackClick={handleBackClick} />
       </div>
       <div className="DishImage">
+          {/*//@ts-ignore*/}
           <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
       </div>
       <div className="Ingredients">
+          {/*//@ts-ignore*/}
           <Ingredients ingredients={recipeData?.extendedIngredients} noOfServings={recipeData?.servings} />
       </div>
       <div className="DishSummary">
           <DishSummary recipeData={recipeData} />
       </div>
       <div className="Directions">
-
+          {/*//@ts-ignore*/}
           <Directions directions={recipeData.analyzedInstructions} />
         </div>
       </div>

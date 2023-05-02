@@ -1,0 +1,87 @@
+@import url('../../index.css'); 
+  .card__wrapper {
+    border:3px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 320px;
+  }
+
+  .card__bg-image {
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .card__container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-title-background {
+    background-image: url('../../images/foodcard-title-image.png');
+    width: 300px;
+    height: 95px;
+    padding: 0.5rem;    
+    max-width: 300px;
+    margin-left: 7px;
+    margin-top: 0.25rem;
+  }
+  
+  .card-title-text {
+    padding-top: 2px;
+    margin: 0;
+    color: black;
+    font: var(--recipecard-title-font);
+  }
+  
+  .card__time {
+    align-items: center;
+    display: flex;
+    width: 110px;
+    height: 45px;
+    margin-left: 7px;
+    margin-bottom: 0.25rem;
+    padding: 0.5rem;
+    background-color: var(--accentcolouryellow);
+    border:3px solid rgba(0, 0, 0, 0.9);
+    border-radius: 23px;
+    opacity: 0.9;
+  }
+  
+.card__ingredients{
+    background-color: var(--accentcolouryellow);
+    border:3px solid rgba(0, 0, 0, 0.9);
+    border-radius: 23px;
+    width: 200px;
+    height: 35px;
+    opacity: 0.9;
+    padding-top: 2px;
+    margin-left: 7px;
+    margin-bottom: 0.25rem;
+}
+
+.ingredients{
+  color: black;
+  font: var(--recipecard-title-font);
+} 
+
+.divider{
+  font-family: "Varela";
+    font-weight: bold;
+    color: black;
+}
+
+.card__time-text {    
+  margin: 0;
+  padding: 0 0.25rem;
+  color: black;
+  font: var(--recipecard-title-font);
+}
+  
+.card__time-text span {
+  padding-left: 0.125rem;
+}
+  

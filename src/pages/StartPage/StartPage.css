@@ -1,0 +1,71 @@
+
+@import url('../../index.css');
+
+.main-div{
+    position: absolute;
+    top: 210px;
+}
+.cardArea-styling{
+    max-width: 980px;
+    flex-direction: row;
+    align-self: center;
+    justify-content: space-between;
+    row-gap: 10px;
+    column-gap: 10px;
+    margin-bottom: 50px;
+}
+
+.matches{
+    width: 100px;
+    height: 30px;  
+    background-color: var(--accentcolouryellow);
+
+    border:3px solid black;
+    border-radius: 10px;
+    text-align: left;
+    text-indent: 5px;
+    color: black;
+}
+.matches-parentes{
+    font-family: "Varela";
+    font-weight: bold;
+    color: black;
+}
+
+.match-and-sort{
+    max-width: 980px;
+    height: 30px;
+    margin-bottom: 10px;
+    justify-content: space-around;
+}
+@media screen and (max-width: 987px)and (min-height: 450px){    
+    .cardArea-styling{
+        width: 650px;
+    }
+}
+
+@media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
+.cardArea-styling{
+    width: 320px;
+    margin-bottom: 140px;
+}
+
+#switch-content{
+    position: absolute;
+    /* background-color: #7c5fb4;
+    width: 100vw; */
+  
+    top: 10px;
+    left: 35px;
+    
+    padding-top: 3px;
+    z-index: 1;
+}
+.matches{
+    margin-left: 100px;
+}
+.main-div{
+    top: 10px;
+
+}
+}
