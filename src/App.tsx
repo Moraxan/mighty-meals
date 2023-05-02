@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Footer from "./components/Footer/Footer";
-import StartPage from "./components/StartPage/StartPage";
-import { RecipePage } from "./components/RecipePage/RecipePage";
+import StartPage from "./pages/StartPage/StartPage";
+import { RecipePage } from "./pages/RecipePage/RecipePage";
 import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
 

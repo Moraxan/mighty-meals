@@ -5,7 +5,7 @@ import { Ingredients } from './Ingredients';
 import { Directions } from './Directions';
 import { DishImage } from './DishImage';
 import {useLoaderData} from "react-router-dom";
-import {useBackButtonStore} from "../Stores/backButtonClick";
+import {useBackButtonStore} from "../../components/Stores/backButtonClick";
 import './RecipePage.css';
 
 //This function fetches the recipe data from the API and stores it in local storage
