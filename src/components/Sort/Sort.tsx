@@ -11,11 +11,11 @@ export default function Sort(props) {
   return (
     <div className="sort-dropdown">
       <select className="select" value={props.sortedBy} onChange={handleSortChange}>
-        <option value="">Sort by:</option>
-        <option value="popularity">Popularity</option>
-        <option value="time">Prep Time</option>
-        <option value="price">Price</option>
-        <option value="calories">Calories</option>
+        <option value="">sort by:</option>
+        <option value="popularity">popularity</option>
+        <option value="time">prep time</option>
+        <option value="price">price</option>
+        <option value="calories">calories</option>
       </select>
     </div>
   );
