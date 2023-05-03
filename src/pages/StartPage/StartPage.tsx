@@ -427,7 +427,7 @@ export default function StartPage(props) {
           <div className="matches">
             <p>
               matches&nbsp;&nbsp;&nbsp;
-              <span className="matches-parentes">({countMatches()})</span>
+              <span className="matches-parentes">(<span className="match-number">{countMatches()}</span>&nbsp;)</span>
             </p>
           </div>
 
@@ -478,7 +478,7 @@ export default function StartPage(props) {
           )}
         </div>
 
-        {!matches && (recipesST.length > 7 || recipesMTVMH.length > 7) && !showMore && <div className="show-more-button-container"> <button onClick={() => setShowMore(true)} className="show-more-button"><span>SHOW &nbsp; MORE</span></button> </div>}
+        {!matches && (recipesST.length > 7 || recipesMTVMH.length > 7) && !showMore && <div className="show-more-button-container"> <button onClick={() => setShowMore(true)} className="show-more-button"><span>show &nbsp; more</span></button> </div>}
         
       </div>
       </div>
