@@ -64,6 +64,10 @@ export default function StartPage(props) {
   // State to shore more button 
   const [showMore, setShowMore] = useState<boolean>(false);
 
+  // variable to determine of no results or not.
+  const [noResultsReturned, setNoResultsReturned] = useState(false);
+
+
   // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
   //@ts-ignore
   const persistedSearchSettings = JSON.parse(sessionStorage.getItem("persisted-search-data"));
@@ -137,6 +141,7 @@ export default function StartPage(props) {
           .then((data) => {
             createCards(data.recipes);
           });
+
       } else {
         // Sample recipes to use instead of calling fetch method during development.
         const forTesting: RecipeFrontST[] = [
@@ -196,6 +201,13 @@ export default function StartPage(props) {
       try {
         const response = await fetch(encodeURI(url));
         const result = await response.json();
+
+        if(result.results.length < 1){
+          setNoResultsReturned(true);
+        } else{
+          setNoResultsReturned(false);
+        }
+        
         createCards(result.results);
       } catch (e) {
         console.log(e);
@@ -210,6 +222,13 @@ export default function StartPage(props) {
         try {
           const response = await fetch(encodeURI(url));
           const result = await response.json();
+
+          if(result.length < 1){
+            setNoResultsReturned(true);
+          } else{
+            setNoResultsReturned(false);
+          }
+
           createCards(result);
         } catch (e) {
           console.log(e);
@@ -453,7 +472,9 @@ export default function StartPage(props) {
             </>}
             </>
           ) : (
-            <NoResult />
+            <>
+              {noResultsReturned && <NoResult />}
+            </>
           )}
         </div>
 
