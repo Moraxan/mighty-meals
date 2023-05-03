@@ -10,7 +10,6 @@
   position: relative;
 }
 .ingredients-box {
-  border: 1px solid black;
   border-radius: 5px;
   font: var(--heading-font);
   display: inline-block;

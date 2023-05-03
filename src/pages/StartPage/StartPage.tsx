@@ -49,6 +49,9 @@ export default function StartPage(props) {
   // State for all filter choices (except ingredients since there are no predefines buttons) so we can make buttons purple if they are selected.
   const [selected, setSelected] = useState(emptyArr);
 
+  // State to shore more button 
+  const [showMore, setShowMore] = useState<boolean>(false);
+
   // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
   //@ts-ignore
   const persistedSearchSettings = JSON.parse(sessionStorage.getItem("persisted-search-data"));
@@ -149,7 +152,6 @@ export default function StartPage(props) {
   async function getApiData() {
     // Function that fetches / GET data back from the API.
     // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
-
     if (standardSearch === true) {
       const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&type=${mealChoice}&cuisine=${createURIString(
         cuisineChoices
@@ -163,7 +165,6 @@ export default function StartPage(props) {
       try {
         const response = await fetch(encodeURI(url));
         const result = await response.json();
-
         createCards(result.results);
       } catch (e) {
         console.log(e);
@@ -178,7 +179,6 @@ export default function StartPage(props) {
         try {
           const response = await fetch(encodeURI(url));
           const result = await response.json();
-
           createCards(result);
         } catch (e) {
           console.log(e);
@@ -231,6 +231,9 @@ export default function StartPage(props) {
       return;
     }
 
+    // Showing show more button 
+    setShowMore(false)
+
     if (input.length < 1) {
       setRecipesST(emptyRecipeST);
       setRecipesMTVMH(emptyRecipeMTVMH);
@@ -271,11 +274,33 @@ export default function StartPage(props) {
     }
   }
 
-
   // importing useMediaQuery function to make SearchSwith appear based on if condition is met or not.
   const matches = useMediaQuery(
     "screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)"
   );
+
+
+  const renderSTCard = (recipe: RecipeFrontST) => <Card
+    key={recipe.id}
+    recId={recipe.id}
+    imgSrc={recipe.image}
+    recipeTitle={recipe.title}
+    readyInMin={recipe.readyInMinutes}
+    handleRecipeClick={props.handleRecipeClick}
+    persistSearchData={persistSearchData}
+  />
+
+  const renderMTMVHCard = (recipe: RecipeMTVMH) => <CardMTVMH
+    key={recipe.id}
+    recId={recipe.id}
+    imgSrc={recipe.image}
+    recipeTitle={recipe.title}
+    usedIngredientCount={recipe.usedIngredientCount}
+    missedIngredientCount={recipe.missedIngredientCount}
+    handleRecipeClick={props.handleRecipeClick}
+    persistSearchData={persistSearchData}
+    ingredientChoices={ingredientChoices}
+  />
 
   return (
     <>
@@ -366,37 +391,43 @@ export default function StartPage(props) {
 
           {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
             <>
+            {!matches ? (
+              <>
               {recipesST.length > 0 &&
-                recipesST.map((recipe) => (
-                  <Card
-                    key={recipe.id}
-                    recId={recipe.id}
-                    imgSrc={recipe.image}
-                    recipeTitle={recipe.title}
-                    readyInMin={recipe.readyInMinutes}
-                    handleRecipeClick={props.handleRecipeClick}
-                    persistSearchData={persistSearchData}
-                  ></Card>
-                ))}
+                recipesST.slice(0, 6).map((recipe) => renderSTCard(recipe))
+              }
               {recipesMTVMH.length > 0 &&
-                recipesMTVMH.map((recipe) => (
-                  <CardMTVMH
-                    key={recipe.id}
-                    recId={recipe.id}
-                    imgSrc={recipe.image}
-                    recipeTitle={recipe.title}
-                    usedIngredientCount={recipe.usedIngredientCount}
-                    missedIngredientCount={recipe.missedIngredientCount}
-                    handleRecipeClick={props.handleRecipeClick}
-                    persistSearchData={persistSearchData}
-                    ingredientChoices={ingredientChoices}
-                  />
-                ))}
+                recipesMTVMH.slice(0, 6).map((recipe) => renderMTMVHCard(recipe))
+              }
+              {
+                (recipesST.length < 7 || recipesMTVMH.length < 7) && showMore && 
+                <>
+                  {recipesST.length > 0 &&
+                    recipesST.slice(6, recipesST.length).map((recipe) => renderSTCard(recipe))
+                  }
+                  {recipesMTVMH.length > 0 &&
+                    recipesMTVMH.slice(6, recipesMTVMH.length).map((recipe) => renderMTMVHCard(recipe))
+                  }
+                </>
+              }
+              </>
+            ) : 
+            <>
+              {recipesST.length > 0 &&
+                recipesST.map((recipe) => renderSTCard(recipe))
+              }
+              {recipesMTVMH.length > 0 &&
+                recipesMTVMH.map((recipe) => renderMTMVHCard(recipe))
+              }
+            </>}
             </>
           ) : (
             <NoResult />
           )}
         </div>
+
+        {!matches && (recipesST.length > 7 || recipesMTVMH.length > 7) && !showMore && <div className="show-more-button-container"> <button onClick={() => setShowMore(true)} className="show-more-button"><span>SHOW &nbsp; MORE</span></button> </div>}
+        
       </div>
       </div>
 
