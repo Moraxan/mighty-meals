@@ -26,9 +26,7 @@
 }
 
 .matches-parentes {
-    font-family: "Varela";
-    font-size: 15px;
-    font-weight: bold;
+    font: var(--small-varela-font);
     color: black;
 }
 
