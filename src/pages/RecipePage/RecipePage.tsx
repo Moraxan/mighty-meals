@@ -63,16 +63,18 @@ export const RecipePage = () => {
         <BackButton handleBackClick={handleBackClick} />
       </div>
       <div className="DishImage">
+          {/*//@ts-ignore*/}
           <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
       </div>
       <div className="Ingredients">
+          {/*//@ts-ignore*/}
           <Ingredients ingredients={recipeData?.extendedIngredients} noOfServings={recipeData?.servings} />
       </div>
       <div className="DishSummary">
           <DishSummary recipeData={recipeData} />
       </div>
       <div className="Directions">
-
+          {/*//@ts-ignore*/}
           <Directions directions={recipeData.analyzedInstructions} />
         </div>
       </div>

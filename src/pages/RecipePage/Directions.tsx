@@ -3,8 +3,10 @@ import uncheckedImg from "../../images/unchecked.png";
 import "./Directions.css";
 import { useState } from "react";
 
+//@ts-ignore
 export const Directions = ({ directions }) => {
   const [directionsState, setDirectionsState] = useState(directions);
+
 //Checks if there are no directions available. Displays message to the user.
   if (!directionsState || directionsState.length === 0) {
     return (
@@ -16,8 +18,12 @@ export const Directions = ({ directions }) => {
       </div>
     );
   }
+
 //This function handles the click on the image. If the image is checked, it will uncheck it. If it is unchecked, it will check it.
+
+  //@ts-ignore
   const handleImageClick = (step) => {
+    //@ts-ignore
     const newSteps = directionsState[0].steps.map((s) =>
       s.number === step.number
         ? {
@@ -38,6 +44,7 @@ export const Directions = ({ directions }) => {
       </div>
       <br />
       <ul className="directions-list">
+        {/*//@ts-ignore*/}
         {directionsState[0].steps.map((step) => (
           <li key={step.number}>
             <button className="image-button">
@@ -47,6 +54,7 @@ export const Directions = ({ directions }) => {
                 onClick={() => handleImageClick(step)}
                 className="directions-image"
               />
+
               <span className={`step-text ${step.checked ? 'checked' : ''}`}>
 {/* Here the text is truncated to 20 chars if the truncated flag is true */}
                 {step.truncated ? `${step.step.slice(0, 20)}...` : step.step}
@@ -57,4 +65,5 @@ export const Directions = ({ directions }) => {
       </ul>
     </div>
   );
+
 };
