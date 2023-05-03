@@ -276,9 +276,6 @@ export default function StartPage(props) {
     }
   }
 
-  function handleSortChange(sortKey: string) {
-    setSortedBy(sortKey);
-  }
   // importing useMediaQuery function to make SearchSwith appear based on if condition is met or not.
   const matches = useMediaQuery(
     "screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)"
@@ -390,6 +387,8 @@ export default function StartPage(props) {
         <div className="d-flex flex-wrap justify-content-center align-self-center cardArea-styling">
           {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
             <>
+            {!matches ? (
+              <>
               {recipesST.length > 0 &&
                 recipesST.slice(0, 6).map((recipe) => renderSTCard(recipe))
               }
@@ -397,7 +396,8 @@ export default function StartPage(props) {
                 recipesMTVMH.slice(0, 6).map((recipe) => renderMTMVHCard(recipe))
               }
               {
-                (recipesST.length < 7 || recipesMTVMH.length < 7) && showMore ? <>
+                (recipesST.length < 7 || recipesMTVMH.length < 7) && showMore && 
+                <>
                   {recipesST.length > 0 &&
                     recipesST.slice(6, recipesST.length).map((recipe) => renderSTCard(recipe))
                   }
@@ -405,15 +405,25 @@ export default function StartPage(props) {
                     recipesMTVMH.slice(6, recipesMTVMH.length).map((recipe) => renderMTMVHCard(recipe))
                   }
                 </>
-                  : null
               }
+              </>
+            ) : 
+            <>
+              {recipesST.length > 0 &&
+                recipesST.map((recipe) => renderSTCard(recipe))
+              }
+              {recipesMTVMH.length > 0 &&
+                recipesMTVMH.map((recipe) => renderMTMVHCard(recipe))
+              }
+            </>}
             </>
           ) : (
             <NoResult />
           )}
         </div>
 
-        {(recipesST.length > 7 || recipesMTVMH.length > 7) && !showMore ? <div className="show-more-button-container"> <button onClick={() => setShowMore(true)} className="show-more-button"><span>SHOW &nbsp; MORE</span></button> </div> : null}
+        {!matches && (recipesST.length > 7 || recipesMTVMH.length > 7) && !showMore && <div className="show-more-button-container"> <button onClick={() => setShowMore(true)} className="show-more-button"><span>SHOW &nbsp; MORE</span></button> </div>}
+        
       </div>
     </>
   );
