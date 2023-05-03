@@ -14,12 +14,24 @@ import { RecipeMTVMH } from "../../components/Interface/Interface";
 import { useMediaQuery } from "../../components/DropdownNav/DropdownNav";
 import { useBackButtonStore } from "../../components/Stores/backButtonClick";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
+import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 
 import "./StartPage.css";
 import Sort from "../../components/Sort/Sort";
 
 //@ts-ignore
 export default function StartPage(props) {
+  //@ts-ignore
+  const setDevMode = useDeveloperModeStore((state) => state.setDevMode);
+  setDevMode(true);
+
+  //@ts-ignore
+  const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
+
+  //@ts-ignore
+  const setProdApiKey = useApiCheckerStore((state) => state.updateProdApiKey);
+
+
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
   const emptyRecipeST: RecipeFrontST[] = [];
   const emptyRecipeMTVMH: RecipeMTVMH[] = [];
@@ -61,7 +73,7 @@ export default function StartPage(props) {
   const [standardSearch, setStandardSearch] = useState(searchSettingsBool);
 
   // API Settings, read spoonacular documentation for more info.
-  const defaultSettings = {
+  const devSettings = {
     storedMaxHits: 6,
     storeAddRecipeNutrition: true,
     storedMaxRandomHits: 3,
@@ -69,22 +81,41 @@ export default function StartPage(props) {
     storedIgnorePantry: true,
   };
 
-  if (localStorage.getItem("mightySettings") === null) {
-    localStorage.setItem("mightySettings", JSON.stringify(defaultSettings));
+  const prodSettings = {
+    storedMaxHits: 20,
+    storeAddRecipeNutrition: true,
+    storedMaxRandomHits: 3,
+    storedRanking: 1,
+    storedIgnorePantry: true,
+  };
+
+  if(devMode){
+    if (localStorage.getItem("mightySettings") === null) {
+      localStorage.setItem("mightySettings", JSON.stringify(devSettings));
+    }
+  
+    if (localStorage.getItem("mightyRandomOrStatic") === null) {
+      localStorage.setItem("mightyRandomOrStatic", "true");
+    }
+  } else{
+    if (localStorage.getItem("mightyProdSettings") === null) {
+      localStorage.setItem("mightyProdSettings", JSON.stringify(prodSettings));
+    }
+
+    if (localStorage.getItem("storedProdApiKey") === null) {
+      localStorage.setItem("storedProdApiKey", "6d398aefc8b6440286cd4509f45075c5");
+      setProdApiKey(localStorage.getItem("storedProdApiKey"));
+    }
   }
 
-  if (localStorage.getItem("mightyRandomOrStatic") === null) {
-    localStorage.setItem("mightyRandomOrStatic", "true");
-  }
+  //@ts-ignore
+  const useStatic = devMode ? JSON.parse(localStorage.getItem("mightyRandomOrStatic")) : false;
 
   //@ts-ignore
-  const useStatic = JSON.parse(localStorage.getItem("mightyRandomOrStatic"));
+  const persistedSettings = devMode ? JSON.parse(localStorage.getItem("mightySettings")) : JSON.parse(localStorage.getItem("mightyProdSettings"));
 
   //@ts-ignore
-  const persistedSettings = JSON.parse(localStorage.getItem("mightySettings"));
-
-  //@ts-ignore
-  const apiKey: string | null = useApiCheckerStore((state) => state.apiKey);
+  const apiKey: string | null = devMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
 
   const maxHits: number = persistedSettings.storedMaxHits;
   const addRecipeNutrition: boolean = persistedSettings.storeAddRecipeNutrition;
