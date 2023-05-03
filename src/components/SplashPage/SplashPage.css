@@ -1,0 +1,36 @@
+@import url('../../index.css');
+@font-face {
+    font-family: "SplashFont";
+    src: url("../../fonts/AVENGEANCE/AVENGEANCE HEROIC AVENGER BI.ttf") format("truetype");
+}
+  
+
+.splash-page { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--accentcolourred);
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .splash-image img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    padding: 4rem;
+    padding-bottom: 2rem;
+
+  }
+  
+  .splash-text {
+    font-family: "SplashFont";
+    color: var(--accentcolouryellow);
+    font-size: 3.2rem;
+    -webkit-text-stroke: 1.2px black; 
+    transform: rotate(-10deg);
+    padding: 1rem;
+  }
+  
+  
