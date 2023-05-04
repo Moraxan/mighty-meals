@@ -9,8 +9,10 @@ export const BackButton = () => {
   const handleBackClick = useBackButtonStore((state) => state.clickBackButton);
 
   const handleClick = () => {
-    if(!sessionStorage.getItem("persisted-search-data") === null){
-      handleBackClick();
+    if(sessionStorage.getItem("persisted-search-data") !== null){
+      handleBackClick(true);
+    } else{
+      handleBackClick(false);
     }
   }
 
