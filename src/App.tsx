@@ -11,7 +11,7 @@ import { SplashPage } from "./components/SplashPage/SplashPage";
 
 const ShowSplashFirstSession = () => {
   const showSplash = sessionStorage.getItem("showSplash") === "false" ? false : true;
-  console.log(showSplash);
+
   if(showSplash){
     useEffect(() => {
       setTimeout(() => {
@@ -23,8 +23,6 @@ const ShowSplashFirstSession = () => {
       }, 2000);
     }, []);
   }
-
-
 
 //Here we can set when the splash page will show. Now it shows is sceenwidth is less than 768px.
   if (showSplash && window.innerWidth <= 768) {
