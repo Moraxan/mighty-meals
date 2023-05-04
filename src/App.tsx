@@ -11,7 +11,7 @@ import { SplashPage } from "./components/SplashPage/SplashPage";
 
 const ShowSplashFirstSession = () => {
   const showSplash = sessionStorage.getItem("showSplash") === "false" ? false : true;
-  if(showSplash){
+  if(showSplash && window.innerWidth <= 768){
     useEffect(() => {
       setTimeout(() => {
         sessionStorage.setItem("showSplash", "false");
