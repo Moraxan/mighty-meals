@@ -3,12 +3,16 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import ModalSettings from '../ModalSettings/ModalSettings';
 import ModalCSS from '../ModalCSS/ModalCSS';
 import burger from "../../images/burger.png";
+import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 import "./DropdownNav.css";
 
 
 // Put this as its own component due to half-comlicated code to monitor screensize and upon that change state if it matches below variable matches.
 // Function is called useMediaQuery.
 export default function DropdownNav() {
+    //@ts-ignore
+    const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
+
     const matches = useMediaQuery('screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)')
     const [showSettings, setShowSettings] = useState(false);
     const [showCSS, setShowCSS] = useState(false);
@@ -30,7 +34,7 @@ export default function DropdownNav() {
       <Dropdown.Menu className="dropdown-text">
         <Dropdown.Item>Profile</Dropdown.Item>
         <Dropdown.Item onClick={handleClickSettings}>Settings</Dropdown.Item>
-        <Dropdown.Item onClick={handleClickCSS}>CSS Guidelines/Help</Dropdown.Item>
+        {devMode && <Dropdown.Item onClick={handleClickCSS}>CSS Guidelines/Help</Dropdown.Item>}
       </Dropdown.Menu>
     </Dropdown>
     {showSettings && <ModalSettings setShowSettings={setShowSettings} />}

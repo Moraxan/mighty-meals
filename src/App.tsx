@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Footer from "./components/Footer/Footer";
@@ -10,31 +10,26 @@ import { SplashPage } from "./components/SplashPage/SplashPage";
 
 
 const ShowSplashFirstSession = () => {
-  const [showSplash, setShowSplash] = useState(true);
-
-  useEffect(() => {
-    const showSplash = sessionStorage.getItem("showSplash");
-    if (showSplash === "false") {
-      setShowSplash(false);
-    } else {
+  const showSplash = sessionStorage.getItem("showSplash") === "false" ? false : true;
+  if(showSplash && window.innerWidth <= 768){
+    useEffect(() => {
       setTimeout(() => {
-        setShowSplash(false);
         sessionStorage.setItem("showSplash", "false");
+        const zIndex = -1;
+        const splashFront: Element | null = document.querySelector('.splash-front');
+        //@ts-ignore
+        splashFront!.style.setProperty('z-index', zIndex);
       }, 2000);
-    }
-  }, []);
+    }, []);
+  }
 
-  const closeSplash = () => {
-    setShowSplash(false);
-    sessionStorage.setItem("showSplash", "false");
-  };
 //Here we can set when the splash page will show. Now it shows is sceenwidth is less than 768px.
   if (showSplash && window.innerWidth <= 768) {
 //@ts-ignore
     return (
     <>
     <div className="splash-front">
-      <SplashPage closeSplash={closeSplash} />
+      <SplashPage />
     </div>
     <div className="splash-behind">
         <StartPage />

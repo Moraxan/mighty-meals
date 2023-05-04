@@ -69,9 +69,8 @@
 } 
 
 .divider{
-  font-family: "Varela";
-    font-weight: bold;
-    color: black;
+  font: var(--small-varela-font);
+  color: black;
 }
 
 .card__time-text {    

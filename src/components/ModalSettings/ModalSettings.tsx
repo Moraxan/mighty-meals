@@ -2,36 +2,32 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useApiCheckerStore } from "../Stores/checkIfApiExists";
+import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 
 import "./ModalSettings.css";
 
 //@ts-ignore
 export default function ModalSaveAPIKey(props) {
   //@ts-ignore
-  const persistedSettings = JSON.parse(localStorage.getItem("mightySettings"));
+  const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
+
+  //@ts-ignore
+  const persistedSettings = devMode ? JSON.parse(localStorage.getItem("mightySettings")) : JSON.parse(localStorage.getItem("mightyProdSettings"));
 
   //@ts-ignore // global zustand variable/state to set state of api key
   const setApiKey = useApiCheckerStore((state) => state.updateApiKey);
+  //@ts-ignore
+  const setProdApiKey = useApiCheckerStore((state) => state.updateProdApiKey);
+
 
   const [show, setShow] = useState(true);
-  const [apiInputBox, setApiInputBox] = useState(
-    localStorage.getItem("storedApiKey")
-  );
+  const [apiInputBox, setApiInputBox] = useState(devMode ? localStorage.getItem("storedApiKey") : localStorage.getItem("storedProdApiKey"));
   const [maxHits, setMaxHits] = useState(persistedSettings.storedMaxHits);
-  const [maxRandom, setMaxRandom] = useState(
-    persistedSettings.storedMaxRandomHits
-  );
-  const [includeNutrition, setIncludeNutrition] = useState(
-    persistedSettings.storeAddRecipeNutrition
-  );
-  const [ignorePantry, setIgnorePantry] = useState(
-    persistedSettings.storedIgnorePantry
-  );
+  const [maxRandom, setMaxRandom] = useState(persistedSettings.storedMaxRandomHits);
+  const [includeNutrition, setIncludeNutrition] = useState(persistedSettings.storeAddRecipeNutrition);
+  const [ignorePantry, setIgnorePantry] = useState(persistedSettings.storedIgnorePantry);
   const [ranking, setRanking] = useState(persistedSettings.storedRanking);
-
-  const [useStatic, setUseStatic] = useState(
-    localStorage.getItem("mightyRandomOrStatic")
-  );
+  const [useStatic, setUseStatic] = useState(devMode ? localStorage.getItem("mightyRandomOrStatic") : "false");
 
   const handleClose = () => setShow(false);
 
@@ -81,10 +77,16 @@ export default function ModalSaveAPIKey(props) {
     persistedSettings.storedIgnorePantry = ignorePantry;
     persistedSettings.storedRanking = ranking;
 
-    localStorage.setItem("storedApiKey", apiInputBox!);
-    setApiKey(localStorage.getItem("storedApiKey"));
-    localStorage.setItem("mightySettings", JSON.stringify(persistedSettings));
-    localStorage.setItem("mightyRandomOrStatic", useStatic!);
+    if(devMode){
+      localStorage.setItem("storedApiKey", apiInputBox!);
+      setApiKey(localStorage.getItem("storedApiKey"));
+      localStorage.setItem("mightySettings", JSON.stringify(persistedSettings));
+      localStorage.setItem("mightyRandomOrStatic", useStatic!);
+    } else{
+      localStorage.setItem("storedProdApiKey", apiInputBox!);
+      setProdApiKey(localStorage.getItem("storedProdApiKey"));
+      localStorage.setItem("mightyProdSettings", JSON.stringify(persistedSettings));
+    }
 
     handleClose();
   };
@@ -107,17 +109,16 @@ export default function ModalSaveAPIKey(props) {
           <input
             className="input-Modal"
             type="text"
+            placeholder="Enter API key here..."
             value={apiInputBox!}
             onChange={handleApiChange}
           />
-          <input
-            className="input-Checkbox"
-            id="random-static"
-            type="checkbox"
-            checked={useStatic === null || useStatic === "true" ? true : false}
-            onChange={handleStaticChange}
-          />
-          <label htmlFor="random-static">Use static instead of random</label>
+          {devMode &&
+          <>
+            <input className="input-Checkbox" id="random-static" type="checkbox" checked={useStatic === null || useStatic === "true" ? true : false} onChange={handleStaticChange}/>
+            <label htmlFor="random-static">Use static instead of random</label>
+          </>}
+
           <br />
           Max hits on search: {maxHits}
           <input
@@ -137,14 +138,12 @@ export default function ModalSaveAPIKey(props) {
             value={maxRandom}
             onChange={handleMaxRndChange}
           />
-          <input
-            className="input-Checkbox"
-            id="nutrition-check"
-            type="checkbox"
-            checked={includeNutrition}
-            onChange={handleNutritionChange}
-          />
-          <label htmlFor="nutrition-check">Include recipe nutrition</label>
+          {devMode &&
+          <>
+            <input className="input-Checkbox" id="nutrition-check" type="checkbox" checked={includeNutrition} onChange={handleNutritionChange}/>
+            <label htmlFor="nutrition-check">Include recipe nutrition</label>
+          </>}
+
           <br />
           <input
             className="input-Checkbox"

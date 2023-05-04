@@ -14,12 +14,24 @@ import { RecipeMTVMH } from "../../components/Interface/Interface";
 import { useMediaQuery } from "../../components/DropdownNav/DropdownNav";
 import { useBackButtonStore } from "../../components/Stores/backButtonClick";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
+import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 
 import "./StartPage.css";
 import Sort from "../../components/Sort/Sort";
 
 //@ts-ignore
 export default function StartPage(props) {
+  //@ts-ignore
+  const setDevMode = useDeveloperModeStore((state) => state.setDevMode);
+  setDevMode(false);
+
+  //@ts-ignore
+  const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
+
+  //@ts-ignore
+  const setProdApiKey = useApiCheckerStore((state) => state.updateProdApiKey);
+
+
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
   const emptyRecipeST: RecipeFrontST[] = [];
   const emptyRecipeMTVMH: RecipeMTVMH[] = [];
@@ -52,6 +64,10 @@ export default function StartPage(props) {
   // State to shore more button 
   const [showMore, setShowMore] = useState<boolean>(false);
 
+  // variable to determine of no results or not.
+  const [noResultsReturned, setNoResultsReturned] = useState(false);
+
+
   // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
   //@ts-ignore
   const persistedSearchSettings = JSON.parse(sessionStorage.getItem("persisted-search-data"));
@@ -61,7 +77,7 @@ export default function StartPage(props) {
   const [standardSearch, setStandardSearch] = useState(searchSettingsBool);
 
   // API Settings, read spoonacular documentation for more info.
-  const defaultSettings = {
+  const devSettings = {
     storedMaxHits: 6,
     storeAddRecipeNutrition: true,
     storedMaxRandomHits: 3,
@@ -69,22 +85,41 @@ export default function StartPage(props) {
     storedIgnorePantry: true,
   };
 
-  if (localStorage.getItem("mightySettings") === null) {
-    localStorage.setItem("mightySettings", JSON.stringify(defaultSettings));
+  const prodSettings = {
+    storedMaxHits: 12,
+    storeAddRecipeNutrition: true,
+    storedMaxRandomHits: 6,
+    storedRanking: 1,
+    storedIgnorePantry: true,
+  };
+
+  if(devMode){
+    if (localStorage.getItem("mightySettings") === null) {
+      localStorage.setItem("mightySettings", JSON.stringify(devSettings));
+    }
+  
+    if (localStorage.getItem("mightyRandomOrStatic") === null) {
+      localStorage.setItem("mightyRandomOrStatic", "true");
+    }
+  } else{
+    if (localStorage.getItem("mightyProdSettings") === null) {
+      localStorage.setItem("mightyProdSettings", JSON.stringify(prodSettings));
+    }
+
+    if (localStorage.getItem("storedProdApiKey") === null) {
+      localStorage.setItem("storedProdApiKey", "6d398aefc8b6440286cd4509f45075c5");
+      setProdApiKey(localStorage.getItem("storedProdApiKey"));
+    }
   }
 
-  if (localStorage.getItem("mightyRandomOrStatic") === null) {
-    localStorage.setItem("mightyRandomOrStatic", "true");
-  }
+  //@ts-ignore
+  const useStatic = devMode ? JSON.parse(localStorage.getItem("mightyRandomOrStatic")) : false;
 
   //@ts-ignore
-  const useStatic = JSON.parse(localStorage.getItem("mightyRandomOrStatic"));
+  const persistedSettings = devMode ? JSON.parse(localStorage.getItem("mightySettings")) : JSON.parse(localStorage.getItem("mightyProdSettings"));
 
   //@ts-ignore
-  const persistedSettings = JSON.parse(localStorage.getItem("mightySettings"));
-
-  //@ts-ignore
-  const apiKey: string | null = useApiCheckerStore((state) => state.apiKey);
+  const apiKey: string | null = devMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
 
   const maxHits: number = persistedSettings.storedMaxHits;
   const addRecipeNutrition: boolean = persistedSettings.storeAddRecipeNutrition;
@@ -106,6 +141,7 @@ export default function StartPage(props) {
           .then((data) => {
             createCards(data.recipes);
           });
+
       } else {
         // Sample recipes to use instead of calling fetch method during development.
         const forTesting: RecipeFrontST[] = [
@@ -165,6 +201,13 @@ export default function StartPage(props) {
       try {
         const response = await fetch(encodeURI(url));
         const result = await response.json();
+
+        if(result.results.length < 1){
+          setNoResultsReturned(true);
+        } else{
+          setNoResultsReturned(false);
+        }
+        
         createCards(result.results);
       } catch (e) {
         console.log(e);
@@ -179,6 +222,13 @@ export default function StartPage(props) {
         try {
           const response = await fetch(encodeURI(url));
           const result = await response.json();
+
+          if(result.length < 1){
+            setNoResultsReturned(true);
+          } else{
+            setNoResultsReturned(false);
+          }
+
           createCards(result);
         } catch (e) {
           console.log(e);
@@ -377,7 +427,7 @@ export default function StartPage(props) {
           <div className="matches">
             <p>
               matches&nbsp;&nbsp;&nbsp;
-              <span className="matches-parentes">({countMatches()})</span>
+              <span className="matches-parentes">(<span className="match-number">{countMatches()}</span>&nbsp;)</span>
             </p>
           </div>
 
@@ -422,11 +472,13 @@ export default function StartPage(props) {
             </>}
             </>
           ) : (
-            <NoResult />
+            <>
+              {noResultsReturned && <NoResult />}
+            </>
           )}
         </div>
 
-        {!matches && (recipesST.length > 7 || recipesMTVMH.length > 7) && !showMore && <div className="show-more-button-container"> <button onClick={() => setShowMore(true)} className="show-more-button"><span>SHOW &nbsp; MORE</span></button> </div>}
+        {!matches && (recipesST.length > 7 || recipesMTVMH.length > 7) && !showMore && <div className="show-more-button-container"> <button onClick={() => setShowMore(true)} className="show-more-button"><span>show &nbsp; more</span></button> </div>}
         
       </div>
       </div>
