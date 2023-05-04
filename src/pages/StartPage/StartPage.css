@@ -18,34 +18,39 @@
     width: 100px;
     height: 30px;  
     background-color: var(--accentcolouryellow);
-
     border:3px solid black;
     border-radius: 10px;
-    text-align: left;
+    text-align: center;
     text-indent: 5px;
     color: black;
 }
 
 .matches-parentes {
-    font-family: "Varela";
-    font-weight: bold;
+    font: var(--small-varela-font);
     color: black;
+}
+
+.match-number{  
+    font: var(--recipecard-title-font);
+    font-size: 17px;
 }
 
 .show-more-button-container {
     display: flex;
     justify-content: center;
     padding-bottom: 50px;
+    position: relative;
+    top: -40px;
 }
 
 .show-more-button {
-    background-color: #eda037;
+    background-color: var(--accentcolouryellow);
     border: 3px solid black;
     border-radius: 10px;
-    text-indent: 5px;
     color: black;
-    padding: 8px 4px 0px;
-    width: 140px;
+    padding-top: 1px;
+    width: 100px;
+    height: 30px;  
     text-align: center;
 }
 
