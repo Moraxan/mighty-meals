@@ -33,7 +33,7 @@ export const RecipePage = () => {
   const apiKey: string | null = devMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
 
   useEffect(() => {
-    const persistedSettings = JSON.parse(localStorage.getItem("mightySettings")!);
+    const persistedSettings = devMode ? JSON.parse(localStorage.getItem("mightySettings")!) : JSON.parse(localStorage.getItem("mightyProdSettings")!);
     const storedData = JSON.parse(localStorage.getItem(`recipeFetch_${recipeId}`)!);
     if (storedData) {
       setRecipeData(storedData);
