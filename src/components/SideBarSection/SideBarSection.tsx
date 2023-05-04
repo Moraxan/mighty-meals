@@ -93,7 +93,7 @@ export default function SideBarSection(props) {
     return (
       <footer className="filter-footer d-flex pb-1">
         <Button className="clear-result-btn" onClick={clearAll}>clear{props.selected.length + props.ingredientChoices.length > 0 && tmpSpan}</Button>
-        <Button className="clear-result-btn" onClick={props.getApiData}>go!</Button>
+        <Button className="clear-result-btn" onClick={() => {props.getApiData(); props.setShow(false)}}>go!</Button>
       </footer>
     )
   }

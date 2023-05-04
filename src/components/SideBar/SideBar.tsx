@@ -56,6 +56,7 @@ export default function SideBar(props) {
             standardSearch={props.standardSearch}
             setStandardSearch={props.setStandardSearch}
             getApiData={props.getApiData}
+            setShow={props.setShow}
           />
         </Offcanvas.Body>
       </Offcanvas>
