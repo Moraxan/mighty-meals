@@ -38,6 +38,7 @@ export default function SideBar(props) {
             ingredientChoices={props.ingredientChoices}
             setIngredientChoices={props.setIngredientChoices}
             showRed={false}
+            getApiData={props.getApiData}
           />
           <SideBarSection
             mealChoice={props.mealChoice}
