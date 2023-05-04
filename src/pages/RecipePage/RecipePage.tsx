@@ -5,7 +5,7 @@ import { Ingredients } from './Ingredients';
 import { Directions } from './Directions';
 import { DishImage } from './DishImage';
 import {useLoaderData} from "react-router-dom";
-import {useBackButtonStore} from "../../components/Stores/backButtonClick";
+
 import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
 import './RecipePage.css';
@@ -25,8 +25,7 @@ export const RecipePage = () => {
   const [noResultsReturned, setNoResultsReturned] = useState(false);
 
 
-  //@ts-ignore //global zustand variable/state to monitor back button click and persist state.
-  const handleBackClick = useBackButtonStore((state) => state.clickBackButton);
+
 
   //@ts-ignore
   const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
@@ -76,7 +75,7 @@ export const RecipePage = () => {
   return (
     <div className="RecipePage">
       <div className="BackButton">
-        <BackButton handleBackClick={handleBackClick} />
+        <BackButton />
       </div>
       <div className="DishImage">
           {/*//@ts-ignore*/}

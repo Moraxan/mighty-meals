@@ -80,7 +80,7 @@ export default function SearchBar(props){
                             </ul>
                         )}
                     </div>
-                    {props.ingredientChoices.length > 0 && <div className="search-icon" onClick={() => {props.getApiData()}}><img className="icon-search" src={searchLogo} /></div>}
+                    {props.ingredientChoices.length > 0 && <div className="search-icon" onClick={() => {props.getApiData(); props.setShow(false)}}><img className="icon-search" src={searchLogo} /></div>}
                     <div className="icon" onClick={openFilter}><img className="icon-filter" src={filterLogo} /></div>
                 </div>
             </div>
