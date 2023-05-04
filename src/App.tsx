@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "./components/NavigationBar/NavigationBar";
 import Footer from "./components/Footer/Footer";
@@ -11,7 +11,7 @@ import { SplashPage } from "./components/SplashPage/SplashPage";
 
 const ShowSplashFirstSession = () => {
   const showSplash = sessionStorage.getItem("showSplash") === "false" ? false : true;
-  if(showSplash){
+  if(showSplash && window.innerWidth <= 768){
     useEffect(() => {
       setTimeout(() => {
         sessionStorage.setItem("showSplash", "false");

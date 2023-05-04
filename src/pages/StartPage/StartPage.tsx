@@ -23,7 +23,7 @@ import Sort from "../../components/Sort/Sort";
 export default function StartPage(props) {
   //@ts-ignore
   const setDevMode = useDeveloperModeStore((state) => state.setDevMode);
-  setDevMode(true);
+  setDevMode(false);
 
   //@ts-ignore
   const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
@@ -88,7 +88,7 @@ export default function StartPage(props) {
   const prodSettings = {
     storedMaxHits: 12,
     storeAddRecipeNutrition: true,
-    storedMaxRandomHits: 3,
+    storedMaxRandomHits: 6,
     storedRanking: 1,
     storedIgnorePantry: true,
   };
