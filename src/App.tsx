@@ -10,17 +10,21 @@ import { SplashPage } from "./components/SplashPage/SplashPage";
 
 
 const ShowSplashFirstSession = () => {
-  const [showSplash, setShowSplash] = useState(true);
+  const showSplash = sessionStorage.getItem("showSplash") === "false" ? false : true;
+  console.log(showSplash);
+  if(showSplash){
+    useEffect(() => {
+      setTimeout(() => {
+        sessionStorage.setItem("showSplash", "false");
+        const zIndex = -1;
+        const splashFront: Element | null = document.querySelector('.splash-front');
+        //@ts-ignore
+        splashFront!.style.setProperty('z-index', zIndex);
+      }, 2000);
+    }, []);
+  }
 
-  useEffect(() => {
-    const isShowSplash = sessionStorage.getItem('showSplash');
-    if (isShowSplash === 'false') {
-      setShowSplash(false);
-    } else {
-      setShowSplash(true);
-      sessionStorage.setItem('showSplash', 'false');
-    }
-  }, []);
+
 
 //Here we can set when the splash page will show. Now it shows is sceenwidth is less than 768px.
   if (showSplash && window.innerWidth <= 768) {
