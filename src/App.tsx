@@ -13,28 +13,22 @@ const ShowSplashFirstSession = () => {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    const showSplash = sessionStorage.getItem("showSplash");
-    if (showSplash === "false") {
+    const isShowSplash = sessionStorage.getItem('showSplash');
+    if (isShowSplash === 'false') {
       setShowSplash(false);
     } else {
-      setTimeout(() => {
-        setShowSplash(false);
-        sessionStorage.setItem("showSplash", "false");
-      }, 2000);
+      setShowSplash(true);
+      sessionStorage.setItem('showSplash', 'false');
     }
   }, []);
 
-  const closeSplash = () => {
-    setShowSplash(false);
-    sessionStorage.setItem("showSplash", "false");
-  };
 //Here we can set when the splash page will show. Now it shows is sceenwidth is less than 768px.
   if (showSplash && window.innerWidth <= 768) {
 //@ts-ignore
     return (
     <>
     <div className="splash-front">
-      <SplashPage closeSplash={closeSplash} />
+      <SplashPage />
     </div>
     <div className="splash-behind">
         <StartPage />
