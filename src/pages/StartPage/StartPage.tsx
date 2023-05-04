@@ -86,7 +86,7 @@ export default function StartPage(props) {
   };
 
   const prodSettings = {
-    storedMaxHits: 20,
+    storedMaxHits: 12,
     storeAddRecipeNutrition: true,
     storedMaxRandomHits: 3,
     storedRanking: 1,
