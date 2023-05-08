@@ -18,6 +18,7 @@ import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 
 import "./StartPage.css";
 import Sort from "../../components/Sort/Sort";
+import SuperHeroInfo from "../../components/SuperHeroInfo/SuperHeroInfo";
 
 //@ts-ignore
 export default function StartPage(props) {
@@ -30,7 +31,6 @@ export default function StartPage(props) {
 
   //@ts-ignore
   const setProdApiKey = useApiCheckerStore((state) => state.updateProdApiKey);
-
 
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
   const emptyRecipeST: RecipeFrontST[] = [];
@@ -61,21 +61,82 @@ export default function StartPage(props) {
   // State for all filter choices (except ingredients since there are no predefines buttons) so we can make buttons purple if they are selected.
   const [selected, setSelected] = useState(emptyArr);
 
-  // State to shore more button 
+  // State to shore more button
   const [showMore, setShowMore] = useState<boolean>(false);
 
   // variable to determine of no results or not.
   const [noResultsReturned, setNoResultsReturned] = useState(false);
 
-
   // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
   //@ts-ignore
-  const persistedSearchSettings = JSON.parse(sessionStorage.getItem("persisted-search-data"));
+  const persistedSearchSettings = JSON.parse(
+    sessionStorage.getItem("persisted-search-data")
+  );
   const searchSettingsBool: boolean = !backButtonClicked
     ? true
     : persistedSearchSettings.searchMode;
   const [standardSearch, setStandardSearch] = useState(searchSettingsBool);
 
+  // State to monitor if a superhero was selected
+  //@ts-ignore
+  const [superHeroInfo, setSuperHeroInfo] = useState();
+
+  // Storing superhero object in this state.
+  //@ts-ignore
+  const [superHero, setSuperHero] = useState(defaultSuperHero);
+  const emptySuperHero: {} = {};
+  const defaultSuperHero = {
+    "response": "success",
+    "id": "659",
+    "name": "Thor",
+    "powerstats": {
+      "intelligence": "69",
+      "strength": "100",
+      "speed": "83",
+      "durability": "100",
+      "power": "100",
+      "combat": "100"
+    },
+    "biography": {
+      "full-name": "Thor Odinson",
+      "alter-egos": "Rune King Thor",
+      "aliases": [
+        "Donald Blake",
+        "Sigurd Jarlson",
+        "Jake Olsen",
+        "Donar the Mighty"
+      ],
+      "place-of-birth": "Asgard",
+      "first-appearance": "Journey into Mystery #83 (August, 1962)",
+      "publisher": "Rune King Thor",
+      "alignment": "good"
+    },
+    "appearance": {
+      "gender": "Male",
+      "race": "Asgardian",
+      "height": [
+        "6'6",
+        "198 cm"
+      ],
+      "weight": [
+        "640 lb",
+        "288 kg"
+      ],
+      "eye-color": "Blue",
+      "hair-color": "Blond"
+    },
+    "work": {
+      "occupation": "King of Asgard; formerly EMS Technician; Physician",
+      "base": "New York, New York"
+    },
+    "connections": {
+      "group-affiliation": "Avengers",
+      "relatives": "Odin (father), Gaea (mother), Frigga (step-mother), Loki (step-brother), Vidar (half-brother), Buri (paternal great-grandfather), Bolthorn (maternal great grandfather), Bor (grandfather), Bestla (grandmother), Vili (uncle), Ve (uncle), Sigyn (former sister-in-law), Hela (alleged niece), Jormungand (alleged nephew), Fernis Wolf (alleged nephew)"
+    },
+    "image": {
+      "url": "https://www.superherodb.com/pictures2/portraits/10/100/140.jpg"
+    }
+  }
   // API Settings, read spoonacular documentation for more info.
   const devSettings = {
     storedMaxHits: 6,
@@ -93,33 +154,39 @@ export default function StartPage(props) {
     storedIgnorePantry: true,
   };
 
-  if(devMode){
+  if (devMode) {
     if (localStorage.getItem("mightySettings") === null) {
       localStorage.setItem("mightySettings", JSON.stringify(devSettings));
     }
-  
+
     if (localStorage.getItem("mightyRandomOrStatic") === null) {
       localStorage.setItem("mightyRandomOrStatic", "true");
     }
-  } else{
+  } else {
     if (localStorage.getItem("mightyProdSettings") === null) {
       localStorage.setItem("mightyProdSettings", JSON.stringify(prodSettings));
     }
 
     if (localStorage.getItem("storedProdApiKey") === null) {
-      localStorage.setItem("storedProdApiKey", "6d398aefc8b6440286cd4509f45075c5");
+      localStorage.setItem("storedProdApiKey", "z");
       setProdApiKey(localStorage.getItem("storedProdApiKey"));
     }
   }
 
   //@ts-ignore
-  const useStatic = devMode ? JSON.parse(localStorage.getItem("mightyRandomOrStatic")) : false;
+  const useStatic = devMode
+    ? JSON.parse(localStorage.getItem("mightyRandomOrStatic"))
+    : false;
 
   //@ts-ignore
-  const persistedSettings = devMode ? JSON.parse(localStorage.getItem("mightySettings")) : JSON.parse(localStorage.getItem("mightyProdSettings"));
+  const persistedSettings = devMode
+    ? JSON.parse(localStorage.getItem("mightySettings"))
+    : JSON.parse(localStorage.getItem("mightyProdSettings"));
 
   //@ts-ignore
-  const apiKey: string | null = devMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
+  const apiKey: string | null = devMode
+    ? useApiCheckerStore((state) => state.apiKey)
+    : useApiCheckerStore((state) => state.apiProdKey);
 
   const maxHits: number = persistedSettings.storedMaxHits;
   const addRecipeNutrition: boolean = persistedSettings.storeAddRecipeNutrition;
@@ -141,7 +208,6 @@ export default function StartPage(props) {
           .then((data) => {
             createCards(data.recipes);
           });
-
       } else {
         // Sample recipes to use instead of calling fetch method during development.
         const forTesting: RecipeFrontST[] = [
@@ -171,11 +237,13 @@ export default function StartPage(props) {
     //If back button is clicked previous persited states are being loaded back.
     if (backButtonClicked) {
       //@ts-ignore
-      const persistedData = JSON.parse(sessionStorage.getItem("persisted-search-data"));
+      const persistedData = JSON.parse(
+        sessionStorage.getItem("persisted-search-data")
+      );
 
       setRecipesST(persistedData.recipes);
       setRecipesMTVMH(persistedData.recipesByIngredients);
-      setSortedBy(persistedData.sortedBy)
+      setSortedBy(persistedData.sortedBy);
       setIngredientChoices(persistedData.ingridients);
       setMealChoice(persistedData.meal);
       setCuisineChoices(persistedData.cuisines);
@@ -202,12 +270,12 @@ export default function StartPage(props) {
         const response = await fetch(encodeURI(url));
         const result = await response.json();
 
-        if(result.results.length < 1){
+        if (result.results.length < 1) {
           setNoResultsReturned(true);
-        } else{
+        } else {
           setNoResultsReturned(false);
         }
-        
+
         createCards(result.results);
       } catch (e) {
         console.log(e);
@@ -223,9 +291,9 @@ export default function StartPage(props) {
           const response = await fetch(encodeURI(url));
           const result = await response.json();
 
-          if(result.length < 1){
+          if (result.length < 1) {
             setNoResultsReturned(true);
-          } else{
+          } else {
             setNoResultsReturned(false);
           }
 
@@ -281,8 +349,8 @@ export default function StartPage(props) {
       return;
     }
 
-    // Showing show more button 
-    setShowMore(false)
+    // Showing show more button
+    setShowMore(false);
 
     if (input.length < 1) {
       setRecipesST(emptyRecipeST);
@@ -329,28 +397,31 @@ export default function StartPage(props) {
     "screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)"
   );
 
+  const renderSTCard = (recipe: RecipeFrontST) => (
+    <Card
+      key={recipe.id}
+      recId={recipe.id}
+      imgSrc={recipe.image}
+      recipeTitle={recipe.title}
+      readyInMin={recipe.readyInMinutes}
+      handleRecipeClick={props.handleRecipeClick}
+      persistSearchData={persistSearchData}
+    />
+  );
 
-  const renderSTCard = (recipe: RecipeFrontST) => <Card
-    key={recipe.id}
-    recId={recipe.id}
-    imgSrc={recipe.image}
-    recipeTitle={recipe.title}
-    readyInMin={recipe.readyInMinutes}
-    handleRecipeClick={props.handleRecipeClick}
-    persistSearchData={persistSearchData}
-  />
-
-  const renderMTMVHCard = (recipe: RecipeMTVMH) => <CardMTVMH
-    key={recipe.id}
-    recId={recipe.id}
-    imgSrc={recipe.image}
-    recipeTitle={recipe.title}
-    usedIngredientCount={recipe.usedIngredientCount}
-    missedIngredientCount={recipe.missedIngredientCount}
-    handleRecipeClick={props.handleRecipeClick}
-    persistSearchData={persistSearchData}
-    ingredientChoices={ingredientChoices}
-  />
+  const renderMTMVHCard = (recipe: RecipeMTVMH) => (
+    <CardMTVMH
+      key={recipe.id}
+      recId={recipe.id}
+      imgSrc={recipe.image}
+      recipeTitle={recipe.title}
+      usedIngredientCount={recipe.usedIngredientCount}
+      missedIngredientCount={recipe.missedIngredientCount}
+      handleRecipeClick={props.handleRecipeClick}
+      persistSearchData={persistSearchData}
+      ingredientChoices={ingredientChoices}
+    />
+  );
 
   return (
     <>
@@ -378,7 +449,11 @@ export default function StartPage(props) {
           setSelected={setSelected}
         />
 
-        {standardSearch ? (
+        {superHeroInfo ? (
+          <SuperHeroInfo 
+            superHero={superHero}
+          />
+        ) : standardSearch ? (
           <SearchBarFreeText
             freeTextSearch={freeTextSearch}
             setFreeTextSearch={setFreeTextSearch}
@@ -421,68 +496,79 @@ export default function StartPage(props) {
 
         <br />
 
-      <div className="d-flex flex-column align-self-center justify-content-evenly main-div">
-        <div className="d-flex justify-content-between match-and-sort">
+        <div className="d-flex flex-column align-self-center justify-content-evenly main-div">
+          <div className="d-flex justify-content-between match-and-sort">
+            <div className="matches">
+              <p>
+                matches&nbsp;&nbsp;&nbsp;
+                <span className="matches-parentes">
+                  (<span className="match-number">{countMatches()}</span>&nbsp;)
+                </span>
+              </p>
+            </div>
 
-          <div className="matches">
-            <p>
-              matches&nbsp;&nbsp;&nbsp;
-              <span className="matches-parentes">(<span className="match-number">{countMatches()}</span>&nbsp;)</span>
-            </p>
+            {standardSearch && (
+              <div className="sorting">
+                <Sort sortedBy={sortedBy} setSortedBy={setSortedBy} />
+              </div>
+            )}
+          </div>
+          <div className="d-flex flex-wrap justify-content-center cardArea-styling">
+            {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
+              <>
+                {!matches ? (
+                  <>
+                    {recipesST.length > 0 &&
+                      recipesST
+                        .slice(0, 6)
+                        .map((recipe) => renderSTCard(recipe))}
+                    {recipesMTVMH.length > 0 &&
+                      recipesMTVMH
+                        .slice(0, 6)
+                        .map((recipe) => renderMTMVHCard(recipe))}
+                    {(recipesST.length < 7 || recipesMTVMH.length < 7) &&
+                      showMore && (
+                        <>
+                          {recipesST.length > 0 &&
+                            recipesST
+                              .slice(6, recipesST.length)
+                              .map((recipe) => renderSTCard(recipe))}
+                          {recipesMTVMH.length > 0 &&
+                            recipesMTVMH
+                              .slice(6, recipesMTVMH.length)
+                              .map((recipe) => renderMTMVHCard(recipe))}
+                        </>
+                      )}
+                  </>
+                ) : (
+                  <>
+                    {recipesST.length > 0 &&
+                      recipesST.map((recipe) => renderSTCard(recipe))}
+                    {recipesMTVMH.length > 0 &&
+                      recipesMTVMH.map((recipe) => renderMTMVHCard(recipe))}
+                  </>
+                )}
+              </>
+            ) : (
+              <>{noResultsReturned && <NoResult />}</>
+            )}
           </div>
 
-          {standardSearch && 
-          <div className="sorting">
-            <Sort sortedBy={sortedBy} setSortedBy={setSortedBy} />
-          </div>}
-          
+          {!matches &&
+            (recipesST.length > 7 || recipesMTVMH.length > 7) &&
+            !showMore && (
+              <div className="show-more-button-container">
+                {" "}
+                <button
+                  onClick={() => setShowMore(true)}
+                  className="show-more-button"
+                >
+                  <span>show &nbsp; more</span>
+                </button>{" "}
+              </div>
+            )}
         </div>
-          <div className="d-flex flex-wrap justify-content-center cardArea-styling">
-
-          {recipesST.length > 0 || recipesMTVMH.length > 0 ? (
-            <>
-            {!matches ? (
-              <>
-              {recipesST.length > 0 &&
-                recipesST.slice(0, 6).map((recipe) => renderSTCard(recipe))
-              }
-              {recipesMTVMH.length > 0 &&
-                recipesMTVMH.slice(0, 6).map((recipe) => renderMTMVHCard(recipe))
-              }
-              {
-                (recipesST.length < 7 || recipesMTVMH.length < 7) && showMore && 
-                <>
-                  {recipesST.length > 0 &&
-                    recipesST.slice(6, recipesST.length).map((recipe) => renderSTCard(recipe))
-                  }
-                  {recipesMTVMH.length > 0 &&
-                    recipesMTVMH.slice(6, recipesMTVMH.length).map((recipe) => renderMTMVHCard(recipe))
-                  }
-                </>
-              }
-              </>
-            ) : 
-            <>
-              {recipesST.length > 0 &&
-                recipesST.map((recipe) => renderSTCard(recipe))
-              }
-              {recipesMTVMH.length > 0 &&
-                recipesMTVMH.map((recipe) => renderMTMVHCard(recipe))
-              }
-            </>}
-            </>
-          ) : (
-            <>
-              {noResultsReturned && <NoResult />}
-            </>
-          )}
-        </div>
-
-        {!matches && (recipesST.length > 7 || recipesMTVMH.length > 7) && !showMore && <div className="show-more-button-container"> <button onClick={() => setShowMore(true)} className="show-more-button"><span>show &nbsp; more</span></button> </div>}
-        
       </div>
-      </div>
-
     </>
   );
 }
