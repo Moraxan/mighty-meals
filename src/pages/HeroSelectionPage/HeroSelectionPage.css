@@ -43,6 +43,7 @@
 
 .hero-flex:hover span{
     color: var(--accentcolouryellow);
+    -webkit-text-stroke: 1px black;
 }
 
 @media screen and (max-width: 900px){
@@ -63,6 +64,10 @@
 }
 
 @media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
+    .hero-text {
+        color: var(--accentcolouryellow);
+        -webkit-text-stroke: 1px black;
+    }
     .heroheader h1{
         margin-top: 45px;
         font-size: 2rem;
