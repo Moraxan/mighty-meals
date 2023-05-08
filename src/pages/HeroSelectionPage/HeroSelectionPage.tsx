@@ -17,7 +17,7 @@ export default function HeroSelectionPage(){
             </div>
             
             <div className="heroheader">
-                <h1>eat like your favourite hero</h1>
+                <h1>eat like your favorite hero</h1>
             </div>
 
             <div className="hero-image-container">
