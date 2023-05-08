@@ -4,6 +4,7 @@ import ModalSettings from '../ModalSettings/ModalSettings';
 import ModalCSS from '../ModalCSS/ModalCSS';
 import burger from "../../images/burger.png";
 import { useDeveloperModeStore } from "../../components/Stores/developerMode";
+import {Link} from 'react-router-dom';
 import "./DropdownNav.css";
 
 
@@ -33,6 +34,7 @@ export default function DropdownNav() {
 
       <Dropdown.Menu className="dropdown-text">
         <Dropdown.Item>Profile</Dropdown.Item>
+        <Dropdown.Item><Link to="/heroselection" style={{textDecoration: "none", color: "black"}}>Hero selection</Link></Dropdown.Item>
         <Dropdown.Item onClick={handleClickSettings}>Settings</Dropdown.Item>
         {devMode && <Dropdown.Item onClick={handleClickCSS}>CSS Guidelines/Help</Dropdown.Item>}
       </Dropdown.Menu>
