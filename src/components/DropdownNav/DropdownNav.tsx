@@ -34,7 +34,7 @@ export default function DropdownNav() {
 
       <Dropdown.Menu className="dropdown-text">
         <Dropdown.Item>Profile</Dropdown.Item>
-        <Dropdown.Item><Link to="/heroselection" style={{textDecoration: "none", color: "black"}}>Hero selection</Link></Dropdown.Item>
+        <Link className="dropdown-item" to="/heroselection" style={{textDecoration: "none", color: "black"}}>Hero selection</Link>
         <Dropdown.Item onClick={handleClickSettings}>Settings</Dropdown.Item>
         {devMode && <Dropdown.Item onClick={handleClickCSS}>CSS Guidelines/Help</Dropdown.Item>}
       </Dropdown.Menu>

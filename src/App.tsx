@@ -86,7 +86,7 @@ export const Router = createBrowserRouter([
     path: "heroselection",
     element: (
       <>
-      <div className="app-body-recipe">
+      <div className="app-body-hero">
         <NavigationBar hideSwitch={true}/>
         <HeroSelectionPage />
       </div>
