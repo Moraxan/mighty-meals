@@ -41,6 +41,10 @@
     font-size: 1.6rem;
 }
 
+.hero-flex:hover span{
+    color: var(--accentcolouryellow);
+}
+
 @media screen and (max-width: 900px){
     .back{
         height: 50px;
