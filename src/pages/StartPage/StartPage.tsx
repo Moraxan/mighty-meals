@@ -310,9 +310,9 @@ export default function StartPage(props) {
   function countMatches() {
     let matches: number = 0;
 
-    if (recipesST.length > 1) {
+    if (recipesST.length > 0) {
       matches = recipesST.length;
-    } else if (recipesMTVMH.length > 1) {
+    } else if (recipesMTVMH.length > 0) {
       matches = recipesMTVMH.length;
     }
 
