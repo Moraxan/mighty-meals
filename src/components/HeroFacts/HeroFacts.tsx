@@ -3,13 +3,12 @@
 
 
 export const ThorFacts: string = `
-        Attention all kids! Get ready to meet the incredible hero, Thor!
+        Attention all kids! Get ready to meet the incredible hero, Thor! 
         He's not like any ordinary person, but a powerful god from Asgard with the strength of ten thousand men and the power of thunder and lightning at his fingertips.
-        Thor fights bravely to protect the Nine Realms against evil forces and always stands up for the innocent.
-        But did you know that Thor is also an amazing chef?
-        He loves to cook yummy Nordic food, especially roasted meats, seafood, and vegetables.
-        Let's all give a big cheer for Thor - a hero in battle and at the dinner table too!
-        `;
+        Thor fights bravely to protect the Nine Realms against evil forces and always stands up for the innocent. 
+        But did you know that Thor is also an amazing chef? 
+        He loves to cook yummy Nordic food, especially roasted meats, seafood, and vegetables. 
+        Let's all give a big cheer for Thor - a hero in battle and at the dinner table too!`;
   
 export const HulkFacts: string = `
         Get ready to meet the incredible Hulk - a green superhero with the power to protect the innocent and fight against evil! 
