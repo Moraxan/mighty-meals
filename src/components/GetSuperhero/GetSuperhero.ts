@@ -6,6 +6,7 @@ export const getSuperhero = async (id: number) =>  {
         const result = await response.json();
         return result.results;
     }
-    catch{
+    catch(error){
+      console.log(`Could not fetch hero. Error: ${error}`)
     }
 }
