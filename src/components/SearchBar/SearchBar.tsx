@@ -35,7 +35,7 @@ export default function SearchBar(props){
                 setFilteredData(newFilter);
             }
         };
-
+        
         //@ts-ignore
         const ingredientClick = (event) => {
             // This finction is triggered from the list items sorted above.
@@ -54,19 +54,20 @@ export default function SearchBar(props){
             // Resets userinput and filter after ingredient/list item is selected.
             setFilteredData(emptyStringArr);
             setSearchtext("");
-        };
+        };  
 
         //@ts-ignore
         const openFilter = () => {
-            props.setShow(!props.show);
-        }
+        props.setShow(!props.show);
+    }
+
 
     return (
         // First div uses ternary on received prop (showRed) to determine if the extra red fluff is needed.
         <div className={props.showRed === true ? "red-fluff" : ""}>
             <div className={props.showRed === true ? "wrapper wrapper-padding" : "wrapper no-fluff"}>
                 <div className="search-input">
-                    <input type="text" placeholder={props.ingredientChoices.length > 0 ? `Search ingredients (${props.ingredientChoices.length})` : "Search ingredients"} onChange={handleChange} value={searchText}/>
+                    <input type="text" placeholder={props.ingredientChoices.length > 0 ? `Search ingredients (${props.ingredientChoices.length})` : "Search ingredients"} onChange={handleChange}  value={searchText}/>
                     {/* If showRed is true our fileted result div gets a second class allowing us to change direction from down to up when displayed on phone. */}
                     <div className={props.showRed === true ? "autocom-box mobile-change-direction" : "autocom-box"}>
                         {/* Checks that our filteredData.length is longer than 0 and if true display the results. */}
