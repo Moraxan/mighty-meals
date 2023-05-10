@@ -6,7 +6,6 @@ import burger from "../../images/burger.png";
 import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 import {Link} from 'react-router-dom';
 import "./DropdownNav.css";
-import { Link } from "react-router-dom";
 
 
 // Put this as its own component due to half-comlicated code to monitor screensize and upon that change state if it matches below variable matches.
@@ -34,7 +33,7 @@ export default function DropdownNav() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="dropdown-text">
-        <Link className="dropdown-item" to="/profilepage" style={{textDecoration: "none", color: "black"}}>Profile</Link>
+        <Dropdown.Item>Profile</Dropdown.Item>
         <Link className="dropdown-item" to="/heroselection" style={{textDecoration: "none", color: "black"}}>Hero selection</Link>
         <Dropdown.Item onClick={handleClickSettings}>Settings</Dropdown.Item>
         {devMode && <Dropdown.Item onClick={handleClickCSS}>CSS Guidelines/Help</Dropdown.Item>}
