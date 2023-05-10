@@ -1,5 +1,3 @@
-
-
 export const getSuperhero = async (id: number) =>  {
 
     try {
