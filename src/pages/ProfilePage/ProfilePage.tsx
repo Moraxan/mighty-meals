@@ -58,9 +58,12 @@ export const ProfilePage = () => {
   };
 
   return (
+   
     <div className="profilepage-container">
+         <BackButton/>
         Profile
-    <BackButton />
+       
+
       <div className="likedrecipes">
         These are your liked recipes!
         <LikedRecipes />
