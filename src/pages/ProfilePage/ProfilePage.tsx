@@ -65,7 +65,9 @@ export const ProfilePage = () => {
        
 
       <div className="likedrecipes">
-        These are your liked recipes!
+        <div className="profile-header">
+          These are your liked recipes!
+        </div>
         <LikedRecipes />
       </div>
     </div>

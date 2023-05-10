@@ -3,6 +3,10 @@
 .profilepage-container {
     font: var(--heading-font);
     color: var(--accentcolouryellow);
+
+}
+
+.profile-header{
     -webkit-text-stroke: 1px black;
 }
 
@@ -12,5 +16,5 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-  }
+}
   
