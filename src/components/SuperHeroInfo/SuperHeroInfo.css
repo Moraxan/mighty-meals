@@ -1,0 +1,87 @@
+.superhero-container {
+  max-width: 980px;
+  flex-direction: row;
+  align-self: center;
+  justify-content: space-between;
+  row-gap: 10px;
+  column-gap: 10px;
+  margin-bottom: 50px;
+}
+
+.image-container {
+  border: 3px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 320px;
+}
+
+.info{
+  display: flex;
+  flex-direction: column;
+}
+
+.info-first{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.info-second{
+  display: flex;
+  flex-direction: row;
+}
+
+.info-container {
+  background-color: var(--accentcolourred);
+  border: 3px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 640px;
+  padding: 30px;
+}
+
+.superhero-info h2{
+  font-family: "Avengeance";
+}
+.superhero-info p{
+  font-family: "Varela";
+  font-weight: bold;
+}
+.superhero-image {
+  width: 100%;
+}
+
+.details-container {
+  font-family: "Varela";
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: space-between;
+}
+
+.powerstat-image {
+  max-width: 100px;
+}
+
+.yellow-background {
+  background-color: var(--accentcolouryellow);
+  padding: 5px;
+  margin: 5px;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats-details {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.stats-details p {
+  margin-right: 10px;
+}

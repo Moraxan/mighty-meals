@@ -79,11 +79,10 @@ export default function StartPage(props) {
 
   // State to monitor if a superhero was selected
   //@ts-ignore
-  const [superHeroInfo, setSuperHeroInfo] = useState();
+  const [superHeroInfo, setSuperHeroInfo] = useState(true);
 
   // Storing superhero object in this state.
   //@ts-ignore
-  const [superHero, setSuperHero] = useState(defaultSuperHero);
   const emptySuperHero: {} = {};
   const defaultSuperHero = {
     "response": "success",
@@ -137,6 +136,7 @@ export default function StartPage(props) {
       "url": "https://www.superherodb.com/pictures2/portraits/10/100/140.jpg"
     }
   }
+  const [superHero, setSuperHero] = useState(defaultSuperHero);
   // API Settings, read spoonacular documentation for more info.
   const devSettings = {
     storedMaxHits: 6,
@@ -496,7 +496,7 @@ export default function StartPage(props) {
 
         <br />
 
-        <div className="d-flex flex-column align-self-center justify-content-evenly main-div">
+        {/* <div className="d-flex flex-column align-self-center justify-content-evenly main-div">
           <div className="d-flex justify-content-between match-and-sort">
             <div className="matches">
               <p>
@@ -567,7 +567,7 @@ export default function StartPage(props) {
                 </button>{" "}
               </div>
             )}
-        </div>
+        </div> */}
       </div>
     </>
   );
