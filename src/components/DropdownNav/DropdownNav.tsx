@@ -6,7 +6,6 @@ import burger from "../../images/burger.png";
 import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 import {Link} from 'react-router-dom';
 import "./DropdownNav.css";
-import { Link } from "react-router-dom";
 
 
 // Put this as its own component due to half-comlicated code to monitor screensize and upon that change state if it matches below variable matches.

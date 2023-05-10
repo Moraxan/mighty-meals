@@ -85,6 +85,7 @@ export const Router = createBrowserRouter([
       <>
       <NavigationBar hideSwitch={true}/>
       <ProfilePage />
+      </>
       ),
   },
   {
