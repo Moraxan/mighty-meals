@@ -18,11 +18,11 @@ export const BackButton = () => {
   }
 
   return (
-    <Link to="/" style={{textDecoration:"none"}} onClick={handleClick} >
+    <div style={{textDecoration:"none"}} onClick={handleClick} >
     <div className="RecipePage-back-button" >      
         <img className="back" alt="back-button"  src={backbtn} width="120" height="64"></img>
     </div>
-    </Link>
+    </div>
   );
 };
 
