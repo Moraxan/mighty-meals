@@ -7,6 +7,7 @@ import { RecipePage } from "./pages/RecipePage/RecipePage";
 import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
 import { SplashPage } from "./components/SplashPage/SplashPage";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 
 
 const ShowSplashFirstSession = () => {
@@ -60,9 +61,7 @@ export const Router = createBrowserRouter([
     path: "/",
     element: (
       <>
-      <div className="splashPage">
      <ShowSplashFirstSession />
-     </div>
       </>
     ),
   },
@@ -71,14 +70,24 @@ export const Router = createBrowserRouter([
     loader: ({ params }) => {return params.id},
     element: (
       <>
-          <div className="app-body-recipe">
-            <NavigationBar hideSwitch={true}/>
-            <RecipePage />
-          </div>
+          <NavigationBar hideSwitch={true}/>
+          <RecipePage />
           <div className='footer'>
           <Footer />
           </div>
         </>
       )
+  },
+  {
+    path: "profilepage",
+    element: (
+      <>
+      <NavigationBar hideSwitch={true}/>
+      <ProfilePage />
+      <div className="footer">
+      <Footer />
+      </div>
+      </>
+    ),
   }
 ]);
