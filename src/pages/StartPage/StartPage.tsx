@@ -23,7 +23,7 @@ import Sort from "../../components/Sort/Sort";
 export default function StartPage(props) {
   //@ts-ignore
   const setDevMode = useDeveloperModeStore((state) => state.setDevMode);
-  setDevMode(false);
+  setDevMode(true);
 
   //@ts-ignore
   const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
