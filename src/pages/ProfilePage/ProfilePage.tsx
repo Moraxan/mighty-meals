@@ -2,6 +2,7 @@ import './ProfilePage.css';
 import { useState, useEffect, useMemo } from "react";
 import Card from '../../components/RecipeCard/Card';
 import { RecipeFrontST } from '../../components/Interface/Interface';
+import { BackButton } from '../RecipePage/BackButton';
 
 export const ProfilePage = () => {
 
@@ -59,6 +60,7 @@ export const ProfilePage = () => {
   return (
     <div className="profilepage-container">
         Profile
+    <BackButton />
       <div className="likedrecipes">
         These are your liked recipes!
         <LikedRecipes />
