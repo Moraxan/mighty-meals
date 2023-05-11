@@ -151,7 +151,6 @@ export default function StartPage(props) {
         }
 
         const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&cuisine=${cuisine}&minCalories=${minCalories}&number=${maxHits}&sort=popularity&sortDirection=desc&addRecipeInformation=true`;
-        console.log(encodeURI(url))
         try {
           fetch(encodeURI(url))
             .then((response) => response.json())

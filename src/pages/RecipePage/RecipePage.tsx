@@ -40,7 +40,6 @@ export const RecipePage = () => {
       //@ts-ignore
       const addNutrition: boolean = persistedSettings === null ? true : persistedSettings.storeAddRecipeNutrition;
       const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=${addNutrition}`;
-      console.log(url);
 
       fetch(url)
         .then((response) => {
