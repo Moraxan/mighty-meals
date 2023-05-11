@@ -6,6 +6,7 @@
   row-gap: 10px;
   column-gap: 10px;
   margin-bottom: 50px;
+  font-size: smaller;
 }
 
 .image-container {
@@ -15,18 +16,18 @@
   max-width: 320px;
 }
 
-.info{
+.info {
   display: flex;
   flex-direction: column;
 }
 
-.info-first{
+.info-first {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.info-second{
+.info-second {
   display: flex;
   flex-direction: row;
 }
@@ -37,21 +38,25 @@
   border-radius: 10px;
   overflow: hidden;
   max-width: 640px;
-  padding: 30px;
+  padding: 20px;
 }
 
-.superhero-info h2{
+.superhero-info h2 {
   font-family: "Avengeance";
 }
-.superhero-info p{
+.superhero-info p {
+  margin-top: 20px;
+  font-size: small;
   font-family: "Varela";
   font-weight: bold;
 }
+
 .superhero-image {
   width: 100%;
 }
 
 .details-container {
+  margin-top: 20px;
   font-family: "Varela";
   font-weight: bold;
   display: flex;
@@ -73,15 +78,16 @@
 .stats {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 240px;
 }
 
 .stats-details {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  justify-content: space-between;
 }
 
-.stats-details p {
-  margin-right: 10px;
+.stats-details img {
+  height: 9px;
+  margin-top: 6px;
 }
