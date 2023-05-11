@@ -9,12 +9,12 @@ import ModalSaveAPIKey from "../../components/ModalSaveAPIKey/ModalSaveAPIKey";
 import HaveCook from "../../components/HaveCooked/HaveCooked";
 import Card from "../../components/RecipeCard/Card";
 import CardMTVMH from "../../components/RecipeCard/CardMTVMH";
-import { RecipeFrontST } from "../../components/Interface/Interface";
-import { RecipeMTVMH } from "../../components/Interface/Interface";
+import { RecipeFrontST, RecipeMTVMH, Hero } from "../../components/Interface/Interface";
 import { useMediaQuery } from "../../components/DropdownNav/DropdownNav";
 import { useBackButtonStore } from "../../components/Stores/backButtonClick";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
 import { useDeveloperModeStore } from "../../components/Stores/developerMode";
+import { useHeroInfoStore } from "../../components/Stores/displayHeroInfoAndFood";
 
 import "./StartPage.css";
 import Sort from "../../components/Sort/Sort";
@@ -30,6 +30,14 @@ export default function StartPage(props) {
 
   //@ts-ignore
   const setProdApiKey = useApiCheckerStore((state) => state.updateProdApiKey);
+
+
+
+  //@ts-ignore Zustand store variables for hero selection, inluding hero object and if hero is selected or not.
+  const isHeroSelected: boolean = useHeroInfoStore((state) => state.isHeroSelected);
+  //@ts-ignore
+  const heroObject: Hero = useHeroInfoStore((state) => state.heroObject);
+
 
 
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
@@ -133,38 +141,42 @@ export default function StartPage(props) {
   useEffect(() => {
     //If only by render and no backbutton click random recipes are fetched.
     if (!backButtonClicked) {
-      if (!useStatic) {
-        fetch(
-          `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            createCards(data.recipes);
-          });
+      if(isHeroSelected){
 
-      } else {
-        // Sample recipes to use instead of calling fetch method during development.
-        const forTesting: RecipeFrontST[] = [
-          {
-            id: 637776,
-            title: "Cherry Pancakes for One",
-            image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
-            readyInMinutes: 45,
-          },
-          {
-            id: 660697,
-            title: "Southern Fried Catfish",
-            image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
-            readyInMinutes: 45,
-          },
-          {
-            id: 634091,
-            title: "Banana Foster Bread Pudding",
-            image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
-            readyInMinutes: 45,
-          },
-        ];
-        createCards(forTesting);
+      } else{
+        if (!useStatic) {
+          fetch(
+            `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              createCards(data.recipes);
+            });
+  
+        } else {
+          // Sample recipes to use instead of calling fetch method during development.
+          const forTesting: RecipeFrontST[] = [
+            {
+              id: 637776,
+              title: "Cherry Pancakes for One",
+              image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+              readyInMinutes: 45,
+            },
+            {
+              id: 660697,
+              title: "Southern Fried Catfish",
+              image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
+              readyInMinutes: 45,
+            },
+            {
+              id: 634091,
+              title: "Banana Foster Bread Pudding",
+              image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
+              readyInMinutes: 45,
+            },
+          ];
+          createCards(forTesting);
+        }
       }
     }
 
@@ -184,6 +196,8 @@ export default function StartPage(props) {
       setSelected(persistedData.selectedFilters);
     }
   }, []);
+
+
 
   async function getApiData() {
     // Function that fetches / GET data back from the API.
@@ -378,7 +392,9 @@ export default function StartPage(props) {
           setSelected={setSelected}
         />
 
-        {standardSearch ? (
+        {isHeroSelected ?
+        (<h3>{heroObject.name}</h3>) :
+        standardSearch ? (
           <SearchBarFreeText
             freeTextSearch={freeTextSearch}
             setFreeTextSearch={setFreeTextSearch}
@@ -397,6 +413,7 @@ export default function StartPage(props) {
             getApiData={getApiData}
           />
         )}
+
         <SideBar
           show={show}
           setShow={setShow}
