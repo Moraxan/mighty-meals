@@ -6,24 +6,12 @@ import increaseBtn from "../../images/increaseBtn.png";
 function AdjustMeasurment(amount: number, unit: string) {
 
   if (unit === "ml") {
-    if (amount >= 1000) {
-      unit = "L";
-      amount /= 1000;
-    } else if (amount >= 100 && amount < 1000) {
-      unit = "dl";
-      amount /= 100;
-    }
-  }
-  if (unit === 'g'){
-    if (amount >= 1000) {
-      unit = 'kg',
-      amount /= 1000;
-    } else if(amount >= 100 && amount < 1000){
-      unit = 'hg',
-      amount /= 100;
-    }
+    amount = amount >= 1000 ? (unit = "L", amount / 1000) : (amount >= 100 && amount < 1000) ? (unit = "dl", amount / 100) : amount;
   }
   
+  if (unit === "g") {
+    amount = amount >= 1000 ? (unit = "kg", amount / 1000) : (amount >= 100 && amount < 1000) ? (unit = "hg", amount / 100) : amount;
+  }
   amount = amount < 0.1 ? 0.1 : amount;
 
   return { adjustedAmount: amount, adjustedUnit: unit };
@@ -34,18 +22,20 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
   const [servings, setServings] = useState(noOfServings);
   const [ingredientAmounts, setIngredientAmounts] = useState([]);
   const [ingredientUnits, setIngredientUnits] = useState([]);
-  const ingredientNames = ingredients.map(
-    (ingredient: any) => ingredient.originalName
-  );
+  const ingredientNames = ingredients.map((ingredient: any) => ingredient.originalName);
 
   useEffect(() => {
+
+    
     const amounts = ingredients.map((ingredient: any) => {
-      return ingredient.measures.metric.amount;
+      const amount = ingredient.measures.metric.amount;
+      return amount;
     });
     setIngredientAmounts(amounts);
 
     const units = ingredients.map((ingredient: any) => {
-      return ingredient.measures.metric.unitShort;
+      const unit = ingredient.measures.metric.unitShort;
+      return unit;
     });
     setIngredientUnits(units);
   }, [ingredients]);
