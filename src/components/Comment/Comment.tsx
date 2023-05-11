@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import './Comment.css';
 
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
  const CommentForm = () => {
     const [comment, setComment] = useState("");
@@ -12,9 +12,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
     };
     return (
         <div className="comment-position">
-            <div className="p-3 w-100">
-                <h4 className="mb-2 font-weight-bold">Comments</h4>
-                <div className="p-3 shadow-sm">
+                <div className="header">
+                    <p >comments</p>
+                </div>              
+                
                     <InputGroup>
                         <Form.Control
                             placeholder="Write your comment"
@@ -24,15 +25,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
                             aria-label="With textarea"
                         />
                     </InputGroup>
-                    <button
-                        className="mt-3 border-0 py-2 px-4"
+                
+                <div className="comment-button">
+                <button                        
                         onClick={commentHandler}
-                        style={{ borderRadius: "20px" }}
                     >
-                        Comment
+                        comment
                     </button>
                 </div>
-            </div>
+                    
+                
+            
         </div>
     );
 };
