@@ -3,16 +3,42 @@ import { useState, useEffect } from "react";
 import decreaseBtn from "../../images/decreaseBtn.png";
 import increaseBtn from "../../images/increaseBtn.png";
 
+function AdjustMeasurment(amount: number, unit: string) {
+
+  if (unit === "ml") {
+    if (amount >= 1000) {
+      unit = "L";
+      amount /= 1000;
+    } else if (amount >= 100 && amount < 1000) {
+      unit = "dl";
+      amount /= 100;
+    }
+  }
+  if (unit === 'g'){
+    if (amount >= 1000) {
+      unit = 'kg',
+      amount /= 1000;
+    } else if(amount >= 100 && amount < 1000){
+      unit = 'hg',
+      amount /= 100;
+    }
+  }
+  
+  amount = amount < 0.1 ? 0.1 : amount;
+
+  return { adjustedAmount: amount, adjustedUnit: unit };
+}
+
 //@ts-ignore
 export const Ingredients = ({ ingredients, noOfServings }) => {
-
   const [servings, setServings] = useState(noOfServings);
   const [ingredientAmounts, setIngredientAmounts] = useState([]);
   const [ingredientUnits, setIngredientUnits] = useState([]);
-  const ingredientNames = ingredients.map((ingredient: any) => ingredient.originalName);
+  const ingredientNames = ingredients.map(
+    (ingredient: any) => ingredient.originalName
+  );
 
   useEffect(() => {
-    
     const amounts = ingredients.map((ingredient: any) => {
       return ingredient.measures.metric.amount;
     });
@@ -43,17 +69,17 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
       <div className="ingredients-list">
         <ul>
           {ingredientAmounts.map((amount: number, index: number) => {
-            let calculatedAmount = (amount * servings) / noOfServings;
-            if (calculatedAmount < 0.1){
-              calculatedAmount = 0.1;
-            }
+            const calculatedAmount = (amount * servings) / noOfServings;
+
+            const { adjustedAmount, adjustedUnit } = AdjustMeasurment(calculatedAmount,ingredientUnits[index]);
+
             return (
               <li key={index}>
                 <strong>
-                  {calculatedAmount % 1 !== 0 ? calculatedAmount.toFixed(1) : calculatedAmount}
+                  {adjustedAmount % 1 !== 0 ? adjustedAmount.toFixed(1) : adjustedAmount}
                 </strong>
-                {" "}
-                {ingredientUnits[index]}
+                  {" "}
+                  {adjustedUnit}
                 {" "}
                 {ingredientNames[index]}
               </li>
@@ -69,7 +95,11 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
             onClick={() => handleDecreaseButtonClick()}
           />
         </button>
-        {servings === 1 ? <p>{servings} serving</p> : <p>{servings} servings</p>}
+        {servings === 1 ? (
+          <p>{servings} serving</p>
+        ) : (
+          <p>{servings} servings</p>
+        )}
         <button className="increase-btn">
           <img
             src={increaseBtn}
