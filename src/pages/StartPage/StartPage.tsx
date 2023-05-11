@@ -141,42 +141,62 @@ export default function StartPage(props) {
   useEffect(() => {
     //If only by render and no backbutton click random recipes are fetched.
     if (!backButtonClicked) {
-      if(isHeroSelected){
 
-      } else{
-        if (!useStatic) {
-          fetch(
-            `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              createCards(data.recipes);
-            });
-  
-        } else {
-          // Sample recipes to use instead of calling fetch method during development.
-          const forTesting: RecipeFrontST[] = [
-            {
-              id: 637776,
-              title: "Cherry Pancakes for One",
-              image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
-              readyInMinutes: 45,
-            },
-            {
-              id: 660697,
-              title: "Southern Fried Catfish",
-              image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
-              readyInMinutes: 45,
-            },
-            {
-              id: 634091,
-              title: "Banana Foster Bread Pudding",
-              image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
-              readyInMinutes: 45,
-            },
-          ];
-          createCards(forTesting);
+      if(isHeroSelected){
+        let cuisine: string = "";
+        let minCalories: string = "";
+
+        if(heroObject.id === "149"){
+          cuisine = "american";
+          minCalories = "1";
+        } else if(heroObject.id === "332"){
+          cuisine = "";
+          minCalories = "1000";
+        } else if(heroObject.id === "659"){
+          cuisine = "nordic";
+          minCalories = "1";
         }
+
+        const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&cuisine=${cuisine}&minCalories=${minCalories}&number=${maxHits}&sort=popularity&sortDirection=desc&addRecipeInformation=true`;
+        console.log(encodeURI(url))
+        try {
+          fetch(encodeURI(url))
+            .then((response) => response.json())
+            .then((data) => {createCards(data.results)});
+        } catch (e) {
+          console.log(e);
+        }
+
+        } else{
+          if (!useStatic) {
+            fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`)
+              .then((response) => response.json())
+              .then((data) => {createCards(data.recipes);});
+    
+          } else {
+            // Sample recipes to use instead of calling fetch method during development.
+            const forTesting: RecipeFrontST[] = [
+              {
+                id: 637776,
+                title: "Cherry Pancakes for One",
+                image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+                readyInMinutes: 45,
+              },
+              {
+                id: 660697,
+                title: "Southern Fried Catfish",
+                image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
+                readyInMinutes: 45,
+              },
+              {
+                id: 634091,
+                title: "Banana Foster Bread Pudding",
+                image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
+                readyInMinutes: 45,
+              },
+            ];
+            createCards(forTesting);
+          }
       }
     }
 
@@ -393,7 +413,7 @@ export default function StartPage(props) {
         />
 
         {isHeroSelected ?
-        (<h3>{heroObject.name}</h3>) :
+        (<h3>{heroObject.biography.facts}</h3>) :
         standardSearch ? (
           <SearchBarFreeText
             freeTextSearch={freeTextSearch}
@@ -448,7 +468,8 @@ export default function StartPage(props) {
             </p>
           </div>
 
-          {standardSearch && 
+          {standardSearch &&
+          !isHeroSelected && 
           <div className="sorting">
             <Sort sortedBy={sortedBy} setSortedBy={setSortedBy} />
           </div>}

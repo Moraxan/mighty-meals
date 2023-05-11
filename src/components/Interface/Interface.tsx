@@ -66,6 +66,7 @@ interface powerstats {
 }
 
 interface biography {
+    facts: string,
     fullName: string,
     alterEgos: string,
     aliases: string[],

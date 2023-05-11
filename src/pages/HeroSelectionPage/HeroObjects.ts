@@ -1,4 +1,7 @@
-export const captainAmerica = {
+import { ThorFacts, HulkFacts, CaptainAmericaFacts } from "../../components/HeroFacts/HeroFacts";
+import { Hero } from "../../components/Interface/Interface";
+
+export const captainAmerica: Hero = {
     id: "149",
     name: "Captain America",
     powerstats: {
@@ -10,6 +13,7 @@ export const captainAmerica = {
         combat: "100"
     },
     biography: {
+        facts: CaptainAmericaFacts,
         fullName: "Steve Rogers",
         alterEgos: "No alter egos found.",
         aliases: [
@@ -48,7 +52,7 @@ export const captainAmerica = {
     }
 }
 
-export const hulk = {
+export const hulk: Hero = {
     id: "332",
     name: "Hulk",
     powerstats: {
@@ -60,6 +64,7 @@ export const hulk = {
         combat: "85"
     },
     biography: {
+        facts: HulkFacts,
         fullName: "Bruce Banner",
         alterEgos: "No alter egos found.",
         aliases: [
@@ -104,7 +109,7 @@ export const hulk = {
     }
 }
 
-export const thor = {
+export const thor: Hero = {
     id: "659",
     name: "Thor",
     powerstats: {
@@ -116,6 +121,7 @@ export const thor = {
         combat: "100"
     },
     biography: {
+        facts: ThorFacts,
         fullName: "Thor Odinson",
         alterEgos: "Rune King Thor",
         aliases: [
