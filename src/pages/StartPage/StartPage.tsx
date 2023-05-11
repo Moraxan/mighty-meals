@@ -50,6 +50,7 @@ export default function StartPage(props) {
   // States for all different type of filter/ingredient choices
   const [freeTextSearch, setFreeTextSearch] = useState("");
   const [ingredientChoices, setIngredientChoices] = useState(emptyArr);
+  const [totalNumberOfIngredients, TotalNumberOfIngredients] = useState<number>();
   const [mealChoice, setMealChoice] = useState("");
   const [cuisineChoices, setCuisineChoices] = useState(emptyArr);
   const [intoleranceChoices, setIntoleranceChoices] = useState(emptyArr);
@@ -185,6 +186,11 @@ export default function StartPage(props) {
     }
   }, []);
 
+  function CountIngredients() {
+    var tmp = ingredientChoices.length;
+    TotalNumberOfIngredients(tmp);
+  }
+
   async function getApiData() {
     // Function that fetches / GET data back from the API.
     // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
@@ -319,6 +325,7 @@ export default function StartPage(props) {
           };
           tmpTmp.push(tmp);
           setRecipesMTVMH(tmpTmp);
+          CountIngredients();
         });
       }
     }
@@ -350,6 +357,7 @@ export default function StartPage(props) {
     handleRecipeClick={props.handleRecipeClick}
     persistSearchData={persistSearchData}
     ingredientChoices={ingredientChoices}
+    totalNumberOfIngredients={totalNumberOfIngredients}
   />
 
   return (
