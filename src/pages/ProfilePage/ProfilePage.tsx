@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import Card from '../../components/RecipeCard/Card';
 import { RecipeFrontST } from '../../components/Interface/Interface';
 import { BackButton } from '../RecipePage/BackButton';
+import CommentForm from '../../components/Comment/Comment';
 
 export const ProfilePage = () => {
 
@@ -60,16 +61,28 @@ export const ProfilePage = () => {
   return (
    
     <div className="profilepage-container">
-         <BackButton/>
+      <div className="back-btn">
+        <BackButton />
+      </div>
+      <div className="profile-header">
         Profile
-       
-
-      <div className="likedrecipes">
-        <div className="profile-header">
-          These are your liked recipes!
+      </div>
+    
+      <div className="grid-container">
+        <div className="likedrecipes">
+          <div className="profile-header">
+            These are your liked recipes!
+          </div>
+          <div className="likedrecipes-box">
+            <LikedRecipes />
+          </div>
         </div>
-        <LikedRecipes />
+        <div className="comments-box">
+          <CommentForm/>
+        </div>
       </div>
     </div>
+  
+
   );
 }
