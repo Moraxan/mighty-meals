@@ -6,8 +6,6 @@ import { Directions } from './Directions';
 import { DishImage } from './DishImage';
 import {useLoaderData} from "react-router-dom";
 import { isDevMode } from "../../main";
-
-import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
 import './RecipePage.css';
 
@@ -27,16 +25,11 @@ export const RecipePage = () => {
 
 
 
-  //@ts-ignore Set this in main.tsx file.
-  const setDevMode = useDeveloperModeStore((state) => state.setDevMode);
-  setDevMode(isDevMode);
   //@ts-ignore
-  const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
-  //@ts-ignore
-  const apiKey: string | null = devMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
+  const apiKey: string | null = isDevMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
 
   useEffect(() => {
-    const persistedSettings = devMode ? JSON.parse(localStorage.getItem("mightySettings")!) : JSON.parse(localStorage.getItem("mightyProdSettings")!);
+    const persistedSettings = isDevMode ? JSON.parse(localStorage.getItem("mightySettings")!) : JSON.parse(localStorage.getItem("mightyProdSettings")!);
     const storedData = JSON.parse(localStorage.getItem(`recipeFetch_${recipeId}`)!);
 
     if (storedData) {

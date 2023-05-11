@@ -13,7 +13,6 @@ import { RecipeFrontST, RecipeMTVMH, Hero } from "../../components/Interface/Int
 import { useMediaQuery } from "../../components/DropdownNav/DropdownNav";
 import { useBackButtonStore } from "../../components/Stores/backButtonClick";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
-import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 import { useHeroInfoStore } from "../../components/Stores/displayHeroInfoAndFood";
 import { isDevMode } from "../../main";
 
@@ -22,24 +21,16 @@ import Sort from "../../components/Sort/Sort";
 
 //@ts-ignore
 export default function StartPage(props) {
-  //@ts-ignore Set this in main.tsx file.
-  const setDevMode = useDeveloperModeStore((state) => state.setDevMode);
-  setDevMode(isDevMode);
 
-  //@ts-ignore
-  const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
+  //***************************                   DEVMODE IS NOW SET IN MAIN.TSX FILE!!!                **************************
 
   //@ts-ignore
   const setProdApiKey = useApiCheckerStore((state) => state.updateProdApiKey);
-
-
 
   //@ts-ignore Zustand store variables for hero selection, inluding hero object and if hero is selected or not.
   const isHeroSelected: boolean = useHeroInfoStore((state) => state.isHeroSelected);
   //@ts-ignore
   const heroObject: Hero = useHeroInfoStore((state) => state.heroObject);
-
-
 
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
   const emptyRecipeST: RecipeFrontST[] = [];
@@ -102,7 +93,7 @@ export default function StartPage(props) {
     storedIgnorePantry: true,
   };
 
-  if(devMode){
+  if(isDevMode){
     if (localStorage.getItem("mightySettings") === null) {
       localStorage.setItem("mightySettings", JSON.stringify(devSettings));
     }
@@ -122,13 +113,13 @@ export default function StartPage(props) {
   }
 
   //@ts-ignore
-  const useStatic = devMode ? JSON.parse(localStorage.getItem("mightyRandomOrStatic")) : false;
+  const useStatic = isDevMode ? JSON.parse(localStorage.getItem("mightyRandomOrStatic")) : false;
 
   //@ts-ignore
-  const persistedSettings = devMode ? JSON.parse(localStorage.getItem("mightySettings")) : JSON.parse(localStorage.getItem("mightyProdSettings"));
+  const persistedSettings = isDevMode ? JSON.parse(localStorage.getItem("mightySettings")) : JSON.parse(localStorage.getItem("mightyProdSettings"));
 
   //@ts-ignore
-  const apiKey: string | null = devMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
+  const apiKey: string | null = isDevMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
 
   const maxHits: number = persistedSettings.storedMaxHits;
   const addRecipeNutrition: boolean = persistedSettings.storeAddRecipeNutrition;
