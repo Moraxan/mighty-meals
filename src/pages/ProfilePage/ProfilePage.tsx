@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import Card from '../../components/RecipeCard/Card';
 import { RecipeFrontST } from '../../components/Interface/Interface';
 import { BackButton } from '../RecipePage/BackButton';
-import CommentForm from '../../components/Comment/Comment';
+import CommentForm from '../../components/Comment/CommentForm';
 
 export const ProfilePage = () => {
 
