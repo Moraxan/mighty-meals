@@ -44,7 +44,7 @@ export const ProfilePage = () => {
   // This maps over the liked recipes and displays the cards for them.
   const LikedRecipes = () => {
     return (
-      <div>
+      <div >
         {recipes.map((recipe) => (
           <Card
             key={recipe.id}
@@ -73,7 +73,7 @@ export const ProfilePage = () => {
           <div className="profile-header">
             These are your liked recipes!
           </div>
-          <div className="likedrecipes-box">
+          <div>
             <LikedRecipes />
           </div>
         </div>
