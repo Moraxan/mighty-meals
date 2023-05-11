@@ -62,9 +62,7 @@ export const Router = createBrowserRouter([
     path: "/",
     element: (
       <>
-      <div className="splashPage">
      <ShowSplashFirstSession />
-     </div>
       </>
     ),
   },
@@ -73,10 +71,8 @@ export const Router = createBrowserRouter([
     loader: ({ params }) => {return params.id},
     element: (
       <>
-          <div className="app-body-recipe">
             <NavigationBar hideSwitch={true}/>
             <RecipePage />
-          </div>
           <div className='footer'>
           <Footer />
           </div>
