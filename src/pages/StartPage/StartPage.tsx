@@ -15,15 +15,16 @@ import { useBackButtonStore } from "../../components/Stores/backButtonClick";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
 import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 import { useHeroInfoStore } from "../../components/Stores/displayHeroInfoAndFood";
+import { isDevMode } from "../../main";
 
 import "./StartPage.css";
 import Sort from "../../components/Sort/Sort";
 
 //@ts-ignore
 export default function StartPage(props) {
-  //@ts-ignore
+  //@ts-ignore Set this in main.tsx file.
   const setDevMode = useDeveloperModeStore((state) => state.setDevMode);
-  setDevMode(true);
+  setDevMode(isDevMode);
 
   //@ts-ignore
   const devMode: boolean = useDeveloperModeStore((state) => state.devMode);

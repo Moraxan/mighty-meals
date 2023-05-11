@@ -5,6 +5,7 @@ import { Ingredients } from './Ingredients';
 import { Directions } from './Directions';
 import { DishImage } from './DishImage';
 import {useLoaderData} from "react-router-dom";
+import { isDevMode } from "../../main";
 
 import { useDeveloperModeStore } from "../../components/Stores/developerMode";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
@@ -26,7 +27,9 @@ export const RecipePage = () => {
 
 
 
-
+  //@ts-ignore Set this in main.tsx file.
+  const setDevMode = useDeveloperModeStore((state) => state.setDevMode);
+  setDevMode(isDevMode);
   //@ts-ignore
   const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
   //@ts-ignore
@@ -35,14 +38,16 @@ export const RecipePage = () => {
   useEffect(() => {
     const persistedSettings = devMode ? JSON.parse(localStorage.getItem("mightySettings")!) : JSON.parse(localStorage.getItem("mightyProdSettings")!);
     const storedData = JSON.parse(localStorage.getItem(`recipeFetch_${recipeId}`)!);
+
     if (storedData) {
       setRecipeData(storedData);
     } else {
 //Remember to put in your own API key here the first time you run this code
 //If you see the middle component of the page saying Loading... then you've probably forgotten to put in your API key
       //@ts-ignore
-
-      const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=${persistedSettings.storeAddRecipeNutrition}`;
+      const addNutrition: boolean = persistedSettings === null ? true : persistedSettings.storeAddRecipeNutrition;
+      const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=${addNutrition}`;
+      console.log(url);
 
       fetch(url)
         .then((response) => {
