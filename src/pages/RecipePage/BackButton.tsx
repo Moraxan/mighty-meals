@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {useBackButtonStore} from "../../components/Stores/backButtonClick";
 import backbtn from "../../images/return-button.png";
 
@@ -8,11 +8,15 @@ export const BackButton = () => {
   //@ts-ignore //global zustand variable/state to monitor back button click and persist state.
   const handleBackClick = useBackButtonStore((state) => state.clickBackButton);
 
+  //Takes the current URI from where backbutton was clicked. If clicked from hero selection page no persist logic is run.
+  const currentLocationURI = useLocation().pathname;
   const handleClick = () => {
-    if(sessionStorage.getItem("persisted-search-data") !== null){
-      handleBackClick(true);
-    } else{
-      handleBackClick(false);
+    if(currentLocationURI !== "/heroselection"){
+      if(sessionStorage.getItem("persisted-search-data") !== null){
+        handleBackClick(true);
+      } else{
+        handleBackClick(false);
+      }
     }
   }
 
@@ -26,4 +30,3 @@ export const BackButton = () => {
 };
 
 //onClick={() => useBackButtonStore((state) => state.clickBackButton())}
-

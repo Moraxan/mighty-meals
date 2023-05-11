@@ -17,7 +17,7 @@ const Card = ( props ) => {
     
     <div>
       
-    <Link to={`recipe/${props.recId}`} onClick={() => {props.persistSearchData()}}>
+    <Link to={`/recipe/${props.recId}`} onClick={() => {props.persistSearchData()}}>
     <div className="card card__wrapper">
       {/*//@ts-ignore*/}
       <img className="card__bg-image" src={props.imgSrc === undefined ? "undefined" : props.imgSrc} alt="" onError={(e) => {e.target.src = alt_image}} />
