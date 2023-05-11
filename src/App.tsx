@@ -8,6 +8,7 @@ import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
 import { SplashPage } from "./components/SplashPage/SplashPage";
 import HeroSelectionPage from "./pages/HeroSelectionPage/HeroSelectionPage";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 
 
 const ShowSplashFirstSession = () => {
@@ -80,6 +81,15 @@ export const Router = createBrowserRouter([
           <Footer />
           </div>
         </>
+      )
+  },
+  {
+    path: "profilepage",
+    element: (
+      <>
+      <NavigationBar hideSwitch={true}/>
+      <ProfilePage />
+      </>
       ),
   },
   {

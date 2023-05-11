@@ -26,7 +26,7 @@ const CardMTVMH = ( props ) => {
         <div>
           <div className="card__ingredients">            
             <p className="ingredients">                        
-              <span>matching ingredients:&nbsp;&nbsp;{props.usedIngredientCount}<span className="divider">&nbsp;/</span>{props.ingredientChoices.length}</span>
+              <span>matching ingredients:&nbsp;&nbsp;{props.usedIngredientCount}<span className="divider">&nbsp;/</span>{props.totalNumberOfIngredients}</span>
             </p>
           </div>
         </div>
