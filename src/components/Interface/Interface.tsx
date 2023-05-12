@@ -42,3 +42,59 @@ export interface RecipeMTVMH {
 
     // unusedIngredients: string[];
 }
+
+
+
+export interface Hero {
+    id: string,
+    name: string,
+    powerstats: powerstats,
+    biography: biography,
+    appearance: appearance,
+    work: work,
+    connections: connections,
+    image: image,
+}
+
+interface powerstats {
+    intelligence: string,
+    strength: string,
+    speed: string,
+    durability: string,
+    power: string,
+    combat: string,
+}
+
+interface biography {
+    facts: string,
+    fullName: string,
+    alterEgos: string,
+    aliases: string[],
+    placeOfBirth: string,
+    firstAppearance: string,
+    publisher: string,
+    alignment: string,
+}
+
+interface appearance {
+    gender: string,
+    race: string,
+    height: string[],
+    weight: string[],
+    eyeColor: string,
+    hairColor: string,
+}
+
+interface work {
+    occupation: string,
+    base: string,
+}
+
+interface connections {
+    groupAffiliation: string,
+    relatives: string,
+}
+
+interface image {
+    url: string,
+}

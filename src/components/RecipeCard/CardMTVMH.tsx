@@ -1,9 +1,22 @@
 import "./card.css";
-import {Link} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useBroserHistoryStore } from "../Stores/browsingHistory";
 import alt_image from "../../images/alt_image.png";
 
 //@ts-ignore
 const CardMTVMH = ( props ) => {
+
+  //@ts-ignore
+  const setPreviousPage = useBroserHistoryStore((state) => state.setPreviousPage);
+  const location: string = useLocation().pathname;
+
+  const handleClick = () => {
+    if(location !== "/profilepage"){
+      props.persistSearchData();
+    }
+    
+    setPreviousPage(location);
+  };
 
   function removeSymbolsFromString(){
     const title = props.recipeTitle
@@ -14,7 +27,7 @@ const CardMTVMH = ( props ) => {
 
   return (
     <div className="topCard">
-    <Link to={`recipe/${props.recId}`} onClick={() => {props.persistSearchData()}}>
+    <Link to={`/recipe/${props.recId}`} onClick={() => {handleClick()}}>
     <div className="card card__wrapper">
       {/*//@ts-ignore*/}
       <img className="card__bg-image" src={props.imgSrc === undefined ? "undefined" : props.imgSrc} alt="" onError={(e) => {e.target.src = alt_image}} />
@@ -26,7 +39,7 @@ const CardMTVMH = ( props ) => {
         <div>
           <div className="card__ingredients">            
             <p className="ingredients">                        
-              <span>matching ingredients:&nbsp;&nbsp;{props.usedIngredientCount}<span className="divider">&nbsp;/</span>{props.ingredientChoices.length}</span>
+              <span>matching ingredients:&nbsp;&nbsp;{props.usedIngredientCount}<span className="divider">&nbsp;/</span>{props.totalNumberOfIngredients}</span>
             </p>
           </div>
         </div>
