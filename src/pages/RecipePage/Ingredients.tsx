@@ -3,16 +3,19 @@ import { useState, useEffect } from "react";
 import decreaseBtn from "../../images/decreaseBtn.png";
 import increaseBtn from "../../images/increaseBtn.png";
 
-function AdjustMeasurment(amount: number, unit: string) {
+function AdjustMeasurment(amount: any, unit: string) {
 
   if (unit === "ml") {
-    amount = amount >= 1000 ? (unit = "L", amount / 1000) : (amount >= 100 && amount < 1000) ? (unit = "dl", amount / 100) : amount;
+    amount = amount >= 1000 ? (unit = "l", amount / 1000) : (amount >= 100 && amount < 1000) ? (unit = "dl", amount / 100) : amount;
   }
   
   if (unit === "g") {
     amount = amount >= 1000 ? (unit = "kg", amount / 1000) : (amount >= 100 && amount < 1000) ? (unit = "hg", amount / 100) : amount;
   }
   amount = amount < 0.1 ? 0.1 : amount;
+
+  //if first decimal of amount = 0, round down to integer (quick fix to solve bug) else shorten to display 1 decimal point
+  amount = Number(amount.toFixed(1).split(".")[1][0]) === 0 ? Math.round(amount) : amount.toFixed(1);
 
   return { adjustedAmount: amount, adjustedUnit: unit };
 }
@@ -40,14 +43,12 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
     setIngredientUnits(units);
   }, [ingredients]);
 
-  //logic for decreasing portion size
   const handleDecreaseButtonClick = () => {
     if (servings === 1) return;
     //@ts-ignore
     setServings((prevServings) => prevServings - 1);
   };
 
-  //logic for increasing portion size
   const handleIncreaseButtonClick = () => {
     //@ts-ignore
     setServings((prevServings) => prevServings + 1);
@@ -66,7 +67,7 @@ export const Ingredients = ({ ingredients, noOfServings }) => {
             return (
               <li key={index}>
                 <strong>
-                  {adjustedAmount % 1 !== 0 ? adjustedAmount.toFixed(1) : adjustedAmount}
+                  {adjustedAmount}
                 </strong>
                   {" "}
                   {adjustedUnit}
