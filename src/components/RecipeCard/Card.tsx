@@ -1,10 +1,25 @@
 import "./card.css";
-import {Link} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useBroserHistoryStore } from "../Stores/browsingHistory";
 import clock from "../../images/clock.png";
 import alt_image from "../../images/alt_image.png";
 
 //@ts-ignore
 const Card = ( props ) => {
+
+  //@ts-ignore
+  const setPreviousPage = useBroserHistoryStore((state) => state.setPreviousPage);
+  const location: string = useLocation().pathname;
+
+  const handleClick = () => {
+    if(location !== "/profilepage"){
+      props.persistSearchData();
+    }
+    
+    setPreviousPage(location);
+  };
+
+
 
   function removeSymbolsFromString(){
     const title = props.recipeTitle
@@ -17,7 +32,7 @@ const Card = ( props ) => {
     
     <div>
       
-    <Link to={`/recipe/${props.recId}`} onClick={() => {props.persistSearchData()}}>
+    <Link to={`/recipe/${props.recId}`} onClick={() => {handleClick()}}>
     <div className="card card__wrapper">
       {/*//@ts-ignore*/}
       <img className="card__bg-image" src={props.imgSrc === undefined ? "undefined" : props.imgSrc} alt="" onError={(e) => {e.target.src = alt_image}} />
