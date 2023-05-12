@@ -1,5 +1,7 @@
 import create, { SetState } from 'zustand'
 
+const likedRecipesStorageKey = 'likedRecipes'
+
 interface RecipeStoreState {
   recipeIds: string[]
   addRecipeId: (id: string) => void
@@ -7,12 +9,26 @@ interface RecipeStoreState {
   clearRecipeIds: () => void
 }
 
-export const likedRecipeStore = create<RecipeStoreState>((set: SetState<RecipeStoreState>) => ({
-  recipeIds: [],
-  addRecipeId: (id: string) =>
-    set((state) => ({ recipeIds: [...state.recipeIds, id] })),
-  removeRecipeId: (id: string) =>
-    set((state) => ({ recipeIds: state.recipeIds.filter((recipeId) => recipeId !== id) })),
-  clearRecipeIds: () => set({ recipeIds: [] }),
-}))
+export const likedRecipeStore = create<RecipeStoreState>((set: SetState<RecipeStoreState>) => {
+  const savedRecipeIds = JSON.parse(localStorage.getItem(likedRecipesStorageKey) || '[]')
 
+  return {
+    recipeIds: savedRecipeIds,
+    addRecipeId: (id: string) =>
+      set((state) => {
+        const updatedIds = [...state.recipeIds, id]
+        localStorage.setItem(likedRecipesStorageKey, JSON.stringify(updatedIds))
+        return { recipeIds: updatedIds }
+      }),
+    removeRecipeId: (id: string) =>
+      set((state) => {
+        const updatedIds = state.recipeIds.filter((recipeId) => recipeId !== id)
+        localStorage.setItem(likedRecipesStorageKey, JSON.stringify(updatedIds))
+        return { recipeIds: updatedIds }
+      }),
+    clearRecipeIds: () => {
+      localStorage.removeItem(likedRecipesStorageKey)
+      set({ recipeIds: [] })
+    },
+  }
+})
