@@ -3,6 +3,7 @@ import { BackButton } from "../RecipePage/BackButton";
 import { getSuperhero } from "../../components/GetSuperhero/GetSuperhero";
 import { captainAmerica, hulk, thor } from "./HeroObjects";
 import { useHeroInfoStore } from "../../components/Stores/displayHeroInfoAndFood";
+import {useBackButtonStore} from "../../components/Stores/backButtonClick";
 
 import cptAmericaImg from "./Images/captainAmerica.jpg";
 import hulkImg from "./Images/hulk.jpg";
@@ -12,6 +13,8 @@ import "./HeroSelectionPage.css";
 
 export default function HeroSelectionPage(){
 
+    //@ts-ignore Zustand store variables for setting clicked state, useState on StartPage renders differently depending on this.
+    const handleBackClick = useBackButtonStore((state) => state.clickBackButton);
     //@ts-ignore Zustand store variables for setting global hero object and if hero is selected
     const setHeroObject = useHeroInfoStore((state) => state.setHeroObject);
     //@ts-ignore
@@ -22,14 +25,14 @@ export default function HeroSelectionPage(){
     // const thorImg: string = "https://www.superherodb.com/pictures2/portraits/10/100/140.jpg";
 
     const onHeroClick = (heroId: number) => {
+        setIsHeroSelected(true);
+        handleBackClick(false);
+
         if(heroId === 149){
-            setIsHeroSelected(true);
             setHeroObject(captainAmerica);
         } else if(heroId === 332){
-            setIsHeroSelected(true);
             setHeroObject(hulk);
         } else if(heroId === 659){
-            setIsHeroSelected(true);
             setHeroObject(thor);
         };
     };
