@@ -41,8 +41,14 @@ export const Directions = ({ directions, recipeId }) => {
   };
 
 //This function handles the click on the like button. It adds the recipe to the Zustand Store for access in the profile page mainly
-  const handleButtonClick = (recipeId: string) => {
-    likedRecipeStore.getState().addRecipeId(recipeId);
+const handleButtonClick = (event) => {
+  const recipeId = event.target.dataset.recipeId;
+  likedRecipeStore.getState().addRecipeId(recipeId);
+  const clickedImage = event.target;
+  clickedImage.style.opacity = '0.5';
+  setTimeout(() => {
+    clickedImage.style.opacity = '1';
+  }, 500);
   }
 
   return (
@@ -50,7 +56,7 @@ export const Directions = ({ directions, recipeId }) => {
         <div className="title-buttons-container">
           <h2 className="directions-box">directions</h2>
           <div className="directions-buttons">
-          <img src={likeButton} onClick={() => handleButtonClick(recipeId)} alt="like"/>
+          <img src={likeButton} data-recipe-id={recipeId} onClick={handleButtonClick} alt="like"/>
           <img src={dislikeButton} alt="dislike"/>
         </div>
       </div>
