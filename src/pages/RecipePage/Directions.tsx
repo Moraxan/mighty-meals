@@ -2,7 +2,7 @@ import checkedImg from "../../images/checked.png";
 import uncheckedImg from "../../images/unchecked.png";
 import dislikeButton from "../../images/dislike_btn.png";
 import likeButton from "../../images/like_btn.png";
-import {recipeStore} from "../../components/Stores/likedRecipes";
+import {likedRecipeStore} from "../../components/Stores/likedRecipes";
 import "./Directions.css";
 import { useState } from "react";
 
@@ -42,7 +42,7 @@ export const Directions = ({ directions, recipeId }) => {
 
 //This function handles the click on the like button. It adds the recipe to the Zustand Store for access in the profile page mainly
   const handleButtonClick = (recipeId: string) => {
-    recipeStore.getState().addRecipeId(recipeId);
+    likedRecipeStore.getState().addRecipeId(recipeId);
   }
 
   return (

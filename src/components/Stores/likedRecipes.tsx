@@ -7,7 +7,7 @@ interface RecipeStoreState {
   clearRecipeIds: () => void
 }
 
-export const recipeStore = create<RecipeStoreState>((set: SetState<RecipeStoreState>) => ({
+export const likedRecipeStore = create<RecipeStoreState>((set: SetState<RecipeStoreState>) => ({
   recipeIds: [],
   addRecipeId: (id: string) =>
     set((state) => ({ recipeIds: [...state.recipeIds, id] })),
