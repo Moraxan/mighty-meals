@@ -4,7 +4,7 @@ import Card from '../../components/RecipeCard/Card';
 import { RecipeFrontST } from '../../components/Interface/Interface';
 import { BackButton } from '../RecipePage/BackButton';
 import CommentForm from '../../components/Comment/CommentForm';
-import { recipeStore } from '../../components/Stores/likedRecipes';
+import { likedRecipeStore } from '../../components/Stores/likedRecipes';
 import { useStore } from 'zustand';
 
 export const ProfilePage = () => {
@@ -32,7 +32,7 @@ export const ProfilePage = () => {
   ], []);
 
   const [recipes, setRecipes] = useState<RecipeFrontST[]>([]);
-  const recipeIds = useStore(recipeStore).recipeIds;
+  const recipeIds = useStore(likedRecipeStore).recipeIds;
 
 // // The useEffect function will be called every time the component mounts or recipeIds changes
 // useEffect(() => {
