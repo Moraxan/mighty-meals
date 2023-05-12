@@ -4,6 +4,8 @@ import Card from '../../components/RecipeCard/Card';
 import { RecipeFrontST } from '../../components/Interface/Interface';
 import { BackButton } from '../RecipePage/BackButton';
 import CommentForm from '../../components/Comment/CommentForm';
+import { recipeStore } from '../../components/Stores/likedRecipes';
+import { useStore } from 'zustand';
 
 export const ProfilePage = () => {
 
@@ -30,16 +32,19 @@ export const ProfilePage = () => {
   ], []);
 
   const [recipes, setRecipes] = useState<RecipeFrontST[]>([]);
+  const recipeIds = useStore(recipeStore).recipeIds;
 
-  // useEffect checks if there are any recipes in the database. If there are no recipes in the database, the dummy array is used.
-  useEffect(() => {
-    const storedRecipes = JSON.parse(localStorage.getItem("recipes") || "[]") as RecipeFrontST[];
-    if (storedRecipes.length > 0) {
-      setRecipes(storedRecipes);
-    } else {
-      setRecipes(defaultRecipes);
-    }
-  }, [defaultRecipes]);
+// // The useEffect function will be called every time the component mounts or recipeIds changes
+// useEffect(() => {
+//   // Map the recipeIds to an array of RecipeFrontST objects
+//   const storedRecipes = recipeIds.map((id) => JSON.parse(localStorage.getItem(id) || "{}") as RecipeFrontST);
+  
+//   if (storedRecipes.length > 0) {
+//     setRecipes(storedRecipes);
+//   } else {
+//     setRecipes(defaultRecipes);
+//   }
+// }, [recipeIds]);
 
   // This maps over the liked recipes and displays the cards for them.
   const LikedRecipes = () => {

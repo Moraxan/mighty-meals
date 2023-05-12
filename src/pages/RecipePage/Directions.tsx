@@ -1,10 +1,13 @@
 import checkedImg from "../../images/checked.png";
 import uncheckedImg from "../../images/unchecked.png";
+import dislikeButton from "../../images/dislike_btn.png";
+import likeButton from "../../images/like_btn.png";
+import {recipeStore} from "../../components/Stores/likedRecipes";
 import "./Directions.css";
 import { useState } from "react";
 
 //@ts-ignore
-export const Directions = ({ directions }) => {
+export const Directions = ({ directions, recipeId }) => {
   const [directionsState, setDirectionsState] = useState(directions);
 
 //Checks if there are no directions available. Displays message to the user.
@@ -37,11 +40,22 @@ export const Directions = ({ directions }) => {
     setDirectionsState([{ ...directionsState[0], steps: newSteps }]);
   };
 
+//This function handles the click on the like button. It adds the recipe to the Zustand Store for access in the profile page mainly
+  const handleButtonClick = (recipeId: string) => {
+    recipeStore.getState().addRecipeId(recipeId);
+  }
+
   return (
     <div className="directions-container">
-      <div>
-        <h2 className="directions-box">directions</h2>
+        <div className="title-buttons-container">
+          <h2 className="directions-box">directions</h2>
+          <div className="directions-buttons">
+          <img src={likeButton} onClick={() => handleButtonClick(recipeId)} alt="like"/>
+          <img src={dislikeButton} alt="dislike"/>
+        </div>
       </div>
+      
+
       <br />
       <ul className="directions-list">
         {/*//@ts-ignore*/}
