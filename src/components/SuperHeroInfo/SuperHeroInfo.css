@@ -52,7 +52,7 @@
 }
 
 .superhero-image {
-  width: 100%;
+  width: 110%;
 }
 
 .details-container {
@@ -90,4 +90,34 @@
 .stats-details img {
   height: 9px;
   margin-top: 6px;
+}
+
+@media screen and (max-width: 987px) and (min-height: 450px) {
+  .superhero-container {
+    width: 650px;
+  }
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+  .stats {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 900px) and (max-height: 450px),
+  screen and (max-width: 450px) and (max-height: 900px) {
+  .superhero-container {
+    width: 320px;
+    margin-bottom: 140px;
+  }
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+  .stats {
+    margin-top: 20px;
+  }
 }

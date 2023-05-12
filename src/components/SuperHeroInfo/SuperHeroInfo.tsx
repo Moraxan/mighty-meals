@@ -1,5 +1,6 @@
 import "./SuperHeroInfo.css";
-import { ThorFacts } from "../HeroFacts/HeroFacts";
+import { useHeroInfoStore } from "../../components/Stores/displayHeroInfoAndFood";
+import { Hero } from "../../components/Interface/Interface";
 import statbar0 from "../../images/statbar_0.png";
 import statbar1 from "../../images/statbar_1.png";
 import statbar2 from "../../images/statbar_2.png";
@@ -13,7 +14,9 @@ import statbar9 from "../../images/statbar_9.png";
 import statbar10 from "../../images/statbar_10.png";
 
 //@ts-ignore
-export default function SuperHeroInfo({ superHero }) {
+export default function SuperHeroInfo() {
+  //@ts-ignore
+  const superHero: Hero = useHeroInfoStore((state) => state.heroObject);
   //@ts-ignore
   const powerStatImage = (powerStatValue) => {
     let imageUrl = "";
@@ -70,12 +73,12 @@ export default function SuperHeroInfo({ superHero }) {
         <div className="info-container">
           <div className="superhero-info">
             <h2 className="yellow-background">{superHero.name}</h2>
-            <p>{ThorFacts}</p>
+            <p>{superHero.biography.facts}</p>
           </div>
           <div className="details-container">
             <div className="info">
               <div className="info-first">
-                <p>Full Name: {superHero.biography["full-name"]}</p>
+                <p>Full Name: {superHero.biography.fullName}</p>
                 <p>Race: {superHero.appearance.race}</p>
                 <p>Base: {superHero.work.base}</p>
               </div>
@@ -85,7 +88,7 @@ export default function SuperHeroInfo({ superHero }) {
                     Height: {superHero.appearance.height[1]}
                   </p>
                   <p className="yellow-background">
-                    Hair color: {superHero.appearance["hair-color"]}
+                    Hair color: {superHero.appearance.hairColor}
                   </p>
                 </div>
                 <div className="second-column">
@@ -93,7 +96,7 @@ export default function SuperHeroInfo({ superHero }) {
                     Weight: {superHero.appearance.weight[1]}
                   </p>
                   <p className="yellow-background">
-                    Eye color: {superHero.appearance["eye-color"]}
+                    Eye color: {superHero.appearance.eyeColor}
                   </p>
                 </div>
               </div>

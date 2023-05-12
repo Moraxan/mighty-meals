@@ -9,7 +9,11 @@ import ModalSaveAPIKey from "../../components/ModalSaveAPIKey/ModalSaveAPIKey";
 import HaveCook from "../../components/HaveCooked/HaveCooked";
 import Card from "../../components/RecipeCard/Card";
 import CardMTVMH from "../../components/RecipeCard/CardMTVMH";
-import { RecipeFrontST, RecipeMTVMH, Hero } from "../../components/Interface/Interface";
+import {
+  RecipeFrontST,
+  RecipeMTVMH,
+  Hero,
+} from "../../components/Interface/Interface";
 import { useMediaQuery } from "../../components/DropdownNav/DropdownNav";
 import { useBackButtonStore } from "../../components/Stores/backButtonClick";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
@@ -22,27 +26,28 @@ import SuperHeroInfo from "../../components/SuperHeroInfo/SuperHeroInfo";
 
 //@ts-ignore
 export default function StartPage(props) {
-
   //***************************                   DEVMODE IS NOW SET IN MAIN.TSX FILE!!!                **************************
 
- //#region Zustand stores #############################################################################################################
+  //#region Zustand stores #############################################################################################################
 
   //@ts-ignore
   const setProdApiKey = useApiCheckerStore((state) => state.updateProdApiKey);
   //@ts-ignore Zustand store variables for hero selection, inluding hero object and if hero is selected or not.
-  const isHeroSelected: boolean = useHeroInfoStore((state) => state.isHeroSelected);
+  const isHeroSelected: boolean = useHeroInfoStore(
+    (state) => state.isHeroSelected
+  );
   //@ts-ignore
   const heroObject: Hero = useHeroInfoStore((state) => state.heroObject);
   //@ts-ignore // global zustand variable/state to monitor back button click and persist state
   const backButtonClicked = useBackButtonStore((state) => state.clicked);
   //@ts-ignore
-  const apiKey: string | null = isDevMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
+  const apiKey: string | null = isDevMode
+    ? useApiCheckerStore((state) => state.apiKey)
+    : useApiCheckerStore((state) => state.apiProdKey);
 
+  //#endregion ##########################################################################################################################
 
- //#endregion ##########################################################################################################################
-
-
- //#region React States for monitoring changes, in filter for example #################################################################
+  //#region React States for monitoring changes, in filter for example #################################################################
 
   // Below 2 arrays are used to make it clear for TypeScript what types our useState functions require.
   const emptyRecipeST: RecipeFrontST[] = [];
@@ -59,7 +64,8 @@ export default function StartPage(props) {
   // States for all different type of filter/ingredient choices
   const [freeTextSearch, setFreeTextSearch] = useState("");
   const [ingredientChoices, setIngredientChoices] = useState(emptyArr);
-  const [totalNumberOfIngredients, TotalNumberOfIngredients] = useState<number>();
+  const [totalNumberOfIngredients, TotalNumberOfIngredients] =
+    useState<number>();
   const [mealChoice, setMealChoice] = useState("");
   const [cuisineChoices, setCuisineChoices] = useState(emptyArr);
   const [intoleranceChoices, setIntoleranceChoices] = useState(emptyArr);
@@ -77,10 +83,9 @@ export default function StartPage(props) {
   // variable to determine of no results or not.
   const [noResultsReturned, setNoResultsReturned] = useState(false);
 
- //#endregion ##########################################################################################################################
+  //#endregion ##########################################################################################################################
 
-
-//#region Settings for dev/prod and persisted search/settings data ####################################################################
+  //#region Settings for dev/prod and persisted search/settings data ####################################################################
 
   // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
   //@ts-ignore
@@ -92,66 +97,6 @@ export default function StartPage(props) {
     : persistedSearchSettings.searchMode;
   const [standardSearch, setStandardSearch] = useState(searchSettingsBool);
 
-  // State to monitor if a superhero was selected
-  //@ts-ignore
-  const [superHeroInfo, setSuperHeroInfo] = useState(true);
-
-  // Storing superhero object in this state.
-  //@ts-ignore
-  const emptySuperHero: {} = {};
-  const defaultSuperHero = {
-    "response": "success",
-    "id": "659",
-    "name": "Thor",
-    "powerstats": {
-      "intelligence": "69",
-      "strength": "100",
-      "speed": "83",
-      "durability": "100",
-      "power": "100",
-      "combat": "100"
-    },
-    "biography": {
-      "full-name": "Thor Odinson",
-      "alter-egos": "Rune King Thor",
-      "aliases": [
-        "Donald Blake",
-        "Sigurd Jarlson",
-        "Jake Olsen",
-        "Donar the Mighty"
-      ],
-      "place-of-birth": "Asgard",
-      "first-appearance": "Journey into Mystery #83 (August, 1962)",
-      "publisher": "Rune King Thor",
-      "alignment": "good"
-    },
-    "appearance": {
-      "gender": "Male",
-      "race": "Asgardian",
-      "height": [
-        "6'6",
-        "198 cm"
-      ],
-      "weight": [
-        "640 lb",
-        "288 kg"
-      ],
-      "eye-color": "Blue",
-      "hair-color": "Blond"
-    },
-    "work": {
-      "occupation": "King of Asgard; formerly EMS Technician; Physician",
-      "base": "New York, New York"
-    },
-    "connections": {
-      "group-affiliation": "Avengers",
-      "relatives": "Odin (father), Gaea (mother), Frigga (step-mother), Loki (step-brother), Vidar (half-brother), Buri (paternal great-grandfather), Bolthorn (maternal great grandfather), Bor (grandfather), Bestla (grandmother), Vili (uncle), Ve (uncle), Sigyn (former sister-in-law), Hela (alleged niece), Jormungand (alleged nephew), Fernis Wolf (alleged nephew)"
-    },
-    "image": {
-      "url": "https://www.superherodb.com/pictures2/portraits/10/100/140.jpg"
-    }
-  }
-  const [superHero, setSuperHero] = useState(defaultSuperHero);
   // API Settings, read spoonacular documentation for more info.
   const devSettings = {
     storedMaxHits: 6,
@@ -169,7 +114,7 @@ export default function StartPage(props) {
     storedIgnorePantry: true,
   };
 
-  if(isDevMode){
+  if (isDevMode) {
     if (localStorage.getItem("mightySettings") === null) {
       localStorage.setItem("mightySettings", JSON.stringify(devSettings));
     }
@@ -189,11 +134,14 @@ export default function StartPage(props) {
   }
 
   //@ts-ignore
-  const useStatic = isDevMode ? JSON.parse(localStorage.getItem("mightyRandomOrStatic")) : false;
+  const useStatic = isDevMode
+    ? JSON.parse(localStorage.getItem("mightyRandomOrStatic"))
+    : false;
 
   //@ts-ignore
-  const persistedSettings = isDevMode ? JSON.parse(localStorage.getItem("mightySettings")) : JSON.parse(localStorage.getItem("mightyProdSettings"));
-
+  const persistedSettings = isDevMode
+    ? JSON.parse(localStorage.getItem("mightySettings"))
+    : JSON.parse(localStorage.getItem("mightyProdSettings"));
 
   const maxHits: number = persistedSettings.storedMaxHits;
   const addRecipeNutrition: boolean = persistedSettings.storeAddRecipeNutrition;
@@ -203,27 +151,25 @@ export default function StartPage(props) {
   const ranking: number = persistedSettings.storedRanking; //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
   const ignorePantry: boolean = persistedSettings.storedIgnorePantry; //Whether to ignore typical pantry items, such as water, salt, flour, etc.
 
-//#endregion ##########################################################################################################################
+  //#endregion ##########################################################################################################################
 
-
-//#region useEffect for page reload, returns random recipes, persisted recipes/search or hero selected recipes ########################
+  //#region useEffect for page reload, returns random recipes, persisted recipes/search or hero selected recipes ########################
 
   //useEffect hook that renders when the page load/reload.
   useEffect(() => {
     //If only by render and no backbutton click random recipes are fetched.
     if (!backButtonClicked) {
-
-      if(isHeroSelected){
+      if (isHeroSelected) {
         let cuisine: string = "";
         let minCalories: string = "";
 
-        if(heroObject.id === "149"){
+        if (heroObject.id === "149") {
           cuisine = "american";
           minCalories = "1";
-        } else if(heroObject.id === "332"){
+        } else if (heroObject.id === "332") {
           cuisine = "";
           minCalories = "1000";
-        } else if(heroObject.id === "659"){
+        } else if (heroObject.id === "659") {
           cuisine = "nordic";
           minCalories = "1";
         }
@@ -232,41 +178,45 @@ export default function StartPage(props) {
         try {
           fetch(encodeURI(url))
             .then((response) => response.json())
-            .then((data) => {createCards(data.results)});
+            .then((data) => {
+              createCards(data.results);
+            });
         } catch (e) {
           console.log(e);
         }
-
-        } else{
-          if (!useStatic) {
-            fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`)
-              .then((response) => response.json())
-              .then((data) => {createCards(data.recipes);});
-    
-          } else {
-            // Sample recipes to use instead of calling fetch method during development.
-            const forTesting: RecipeFrontST[] = [
-              {
-                id: 637776,
-                title: "Cherry Pancakes for One",
-                image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
-                readyInMinutes: 45,
-              },
-              {
-                id: 660697,
-                title: "Southern Fried Catfish",
-                image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
-                readyInMinutes: 45,
-              },
-              {
-                id: 634091,
-                title: "Banana Foster Bread Pudding",
-                image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
-                readyInMinutes: 45,
-              },
-            ];
-            createCards(forTesting);
-          }
+      } else {
+        if (!useStatic) {
+          fetch(
+            `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&tags=${getMealTypeByTime()}&number=${maxRandomHits}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              createCards(data.recipes);
+            });
+        } else {
+          // Sample recipes to use instead of calling fetch method during development.
+          const forTesting: RecipeFrontST[] = [
+            {
+              id: 637776,
+              title: "Cherry Pancakes for One",
+              image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+              readyInMinutes: 45,
+            },
+            {
+              id: 660697,
+              title: "Southern Fried Catfish",
+              image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
+              readyInMinutes: 45,
+            },
+            {
+              id: 634091,
+              title: "Banana Foster Bread Pudding",
+              image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
+              readyInMinutes: 45,
+            },
+          ];
+          createCards(forTesting);
+        }
       }
     }
 
@@ -289,69 +239,67 @@ export default function StartPage(props) {
     }
   }, []);
 
-//#endregion ##########################################################################################################################
+  //#endregion ##########################################################################################################################
 
+  //#region Main API fetch function #####################################################################################################
 
-//#region Main API fetch function #####################################################################################################
-
-async function getApiData() {
-  // Function that fetches / GET data back from the API.
-  // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
-  if (standardSearch === true) {
-    const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&type=${mealChoice}&cuisine=${createURIString(
-      cuisineChoices
-    )}&includeIngredients=${createURIString(
-      ingredientChoices
-    )}&intolerance=${createURIString(
-      intoleranceChoices
-    )}&diet=${createURIString(
-      dietChoices
-    )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}&sort=${sortedBy}`;
-    try {
-      const response = await fetch(encodeURI(url));
-      const result = await response.json();
-
-      if(result.results.length < 1){
-        setNoResultsReturned(true);
-      } else{
-        setNoResultsReturned(false);
-      }
-      
-      createCards(result.results);
-    } catch (e) {
-      console.log(e);
-    }
-  } else {
-    // This search requires at least 1 ingredient, if none are selected an alert will pop-up telling the user to select at least 1..
-    if (ingredientChoices.length > 0) {
-      const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(
+  async function getApiData() {
+    // Function that fetches / GET data back from the API.
+    // 2 endpoints which are controlled by state prop standardSearch. If true standard search will run, if false "man tager vad man haver" search will run.
+    if (standardSearch === true) {
+      const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&type=${mealChoice}&cuisine=${createURIString(
+        cuisineChoices
+      )}&includeIngredients=${createURIString(
         ingredientChoices
-      )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
-
+      )}&intolerance=${createURIString(
+        intoleranceChoices
+      )}&diet=${createURIString(
+        dietChoices
+      )}&query=${freeTextSearch}&number=${maxHits}&addRecipeInformation=true&addRecipeNutrition=${addRecipeNutrition}&sort=${sortedBy}`;
       try {
         const response = await fetch(encodeURI(url));
         const result = await response.json();
 
-        if(result.length < 1){
+        if (result.results.length < 1) {
           setNoResultsReturned(true);
-        } else{
+        } else {
           setNoResultsReturned(false);
         }
 
-        createCards(result);
+        createCards(result.results);
       } catch (e) {
         console.log(e);
       }
     } else {
-      alert("Please select at least 1 ingredient...");
+      // This search requires at least 1 ingredient, if none are selected an alert will pop-up telling the user to select at least 1..
+      if (ingredientChoices.length > 0) {
+        const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${createURIString(
+          ingredientChoices
+        )}&ranking=${ranking}&ignorePantry=${ignorePantry}&number=${maxHits}`;
+
+        try {
+          const response = await fetch(encodeURI(url));
+          const result = await response.json();
+
+          if (result.length < 1) {
+            setNoResultsReturned(true);
+          } else {
+            setNoResultsReturned(false);
+          }
+
+          createCards(result);
+        } catch (e) {
+          console.log(e);
+        }
+      } else {
+        alert("Please select at least 1 ingredient...");
+      }
     }
   }
-}
 
-//#endregion ##########################################################################################################################
+  //#endregion ##########################################################################################################################
 
-
-//#region General Functions collected here ############################################################################################
+  //#region General Functions collected here ############################################################################################
 
   // Takes object from API call and creates cardObject for both search types.
   function createCards(input: RecipeFrontST[] | RecipeMTVMH[]) {
@@ -404,28 +352,32 @@ async function getApiData() {
     }
   }
 
-  const renderSTCard = (recipe: RecipeFrontST) => <Card
-  key={recipe.id}
-  recId={recipe.id}
-  imgSrc={recipe.image}
-  recipeTitle={recipe.title}
-  readyInMin={recipe.readyInMinutes}
-  handleRecipeClick={props.handleRecipeClick}
-  persistSearchData={persistSearchData}
-  />
+  const renderSTCard = (recipe: RecipeFrontST) => (
+    <Card
+      key={recipe.id}
+      recId={recipe.id}
+      imgSrc={recipe.image}
+      recipeTitle={recipe.title}
+      readyInMin={recipe.readyInMinutes}
+      handleRecipeClick={props.handleRecipeClick}
+      persistSearchData={persistSearchData}
+    />
+  );
 
-  const renderMTMVHCard = (recipe: RecipeMTVMH) => <CardMTVMH
-  key={recipe.id}
-  recId={recipe.id}
-  imgSrc={recipe.image}
-  recipeTitle={recipe.title}
-  usedIngredientCount={recipe.usedIngredientCount}
-  missedIngredientCount={recipe.missedIngredientCount}
-  handleRecipeClick={props.handleRecipeClick}
-  persistSearchData={persistSearchData}
-  ingredientChoices={ingredientChoices}
-  totalNumberOfIngredients={totalNumberOfIngredients}
-  />
+  const renderMTMVHCard = (recipe: RecipeMTVMH) => (
+    <CardMTVMH
+      key={recipe.id}
+      recId={recipe.id}
+      imgSrc={recipe.image}
+      recipeTitle={recipe.title}
+      usedIngredientCount={recipe.usedIngredientCount}
+      missedIngredientCount={recipe.missedIngredientCount}
+      handleRecipeClick={props.handleRecipeClick}
+      persistSearchData={persistSearchData}
+      ingredientChoices={ingredientChoices}
+      totalNumberOfIngredients={totalNumberOfIngredients}
+    />
+  );
 
   // Function called when recipe card is clicked, persisting current filters/result.
   const persistSearchData = () => {
@@ -473,8 +425,8 @@ async function getApiData() {
     "screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)"
   );
 
-//#endregion ##########################################################################################################################
-
+  const containerClassName = `d-flex flex-wrap justify-content-center cardArea-styling ${isHeroSelected ? 'hero-selected' : ''}`;
+  //#endregion ##########################################################################################################################
 
   return (
     <>
@@ -502,9 +454,9 @@ async function getApiData() {
           setSelected={setSelected}
         />
 
-        {isHeroSelected ?
-        (<h3>{heroObject.biography.facts}</h3>) :
-        standardSearch ? (
+        {isHeroSelected ? (
+          <SuperHeroInfo />
+        ) : standardSearch ? (
           <SearchBarFreeText
             freeTextSearch={freeTextSearch}
             setFreeTextSearch={setFreeTextSearch}
@@ -548,7 +500,7 @@ async function getApiData() {
 
         <br />
 
-        {/* <div className="d-flex flex-column align-self-center justify-content-evenly main-div">
+        <div className={containerClassName}>
           <div className="d-flex justify-content-between match-and-sort">
             <div className="matches">
               <p>
@@ -620,15 +572,11 @@ async function getApiData() {
                 </button>{" "}
               </div>
             )}
-        </div> */}
+        </div>
       </div>
     </>
   );
 }
-
-
-
-
 
 // Used in random API call URL to define type of meal.
 function getMealTypeByTime() {
