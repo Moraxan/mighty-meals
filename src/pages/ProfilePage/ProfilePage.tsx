@@ -46,9 +46,8 @@ export const ProfilePage = () => {
     return (
       <div >
         {recipes.map((recipe) => (
-          <div className="profilePage-card">
+          <div className="profilePage-card" key={recipe.id}>
             <Card
-              key={recipe.id}
               recId={recipe.id}
               recipeTitle={recipe.title}
               imgSrc={recipe.image}
