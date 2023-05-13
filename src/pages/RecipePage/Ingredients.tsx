@@ -6,7 +6,7 @@ import increaseBtn from "../../images/increaseBtn.png";
 function AdjustMeasurment(amount: any, unit: string) {
 
   if (unit === "ml") {
-    amount = amount >= 1000 ? (unit = "l", amount / 1000) : (amount >= 50 && amount < 1000) ? (unit = "dl", amount / 100) : amount;
+    amount = amount >= 1000 ? (unit = "l", amount / 1000) : (amount >= 100 && amount < 1000) ? (unit = "dl", amount / 100) : amount;
   }
   
   if (unit === "g") {
