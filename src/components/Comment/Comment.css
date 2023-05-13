@@ -1,10 +1,5 @@
-/* .Comment-body {
-  background-color: #eda037
+@import url('../../index.css');
 
-  }
-  .Comment-position{
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items: center;
-  } */
+.comment-position{
+  background-color: var(--accentcolourred);
+}
