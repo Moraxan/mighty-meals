@@ -41,6 +41,8 @@ export const Directions = ({ directions, recipeId }) => {
   };
 
 //This function handles the click on the like button. It adds the recipe to the Zustand Store for access in the profile page mainly
+//Also dims the button on a click to signal to the user that the button has been clicked
+//@ts-ignore
 const handleButtonClick = (event) => {
   const recipeId = event.target.dataset.recipeId;
   likedRecipeStore.getState().addRecipeId(recipeId);
