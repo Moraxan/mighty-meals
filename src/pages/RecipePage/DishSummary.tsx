@@ -60,7 +60,7 @@ export function DishSummary(props: any) {
       <div className='share-button-con'>
         <button onClick={shareHandler} className='share-button'>
           {
-            shareStatus ? 'Copied to clipboard' : <><img src={clipboard} alt="copy"></img>Share this recipe</>
+            shareStatus ? 'Copied to clipboard' : <><img src={clipboard} alt="copy"></img>Share recipe</>
           }
         </button>
       </div>
