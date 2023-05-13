@@ -13,7 +13,7 @@ function AdjustMeasurment(amount: any, unit: string) {
     amount = amount >= 1000 ? (unit = "kg", amount / 1000) : (amount >= 100 && amount < 1000) ? (unit = "hg", amount / 100) : amount;
   }
 
-  if (unit.toLowerCase() === "tbsps" || unit.toLowerCase() === "tbsp"){ //kanske inte behöver använda to lowercase här
+  if (unit.toLowerCase() === "tbsps" || unit.toLowerCase() === "tbsp"){
     unit = 'tbsp';
     amount = amount < 1 ? (unit = "tsp", amount * 3) : amount;
   }
