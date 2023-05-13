@@ -25,6 +25,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-left: 5px;
 }
 
 .info-second {
@@ -41,9 +42,16 @@
   padding: 20px;
 }
 
+.superhero-info p {
+  text-align: left;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
 .superhero-info h2 {
   font-family: "Avengeance";
 }
+
 .superhero-info p {
   margin-top: 20px;
   font-size: small;
@@ -67,12 +75,15 @@
 
 .powerstat-image {
   max-width: 100px;
+  margin-right: 10px;
 }
 
 .yellow-background {
   background-color: var(--accentcolouryellow);
   padding: 5px;
   margin: 5px;
+  border-radius: 5px;
+  border: 3px solid black;
 }
 
 .stats {
