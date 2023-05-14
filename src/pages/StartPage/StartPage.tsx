@@ -420,7 +420,7 @@ export default function StartPage(props) {
     <>
       {apiKey === null && <ModalSaveAPIKey />}
       <div className="app-body d-flex flex-column">
-        {matches === true && (
+        {matches === true && !isHeroSelected && (
           <SearchSwitch
             standardSearch={standardSearch}
             setStandardSearch={setStandardSearch}
