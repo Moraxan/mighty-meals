@@ -412,8 +412,7 @@ export default function StartPage(props) {
   const matches = useMediaQuery(
     "screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px)"
   );
-
-  const containerClassName = `d-flex flex-wrap justify-content-center cardArea-styling ${isHeroSelected ? 'hero-selected' : ''}`;
+  const containerClassName = `d-flex flex-column align-self-center   ${isHeroSelected ? 'hero-selected' : 'main-div'}`;
   //#endregion ##########################################################################################################################
 
   return (
