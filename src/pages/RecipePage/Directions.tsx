@@ -43,15 +43,27 @@ export const Directions = ({ directions, recipeId }) => {
 //This function handles the click on the like button. It adds the recipe to the Zustand Store for access in the profile page mainly
 //Also dims the button on a click to signal to the user that the button has been clicked
 //@ts-ignore
-const handleButtonClick = (event) => {
-  const recipeId = event.target.dataset.recipeId;
-  likedRecipeStore.getState().addRecipeId(recipeId);
-  const clickedImage = event.target;
-  clickedImage.style.opacity = '0.5';
-  setTimeout(() => {
-    clickedImage.style.opacity = '1';
-  }, 500);
-  }
+
+  const handleButtonClick = (event) => {
+
+    const isRecipeLiked = (id: string) => likedRecipeStore.getState().recipeIds.includes(id);
+    const recipeId = event.target.dataset.recipeId;
+    try {
+      if (!isRecipeLiked(recipeId)) {
+        likedRecipeStore.getState().addRecipeId(recipeId);
+        const clickedImage = event.target;
+        clickedImage.style.opacity = '0.5';
+        setTimeout(() => {
+          clickedImage.style.opacity = '1';
+        }, 500);
+      } else {
+        throw new Error('Recipe already liked');
+      }
+    } catch (error) {
+      //@ts-ignore
+      alert(error.message);
+    }
+  };
 
   return (
     <div className="directions-container">
