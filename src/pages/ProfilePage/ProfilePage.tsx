@@ -39,13 +39,15 @@ export const ProfilePage = () => {
     return (
       <div >
         {recipes.map((recipe) => (
-          <Card
-            key={recipe.id}
-            recId={recipe.id}
-            recipeTitle={recipe.title}
-            imgSrc={recipe.image}
-            readyInMin={recipe.readyInMinutes}
-          />
+          <div className="profilePage-card" key={recipe.id}>
+            <Card
+              recId={recipe.id}
+              recipeTitle={recipe.title}
+              imgSrc={recipe.image}
+              readyInMin={recipe.readyInMinutes}
+            />
+          </div>
+
         ))}
       </div>
     );

@@ -7,8 +7,8 @@ import { RecipePage } from "./pages/RecipePage/RecipePage";
 import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
 import { SplashPage } from "./components/SplashPage/SplashPage";
-import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import HeroSelectionPage from "./pages/HeroSelectionPage/HeroSelectionPage";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 
 
 const ShowSplashFirstSession = () => {
@@ -71,8 +71,8 @@ export const Router = createBrowserRouter([
     loader: ({ params }) => {return params.id},
     element: (
       <>
-          <NavigationBar hideSwitch={true}/>
-          <RecipePage />
+            <NavigationBar hideSwitch={true}/>
+            <RecipePage />
           <div className='footer'>
           <Footer />
           </div>
