@@ -60,7 +60,7 @@ export default function StartPage(props) {
   // States for all different type of filter/ingredient choices
   const [freeTextSearch, setFreeTextSearch] = useState("");
   const [ingredientChoices, setIngredientChoices] = useState(emptyArr);
-  const [totalNumberOfIngredients, TotalNumberOfIngredients] =
+  const [totalNumberOfIngredients, setTotalNumberOfIngredients] =
     useState<number>();
   const [mealChoice, setMealChoice] = useState("");
   const [cuisineChoices, setCuisineChoices] = useState(emptyArr);
@@ -224,6 +224,7 @@ export default function StartPage(props) {
       setIntoleranceChoices(persistedData.intolerances);
       setDietChoices(persistedData.diets);
       setSelected(persistedData.selectedFilters);
+      setTotalNumberOfIngredients(persistedData.totalIngredients)
     }
   }, []);
 
@@ -383,6 +384,7 @@ export default function StartPage(props) {
       intolerances: intoleranceChoices,
       diets: dietChoices,
       selectedFilters: selected,
+      totalIngredients: totalNumberOfIngredients
     };
 
     sessionStorage.setItem(
@@ -393,7 +395,7 @@ export default function StartPage(props) {
 
   function CountIngredients() {
     var tmp = ingredientChoices.length;
-    TotalNumberOfIngredients(tmp);
+    setTotalNumberOfIngredients(tmp);
   }
 
   function countMatches() {
