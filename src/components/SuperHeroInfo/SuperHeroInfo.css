@@ -1,0 +1,136 @@
+.superhero-container {
+  max-width: 980px;
+  flex-direction: row;
+  align-self: center;
+  justify-content: space-between;
+  row-gap: 10px;
+  column-gap: 10px;
+  font-size: smaller;
+  color: black;
+}
+
+.image-container {
+  border: 3px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 320px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-first {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 5px;
+}
+
+.info-second {
+  display: flex;
+  flex-direction: row;
+}
+
+.info-container {
+  background-color: var(--accentcolourred);
+  border: 3px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 640px;
+  padding: 20px;
+}
+
+.superhero-info p {
+  text-align: left;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.superhero-info h2 {
+  font-family: "Avengeance";
+  padding-top: 8px;
+}
+
+.superhero-info p {
+  margin-top: 20px;
+  font-size: small;
+  font-family: "Varela";
+  font-weight: bold;
+}
+
+.superhero-image {
+  width: 110%;
+}
+
+.details-container {
+  margin-top: 20px;
+  font-family: "Varela";
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: space-between;
+}
+
+.powerstat-image {
+  max-width: 100px;
+  margin-right: 10px;
+}
+
+.yellow-background {
+  background-color: var(--accentcolouryellow);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid black;
+  
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+}
+
+.stats-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.stats-details img {
+  height: 9px;
+  margin-top: 6px;
+}
+
+@media screen and (max-width: 987px) and (min-height: 450px) {
+  .superhero-container {
+    width: 650px;
+  }
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+  .stats {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 900px) and (max-height: 450px),
+  screen and (max-width: 450px) and (max-height: 900px) {
+  .superhero-container {
+    width: 320px;
+    margin-bottom: 140px;
+  }
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
+  .stats {
+    margin-top: 20px;
+  }
+}
