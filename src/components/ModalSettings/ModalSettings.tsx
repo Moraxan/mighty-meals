@@ -9,12 +9,10 @@ import "./ModalSettings.css";
 //@ts-ignore
 export default function ModalSaveAPIKey(props) {
 
-  //@ts-ignore
-  const persistedSettings = isDevMode ? JSON.parse(localStorage.getItem("mightySettings")) : JSON.parse(localStorage.getItem("mightyProdSettings"));
+  const persistedSettings = isDevMode ? JSON.parse(localStorage.getItem("mightySettings")!) : JSON.parse(localStorage.getItem("mightyProdSettings")!);
 
-  //@ts-ignore // global zustand variable/state to set state of api key
+  //global zustand variable/state to set state of api key
   const setApiKey = useApiCheckerStore((state) => state.updateApiKey);
-  //@ts-ignore
   const setProdApiKey = useApiCheckerStore((state) => state.updateProdApiKey);
 
 

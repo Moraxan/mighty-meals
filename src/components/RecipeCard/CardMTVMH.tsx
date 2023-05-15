@@ -1,13 +1,12 @@
 import "./card.css";
 import { Link, useLocation } from 'react-router-dom';
-import { useBroserHistoryStore } from "../Stores/browsingHistory";
+import { useBrowserHistoryStore } from "../Stores/browsingHistory";
 import alt_image from "../../images/alt_image.png";
 
 //@ts-ignore
 const CardMTVMH = ( props ) => {
 
-  //@ts-ignore
-  const setPreviousPage = useBroserHistoryStore((state) => state.setPreviousPage);
+  const setPreviousPage = useBrowserHistoryStore((state) => state.setPreviousPage);
   const location: string = useLocation().pathname;
 
   const handleClick = () => {

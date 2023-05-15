@@ -1,17 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import {useBackButtonStore} from "../../components/Stores/backButtonClick";
-import { useBroserHistoryStore } from "../../components/Stores/browsingHistory";
+import { useBrowserHistoryStore } from "../../components/Stores/browsingHistory";
 import { useHeroInfoStore } from "../../components/Stores/displayHeroInfoAndFood";
 import backbtn from "../../images/return-button.png";
 
 //@ts-ignore
 export const BackButton = () => {
 
-  //@ts-ignore
-  const getPreviousPage = useBroserHistoryStore((state) => state.previousPage);
+  const getPreviousPage = useBrowserHistoryStore((state) => state.previousPage);
   let previousPage: string = getPreviousPage === null ? "/" : getPreviousPage;
 
-  //@ts-ignore
   const setIsHeroSelected = useHeroInfoStore((state) => state.setIsHeroSelected);
 
   //Takes the current URI from where backbutton was clicked. If clicked from hero selection page no persist logic is run.
@@ -22,7 +20,7 @@ export const BackButton = () => {
     previousPage = "/";
   };
 
-  //@ts-ignore //global zustand variable/state to monitor back button click and persist state.
+  //global zustand variable/state to monitor back button click and persist state.
   const handleBackClick = useBackButtonStore((state) => state.clickBackButton);
 
   const handleClick = () => {

@@ -16,16 +16,12 @@ import './RecipePage.css';
 //If you want to try another recipe, just put in another ID from the API
 //A suggestion is to use one of these IDs: 637776 or 634091 only because it's them that are used on the StartPage
 
-//@ts-ignore
 export const RecipePage = () => {
 //  ***************   |This loads the id to the router via useLoaderData and the loader in the route |***************
   const recipeId = useLoaderData();
   const [recipeData, setRecipeData] = useState(null);
   const [noResultsReturned, setNoResultsReturned] = useState(false);
 
-
-
-  //@ts-ignore
   const apiKey: string | null = isDevMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
 
   useEffect(() => {
@@ -37,7 +33,6 @@ export const RecipePage = () => {
     } else {
 //Remember to put in your own API key here the first time you run this code
 //If you see the middle component of the page saying Loading... then you've probably forgotten to put in your API key
-      //@ts-ignore
       const addNutrition: boolean = persistedSettings === null ? true : persistedSettings.storeAddRecipeNutrition;
       const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=${addNutrition}`;
 

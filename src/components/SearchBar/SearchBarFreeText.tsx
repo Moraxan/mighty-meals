@@ -12,7 +12,6 @@ export default function SearchBarFreeText(props){
         props.setFreeTextSearch(event.target.value.toLowerCase());
     };
 
-    //@ts-ignore
     const openFilter = () => {
         props.setShow(!props.show);
     }
