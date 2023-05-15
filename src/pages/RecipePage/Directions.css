@@ -57,3 +57,21 @@
 .image-button .step-text.checked {
   color: grey;
 }
+
+.title-buttons-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-right: 1rem;
+}
+
+.directions-buttons img {
+  width: 6rem;
+  height: auto;
+  cursor: pointer;
+  
+}
+
+.directions-buttons img:first-child {
+  margin-right: 1rem;
+}

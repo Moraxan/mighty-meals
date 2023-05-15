@@ -3,43 +3,36 @@ import { useState, useEffect, useMemo } from "react";
 import Card from '../../components/RecipeCard/Card';
 import { RecipeFrontST } from '../../components/Interface/Interface';
 import { BackButton } from '../RecipePage/BackButton';
-import CommentForm from '../../components/Comment/Comment';
+import CommentForm from '../../components/Comment/CommentForm';
+import { likedRecipeStore } from '../../components/Stores/likedRecipes';
+import { useStore } from 'zustand';
+
+const apiKey = localStorage.getItem("storedApiKey");
 
 export const ProfilePage = () => {
 
-  // These are used for testing purposes and as a dummy placeholder for now.
-  const defaultRecipes: RecipeFrontST[] = useMemo(() => [
-    {
-      id: 637776,
-      title: "Cherry Pancakes for One",
-      image: "https://spoonacular.com/recipeImages/637776-556x370.jpg",
-      readyInMinutes: 45,
-    },
-    {
-      id: 660697,
-      title: "Southern Fried Catfish",
-      image: "https://spoonacular.com/recipeImages/660697-556x370.jpg",
-      readyInMinutes: 45,
-    },
-    {
-      id: 634091,
-      title: "Banana Foster Bread Pudding",
-      image: "https://spoonacular.com/recipeImages/634091-556x370.jpg",
-      readyInMinutes: 45,
-    },
-  ], []);
-
   const [recipes, setRecipes] = useState<RecipeFrontST[]>([]);
+  const { recipeIds } = likedRecipeStore();
 
-  // useEffect checks if there are any recipes in the database. If there are no recipes in the database, the dummy array is used.
   useEffect(() => {
-    const storedRecipes = JSON.parse(localStorage.getItem("recipes") || "[]") as RecipeFrontST[];
-    if (storedRecipes.length > 0) {
-      setRecipes(storedRecipes);
-    } else {
-      setRecipes(defaultRecipes);
+    const fetchRecipes = async () => {
+      const response = await Promise.all(recipeIds.map((id) => 
+        fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`)
+          .then((response) => response.json())
+      ));
+      const fetchedRecipes = response.map((data: any) => ({
+        id: data.id,
+        title: data.title,
+        image: data.image,
+        readyInMinutes: data.readyInMinutes,
+      }));
+      setRecipes(fetchedRecipes);
+    };
+
+    if (recipeIds.length > 0) {
+      fetchRecipes();
     }
-  }, [defaultRecipes]);
+  }, [recipeIds]);
 
   // This maps over the liked recipes and displays the cards for them.
   const LikedRecipes = () => {
@@ -61,7 +54,6 @@ export const ProfilePage = () => {
   };
 
   return (
-   
     <div className="profilepage-container">
       <div className="back-btn">
         <BackButton />
@@ -69,7 +61,6 @@ export const ProfilePage = () => {
       <div className="profile-header">
         Profile
       </div>
-    
       <div className="grid-container">
         <div className="likedrecipes">
           <div className="profile-header">
@@ -84,7 +75,6 @@ export const ProfilePage = () => {
         </div>
       </div>
     </div>
-  
+  )
+  }
 
-  );
-}
