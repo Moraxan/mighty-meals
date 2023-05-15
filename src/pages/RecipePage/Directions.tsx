@@ -1,10 +1,13 @@
 import checkedImg from "../../images/checked.png";
 import uncheckedImg from "../../images/unchecked.png";
+import dislikeButton from "../../images/dislike_btn.png";
+import likeButton from "../../images/like_btn.png";
+import {likedRecipeStore} from "../../components/Stores/likedRecipes";
 import "./Directions.css";
 import { useState } from "react";
 
 //@ts-ignore
-export const Directions = ({ directions }) => {
+export const Directions = ({ directions, recipeId }) => {
   const [directionsState, setDirectionsState] = useState(directions);
 
 //Checks if there are no directions available. Displays message to the user.
@@ -37,11 +40,42 @@ export const Directions = ({ directions }) => {
     setDirectionsState([{ ...directionsState[0], steps: newSteps }]);
   };
 
+//This function handles the click on the like button. It adds the recipe to the Zustand Store for access in the profile page mainly
+//Also dims the button on a click to signal to the user that the button has been clicked
+//@ts-ignore
+
+  const handleButtonClick = (event) => {
+
+    const isRecipeLiked = (id: string) => likedRecipeStore.getState().recipeIds.includes(id);
+    const recipeId = event.target.dataset.recipeId;
+    try {
+      if (!isRecipeLiked(recipeId)) {
+        likedRecipeStore.getState().addRecipeId(recipeId);
+        const clickedImage = event.target;
+        clickedImage.style.opacity = '0.5';
+        setTimeout(() => {
+          clickedImage.style.opacity = '1';
+        }, 500);
+      } else {
+        throw new Error('Recipe already liked');
+      }
+    } catch (error) {
+      //@ts-ignore
+      alert(error.message);
+    }
+  };
+
   return (
     <div className="directions-container">
-      <div>
-        <h2 className="directions-box">directions</h2>
+        <div className="title-buttons-container">
+          <h2 className="directions-box">directions</h2>
+          <div className="directions-buttons">
+          <img src={likeButton} data-recipe-id={recipeId} onClick={handleButtonClick} alt="like"/>
+          <img src={dislikeButton} alt="dislike"/>
+        </div>
       </div>
+      
+
       <br />
       <ul className="directions-list">
         {/*//@ts-ignore*/}

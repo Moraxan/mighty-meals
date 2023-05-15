@@ -2,32 +2,28 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useApiCheckerStore } from "../Stores/checkIfApiExists";
-import { useDeveloperModeStore } from "../../components/Stores/developerMode";
+import { isDevMode } from "../../main";
 
 import "./ModalSettings.css";
 
 //@ts-ignore
 export default function ModalSaveAPIKey(props) {
-  //@ts-ignore
-  const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
 
-  //@ts-ignore
-  const persistedSettings = devMode ? JSON.parse(localStorage.getItem("mightySettings")) : JSON.parse(localStorage.getItem("mightyProdSettings"));
+  const persistedSettings = isDevMode ? JSON.parse(localStorage.getItem("mightySettings")!) : JSON.parse(localStorage.getItem("mightyProdSettings")!);
 
-  //@ts-ignore // global zustand variable/state to set state of api key
+  //global zustand variable/state to set state of api key
   const setApiKey = useApiCheckerStore((state) => state.updateApiKey);
-  //@ts-ignore
   const setProdApiKey = useApiCheckerStore((state) => state.updateProdApiKey);
 
 
   const [show, setShow] = useState(true);
-  const [apiInputBox, setApiInputBox] = useState(devMode ? localStorage.getItem("storedApiKey") : localStorage.getItem("storedProdApiKey"));
+  const [apiInputBox, setApiInputBox] = useState(isDevMode ? localStorage.getItem("storedApiKey") : localStorage.getItem("storedProdApiKey"));
   const [maxHits, setMaxHits] = useState(persistedSettings.storedMaxHits);
   const [maxRandom, setMaxRandom] = useState(persistedSettings.storedMaxRandomHits);
   const [includeNutrition, setIncludeNutrition] = useState(persistedSettings.storeAddRecipeNutrition);
   const [ignorePantry, setIgnorePantry] = useState(persistedSettings.storedIgnorePantry);
   const [ranking, setRanking] = useState(persistedSettings.storedRanking);
-  const [useStatic, setUseStatic] = useState(devMode ? localStorage.getItem("mightyRandomOrStatic") : "false");
+  const [useStatic, setUseStatic] = useState(isDevMode ? localStorage.getItem("mightyRandomOrStatic") : "false");
 
   const handleClose = () => setShow(false);
 
@@ -77,7 +73,7 @@ export default function ModalSaveAPIKey(props) {
     persistedSettings.storedIgnorePantry = ignorePantry;
     persistedSettings.storedRanking = ranking;
 
-    if(devMode){
+    if(isDevMode){
       localStorage.setItem("storedApiKey", apiInputBox!);
       setApiKey(localStorage.getItem("storedApiKey"));
       localStorage.setItem("mightySettings", JSON.stringify(persistedSettings));
@@ -113,7 +109,7 @@ export default function ModalSaveAPIKey(props) {
             value={apiInputBox!}
             onChange={handleApiChange}
           />
-          {devMode &&
+          {isDevMode &&
           <>
             <input className="input-Checkbox" id="random-static" type="checkbox" checked={useStatic === null || useStatic === "true" ? true : false} onChange={handleStaticChange}/>
             <label htmlFor="random-static">Use static instead of random</label>
@@ -138,7 +134,7 @@ export default function ModalSaveAPIKey(props) {
             value={maxRandom}
             onChange={handleMaxRndChange}
           />
-          {devMode &&
+          {isDevMode &&
           <>
             <input className="input-Checkbox" id="nutrition-check" type="checkbox" checked={includeNutrition} onChange={handleNutritionChange}/>
             <label htmlFor="nutrition-check">Include recipe nutrition</label>

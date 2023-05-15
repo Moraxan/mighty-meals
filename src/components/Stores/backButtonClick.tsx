@@ -1,6 +1,11 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
 
-export const useBackButtonStore = create((set) => ({
+interface BackButtonState {
+    clicked: boolean,
+    clickBackButton: (bool: boolean) => void
+}
+
+export const useBackButtonStore = create<BackButtonState>()((set) => ({
     clicked: false,
     clickBackButton: (bool: boolean) => set({clicked: bool}),
 }))

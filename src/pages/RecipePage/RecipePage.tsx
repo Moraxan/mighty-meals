@@ -5,8 +5,7 @@ import { Ingredients } from './Ingredients';
 import { Directions } from './Directions';
 import { DishImage } from './DishImage';
 import {useLoaderData} from "react-router-dom";
-
-import { useDeveloperModeStore } from "../../components/Stores/developerMode";
+import { isDevMode } from "../../main";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
 import './RecipePage.css';
 
@@ -17,32 +16,25 @@ import './RecipePage.css';
 //If you want to try another recipe, just put in another ID from the API
 //A suggestion is to use one of these IDs: 637776 or 634091 only because it's them that are used on the StartPage
 
-//@ts-ignore
 export const RecipePage = () => {
 //  ***************   |This loads the id to the router via useLoaderData and the loader in the route |***************
   const recipeId = useLoaderData();
   const [recipeData, setRecipeData] = useState(null);
   const [noResultsReturned, setNoResultsReturned] = useState(false);
 
-
-
-
-  //@ts-ignore
-  const devMode: boolean = useDeveloperModeStore((state) => state.devMode);
-  //@ts-ignore
-  const apiKey: string | null = devMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
+  const apiKey: string | null = isDevMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
 
   useEffect(() => {
-    const persistedSettings = devMode ? JSON.parse(localStorage.getItem("mightySettings")!) : JSON.parse(localStorage.getItem("mightyProdSettings")!);
+    const persistedSettings = isDevMode ? JSON.parse(localStorage.getItem("mightySettings")!) : JSON.parse(localStorage.getItem("mightyProdSettings")!);
     const storedData = JSON.parse(localStorage.getItem(`recipeFetch_${recipeId}`)!);
+
     if (storedData) {
       setRecipeData(storedData);
     } else {
 //Remember to put in your own API key here the first time you run this code
 //If you see the middle component of the page saying Loading... then you've probably forgotten to put in your API key
-      //@ts-ignore
-
-      const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=${persistedSettings.storeAddRecipeNutrition}`;
+      const addNutrition: boolean = persistedSettings === null ? true : persistedSettings.storeAddRecipeNutrition;
+      const url = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=${addNutrition}`;
 
       fetch(url)
         .then((response) => {
@@ -90,7 +82,7 @@ export const RecipePage = () => {
       </div>
       <div className="Directions">
           {/*//@ts-ignore*/}
-          <Directions directions={recipeData.analyzedInstructions} />
+          <Directions directions={recipeData.analyzedInstructions } recipeId={recipeId} />
         </div>
       </div>
   );

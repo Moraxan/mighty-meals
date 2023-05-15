@@ -7,6 +7,8 @@ import { RecipePage } from "./pages/RecipePage/RecipePage";
 import {createBrowserRouter} from "react-router-dom";
 import "./App.css";
 import { SplashPage } from "./components/SplashPage/SplashPage";
+import HeroSelectionPage from "./pages/HeroSelectionPage/HeroSelectionPage";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 
 
 const ShowSplashFirstSession = () => {
@@ -25,7 +27,6 @@ const ShowSplashFirstSession = () => {
 
 //Here we can set when the splash page will show. Now it shows is sceenwidth is less than 768px.
   if (showSplash && window.innerWidth <= 768) {
-//@ts-ignore
     return (
     <>
     <div className="splash-front">
@@ -60,9 +61,7 @@ export const Router = createBrowserRouter([
     path: "/",
     element: (
       <>
-      <div className="splashPage">
      <ShowSplashFirstSession />
-     </div>
       </>
     ),
   },
@@ -71,14 +70,35 @@ export const Router = createBrowserRouter([
     loader: ({ params }) => {return params.id},
     element: (
       <>
-          <div className="app-body-recipe">
             <NavigationBar hideSwitch={true}/>
             <RecipePage />
-          </div>
           <div className='footer'>
           <Footer />
           </div>
         </>
       )
+  },
+  {
+    path: "profilepage",
+    element: (
+      <>
+      <NavigationBar hideSwitch={true}/>
+      <ProfilePage />
+      </>
+      ),
+  },
+  {
+    path: "heroselection",
+    element: (
+      <>
+      <div className="app-body-hero">
+        <NavigationBar hideSwitch={true}/>
+        <HeroSelectionPage />
+      </div>
+      <div className="footer">
+      <Footer />
+      </div>
+      </>
+    ),
   }
 ]);
