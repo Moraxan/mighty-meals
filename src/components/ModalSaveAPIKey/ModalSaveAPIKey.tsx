@@ -8,7 +8,7 @@ import "./ModalSaveAPIKey.css";
 //@ts-ignore
 export default function ModalSaveAPIKey() {
 
-  //@ts-ignore // global zustand variable/state to set state of api key
+  //global zustand variable/state to set state of api key
   const setApiKey = useApiCheckerStore((state) => state.updateApiKey);
 
   const [show, setShow] = useState(true);

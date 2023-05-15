@@ -13,11 +13,10 @@ import "./HeroSelectionPage.css";
 
 export default function HeroSelectionPage(){
 
-    //@ts-ignore Zustand store variables for setting clicked state, useState on StartPage renders differently depending on this.
+    //Zustand store variables for setting clicked state, useState on StartPage renders differently depending on this.
     const handleBackClick = useBackButtonStore((state) => state.clickBackButton);
-    //@ts-ignore Zustand store variables for setting global hero object and if hero is selected
+    //Zustand store variables for setting global hero object and if hero is selected
     const setHeroObject = useHeroInfoStore((state) => state.setHeroObject);
-    //@ts-ignore
     const setIsHeroSelected = useHeroInfoStore((state) => state.setIsHeroSelected);
 
     // const cptAmericaImg: string = "https://www.superherodb.com/pictures2/portraits/10/100/274.jpg";

@@ -56,7 +56,6 @@ export default function SearchBar(props){
             setSearchtext("");
         };
 
-        //@ts-ignore
         const openFilter = () => {
             props.setShow(!props.show);
         }

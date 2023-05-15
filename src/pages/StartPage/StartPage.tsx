@@ -30,15 +30,12 @@ export default function StartPage(props) {
 
   //#region Zustand stores #############################################################################################################
 
-  //@ts-ignore
   const setProdApiKey = useApiCheckerStore((state) => state.updateProdApiKey);
-  //@ts-ignore Zustand store variables for hero selection, inluding hero object and if hero is selected or not.
+  //Zustand store variables for hero selection, inluding hero object and if hero is selected or not.
   const isHeroSelected: boolean = useHeroInfoStore((state) => state.isHeroSelected);
-  //@ts-ignore
   const heroObject: Hero = useHeroInfoStore((state) => state.heroObject);
-  //@ts-ignore // global zustand variable/state to monitor back button click and persist state
+  // global zustand variable/state to monitor back button click and persist state
   const backButtonClicked = useBackButtonStore((state) => state.clicked);
-  //@ts-ignore
   const apiKey: string | null = isDevMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
 
   //#endregion ##########################################################################################################################
@@ -84,8 +81,8 @@ export default function StartPage(props) {
   //#region Settings for dev/prod and persisted search/settings data ####################################################################
 
   // State to monitor if it's a regular search or MTVMH search, will affect api call string and in turn also the response.
-  //@ts-ignore
-  const persistedSearchSettings = JSON.parse(sessionStorage.getItem("persisted-search-data"));
+
+  const persistedSearchSettings = JSON.parse(sessionStorage.getItem("persisted-search-data")!);
   const searchSettingsBool: boolean = !backButtonClicked
     ? true
     : persistedSearchSettings.searchMode;
@@ -127,11 +124,9 @@ export default function StartPage(props) {
     }
   }
 
-  //@ts-ignore
-  const useStatic = isDevMode ? JSON.parse(localStorage.getItem("mightyRandomOrStatic")) : false;
+  const useStatic = isDevMode ? JSON.parse(localStorage.getItem("mightyRandomOrStatic")!) : false;
 
-  //@ts-ignore
-  const persistedSettings = isDevMode ? JSON.parse(localStorage.getItem("mightySettings")) : JSON.parse(localStorage.getItem("mightyProdSettings"));
+  const persistedSettings = isDevMode ? JSON.parse(localStorage.getItem("mightySettings")!) : JSON.parse(localStorage.getItem("mightyProdSettings")!);
 
   const maxHits: number = persistedSettings.storedMaxHits;
   const addRecipeNutrition: boolean = persistedSettings.storeAddRecipeNutrition;
@@ -212,8 +207,7 @@ export default function StartPage(props) {
 
     //If back button is clicked previous persited states are being loaded back.
     if (backButtonClicked) {
-      //@ts-ignore
-      const persistedData = JSON.parse(sessionStorage.getItem("persisted-search-data"));
+      const persistedData = JSON.parse(sessionStorage.getItem("persisted-search-data")!);
 
       setRecipesST(persistedData.recipes);
       setRecipesMTVMH(persistedData.recipesByIngredients);
