@@ -98,7 +98,7 @@ export const hulk: Hero = {
     },
     work: {
         occupation: "Nuclear physicist, Agent of S.H.I.E.L.D.",
-        base: "(Banner) Hulkbuster Base, New Mexico, (Hulk) mobile, but prefers New Mexico"
+        base: "New Mexico"
     },
     connections: {
         groupAffiliation: "Defenders, former leader of the new Hulkbusters, member of the Avengers, Pantheon, Titans Three, the Order, Hulkbusters of Counter-Earth-Franklin, alternate Fantastic Four",
