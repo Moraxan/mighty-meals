@@ -40,6 +40,14 @@
     background: #7c5fb4;
 }
 
+.ingredient-toBe-selected{
+    background: #7c5fb4;
+}
+
+.ingredient-selected-remove{
+    background: #e42427;
+}
+
 .search-input input{
     background: #eda037;
     height: 45px;
