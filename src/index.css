@@ -46,7 +46,7 @@ body{
 
 
 ::-webkit-scrollbar-track {
-  background-color: var(--accentcolouryellow);
+  background-color: var(--accentcolouryellowNonStatic);
   border-radius: 10px;
 }
 
