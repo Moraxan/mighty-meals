@@ -18,7 +18,7 @@ body{
   --accentcolourpurpleNonStatic: #7c5fb4;
   --accentcolouryellowNonStatic: #eda037;
   --accentcolourredNonStatic: #e42427;
-  --superherobackgroundNonStatic: #5a4862;
+  --componentbackgroundNonStatic: #eda037;
 
 
 /* Here are all the global font variables */
@@ -62,7 +62,7 @@ body{
     --big-varela-font: 14pt "Varela", sans-serif;
     --medium-varela-font: 12pt "Varela", sans-serif;
     --small-varela-font: 10pt "Varela", sans-serif; 
-    --time-varela-font: 14pt "Avengeance", sans-serif;  
+    --time-varela-font: 14pt "Avengeance", sans-serif;
   }
 
 }

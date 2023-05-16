@@ -15,9 +15,7 @@ export function SetHulkTheme(){
     //@ts-ignore
     r!.style.setProperty('--backgroundcolor', lightGreen);
     //@ts-ignore
-    r!.style.setProperty('--superherobackgroundNonStatic', darkPurple);
-    
-
+    r!.style.setProperty('--componentbackgroundNonStatic', darkPurple);
 
 }
 

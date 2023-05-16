@@ -152,7 +152,7 @@ export default function StartPage(props) {
         if (heroObject.id === "149") {
           cuisine = "american";
           minCalories = "1";
-
+          SetCaptainAmericaTheme();
 
         } else if (heroObject.id === "332") {
           cuisine = "";
@@ -162,7 +162,7 @@ export default function StartPage(props) {
         } else if (heroObject.id === "659") {
           cuisine = "nordic";
           minCalories = "1";
-
+          SetThorTheme();
 
         }
 
