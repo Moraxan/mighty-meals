@@ -49,8 +49,21 @@
 
 .input-group{
   margin-top: 30px;
-  width: 500px;
+  width: 480px;
   background-color: var(--accentcolouryellow);
   border-radius: 5px;
+}
+.modal-background.modal-body{
+  border-radius: 10px;
+  border: 3px solid black;
+}
+.modal-content{
+  border-radius: 15px;  
+}
+
+@media screen and (max-width: 900px) and (max-height: 450px), screen and (max-width: 450px) and (max-height: 900px){
+.input-group{
+  width: 360px;
+}
 }
 
