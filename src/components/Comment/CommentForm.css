@@ -31,7 +31,7 @@
     border: 1px solid black;
   }
 
-.comment-button button{
+.comment-button{
   width: 180px;
   border-radius: 5px;
   border: 1px solid black;
@@ -39,6 +39,9 @@
   padding-left: 5px;
   padding-right: 10px;
   margin-top: 30px;
+}
+.comment-button:hover{
+  background-color: #7c5fb4;
 }
 
 
