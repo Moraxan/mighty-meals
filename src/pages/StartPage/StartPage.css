@@ -17,7 +17,7 @@
 .matches{
     width: 100px;
     height: 30px;  
-    background-color: var(--accentcolouryellow);
+    background-color: var(--accentcolouryellowNonStatic);
     border:3px solid black;
     border-radius: 10px;
     text-align: center;
