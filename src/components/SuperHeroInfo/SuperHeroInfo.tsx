@@ -21,10 +21,10 @@ export default function SuperHeroInfo() {
   const powerStatImage = (powerStatValue) => {
     let imageUrl = "";
     switch (true) {
-      case powerStatValue >= 0 && powerStatValue <= 5:
+      case powerStatValue >= 0 && powerStatValue <= 4:
         imageUrl = statbar0;
         break;
-      case powerStatValue >= 6 && powerStatValue <= 14:
+      case powerStatValue >= 5 && powerStatValue <= 14:
         imageUrl = statbar1;
         break;
       case powerStatValue >= 15 && powerStatValue <= 24:
