@@ -24,6 +24,8 @@
   border-radius: 5px;
   background-color: var(--accentcolouryellow);
   border: 1px solid black;
+  font: var(--small-varela-font);
+  color: black;
   }
 
   .form-control:focus{
