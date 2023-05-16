@@ -51,7 +51,7 @@ export default function SuperHeroInfo() {
       case powerStatValue >= 85 && powerStatValue <= 94:
         imageUrl = statbar9;
         break;
-      case powerStatValue == 100:
+      case powerStatValue >= 95 && powerStatValue <= 100:
         imageUrl = statbar10;
         break;
       default:
