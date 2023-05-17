@@ -7,6 +7,7 @@
     border-radius: 10px;
     height: 100%;
     color: black;
+    position: relative;
 }
 
 .recipe-time {
@@ -51,11 +52,15 @@
 .summary-text {
     font: var(--big-varela-font);
     text-align: left;
+    margin-bottom: 50px;
 }
 
 .share-button-con {
     display: flex;
     justify-content: flex-end;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
 }
 
 .share-button {
