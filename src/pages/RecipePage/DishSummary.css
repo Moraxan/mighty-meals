@@ -1,7 +1,7 @@
 @import url('../../index.css');
 
 .dish-summary-container {
-    background-color: var(--accentcolourred);
+    background-color: var(--accentcolourredNonStatic);
     padding: 10px;
     border: 5px solid black;
     border-radius: 10px;
@@ -13,7 +13,6 @@
     font: var(--time-varela-font);
     padding-top: 8px;
     width: 140px;
-
 }
 
 .title-time {

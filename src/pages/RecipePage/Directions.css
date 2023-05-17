@@ -2,7 +2,7 @@
 
 
 .directions-container {
-  background-color: var(--accentcolouryellow);
+  background-color: var(--componentbackgroundNonStatic);
   border: 5px solid black;
   border-radius: 10px;
   padding: 10px;
@@ -19,6 +19,7 @@
   padding-left: 5px;
   padding-right: 10px;
   color: black;
+  background-color: var(--accentcolouryellow);
 }
 
 

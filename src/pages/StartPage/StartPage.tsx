@@ -23,6 +23,7 @@ import { isDevMode } from "../../main";
 import "./StartPage.css";
 import Sort from "../../components/Sort/Sort";
 import SuperHeroInfo from "../../components/SuperHeroInfo/SuperHeroInfo";
+import { SetHulkTheme, SetThorTheme, SetCaptainAmericaTheme } from "../../components/HeroThemes/HeroThemes";
 
 //@ts-ignore
 export default function StartPage(props) {
@@ -151,12 +152,18 @@ export default function StartPage(props) {
         if (heroObject.id === "149") {
           cuisine = "american";
           minCalories = "1";
+          SetCaptainAmericaTheme();
+
         } else if (heroObject.id === "332") {
           cuisine = "";
           minCalories = "1000";
+          SetHulkTheme();
+
         } else if (heroObject.id === "659") {
           cuisine = "nordic";
           minCalories = "1";
+          SetThorTheme();
+
         }
 
         const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&cuisine=${cuisine}&minCalories=${minCalories}&number=${maxHits}&sort=popularity&sortDirection=desc&addRecipeInformation=true`;
@@ -543,7 +550,7 @@ export default function StartPage(props) {
           </div>
 
           {!matches &&
-            (recipesST.length > 7 || recipesMTVMH.length > 7) &&
+            (recipesST.length > 6 || recipesMTVMH.length > 6) &&
             !showMore && (
               <div className="show-more-button-container">
                 {" "}

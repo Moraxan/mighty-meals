@@ -21,7 +21,7 @@
 }
 
 .questionMark-span:hover{
-    background-color: #eda037;
+    background-color: var(--accentcolouryellow);
 }
 
 .question-icon{
@@ -31,12 +31,12 @@
 }
 
 #mighty-switch{
-    background-color: #7c5fb4;
+    background-color: var(--accentcolourpurple);
     height: 25px;
     width: 55px;
     cursor: pointer;
 }
 
 #mighty-switch:checked{
-    background-color: #eda037;
+    background-color: var(--accentcolouryellow);
 }
