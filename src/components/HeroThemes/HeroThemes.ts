@@ -14,7 +14,7 @@ export function SetHulkTheme(){
     //@ts-ignore
     r!.style.setProperty('--accentcolourredNonStatic', darkGreen);
     //@ts-ignore
-    r!.style.setProperty('--backgroundcolor', lightGreen);
+    r!.style.setProperty('--backgroundcolorNonStatic', lightGreen);
     //@ts-ignore
     r!.style.setProperty('--componentbackgroundNonStatic', darkPurple);
 
@@ -39,7 +39,7 @@ export function SetThorTheme(){
         //@ts-ignore
         r!.style.setProperty('--accentcolourredNonStatic', darkBrown);
         //@ts-ignore
-        r!.style.setProperty('--backgroundcolor', gray);
+        r!.style.setProperty('--backgroundcolorNonStatic', gray);
         //@ts-ignore
         r!.style.setProperty('--componentbackgroundNonStatic', darkRed);
 
@@ -63,7 +63,7 @@ export function SetCaptainAmericaTheme(){
         //@ts-ignore
         r!.style.setProperty('--accentcolourredNonStatic', red);
         //@ts-ignore
-        r!.style.setProperty('--backgroundcolor', darkBlue);
+        r!.style.setProperty('--backgroundcolorNonStatic', darkBlue);
         //@ts-ignore
         r!.style.setProperty('--componentbackgroundNonStatic', darkGray);
 

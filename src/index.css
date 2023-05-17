@@ -5,20 +5,20 @@
 }
 
 body{
-  background-color: var(--backgroundcolor);
+  background-color: var(--backgroundcolorNonStatic);
   font-family: 'Avengeance', 'Varela', sans-serif;
 }
 
 :root {
 /* Here are all the global colour variables, NonStatic versions used when changing color-theme */
-  --backgroundcolor: #7c5fb4;
-  --accentcolourpurple: #7c5fb4;
-  --accentcolouryellow: #eda037;
-  --accentcolourred: #e42427;
-  --accentcolourpurpleNonStatic: #7c5fb4;
-  --accentcolouryellowNonStatic: #eda037;
-  --accentcolourredNonStatic: #e42427;
-  --componentbackgroundNonStatic: #eda037;
+--accentcolourpurple: #7c5fb4;
+--accentcolouryellow: #eda037;
+--accentcolourred: #e42427;
+--accentcolourpurpleNonStatic: #7c5fb4;
+--accentcolouryellowNonStatic: #eda037;
+--accentcolourredNonStatic: #e42427;
+--componentbackgroundNonStatic: #eda037;
+--backgroundcolorNonStatic: #7c5fb4;
 
 
 /* Here are all the global font variables */
