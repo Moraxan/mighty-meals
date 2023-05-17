@@ -5,7 +5,7 @@ export function SetHulkTheme(){
     
     const lightGreen = '#9bc063';
     const darkGreen = '#455d3b';
-    const darkPurple = '#5a4862';
+    const darkPurple = '#a174b5';
 
     //@ts-ignore
     r!.style.setProperty('--accentcolourpurpleNonStatic', darkGreen);
@@ -37,11 +37,11 @@ export function SetThorTheme(){
         //@ts-ignore
         r!.style.setProperty('--accentcolouryellowNonStatic', red );
         //@ts-ignore
-        r!.style.setProperty('--accentcolourredNonStatic', darkBrown);
+        r!.style.setProperty('--accentcolourredNonStatic', blueGray);
         //@ts-ignore
-        r!.style.setProperty('--backgroundcolorNonStatic', gray);
+        r!.style.setProperty('--backgroundcolorNonStatic', darkRed);   //darkred
         //@ts-ignore
-        r!.style.setProperty('--componentbackgroundNonStatic', darkRed);
+        r!.style.setProperty('--componentbackgroundNonStatic', blueGray);    //gray
 
 }
 
