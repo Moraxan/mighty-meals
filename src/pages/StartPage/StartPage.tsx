@@ -551,6 +551,7 @@ export default function StartPage(props) {
 
           {!matches &&
             (recipesST.length > 7 || recipesMTVMH.length > 7) &&
+            (recipesST.length > 6 || recipesMTVMH.length > 6) &&
             !showMore && (
               <div className="show-more-button-container">
                 {" "}
