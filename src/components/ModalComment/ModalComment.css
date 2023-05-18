@@ -13,7 +13,7 @@
 }
 
 .modal-background{
-    background-color: var(--accentcolourred);
+    background-color: var(--accentcolourredNonStatic);
 }
 .filter-close-btn{
     background-color: #eda037;
