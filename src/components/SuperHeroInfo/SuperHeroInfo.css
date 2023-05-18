@@ -34,7 +34,7 @@
 }
 
 .info-container {
-  background-color: var(--accentcolourred);
+  background-color: var(--componentbackgroundNonStatic);
   border: 3px solid black;
   border-radius: 10px;
   overflow: hidden;
@@ -103,6 +103,24 @@
 .stats-details img {
   height: 9px;
   margin-top: 6px;
+}
+
+.back-to-normal{
+  background-color: var(--accentcolouryellow);
+  color: black;
+  border-radius: 10px;
+  border: 1px solid black;
+  height: 35px;
+  width: 200px;
+}
+
+.back-to-normal:hover{
+  background-color: var(--accentcolourred);
+  color: black;
+}
+
+.back-to-normal-text{
+  padding-top: 6px;
 }
 
 @media screen and (max-width: 987px) and (min-height: 450px) {

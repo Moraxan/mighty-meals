@@ -78,11 +78,11 @@ export const RecipePage = () => {
           <Ingredients ingredients={recipeData?.extendedIngredients} noOfServings={recipeData?.servings} />
       </div>
       <div className="DishSummary">
-          <DishSummary recipeData={recipeData} />
+          <DishSummary recipeData={recipeData} recipeId={recipeId} />
       </div>
       <div className="Directions">
           {/*//@ts-ignore*/}
-          <Directions directions={recipeData.analyzedInstructions} />
+          <Directions directions={recipeData.analyzedInstructions } recipeId={recipeId} />
         </div>
       </div>
   );

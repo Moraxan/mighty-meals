@@ -1,5 +1,5 @@
 .filter-buttons{
-    background-color: #eda037;
+    background-color: var(--accentcolouryellow);
     min-width: 130px;
     color: black;
     font-size: 1.7rem;
@@ -11,17 +11,17 @@
 }
 
 .btn-selected{
-    background-color: #7c5fb4;
+    background-color: var(--accentcolourpurple);
 }
 
 .filter-buttons:hover{
-    background-color: #7c5fb4;
+    background-color: var(--accentcolourpurple);
     color: black;
     border: 2px solid black;
 }
 
 .selected-btn{
-    background-color: #7c5fb4;
+    background-color: var(--accentcolourpurple);
     color: black;
     font-size: 1.2rem;
     padding: 0px 15px 0px 8px;
@@ -31,7 +31,7 @@
 }
 
 .selected-btn:hover{
-    background-color: #eda037;
+    background-color: var(--accentcolouryellow);
     color: black;
     border: 2px solid black;
 }
@@ -43,7 +43,7 @@
 }
 
 .clear-result-btn{
-    background-color: #eda037;
+    background-color: var(--accentcolouryellow);
     color: black;
     min-width: 150px;
     font-size: 1.5rem;
@@ -54,7 +54,7 @@
 }
 
 .clear-result-btn:hover{
-    background-color: #7c5fb4;
+    background-color: var(--accentcolourpurple);
     color: black;
     border: 2px solid black;
 }

@@ -2,7 +2,7 @@
 
 
 .directions-container {
-  background-color: var(--accentcolouryellow);
+  background-color: var(--componentbackgroundNonStatic);
   border: 5px solid black;
   border-radius: 10px;
   padding: 10px;
@@ -19,6 +19,7 @@
   padding-left: 5px;
   padding-right: 10px;
   color: black;
+  background-color: var(--accentcolouryellow);
 }
 
 
@@ -56,4 +57,33 @@
 
 .image-button .step-text.checked {
   color: grey;
+}
+
+.title-buttons-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.directions-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.directions-buttons img {
+  width: 6rem;
+  height: auto;
+  cursor: pointer;
+  
+}
+
+#like-button {
+  background-color: var(--accentcolouryellow);
+  border: none;
+}
+
+#dislike-button {
+  background-color: var(--accentcolouryellow);
+  border: none;
 }

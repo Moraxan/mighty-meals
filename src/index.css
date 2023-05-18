@@ -5,15 +5,21 @@
 }
 
 body{
-  background-color: var(--accentcolourpurple);
+  background-color: var(--backgroundcolorNonStatic);
   font-family: 'Avengeance', 'Varela', sans-serif;
 }
 
 :root {
-/* Here are all the global colour variables */
-  --accentcolourpurple: #7c5fb4;
-  --accentcolouryellow: #eda037;
-  --accentcolourred: #e42427;
+/* Here are all the global colour variables, NonStatic versions used when changing color-theme */
+--accentcolourpurple: #7c5fb4;
+--accentcolouryellow: #eda037;
+--accentcolourred: #e42427;
+--accentcolourpurpleNonStatic: #7c5fb4;
+--accentcolouryellowNonStatic: #eda037;
+--accentcolourredNonStatic: #e42427;
+--componentbackgroundNonStatic: #eda037;
+--backgroundcolorNonStatic: #7c5fb4;
+
 
 /* Here are all the global font variables */
   --heading-font: 34pt "Avengeance", sans-serif;
@@ -40,7 +46,7 @@ body{
 
 
 ::-webkit-scrollbar-track {
-  background-color: var(--accentcolouryellow);
+  background-color: var(--accentcolouryellowNonStatic);
   border-radius: 10px;
 }
 
@@ -56,7 +62,7 @@ body{
     --big-varela-font: 14pt "Varela", sans-serif;
     --medium-varela-font: 12pt "Varela", sans-serif;
     --small-varela-font: 10pt "Varela", sans-serif; 
-    --time-varela-font: 14pt "Avengeance", sans-serif;  
+    --time-varela-font: 14pt "Avengeance", sans-serif;
   }
 
 }

@@ -23,6 +23,7 @@ import { isDevMode } from "../../main";
 import "./StartPage.css";
 import Sort from "../../components/Sort/Sort";
 import SuperHeroInfo from "../../components/SuperHeroInfo/SuperHeroInfo";
+import { SetHulkTheme, SetThorTheme, SetCaptainAmericaTheme } from "../../components/HeroThemes/HeroThemes";
 
 //@ts-ignore
 export default function StartPage(props) {
@@ -57,7 +58,7 @@ export default function StartPage(props) {
   // States for all different type of filter/ingredient choices
   const [freeTextSearch, setFreeTextSearch] = useState("");
   const [ingredientChoices, setIngredientChoices] = useState(emptyArr);
-  const [totalNumberOfIngredients, TotalNumberOfIngredients] =
+  const [totalNumberOfIngredients, setTotalNumberOfIngredients] =
     useState<number>();
   const [mealChoice, setMealChoice] = useState("");
   const [cuisineChoices, setCuisineChoices] = useState(emptyArr);
@@ -151,12 +152,18 @@ export default function StartPage(props) {
         if (heroObject.id === "149") {
           cuisine = "american";
           minCalories = "1";
+          SetCaptainAmericaTheme();
+
         } else if (heroObject.id === "332") {
           cuisine = "";
           minCalories = "1000";
+          SetHulkTheme();
+
         } else if (heroObject.id === "659") {
           cuisine = "nordic";
           minCalories = "1";
+          SetThorTheme();
+
         }
 
         const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&cuisine=${cuisine}&minCalories=${minCalories}&number=${maxHits}&sort=popularity&sortDirection=desc&addRecipeInformation=true`;
@@ -218,6 +225,7 @@ export default function StartPage(props) {
       setIntoleranceChoices(persistedData.intolerances);
       setDietChoices(persistedData.diets);
       setSelected(persistedData.selectedFilters);
+      setTotalNumberOfIngredients(persistedData.totalIngredients)
     }
   }, []);
 
@@ -377,6 +385,7 @@ export default function StartPage(props) {
       intolerances: intoleranceChoices,
       diets: dietChoices,
       selectedFilters: selected,
+      totalIngredients: totalNumberOfIngredients
     };
 
     sessionStorage.setItem(
@@ -387,7 +396,7 @@ export default function StartPage(props) {
 
   function CountIngredients() {
     var tmp = ingredientChoices.length;
-    TotalNumberOfIngredients(tmp);
+    setTotalNumberOfIngredients(tmp);
   }
 
   function countMatches() {
@@ -541,7 +550,7 @@ export default function StartPage(props) {
           </div>
 
           {!matches &&
-            (recipesST.length > 7 || recipesMTVMH.length > 7) &&
+            (recipesST.length > 6 || recipesMTVMH.length > 6) &&
             !showMore && (
               <div className="show-more-button-container">
                 {" "}
