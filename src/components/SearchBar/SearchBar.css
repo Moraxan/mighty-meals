@@ -40,6 +40,14 @@
     background: var(--accentcolourpurple);
 }
 
+.ingredient-toBe-selected{
+    background: #7c5fb4;
+}
+
+.ingredient-selected-remove{
+    background: #e42427;
+}
+
 .search-input input{
     background: var(--accentcolouryellow);
     height: 45px;

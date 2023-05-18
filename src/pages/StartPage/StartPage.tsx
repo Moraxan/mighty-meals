@@ -504,7 +504,7 @@ export default function StartPage(props) {
           {standardSearch &&
           !isHeroSelected && 
           <div className="sorting">
-            <Sort sortedBy={sortedBy} setSortedBy={setSortedBy} />
+            <Sort sortedBy={sortedBy} setSortedBy={setSortedBy} getApiData={getApiData} />
           </div>}
           
         </div>
