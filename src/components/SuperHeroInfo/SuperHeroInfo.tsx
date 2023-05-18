@@ -15,7 +15,7 @@ import statbar10 from "../../images/statbar_10.png";
 
 //@ts-ignore
 export default function SuperHeroInfo() {
-  //@ts-ignore
+
   const superHero: Hero = useHeroInfoStore((state) => state.heroObject);
   //@ts-ignore
   const powerStatImage = (powerStatValue) => {
@@ -126,7 +126,7 @@ export default function SuperHeroInfo() {
                   className="powerstat-image"
                 />
               </div>
-              <div className="stats-details">
+              <div className="stats-details power-details">
                 <p>POWER </p>
                 <img
                   src={powerStatImage(superHero.powerstats.power)}
@@ -134,6 +134,9 @@ export default function SuperHeroInfo() {
                   className="powerstat-image"
                 />
               </div>
+              <a className="back-to-normal" href="/" style={{textDecoration:"none"}}>
+                <div className="back-to-normal-text">Revert to normal search</div>
+              </a>
             </div>
           </div>
         </div>
