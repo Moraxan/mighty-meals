@@ -41,8 +41,6 @@ export const Directions = ({ recipeObject }) => {
   }
   const [recipeDisliked, setRecipeDisliked] = useState(dislikedRecipeFound);
 
-  console.log("Directions rendered!");
-
 //Checks if there are no directions available. Displays message to the user.
   if (!directionsState || directionsState.length === 0) {
     return (
