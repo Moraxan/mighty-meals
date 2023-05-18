@@ -21,37 +21,37 @@ export default function SuperHeroInfo() {
   const powerStatImage = (powerStatValue) => {
     let imageUrl = "";
     switch (true) {
-      case powerStatValue >= 0 && powerStatValue <= 9:
+      case powerStatValue >= 0 && powerStatValue <= 4:
         imageUrl = statbar0;
         break;
-      case powerStatValue >= 10 && powerStatValue <= 19:
+      case powerStatValue >= 5 && powerStatValue <= 14:
         imageUrl = statbar1;
         break;
-      case powerStatValue >= 20 && powerStatValue <= 29:
+      case powerStatValue >= 15 && powerStatValue <= 24:
         imageUrl = statbar2;
         break;
-      case powerStatValue >= 30 && powerStatValue <= 39:
+      case powerStatValue >= 25 && powerStatValue <= 34:
         imageUrl = statbar3;
         break;
-      case powerStatValue >= 40 && powerStatValue <= 49:
+      case powerStatValue >= 35 && powerStatValue <= 44:
         imageUrl = statbar4;
         break;
-      case powerStatValue >= 50 && powerStatValue <= 59:
+      case powerStatValue >= 45 && powerStatValue <= 54:
         imageUrl = statbar5;
         break;
-      case powerStatValue >= 60 && powerStatValue <= 69:
+      case powerStatValue >= 55 && powerStatValue <= 64:
         imageUrl = statbar6;
         break;
-      case powerStatValue >= 70 && powerStatValue <= 79:
+      case powerStatValue >= 65 && powerStatValue <= 74:
         imageUrl = statbar7;
         break;
-      case powerStatValue >= 80 && powerStatValue <= 89:
+      case powerStatValue >= 75 && powerStatValue <= 84:
         imageUrl = statbar8;
         break;
-      case powerStatValue >= 90 && powerStatValue <= 99:
+      case powerStatValue >= 85 && powerStatValue <= 94:
         imageUrl = statbar9;
         break;
-      case powerStatValue == 100:
+      case powerStatValue >= 95 && powerStatValue <= 100:
         imageUrl = statbar10;
         break;
       default:

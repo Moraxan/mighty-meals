@@ -1,7 +1,8 @@
 import './DishSummary.css';
 import clock from "../../images/clock.png";
 import clipboard from "../../images/copy.svg"
-import { useState } from 'react';
+import { useState, useEffect, useReducer } from "react";
+import Comment from "../../components/ModalComment/ModalComment"
 
 // Cleans the input string and shortens it to specified number of sentences
 function TruncateString(string: string, numberOfSentences: number) {
@@ -20,8 +21,7 @@ function TruncateString(string: string, numberOfSentences: number) {
   return editedString.slice(0, indexes[numberOfSentences - 1]);
 }
 
-export function DishSummary(props: any) {
-  const summary: string = props.recipeData.summary;
+export function DishSummary(props: any, recipeId:string) {
   function removeSymbolsFromString() {
     const title = props.recipeData.title
     var regex = /[^A-Za-z0-9\s\&\-\']/g;
@@ -31,6 +31,25 @@ export function DishSummary(props: any) {
   }
 
   const [shareStatus, setShareStatus] = useState(false);
+  const [showComments, setshowComments] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const[reducerValue, forceUpdate] = useReducer(x => x+1, 0)
+  const myId: string = props.recipeData.id;
+
+  const handleClickComments = () => {
+    setshowComments(true);
+  }
+  
+  useEffect(() => {
+    var comments = JSON.parse(localStorage.getItem('comments') || "[]")
+    const found = comments.find((element: { id: string; }) => element.id === myId)
+    if (found) {
+        setVisible(true)
+    }
+    else {
+      setVisible(false)
+    }
+  }, [reducerValue]);
 
   // Copy the link to the clipboard
   const shareHandler = () => {
@@ -58,9 +77,11 @@ export function DishSummary(props: any) {
         <p>{TruncateString(props.recipeData.summary, 4)}</p>
       </div>
       <div className='share-button-con'>
+        <button className='comment' onClick={handleClickComments} >{visible ? "edit comment" : "new comment"}</button>
+        {showComments && <Comment recipeId={myId} setshowComments={setshowComments} forceUpdate={forceUpdate} />}
         <button onClick={shareHandler} className='share-button'>
           {
-            shareStatus ? 'Copied to clipboard' : <><img src={clipboard} alt="copy"></img>Share recipe</>
+            shareStatus ? 'Copied to clipboard' : <><img src={clipboard} alt="copy"></img>share recipe</>
           }
         </button>
       </div>
