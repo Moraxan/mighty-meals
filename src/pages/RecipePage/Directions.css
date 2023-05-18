@@ -75,15 +75,14 @@
   width: 6rem;
   height: auto;
   cursor: pointer;
-  
 }
 
 #like-button {
-  background-color: var(--accentcolouryellow);
+  background-color: var(--componentbackgroundNonStatic);
   border: none;
 }
 
 #dislike-button {
-  background-color: var(--accentcolouryellow);
+  background-color: var(--componentbackgroundNonStatic);
   border: none;
 }
