@@ -52,7 +52,7 @@ export function SetCaptainAmericaTheme(){
 
     const blue = '#0000ff';
     const darkBlue = '#002d5c';
-    const red = '#870000';
+    const red = '#ab0303';
     const darkGray = '#a5a5ab';
     const lightGray = '#f0f0f7';
 
