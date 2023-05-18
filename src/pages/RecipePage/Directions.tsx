@@ -2,9 +2,10 @@ import checkedImg from "../../images/checked.png";
 import uncheckedImg from "../../images/unchecked.png";
 import dislikeButton from "../../images/dislike_btn.png";
 import likeButton from "../../images/like_btn.png";
-import {likedRecipeStore} from "../../components/Stores/likedRecipes";
 import "./Directions.css";
 import { useState } from "react";
+import tastyTriumph from "../../sounds/tasty_triumph.mp3";
+import tastelessTerror from "../../sounds/tasteless_terror.mp3";
 
 //@ts-ignore
 export const Directions = ({ directions, recipeId }) => {
@@ -44,34 +45,36 @@ export const Directions = ({ directions, recipeId }) => {
 //Also dims the button on a click to signal to the user that the button has been clicked
 //@ts-ignore
 
-  const handleButtonClick = (event) => {
+const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
+  const audio = new Audio(); // Create an Audio object
 
-    const isRecipeLiked = (id: string) => likedRecipeStore.getState().recipeIds.includes(id);
-    const recipeId = event.target.dataset.recipeId;
-    try {
-      if (!isRecipeLiked(recipeId)) {
-        likedRecipeStore.getState().addRecipeId(recipeId);
-        const clickedImage = event.target;
-        clickedImage.style.opacity = '0.5';
-        setTimeout(() => {
-          clickedImage.style.opacity = '1';
-        }, 500);
-      } else {
-        throw new Error('Recipe already liked');
-      }
-    } catch (error) {
-      //@ts-ignore
-      alert(error.message);
+  try {
+    if (buttonId === "like") {
+        audio.src = tastyTriumph; // Set the source of the audio file
+    } else if (buttonId === "dislike") {
+      audio.src = tastelessTerror; // Set the source of the audio file
+    } else {
+      throw new Error("Unknown button ID");
     }
-  };
+  } catch (error) {
+    //@ts-ignore
+    alert(error.message);
+  }
+
+  audio.play(); // Play the audio file
+};
 
   return (
     <div className="directions-container">
-        <div className="title-buttons-container">
-          <h2 className="directions-box">directions</h2>
-          <div className="directions-buttons">
-          <img src={likeButton} data-recipe-id={recipeId} onClick={handleButtonClick} alt="like"/>
-          <img src={dislikeButton} alt="dislike"/>
+      <div className="title-buttons-container">
+        <div className="directions-box">directions</div>
+        <div className="directions-buttons">
+          <button id="like-button" onClick={(event) => handleButtonClick(event, "like")}>
+            <img src={likeButton} alt="like"/>
+          </button>
+          <button id="dislike-button" onClick={(event) => handleButtonClick(event, "dislike")}>
+            <img src={dislikeButton} alt="dislike"/>
+          </button>
         </div>
       </div>
       

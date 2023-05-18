@@ -63,7 +63,12 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-right: 1rem;
+}
+
+.directions-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .directions-buttons img {
@@ -73,6 +78,12 @@
   
 }
 
-.directions-buttons img:first-child {
-  margin-right: 1rem;
+#like-button {
+  background-color: var(--accentcolouryellow);
+  border: none;
+}
+
+#dislike-button {
+  background-color: var(--accentcolouryellow);
+  border: none;
 }
