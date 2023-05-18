@@ -105,6 +105,24 @@
   margin-top: 6px;
 }
 
+.back-to-normal{
+  background-color: var(--accentcolouryellow);
+  color: black;
+  border-radius: 10px;
+  border: 1px solid black;
+  height: 35px;
+  width: 200px;
+}
+
+.back-to-normal:hover{
+  background-color: var(--accentcolourred);
+  color: black;
+}
+
+.back-to-normal-text{
+  padding-top: 6px;
+}
+
 @media screen and (max-width: 987px) and (min-height: 450px) {
   .superhero-container {
     width: 650px;
