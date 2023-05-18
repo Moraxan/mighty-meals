@@ -28,9 +28,6 @@ export const ProfilePage = () => {
   
     localStorage.setItem("cookedAndLiked", JSON.stringify(currentArray));
     setStorageLikedRecipes(currentArray);
-
-    console.log(storageLikedRecipes);
-    console.log(currentArray);
   }
 
   return (
