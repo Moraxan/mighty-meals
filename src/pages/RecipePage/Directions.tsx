@@ -6,10 +6,21 @@ import "./Directions.css";
 import { useState } from "react";
 import tastyTriumph from "../../sounds/tasty_triumph.mp3";
 import tastelessTerror from "../../sounds/tasteless_terror.mp3";
+import { RecipeFrontST, RecipeDetails } from "../../components/Interface/Interface";
 
 //@ts-ignore
-export const Directions = ({ directions, recipeId }) => {
-  const [directionsState, setDirectionsState] = useState(directions);
+export const Directions = ({ recipeObject }) => {
+  const [directionsState, setDirectionsState] = useState(recipeObject.analyzedInstructions);
+
+  const [likedRecipes, setLikedRecipes] = useState<RecipeFrontST[]>(JSON.parse(localStorage.getItem("cookedAndLiked")!) === null ?
+  [] :
+  JSON.parse(localStorage.getItem("cookedAndLiked")!));
+
+  if(JSON.parse(localStorage.getItem("cookedAndLiked")!) === null){
+    localStorage.setItem("cookedAndLiked", JSON.stringify(likedRecipes));
+  }
+
+  
 
 //Checks if there are no directions available. Displays message to the user.
   if (!directionsState || directionsState.length === 0) {
@@ -51,6 +62,28 @@ const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
   try {
     if (buttonId === "like") {
         audio.src = tastyTriumph; // Set the source of the audio file
+
+        const tempRecipe: RecipeFrontST = {
+          id: recipeObject.id,
+          title: recipeObject.title,
+          image: recipeObject.image,
+          readyInMinutes: recipeObject.readyInMinutes,
+        }
+
+        if(likedRecipes.length < 5){
+
+          let tmpArray = likedRecipes;
+          tmpArray.push(tempRecipe);
+
+
+          localStorage.setItem("cookedAndLiked", JSON.stringify([...likedRecipes, tempRecipe]));
+
+          console.log("recipe set!")
+        }
+
+
+
+
     } else if (buttonId === "dislike") {
       audio.src = tastelessTerror; // Set the source of the audio file
     } else {
@@ -69,9 +102,11 @@ const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
       <div className="title-buttons-container">
         <div className="directions-box">directions</div>
         <div className="directions-buttons">
+          {/*//@ts-ignore*/}
           <button id="like-button" onClick={(event) => handleButtonClick(event, "like")}>
             <img src={likeButton} alt="like"/>
           </button>
+          {/*//@ts-ignore*/}
           <button id="dislike-button" onClick={(event) => handleButtonClick(event, "dislike")}>
             <img src={dislikeButton} alt="dislike"/>
           </button>
@@ -93,7 +128,7 @@ const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
               />
 
               <span className={`step-text ${step.checked ? 'checked' : ''}`}>
-{/* Here the text is truncated to 20 chars if the truncated flag is true */}
+                {/* Here the text is truncated to 20 chars if the truncated flag is true */}
                 {step.truncated ? `${step.step.slice(0, 20)}...` : step.step}
               </span>
             </button>

@@ -82,7 +82,7 @@ export const RecipePage = () => {
       </div>
       <div className="Directions">
           {/*//@ts-ignore*/}
-          <Directions directions={recipeData.analyzedInstructions } recipeId={recipeId} />
+          <Directions recipeObject={recipeData} />
         </div>
       </div>
   );
