@@ -1,26 +1,47 @@
 import checkedImg from "../../images/checked.png";
 import uncheckedImg from "../../images/unchecked.png";
 import dislikeButton from "../../images/dislike_btn.png";
+import dislikeButtonSelected from "../../images/dislike_btn_selected.png";
 import likeButton from "../../images/like_btn.png";
+import likeButtonSelected from "../../images/like_btn_selected.png";
 import "./Directions.css";
 import { useState } from "react";
 import tastyTriumph from "../../sounds/tasty_triumph.mp3";
 import tastelessTerror from "../../sounds/tasteless_terror.mp3";
-import { RecipeFrontST, RecipeDetails } from "../../components/Interface/Interface";
+import { RecipeFrontST } from "../../components/Interface/Interface";
 
 //@ts-ignore
 export const Directions = ({ recipeObject }) => {
   const [directionsState, setDirectionsState] = useState(recipeObject.analyzedInstructions);
 
-  const [likedRecipes, setLikedRecipes] = useState<RecipeFrontST[]>(JSON.parse(localStorage.getItem("cookedAndLiked")!) === null ?
-  [] :
-  JSON.parse(localStorage.getItem("cookedAndLiked")!));
+  //Takes in likes recipes from local storage, if empty / null state is set to [].
+  //Takes in disliked recipes from local storage, if empty / null state is set to [].
+  const [storageLikedRecipes, setStorageLikedRecipes] = useState(JSON.parse(localStorage.getItem("cookedAndLiked")!) !== null ? JSON.parse(localStorage.getItem("cookedAndLiked")!) : []);
+  const [storageDisikedRecipes, setStorageDislikedRecipes] = useState(JSON.parse(localStorage.getItem("cookedAndDisliked")!) !== null ? JSON.parse(localStorage.getItem("cookedAndDisliked")!) : []);
 
-  if(JSON.parse(localStorage.getItem("cookedAndLiked")!) === null){
-    localStorage.setItem("cookedAndLiked", JSON.stringify(likedRecipes));
+  //Checkes if current recipe is found in storage, if found below boolean is set to true so we know it is already liked when rendering.
+  let recipeFound: boolean = false;
+  if(storageLikedRecipes.length > 0){
+    if(storageLikedRecipes.some((recipe: RecipeFrontST) => recipe.id === recipeObject.id)){
+      recipeFound = true;
+    } else{
+      recipeFound = false;
+    }
   }
+  const [recipeLiked, setRecipeLiked] = useState(recipeFound);
 
-  
+
+  let dislikedRecipeFound: boolean = false;
+  if(storageDisikedRecipes.length > 0){
+    if(storageDisikedRecipes.some((recipeId: number) => recipeId === recipeObject.id)){
+      dislikedRecipeFound = true;
+    } else{
+      dislikedRecipeFound = false;
+    }
+  }
+  const [recipeDisliked, setRecipeDisliked] = useState(dislikedRecipeFound);
+
+  console.log("Directions rendered!");
 
 //Checks if there are no directions available. Displays message to the user.
   if (!directionsState || directionsState.length === 0) {
@@ -63,29 +84,31 @@ const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
     if (buttonId === "like") {
         audio.src = tastyTriumph; // Set the source of the audio file
 
-        const tempRecipe: RecipeFrontST = {
-          id: recipeObject.id,
-          title: recipeObject.title,
-          image: recipeObject.image,
-          readyInMinutes: recipeObject.readyInMinutes,
+      if(!recipeLiked){
+        if(recipeDisliked){
+          RemoveDislikedRecipeFromStorage();
+          AddLikedRecipeToStorage();
+        } else{
+          AddLikedRecipeToStorage();
         }
-
-        if(likedRecipes.length < 5){
-
-          let tmpArray = likedRecipes;
-          tmpArray.push(tempRecipe);
-
-
-          localStorage.setItem("cookedAndLiked", JSON.stringify([...likedRecipes, tempRecipe]));
-
-          console.log("recipe set!")
-        }
-
-
-
+      } else{
+        RemoveLikedRecipeFromStorage();
+      }
 
     } else if (buttonId === "dislike") {
       audio.src = tastelessTerror; // Set the source of the audio file
+
+      if(recipeLiked){
+        RemoveLikedRecipeFromStorage();
+        AddDislikedRecipeToStorage();
+      } else{
+        if(recipeDisliked){
+          RemoveDislikedRecipeFromStorage();
+        } else{
+          AddDislikedRecipeToStorage();
+        }
+      }
+
     } else {
       throw new Error("Unknown button ID");
     }
@@ -97,6 +120,61 @@ const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
   audio.play(); // Play the audio file
 };
 
+const AddLikedRecipeToStorage = () => {
+  const newRecipe: RecipeFrontST = {
+    id: recipeObject.id,
+    title: recipeObject.title,
+    image: recipeObject.image,
+    readyInMinutes: recipeObject.readyInMinutes,
+  }
+
+  let currentArray = storageLikedRecipes;
+  currentArray.push(newRecipe);
+
+  localStorage.setItem("cookedAndLiked", JSON.stringify(currentArray));
+
+  setStorageLikedRecipes(currentArray);
+  setRecipeLiked(true);
+}
+
+const AddDislikedRecipeToStorage = () => {
+  let currentArray = storageDisikedRecipes;
+  currentArray.push(recipeObject.id);
+
+  localStorage.setItem("cookedAndDisliked", JSON.stringify(currentArray));
+
+  setStorageDislikedRecipes(currentArray);
+  setRecipeDisliked(true);
+}
+
+const RemoveLikedRecipeFromStorage = () => {
+  const currentRecipeId = (input: RecipeFrontST) => input.id === recipeObject.id;
+  let currentArray = storageLikedRecipes;
+
+  const indexInStorage: number = currentArray.findIndex(currentRecipeId);
+
+  currentArray.splice(indexInStorage, 1);
+
+  localStorage.setItem("cookedAndLiked", JSON.stringify(currentArray));
+
+  setStorageLikedRecipes(currentArray);
+  setRecipeLiked(false);
+}
+
+const RemoveDislikedRecipeFromStorage = () => {
+  const currentRecipeId = (input: RecipeFrontST) => input.id === recipeObject.id;
+  let currentArray = storageDisikedRecipes;
+
+  const indexInStorage: number = currentArray.findIndex(currentRecipeId);
+
+  currentArray.splice(indexInStorage, 1);
+
+  localStorage.setItem("cookedAndDisliked", JSON.stringify(currentArray));
+
+  setStorageDislikedRecipes(currentArray);
+  setRecipeDisliked(false);
+}
+
   return (
     <div className="directions-container">
       <div className="title-buttons-container">
@@ -104,11 +182,11 @@ const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
         <div className="directions-buttons">
           {/*//@ts-ignore*/}
           <button id="like-button" onClick={(event) => handleButtonClick(event, "like")}>
-            <img src={likeButton} alt="like"/>
+            <img src={recipeLiked ? likeButtonSelected : likeButton} alt="like"/>
           </button>
           {/*//@ts-ignore*/}
           <button id="dislike-button" onClick={(event) => handleButtonClick(event, "dislike")}>
-            <img src={dislikeButton} alt="dislike"/>
+            <img src={recipeDisliked ? dislikeButtonSelected: dislikeButton} alt="dislike"/>
           </button>
         </div>
       </div>
