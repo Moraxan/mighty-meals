@@ -39,17 +39,27 @@
     margin-left: 1rem;
 }
 
-.comments-box {
-    grid-row: 2 / 3;
-    grid-column: 2 / 3;
-    background-color: var(--accentcolourred);
-    padding: 1rem;
-    border: 5px solid black;
-    border-radius: 10px;
-    overflow: scroll, hidden;
-    width: auto;
-    margin-right: 1rem;
-  }
-  .profilePage-card {
-    margin: 1rem;
-  }
+.liked-recipe-item{
+    position: relative;
+    max-width: 320px;
+    min-width: 320px;
+    margin-bottom: 1rem;
+}
+
+.liked-recipe-button{
+    cursor: pointer;
+    background-image: url("../../images/like_btn.png") ; 
+    background-repeat:no-repeat;
+    background-size:contain;
+    height:40px;
+    width:55px;
+
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1;
+}
+
+.liked-recipe-button:hover{
+    background-image: url("../../images/like_btn_remove.png") ; 
+}

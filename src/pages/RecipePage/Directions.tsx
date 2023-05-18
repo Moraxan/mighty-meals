@@ -1,14 +1,10 @@
 import checkedImg from "../../images/checked.png";
 import uncheckedImg from "../../images/unchecked.png";
-import dislikeButton from "../../images/dislike_btn.png";
-import dislikeButtonSelected from "../../images/dislike_btn_selected.png";
-import likeButton from "../../images/like_btn.png";
-import likeButtonSelected from "../../images/like_btn_selected.png";
-import "./Directions.css";
 import { useState } from "react";
 import tastyTriumph from "../../sounds/tasty_triumph.mp3";
 import tastelessTerror from "../../sounds/tasteless_terror.mp3";
 import { RecipeFrontST } from "../../components/Interface/Interface";
+import "./Directions.css";
 
 //@ts-ignore
 export const Directions = ({ recipeObject }) => {
@@ -180,11 +176,11 @@ const RemoveDislikedRecipeFromStorage = () => {
         <div className="directions-buttons">
           {/*//@ts-ignore*/}
           <button id="like-button" onClick={(event) => handleButtonClick(event, "like")}>
-            <img src={recipeLiked ? likeButtonSelected : likeButton} alt="like"/>
+            <div className={recipeLiked ? "like-button-selected" : "like-button-fresh"}></div>
           </button>
           {/*//@ts-ignore*/}
           <button id="dislike-button" onClick={(event) => handleButtonClick(event, "dislike")}>
-            <img src={recipeDisliked ? dislikeButtonSelected: dislikeButton} alt="dislike"/>
+            <div className={recipeDisliked ? "dislike-button-selected" : "dislike-button-fresh"}></div>
           </button>
         </div>
       </div>
