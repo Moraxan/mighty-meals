@@ -76,9 +76,8 @@ const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
 
   try {
     if (buttonId === "like") {
-        audio.src = tastyTriumph; // Set the source of the audio file
-
       if(!recipeLiked){
+        audio.src = tastyTriumph; // Set the source of the audio file
         if(recipeDisliked){
           RemoveDislikedRecipeFromStorage();
           AddLikedRecipeToStorage();
@@ -90,15 +89,16 @@ const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
       }
 
     } else if (buttonId === "dislike") {
-      audio.src = tastelessTerror; // Set the source of the audio file
-
+      
       if(recipeLiked){
+        audio.src = tastelessTerror; // Set the source of the audio file
         RemoveLikedRecipeFromStorage();
         AddDislikedRecipeToStorage();
       } else{
         if(recipeDisliked){
           RemoveDislikedRecipeFromStorage();
         } else{
+          audio.src = tastelessTerror; // Set the source of the audio file
           AddDislikedRecipeToStorage();
         }
       }
