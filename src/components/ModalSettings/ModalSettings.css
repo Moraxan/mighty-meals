@@ -35,6 +35,7 @@
 }
 .submitbutton:hover{
     background-color: var(--accentcolourpurple);
+    color: black;
 }
 
 .closebutton{
@@ -45,4 +46,5 @@
 }
 .closebutton:hover{
     background-color: var(--accentcolourpurple);
+    color: black;
 }
