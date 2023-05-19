@@ -71,19 +71,60 @@
   justify-content: center;
 }
 
-.directions-buttons img {
-  width: 6rem;
-  height: auto;
-  cursor: pointer;
-  
+.like-button-fresh{
+  background-image: url("../../images/like_btn.png") ; 
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:4.2rem;
+  width:6rem;
+}
+
+.like-button-fresh:hover{
+  background-image: url("../../images/like_btn_selected.png") ;
+}
+
+.like-button-selected{
+  background-image: url("../../images/like_btn_selected.png") ; 
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:4.2rem;
+  width:6rem;
+}
+
+.like-button-selected:hover{
+  background-image: url("../../images/like_btn_remove.png") ;
+}
+
+.dislike-button-fresh{
+  background-image: url("../../images/dislike_btn.png") ; 
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:4.2rem;
+  width:6rem;
+}
+
+.dislike-button-fresh:hover{
+  background-image: url("../../images/dislike_btn_selected.png") ;
+}
+
+.dislike-button-selected{
+  background-image: url("../../images/dislike_btn_selected.png") ; 
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:4.2rem;
+  width:6rem;
+}
+
+.dislike-button-selected:hover{
+  background-image: url("../../images/dislike_btn_remove.png") ; 
 }
 
 #like-button {
-  background-color: var(--accentcolouryellow);
+  background-color: var(--componentbackgroundNonStatic);
   border: none;
 }
 
 #dislike-button {
-  background-color: var(--accentcolouryellow);
+  background-color: var(--componentbackgroundNonStatic);
   border: none;
 }

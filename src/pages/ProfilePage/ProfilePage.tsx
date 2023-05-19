@@ -1,16 +1,34 @@
-import './ProfilePage.css';
-import { useState, useEffect, useMemo } from "react";
+
+import { useState } from "react";
 import Card from '../../components/RecipeCard/Card';
 import { RecipeFrontST } from '../../components/Interface/Interface';
 import { BackButton } from '../RecipePage/BackButton';
-import CommentForm from '../../components/Comment/CommentForm';
-
-
+import './ProfilePage.css';
 
 export const ProfilePage = () => {
 
+  const [storageLikedRecipes, setStorageLikedRecipes] = useState(JSON.parse(localStorage.getItem("cookedAndLiked")!) !== null ? JSON.parse(localStorage.getItem("cookedAndLiked")!) : []);
 
+  const RenderSTCard = (recipe: RecipeFrontST) => (
+    <Card
+      key={recipe.id}
+      recId={recipe.id}
+      imgSrc={recipe.image}
+      recipeTitle={recipe.title}
+      readyInMin={recipe.readyInMinutes}
+    />
+  );
 
+  const HandleLikedClick = (recipeId: number) => {
+    const currentRecipeId = (input: RecipeFrontST) => input.id === recipeId;
+    let currentArray = storageLikedRecipes.splice(0);
+  
+    const indexInStorage: number = currentArray.findIndex(currentRecipeId);
+    currentArray.splice(indexInStorage, 1);
+  
+    localStorage.setItem("cookedAndLiked", JSON.stringify(currentArray));
+    setStorageLikedRecipes(currentArray);
+  }
 
   return (
     <div className="profilepage-container">
@@ -23,12 +41,17 @@ export const ProfilePage = () => {
       <div className="grid-container">
         <div className="likedrecipes">
           <div className="profile-header">
-            These are your liked recipes!
+            Liked recipes!
           </div>
+          {storageLikedRecipes.length > 0 && storageLikedRecipes.map((recipe: RecipeFrontST) => 
+            <div className="liked-recipe-item" key={recipe.id + "-liked"}>
+              <div className="liked-recipe-button" onClick={() => HandleLikedClick(recipe.id)}></div>
+              {RenderSTCard(recipe)}
+            </div>
+          )}
         </div>
       </div>
     </div> 
-    
   );
 
 }

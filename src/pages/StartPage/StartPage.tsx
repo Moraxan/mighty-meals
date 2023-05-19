@@ -349,7 +349,6 @@ export default function StartPage(props) {
       imgSrc={recipe.image}
       recipeTitle={recipe.title}
       readyInMin={recipe.readyInMinutes}
-      handleRecipeClick={props.handleRecipeClick}
       persistSearchData={persistSearchData}
     />
   );
@@ -362,7 +361,6 @@ export default function StartPage(props) {
       recipeTitle={recipe.title}
       usedIngredientCount={recipe.usedIngredientCount}
       missedIngredientCount={recipe.missedIngredientCount}
-      handleRecipeClick={props.handleRecipeClick}
       persistSearchData={persistSearchData}
       ingredientChoices={ingredientChoices}
       totalNumberOfIngredients={totalNumberOfIngredients}

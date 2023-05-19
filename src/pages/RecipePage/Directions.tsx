@@ -1,15 +1,41 @@
 import checkedImg from "../../images/checked.png";
 import uncheckedImg from "../../images/unchecked.png";
-import dislikeButton from "../../images/dislike_btn.png";
-import likeButton from "../../images/like_btn.png";
-import "./Directions.css";
 import { useState } from "react";
 import tastyTriumph from "../../sounds/tasty_triumph.mp3";
 import tastelessTerror from "../../sounds/tasteless_terror.mp3";
+import { RecipeFrontST } from "../../components/Interface/Interface";
+import "./Directions.css";
 
 //@ts-ignore
-export const Directions = ({ directions, recipeId }) => {
-  const [directionsState, setDirectionsState] = useState(directions);
+export const Directions = ({ recipeObject }) => {
+  const [directionsState, setDirectionsState] = useState(recipeObject.analyzedInstructions);
+
+  //Takes in likes recipes from local storage, if empty / null state is set to [].
+  //Takes in disliked recipes from local storage, if empty / null state is set to [].
+  const [storageLikedRecipes, setStorageLikedRecipes] = useState(JSON.parse(localStorage.getItem("cookedAndLiked")!) !== null ? JSON.parse(localStorage.getItem("cookedAndLiked")!) : []);
+  const [storageDisikedRecipes, setStorageDislikedRecipes] = useState(JSON.parse(localStorage.getItem("cookedAndDisliked")!) !== null ? JSON.parse(localStorage.getItem("cookedAndDisliked")!) : []);
+
+  //Checkes if current recipe is found in storage, if found below boolean is set to true so we know it is already liked when rendering.
+  let recipeFound: boolean = false;
+  if(storageLikedRecipes.length > 0){
+    if(storageLikedRecipes.some((recipe: RecipeFrontST) => recipe.id === recipeObject.id)){
+      recipeFound = true;
+    } else{
+      recipeFound = false;
+    }
+  }
+  const [recipeLiked, setRecipeLiked] = useState(recipeFound);
+
+
+  let dislikedRecipeFound: boolean = false;
+  if(storageDisikedRecipes.length > 0){
+    if(storageDisikedRecipes.some((recipeId: number) => recipeId === recipeObject.id)){
+      dislikedRecipeFound = true;
+    } else{
+      dislikedRecipeFound = false;
+    }
+  }
+  const [recipeDisliked, setRecipeDisliked] = useState(dislikedRecipeFound);
 
 //Checks if there are no directions available. Displays message to the user.
   if (!directionsState || directionsState.length === 0) {
@@ -50,9 +76,33 @@ const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
 
   try {
     if (buttonId === "like") {
+      if(!recipeLiked){
         audio.src = tastyTriumph; // Set the source of the audio file
+        if(recipeDisliked){
+          RemoveDislikedRecipeFromStorage();
+          AddLikedRecipeToStorage();
+        } else{
+          AddLikedRecipeToStorage();
+        }
+      } else{
+        RemoveLikedRecipeFromStorage();
+      }
+
     } else if (buttonId === "dislike") {
-      audio.src = tastelessTerror; // Set the source of the audio file
+      
+      if(recipeLiked){
+        audio.src = tastelessTerror; // Set the source of the audio file
+        RemoveLikedRecipeFromStorage();
+        AddDislikedRecipeToStorage();
+      } else{
+        if(recipeDisliked){
+          RemoveDislikedRecipeFromStorage();
+        } else{
+          audio.src = tastelessTerror; // Set the source of the audio file
+          AddDislikedRecipeToStorage();
+        }
+      }
+
     } else {
       throw new Error("Unknown button ID");
     }
@@ -64,16 +114,73 @@ const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
   audio.play(); // Play the audio file
 };
 
+const AddLikedRecipeToStorage = () => {
+  const newRecipe: RecipeFrontST = {
+    id: recipeObject.id,
+    title: recipeObject.title,
+    image: recipeObject.image,
+    readyInMinutes: recipeObject.readyInMinutes,
+  }
+
+  let currentArray = storageLikedRecipes;
+  currentArray.push(newRecipe);
+
+  localStorage.setItem("cookedAndLiked", JSON.stringify(currentArray));
+
+  setStorageLikedRecipes(currentArray);
+  setRecipeLiked(true);
+}
+
+const AddDislikedRecipeToStorage = () => {
+  let currentArray = storageDisikedRecipes;
+  currentArray.push(recipeObject.id);
+
+  localStorage.setItem("cookedAndDisliked", JSON.stringify(currentArray));
+
+  setStorageDislikedRecipes(currentArray);
+  setRecipeDisliked(true);
+}
+
+const RemoveLikedRecipeFromStorage = () => {
+  const currentRecipeId = (input: RecipeFrontST) => input.id === recipeObject.id;
+  let currentArray = storageLikedRecipes;
+
+  const indexInStorage: number = currentArray.findIndex(currentRecipeId);
+
+  currentArray.splice(indexInStorage, 1);
+
+  localStorage.setItem("cookedAndLiked", JSON.stringify(currentArray));
+
+  setStorageLikedRecipes(currentArray);
+  setRecipeLiked(false);
+}
+
+const RemoveDislikedRecipeFromStorage = () => {
+  const currentRecipeId = (input: RecipeFrontST) => input.id === recipeObject.id;
+  let currentArray = storageDisikedRecipes;
+
+  const indexInStorage: number = currentArray.findIndex(currentRecipeId);
+
+  currentArray.splice(indexInStorage, 1);
+
+  localStorage.setItem("cookedAndDisliked", JSON.stringify(currentArray));
+
+  setStorageDislikedRecipes(currentArray);
+  setRecipeDisliked(false);
+}
+
   return (
     <div className="directions-container">
       <div className="title-buttons-container">
         <div className="directions-box">directions</div>
         <div className="directions-buttons">
+          {/*//@ts-ignore*/}
           <button id="like-button" onClick={(event) => handleButtonClick(event, "like")}>
-            <img src={likeButton} alt="like"/>
+            <div className={recipeLiked ? "like-button-selected" : "like-button-fresh"}></div>
           </button>
+          {/*//@ts-ignore*/}
           <button id="dislike-button" onClick={(event) => handleButtonClick(event, "dislike")}>
-            <img src={dislikeButton} alt="dislike"/>
+            <div className={recipeDisliked ? "dislike-button-selected" : "dislike-button-fresh"}></div>
           </button>
         </div>
       </div>
@@ -93,7 +200,7 @@ const handleButtonClick = (event: MouseEvent, buttonId: string): void => {
               />
 
               <span className={`step-text ${step.checked ? 'checked' : ''}`}>
-{/* Here the text is truncated to 20 chars if the truncated flag is true */}
+                {/* Here the text is truncated to 20 chars if the truncated flag is true */}
                 {step.truncated ? `${step.step.slice(0, 20)}...` : step.step}
               </span>
             </button>
