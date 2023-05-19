@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 //@ts-ignore
@@ -23,9 +22,9 @@ export default function ModalCSS(props) {
           </p>
         </Modal.Body>
         <Modal.Footer className="modalfooter">
-          <Button className="submitbutton" onClick={handleClose}>
+          <button className="submitbutton" onClick={handleClose}>
             Close
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </>

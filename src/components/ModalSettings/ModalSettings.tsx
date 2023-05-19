@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useApiCheckerStore } from "../Stores/checkIfApiExists";
 import { isDevMode } from "../../main";
@@ -175,10 +174,10 @@ export default function ModalSaveAPIKey(props) {
           </a>
         </Modal.Body>
         <Modal.Footer className="modalfooter">
-          <Button className="closebutton" onClick={handleClose}>
+          <button className="closebutton" onClick={handleClose}>
             Close
-          </Button>
-          <Button className="submitbutton"
+          </button>
+          <button className="submitbutton"
             onClick={handleSubmit}
             disabled={
               apiInputBox === null
@@ -189,7 +188,7 @@ export default function ModalSaveAPIKey(props) {
             }
           >
             Save settings
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </>

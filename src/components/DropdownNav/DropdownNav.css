@@ -5,3 +5,7 @@
 .dropdown-item:hover{
     background-color: var(--accentcolourred);
 }
+.dropdown-item:focus{
+    color: black;
+    background-color: var(--accentcolourred);
+}

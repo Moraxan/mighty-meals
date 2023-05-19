@@ -28,6 +28,7 @@
     border: 0px;
 }
 .submitbutton{
+    height: 38px;
     border-radius: 5px;
   border: 1px solid black;
   background-color: var(--accentcolouryellow);
@@ -37,8 +38,13 @@
     background-color: var(--accentcolourpurple);
     color: black;
 }
+.submitbutton:active{
+    background-color: var(--accentcolourpurple);
+    color: black;    
+}
 
 .closebutton{
+    height: 38px;
     border-radius: 5px;
   border: 1px solid black;
   background-color: var(--accentcolouryellow);
@@ -47,4 +53,9 @@
 .closebutton:hover{
     background-color: var(--accentcolourpurple);
     color: black;
+}
+.closebutton:active{
+    background-color: var(--accentcolourpurple);
+    color: black;    
+    
 }
