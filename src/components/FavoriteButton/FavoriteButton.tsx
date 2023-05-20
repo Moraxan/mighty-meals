@@ -24,6 +24,7 @@ export function FavoriteButton({favoritedRecipes, recId, imgSrc, readyInMin, rec
             const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
 
             if (isRecipeInList(favoriteRecipes, recId)) {
+                 //remove object from array. Calls a function that returns the index of the object to remove.
                 favoriteRecipes.splice(getRecipeIndexFromArray(favoriteRecipes,recId), 1);
                 localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
                 // setFavoriteRecipes(favoriteRecipes);
