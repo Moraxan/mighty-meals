@@ -10,6 +10,7 @@ const Card = ( props ) => {
 
   const setPreviousPage = useBrowserHistoryStore((state) => state.setPreviousPage);
   const location: string = useLocation().pathname;
+  
 
   const handleClick = () => {
     if(location !== "/profilepage"){
@@ -18,6 +19,7 @@ const Card = ( props ) => {
     
     setPreviousPage(location);
   };
+
 
   function removeSymbolsFromString(){
     const title = props.recipeTitle
@@ -34,7 +36,6 @@ const Card = ( props ) => {
   return (
     
     <div>
-      
     <Link to={`/recipe/${props.recId}`} onClick={() => {handleClick()}}>
     <div className="card card__wrapper">
       {/*//@ts-ignore*/}
@@ -58,7 +59,7 @@ const Card = ( props ) => {
     </div>
     </Link>
     <div className="favorite-button-container">
-      <FavoriteButton recId={props.recId} imgSrc={props.imgSrc} recipeTitle={titleToDisplay()} readyInMin={props.readyInMin} markAsFavorite={props.isFavoriteRecipe} favoritedRecipes={props.favoriteRecipes} ></FavoriteButton>
+      <FavoriteButton recId={props.recId} imgSrc={props.imgSrc} recipeTitle={titleToDisplay()} readyInMin={props.readyInMin} markAsFavorite={props.markAsFavorite} ></FavoriteButton>
       </div>
     </div>
   )

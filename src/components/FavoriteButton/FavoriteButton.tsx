@@ -1,12 +1,11 @@
 import heart_yellow from "../../images/heart_yellow.png";
 import heart_red from "../../images/heart_red.png";
-import { useState} from 'react';
+import { useState, useEffect} from 'react';
 import '../FavoriteButton/FavoriteButton.css';
 
-export function FavoriteButton({favoritedRecipes, recId, imgSrc, readyInMin, recipeTitle, markAsFavorite}){
+export function FavoriteButton({recId, imgSrc, readyInMin, recipeTitle, markAsFavorite}){
 
     const [isFavorite, setIsFavorite] = useState<boolean>(markAsFavorite);
-    const [favoriteRecipes, setFavoriteRecipes] = useState(favoritedRecipes);
 
     function isRecipeInList(recipes, recipeIdToFind){
         var index = recipes.findIndex(recipe => recipe.id === recipeIdToFind);
@@ -16,7 +15,6 @@ export function FavoriteButton({favoritedRecipes, recId, imgSrc, readyInMin, rec
         var index = recipes.findIndex(recipe => recipe.id === recipeIdToFind);
         return index;
     }
-
     
 
     const HandleButtonClick = (event) => {

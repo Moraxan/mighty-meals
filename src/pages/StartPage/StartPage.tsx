@@ -77,6 +77,9 @@ export default function StartPage(props) {
   // variable to determine of no results or not.
   const [noResultsReturned, setNoResultsReturned] = useState(false);
 
+  // state for favoriteRecipe array in local storage
+  const [favoriteRecipes, setFavoriteRecipes] = useState(JSON.parse(localStorage.getItem("favoriteRecipes")!) !== null ? JSON.parse(localStorage.getItem("favoriteRecipes")!) : []);
+
   //#endregion ##########################################################################################################################
 
   //#region Settings for dev/prod and persisted search/settings data ####################################################################
@@ -342,6 +345,13 @@ export default function StartPage(props) {
     }
   }
 
+    // function for checking if the recipe shown on the card is a favorite recipe. 
+  function checkIfFavoriteRecipe(favoriteRecipes, recipeId:number) {
+    const favoriteStorageArray = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const found = favoriteStorageArray.find(recipe => recipe.id === recipeId)
+    return found? true: false; 
+  }
+
   const renderSTCard = (recipe: RecipeFrontST) => (
     <Card
       key={recipe.id}
@@ -350,6 +360,7 @@ export default function StartPage(props) {
       recipeTitle={recipe.title}
       readyInMin={recipe.readyInMinutes}
       persistSearchData={persistSearchData}
+      markAsFavorite={checkIfFavoriteRecipe(favoriteRecipes,recipe.id)}
     />
   );
 

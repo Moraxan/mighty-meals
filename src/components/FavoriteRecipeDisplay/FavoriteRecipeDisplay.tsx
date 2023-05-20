@@ -7,9 +7,12 @@ import "./FavoriteRecipeDisplay.css";
 export function FavoriteRecipeDisplay({favoriteRecipes}){
 
     const [recipes, setRecipes] = useState(favoriteRecipes);
+    const [isFavorite, setIsFavorite] = useState(false);
 
     function checkIfFavoriteRecipe(favoriteRecipes, recipeId:number) {
-        return favoriteRecipes.find(recipe => recipe.id === recipeId)? true: false;
+        const favoriteStorageArray = JSON.parse(localStorage.getItem('favoriteRecipes'));
+        const found = favoriteStorageArray.find(recipe => recipe.id === recipeId)
+        return found? true: false; 
       }
 
 //@ts-ignore
@@ -23,8 +26,9 @@ export function FavoriteRecipeDisplay({favoriteRecipes}){
               imgSrc={recipe.image}
               recipeTitle={recipe.title}
               readyInMin={recipe.timeToMake}
-              markAsFavorite={checkIfFavoriteRecipe(favoriteRecipes, recipe.id)}
+              markAsFavorite={checkIfFavoriteRecipe(recipes,recipe.id)}
               favoritedRecipes={favoriteRecipes}
+              
               />
             ))}
           </div>
