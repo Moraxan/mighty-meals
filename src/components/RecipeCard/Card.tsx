@@ -38,7 +38,7 @@ const Card = ( props ) => {
 
   return (
     
-    <div>
+    <div className="main-card">
     <Link to={`/recipe/${props.recId}`} onClick={() => {handleClick()}}>
     <div className="card card__wrapper">
       {/*//@ts-ignore*/}
@@ -56,6 +56,7 @@ const Card = ( props ) => {
               {props.readyInMin}
               <span>min</span>
             </p>
+            
           </div>
         </div>
       </div>

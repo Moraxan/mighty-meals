@@ -34,18 +34,16 @@ export function FavoriteRecipeDisplay({favoriteRecipes, setFavoriteRecipes}){
 
     return (
         <>
-        <div className="favorite-title">
-          Favorite recipes
-        </div>
-        <div className="favorite-outer-container">
-          <div className="favorite-outer-container">
-              <div className="cards-container">
+        
+        
+          
+              
                 {favoriteRecipes.length > 0 && <div className="cards-wrapper">
-                    {renderCards(favoriteRecipes)};
+                    {renderCards(favoriteRecipes)}
                 </div>}
-              </div>
-          </div>
-        </div>
+              
+          
+        
         </>
     );
 }

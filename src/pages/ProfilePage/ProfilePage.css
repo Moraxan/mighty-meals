@@ -1,31 +1,34 @@
 .profilepage-container {
     font: var(--heading-font);
     color: var(--accentcolouryellow);
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr;
+    grid-template-rows:  auto auto auto; 
+    gap: 10px;
+    margin-right: 120px;
+}
+.back-btn {
+    grid-column: 1; 
+  grid-row: 1; 
+  cursor: pointer;
+  height: 65px;
+  width: 140px;
 }
 
 .profile-header {
     -webkit-text-stroke: 1px black;
+    grid-column: 1 / 4;
+    grid-row: 1;
+    height: 65px;
 }
-
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-template-rows: auto 1fr;
-    gap: 1rem;
-    margin-top: 1rem;
+.favrecipes{
+    grid-column: 3;
+    grid-row: 2;
 }
-
-.back-btn {
-    grid-row: 1 / 2;
-    grid-column: 1 / 2;
-    margin-left: 1rem;
-    position: fixed;
-    z-index: 1;
-}
-
-.profile-text {
-    grid-row: 1 / 2;
-    grid-column: 2 / 3;
+.likedrecipes{
+    grid-column: 2;
+    grid-row: 2;
+    width: 360px;
 }
 
 .likedrecipes {
@@ -43,7 +46,6 @@
     position: relative;
     max-width: 320px;
     min-width: 320px;
-    margin-bottom: 1rem;
 }
 
 .liked-recipe-button{

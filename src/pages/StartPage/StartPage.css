@@ -9,7 +9,7 @@
     flex-direction: row;
     align-self: center;
     justify-content: space-between;
-    row-gap: 10px;
+    
     column-gap: 10px;
     margin-bottom: 50px;
 }

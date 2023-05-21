@@ -1,9 +1,21 @@
 @import url('../../index.css'); 
+
+  .main-card{
+    position: relative;
+  }
+  .favorite-button-container{
+    position: absolute;
+    height: 36px;
+    bottom: 22px;
+    right: 10px;
+    z-index: 1;
+  }
   .card__wrapper {
     border:3px solid black;
     border-radius: 10px;
     overflow: hidden;
     max-width: 320px;
+    margin-bottom: 10px;
   }
 
   .card__bg-image {
