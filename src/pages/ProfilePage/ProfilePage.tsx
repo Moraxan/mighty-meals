@@ -1,13 +1,23 @@
-
 import { useState } from "react";
 import Card from '../../components/RecipeCard/Card';
 import { RecipeFrontST } from '../../components/Interface/Interface';
 import { BackButton } from '../RecipePage/BackButton';
 import './ProfilePage.css';
+import { FavoriteRecipeDisplay } from "../../components/FavoriteRecipeDisplay/FavoriteRecipeDisplay";
+
 
 export const ProfilePage = () => {
 
+  
+
   const [storageLikedRecipes, setStorageLikedRecipes] = useState(JSON.parse(localStorage.getItem("cookedAndLiked")!) !== null ? JSON.parse(localStorage.getItem("cookedAndLiked")!) : []);
+  const [favoriteRecipes, setFavoriteRecipes] = useState(JSON.parse(localStorage.getItem("favoriteRecipes")!) !== null ? JSON.parse(localStorage.getItem("favoriteRecipes")!) : []);
+
+  // function for checking if the recipe shown on the card is a favorite recipe. 
+  // function checkIfFavoriteRecipe(recipeId:number) {
+  //   const found = favoriteRecipes.find(recipe => recipe.id === recipeId)
+  //   return found? true: false; 
+  // }
 
   const RenderSTCard = (recipe: RecipeFrontST) => (
     <Card
@@ -30,6 +40,7 @@ export const ProfilePage = () => {
     setStorageLikedRecipes(currentArray);
   }
 
+
   return (
     <div className="profilepage-container">
       <div className="back-btn">
@@ -51,8 +62,8 @@ export const ProfilePage = () => {
           )}
         </div>
       </div>
+      <FavoriteRecipeDisplay favoriteRecipes={favoriteRecipes} setFavoriteRecipes={setFavoriteRecipes} ></FavoriteRecipeDisplay>
     </div> 
   );
 
 }
-

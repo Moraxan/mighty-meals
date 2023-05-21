@@ -1,0 +1,11 @@
+.favorite-button{
+    cursor: pointer;
+    background-color: transparent;
+    border: 0px;
+    
+}
+
+.favorite-image{
+    width: 40px;
+    height: auto; 
+}

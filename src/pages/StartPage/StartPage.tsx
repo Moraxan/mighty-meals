@@ -6,14 +6,9 @@ import SearchBarFreeText from "../../components/SearchBar/SearchBarFreeText";
 import SearchSwitch from "../../components/SearchSwitch/SearchSwitch";
 import NoResult from "../../components/NoResult/NoResult";
 import ModalSaveAPIKey from "../../components/ModalSaveAPIKey/ModalSaveAPIKey";
-import HaveCook from "../../components/HaveCooked/HaveCooked";
 import Card from "../../components/RecipeCard/Card";
 import CardMTVMH from "../../components/RecipeCard/CardMTVMH";
-import {
-  RecipeFrontST,
-  RecipeMTVMH,
-  Hero,
-} from "../../components/Interface/Interface";
+import { RecipeFrontST, RecipeMTVMH, Hero } from "../../components/Interface/Interface";
 import { useMediaQuery } from "../../components/DropdownNav/DropdownNav";
 import { useBackButtonStore } from "../../components/Stores/backButtonClick";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
@@ -27,6 +22,11 @@ import { SetHulkTheme, SetThorTheme, SetCaptainAmericaTheme } from "../../compon
 
 //@ts-ignore
 export default function StartPage(props) {
+
+  if(JSON.parse(localStorage.getItem('favoriteRecipes')!) === null){
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
+
   //***************************                   DEVMODE IS NOW SET IN MAIN.TSX FILE!!!                **************************
 
   //#region Zustand stores #############################################################################################################
@@ -342,6 +342,14 @@ export default function StartPage(props) {
     }
   }
 
+    // function for checking if the recipe shown on the card is a favorite recipe. 
+  function checkIfFavoriteRecipe(recipeId:number) {
+    const favoriteStorageArray = JSON.parse(localStorage.getItem('favoriteRecipes')!);
+    //@ts-ignore
+    const found = favoriteStorageArray.find(recipe => recipe.id === recipeId)
+    return found? true: false; 
+  }
+
   const renderSTCard = (recipe: RecipeFrontST) => (
     <Card
       key={recipe.id}
@@ -350,6 +358,8 @@ export default function StartPage(props) {
       recipeTitle={recipe.title}
       readyInMin={recipe.readyInMinutes}
       persistSearchData={persistSearchData}
+      markAsFavorite={checkIfFavoriteRecipe(recipe.id)}
+      showHeart={true}
     />
   );
 
@@ -364,6 +374,8 @@ export default function StartPage(props) {
       persistSearchData={persistSearchData}
       ingredientChoices={ingredientChoices}
       totalNumberOfIngredients={totalNumberOfIngredients}
+      markAsFavorite={checkIfFavoriteRecipe(recipe.id)}
+      showHeart={true}
     />
   );
 
