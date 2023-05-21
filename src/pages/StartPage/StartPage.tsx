@@ -375,6 +375,7 @@ export default function StartPage(props) {
       persistSearchData={persistSearchData}
       ingredientChoices={ingredientChoices}
       totalNumberOfIngredients={totalNumberOfIngredients}
+      markAsFavorite={checkIfFavoriteRecipe(favoriteRecipes,recipe.id)}
     />
   );
 

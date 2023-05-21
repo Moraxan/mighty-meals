@@ -2,6 +2,7 @@ import "./card.css";
 import { Link, useLocation } from 'react-router-dom';
 import { useBrowserHistoryStore } from "../Stores/browsingHistory";
 import alt_image from "../../images/alt_image.png";
+import { FavoriteButton } from "../FavoriteButton/FavoriteButton";
 
 //@ts-ignore
 const CardMTVMH = ( props ) => {
@@ -22,6 +23,10 @@ const CardMTVMH = ( props ) => {
     var regex = /[^A-Za-z0-9\s\&\-\']/g;
     var editedString = title.replace(regex, "");
     return editedString;
+  }
+  function titleToDisplay() {
+    let strippedTitle = removeSymbolsFromString();
+    return strippedTitle.length < 36 ? strippedTitle.toLowerCase() : strippedTitle.substring(0, 35).toLowerCase() + "...";
   }
 
   return (
@@ -45,6 +50,9 @@ const CardMTVMH = ( props ) => {
       </div>
     </div>
     </Link>
+    <div className="favorite-button-container">
+      <FavoriteButton recId={props.recId} imgSrc={props.imgSrc} recipeTitle={titleToDisplay()} readyInMin={props.readyInMin} markAsFavorite={props.markAsFavorite} ></FavoriteButton>
+      </div>
     </div>
   );
 };
