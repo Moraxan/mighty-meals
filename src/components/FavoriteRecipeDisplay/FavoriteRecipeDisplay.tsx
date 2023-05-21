@@ -1,17 +1,12 @@
-import { render } from "react-dom";
-import { useState } from "react";
 import Card from "../../components/RecipeCard/Card";
-import Footer from "../../components/Footer/Footer";
 import "./FavoriteRecipeDisplay.css";
 
-export function FavoriteRecipeDisplay({favoriteRecipes}){
+//@ts-ignore
+export function FavoriteRecipeDisplay({favoriteRecipes, setFavoriteRecipes}){
 
-    const [recipes, setRecipes] = useState(favoriteRecipes);
-    const [isFavorite, setIsFavorite] = useState(false);
-
-    function checkIfFavoriteRecipe(favoriteRecipes, recipeId:number) {
-        const favoriteStorageArray = JSON.parse(localStorage.getItem('favoriteRecipes'));
-        const found = favoriteStorageArray.find(recipe => recipe.id === recipeId)
+    function checkIfFavoriteRecipe(recipeId:number) {
+      //@ts-ignore
+        const found = favoriteRecipes.find(recipe => recipe.id === recipeId)
         return found? true: false; 
       }
 
@@ -19,6 +14,7 @@ export function FavoriteRecipeDisplay({favoriteRecipes}){
       const renderCards = (recipes) => {
         return (
           <div>
+            {/*//@ts-ignore*/}
             {recipes.map(recipe => (
               <Card
               key={recipe.id}
@@ -26,9 +22,10 @@ export function FavoriteRecipeDisplay({favoriteRecipes}){
               imgSrc={recipe.image}
               recipeTitle={recipe.title}
               readyInMin={recipe.timeToMake}
-              markAsFavorite={checkIfFavoriteRecipe(recipes,recipe.id)}
-              favoritedRecipes={favoriteRecipes}
-              
+              markAsFavorite={checkIfFavoriteRecipe(recipe.id)}
+              favoriteRecipes={favoriteRecipes}
+              setFavoriteRecipes={setFavoriteRecipes}
+              showHeart={true}
               />
             ))}
           </div>
@@ -43,9 +40,9 @@ export function FavoriteRecipeDisplay({favoriteRecipes}){
         <div className="favorite-outer-container">
           <div className="favorite-outer-container">
               <div className="cards-container">
-                <div className="cards-wrapper">
-                    {renderCards(recipes)};
-                </div>
+                {favoriteRecipes.length > 0 && <div className="cards-wrapper">
+                    {renderCards(favoriteRecipes)};
+                </div>}
               </div>
           </div>
         </div>

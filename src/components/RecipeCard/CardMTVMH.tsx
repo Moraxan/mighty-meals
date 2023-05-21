@@ -1,11 +1,14 @@
 import "./card.css";
 import { Link, useLocation } from 'react-router-dom';
+import { useState } from "react";
 import { useBrowserHistoryStore } from "../Stores/browsingHistory";
 import alt_image from "../../images/alt_image.png";
 import { FavoriteButton } from "../FavoriteButton/FavoriteButton";
 
 //@ts-ignore
 const CardMTVMH = ( props ) => {
+
+  const [isFavorite, setIsFavorite] = useState<boolean>(props.markAsFavorite);
 
   const setPreviousPage = useBrowserHistoryStore((state) => state.setPreviousPage);
   const location: string = useLocation().pathname;
@@ -50,9 +53,9 @@ const CardMTVMH = ( props ) => {
       </div>
     </div>
     </Link>
-    <div className="favorite-button-container">
-      <FavoriteButton recId={props.recId} imgSrc={props.imgSrc} recipeTitle={titleToDisplay()} readyInMin={props.readyInMin} markAsFavorite={props.markAsFavorite} ></FavoriteButton>
-      </div>
+    {props.showHeart && <div className="favorite-button-container">
+      <FavoriteButton recId={props.recId} imgSrc={props.imgSrc} recipeTitle={titleToDisplay()} readyInMin={props.readyInMin} setFavoriteRecipes={props.setFavoriteRecipes} isFavorite={isFavorite} setIsFavorite={setIsFavorite} ></FavoriteButton>
+      </div>}
     </div>
   );
 };

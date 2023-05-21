@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Card from '../../components/RecipeCard/Card';
 import { RecipeFrontST } from '../../components/Interface/Interface';
@@ -9,15 +8,16 @@ import { FavoriteRecipeDisplay } from "../../components/FavoriteRecipeDisplay/Fa
 
 export const ProfilePage = () => {
 
+  
+
   const [storageLikedRecipes, setStorageLikedRecipes] = useState(JSON.parse(localStorage.getItem("cookedAndLiked")!) !== null ? JSON.parse(localStorage.getItem("cookedAndLiked")!) : []);
   const [favoriteRecipes, setFavoriteRecipes] = useState(JSON.parse(localStorage.getItem("favoriteRecipes")!) !== null ? JSON.parse(localStorage.getItem("favoriteRecipes")!) : []);
 
   // function for checking if the recipe shown on the card is a favorite recipe. 
-  function checkIfFavoriteRecipe(favoriteRecipes, recipeId:number) {
-    const favoriteStorageArray = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const found = favoriteStorageArray.find(recipe => recipe.id === recipeId)
-    return found? true: false; 
-  }
+  // function checkIfFavoriteRecipe(recipeId:number) {
+  //   const found = favoriteRecipes.find(recipe => recipe.id === recipeId)
+  //   return found? true: false; 
+  // }
 
   const RenderSTCard = (recipe: RecipeFrontST) => (
     <Card
@@ -26,7 +26,6 @@ export const ProfilePage = () => {
       imgSrc={recipe.image}
       recipeTitle={recipe.title}
       readyInMin={recipe.readyInMinutes}
-      markAsFavorite={checkIfFavoriteRecipe(favoriteRecipes,recipe.id)}
     />
   );
 
@@ -63,10 +62,7 @@ export const ProfilePage = () => {
           )}
         </div>
       </div>
-      <div className="profile-header">
-        Favorite recipes!
-      </div>
-      <FavoriteRecipeDisplay favoriteRecipes={favoriteRecipes}></FavoriteRecipeDisplay>
+      <FavoriteRecipeDisplay favoriteRecipes={favoriteRecipes} setFavoriteRecipes={setFavoriteRecipes} ></FavoriteRecipeDisplay>
     </div> 
   );
 

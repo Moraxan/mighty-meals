@@ -6,14 +6,9 @@ import SearchBarFreeText from "../../components/SearchBar/SearchBarFreeText";
 import SearchSwitch from "../../components/SearchSwitch/SearchSwitch";
 import NoResult from "../../components/NoResult/NoResult";
 import ModalSaveAPIKey from "../../components/ModalSaveAPIKey/ModalSaveAPIKey";
-import HaveCook from "../../components/HaveCooked/HaveCooked";
 import Card from "../../components/RecipeCard/Card";
 import CardMTVMH from "../../components/RecipeCard/CardMTVMH";
-import {
-  RecipeFrontST,
-  RecipeMTVMH,
-  Hero,
-} from "../../components/Interface/Interface";
+import { RecipeFrontST, RecipeMTVMH, Hero } from "../../components/Interface/Interface";
 import { useMediaQuery } from "../../components/DropdownNav/DropdownNav";
 import { useBackButtonStore } from "../../components/Stores/backButtonClick";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
@@ -27,6 +22,11 @@ import { SetHulkTheme, SetThorTheme, SetCaptainAmericaTheme } from "../../compon
 
 //@ts-ignore
 export default function StartPage(props) {
+
+  if(JSON.parse(localStorage.getItem('favoriteRecipes')!) === null){
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
+
   //***************************                   DEVMODE IS NOW SET IN MAIN.TSX FILE!!!                **************************
 
   //#region Zustand stores #############################################################################################################
@@ -76,9 +76,6 @@ export default function StartPage(props) {
 
   // variable to determine of no results or not.
   const [noResultsReturned, setNoResultsReturned] = useState(false);
-
-  // state for favoriteRecipe array in local storage
-  const [favoriteRecipes, setFavoriteRecipes] = useState(JSON.parse(localStorage.getItem("favoriteRecipes")!) !== null ? JSON.parse(localStorage.getItem("favoriteRecipes")!) : []);
 
   //#endregion ##########################################################################################################################
 
@@ -346,8 +343,9 @@ export default function StartPage(props) {
   }
 
     // function for checking if the recipe shown on the card is a favorite recipe. 
-  function checkIfFavoriteRecipe(favoriteRecipes, recipeId:number) {
-    const favoriteStorageArray = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  function checkIfFavoriteRecipe(recipeId:number) {
+    const favoriteStorageArray = JSON.parse(localStorage.getItem('favoriteRecipes')!);
+    //@ts-ignore
     const found = favoriteStorageArray.find(recipe => recipe.id === recipeId)
     return found? true: false; 
   }
@@ -360,7 +358,8 @@ export default function StartPage(props) {
       recipeTitle={recipe.title}
       readyInMin={recipe.readyInMinutes}
       persistSearchData={persistSearchData}
-      markAsFavorite={checkIfFavoriteRecipe(favoriteRecipes,recipe.id)}
+      markAsFavorite={checkIfFavoriteRecipe(recipe.id)}
+      showHeart={true}
     />
   );
 
@@ -375,7 +374,8 @@ export default function StartPage(props) {
       persistSearchData={persistSearchData}
       ingredientChoices={ingredientChoices}
       totalNumberOfIngredients={totalNumberOfIngredients}
-      markAsFavorite={checkIfFavoriteRecipe(favoriteRecipes,recipe.id)}
+      markAsFavorite={checkIfFavoriteRecipe(recipe.id)}
+      showHeart={true}
     />
   );
 
