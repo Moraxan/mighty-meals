@@ -1,8 +1,11 @@
-@font-face{
-    font-family: "Varela";
-    src: local("VarelaRoundRegular"), url("../../fonts/Varela/VarelaRound-Regular.ttf") format("truetype");
-}
-
 .dropdown-text{
-    font-family: "Varela";
+    font: var(--small-varela-font);
+    background-color: var(--accentcolouryellow);
+}
+.dropdown-item:hover{
+    background-color: var(--accentcolourred);
+}
+.dropdown-item:focus{
+    color: black;
+    background-color: var(--accentcolourred);
 }

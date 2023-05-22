@@ -43,7 +43,7 @@
   margin-top: 30px;
 }
 .comment-button:hover{
-  background-color: #7c5fb4;
+  background-color: var(--accentcolourpurple);
 }
 
 

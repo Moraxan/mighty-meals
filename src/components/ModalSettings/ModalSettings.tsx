@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useApiCheckerStore } from "../Stores/checkIfApiExists";
 import { isDevMode } from "../../main";
@@ -65,7 +64,7 @@ export default function ModalSaveAPIKey(props) {
       setUseStatic("true");
     }
   };
-
+  
   const handleSubmit = () => {
     persistedSettings.storedMaxHits = maxHits;
     persistedSettings.storedMaxRandomHits = maxRandom;
@@ -97,10 +96,10 @@ export default function ModalSaveAPIKey(props) {
           props.setShowSettings(false);
         }}
       >
-        <Modal.Header closeButton>
+        <Modal.Header className="modalheader" closeButton>
           <Modal.Title>Settings</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="modalbody">
           API key:
           <input
             className="input-Modal"
@@ -174,12 +173,11 @@ export default function ModalSaveAPIKey(props) {
             Documentation
           </a>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer className="modalfooter">
+          <button className="closebutton" onClick={handleClose}>
             Close
-          </Button>
-          <Button
-            variant="primary"
+          </button>
+          <button className="submitbutton"
             onClick={handleSubmit}
             disabled={
               apiInputBox === null
@@ -190,7 +188,7 @@ export default function ModalSaveAPIKey(props) {
             }
           >
             Save settings
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </>

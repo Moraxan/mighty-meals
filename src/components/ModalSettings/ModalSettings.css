@@ -1,9 +1,61 @@
 .input-Checkbox{
     margin: 15px 5px 10px 0px;
+    accent-color: var(--accentcolouryellow);    
 }
 
 .input-Modal-Small{
     max-width: 30px;
     margin-top: 10px;
     margin-right: 5px;
+    color: black;
+  accent-color: var(--accentcolouryellow);
+}
+.input-Modal{
+    background-color: var(--accentcolouryellow);
+  color: black;
+  accent-color: var(--accentcolouryellow);
+}
+
+.modalbody{
+    background-color: var(--accentcolourred);
+}
+.modalheader{
+    background-color: var(--accentcolourred);
+    border: 0px;
+}
+.modalfooter{
+    background-color: var(--accentcolourred);
+    border: 0px;
+}
+.submitbutton{
+    height: 38px;
+    border-radius: 5px;
+  border: 1px solid black;
+  background-color: var(--accentcolouryellow);
+  color: black;
+}
+.submitbutton:hover{
+    background-color: var(--accentcolourpurple);
+    color: black;
+}
+.submitbutton:active{
+    background-color: var(--accentcolourpurple);
+    color: black;    
+}
+
+.closebutton{
+    height: 38px;
+    border-radius: 5px;
+  border: 1px solid black;
+  background-color: var(--accentcolouryellow);
+  color: black;
+}
+.closebutton:hover{
+    background-color: var(--accentcolourpurple);
+    color: black;
+}
+.closebutton:active{
+    background-color: var(--accentcolourpurple);
+    color: black;    
+    
 }
