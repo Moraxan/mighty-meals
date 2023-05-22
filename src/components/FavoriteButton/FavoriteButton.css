@@ -2,10 +2,10 @@
     cursor: pointer;
     background-color: transparent;
     border: 0px;
-    
+    height: 36px; 
 }
 
 .favorite-image{
     width: 40px;
-    height: auto; 
+    height: 36px; 
 }
