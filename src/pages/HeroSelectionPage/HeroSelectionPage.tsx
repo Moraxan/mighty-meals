@@ -1,9 +1,8 @@
 import {Link} from 'react-router-dom';
 import { BackButton } from "../RecipePage/BackButton";
-import { getSuperhero } from "../../components/GetSuperhero/GetSuperhero";
 import { captainAmerica, hulk, thor } from "./HeroObjects";
 import { useHeroInfoStore } from "../../components/Stores/displayHeroInfoAndFood";
-import {useBackButtonStore} from "../../components/Stores/backButtonClick";
+import { useBackButtonStore } from "../../components/Stores/backButtonClick";
 
 import cptAmericaImg from "./Images/captainAmerica.jpg";
 import hulkImg from "./Images/hulk.jpg";
@@ -38,10 +37,10 @@ export default function HeroSelectionPage(){
 
     return (
         <>
-            <div className="back-btn">
+            <div className="backbutton-style">
                 <BackButton />
             </div>
-            
+
             <div className="heroheader">
                 <h1>eat like your favorite hero</h1>
             </div>
