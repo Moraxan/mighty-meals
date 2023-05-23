@@ -11,7 +11,6 @@
     justify-content: space-between;
     
     column-gap: 10px;
-    margin-bottom: 50px;
 }
 
 .matches{
@@ -49,6 +48,7 @@
     border-radius: 10px;
     color: black;
     padding-top: 1px;
+    margin-top: 50px;
     width: 100px;
     height: 30px;  
     text-align: center;
@@ -74,8 +74,6 @@
 
     #switch-content{
         position: absolute;
-        /* background-color: #7c5fb4;
-        width: 100vw; */
     
         top: 10px;
         left: 35px;
@@ -89,5 +87,8 @@
     .main-div{
         top: 10px;
 
+    }
+    .red-fluff{
+        z-index: 2;
     }
 }

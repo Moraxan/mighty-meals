@@ -1,11 +1,13 @@
-.favorite-button{
+.favorite-button{    
     cursor: pointer;
     background-color: transparent;
     border: 0px;
     height: 36px; 
-}
-
-.favorite-image{
     width: 40px;
+    padding: 0px;
+}
+.favorite-button img{
+    vertical-align: top;
     height: 36px; 
+    width: 40px;
 }
