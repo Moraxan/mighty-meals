@@ -43,7 +43,6 @@
 .likedrecipes {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 10px;
     background-color: var(--accentcolourredNonStatic);
     border:5px solid black;
     border-radius: 10px;
@@ -66,6 +65,7 @@
     position: relative;
     max-width: 320px;
     min-width: 320px;
+    height: 235px;
 }
 
 .liked-recipe-button{
