@@ -11,6 +11,7 @@
     justify-content: space-between;
     
     column-gap: 10px;
+    margin-bottom: 70px;
 }
 
 .matches{
@@ -48,7 +49,6 @@
     border-radius: 10px;
     color: black;
     padding-top: 1px;
-    margin-top: 50px;
     width: 100px;
     height: 30px;  
     text-align: center;

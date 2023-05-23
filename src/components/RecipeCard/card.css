@@ -2,6 +2,7 @@
 
   .main-card{
     position: relative;
+    height: 235px;
   }
   .favorite-button-container{
     position: absolute;
@@ -20,8 +21,9 @@
   }
 
   .card__bg-image {
-    width: 100%;
-    height: 100%;
+    object-fit:fill;
+    width: 320px;
+    height: 210px;
   }
   
   .card__container {
