@@ -49,7 +49,7 @@ export function FavoriteButton({recId, imgSrc, readyInMin, recipeTitle, setFavor
     return (
         <>
             <button className="favorite-button">
-                <img src={isFavorite? heart_red : heart_yellow} alt="<3" onClick={HandleButtonClick} className="favorite-image"/>
+                <img src={isFavorite? heart_red : heart_yellow} alt="<3" onClick={HandleButtonClick} />
             </button>
 
         </>

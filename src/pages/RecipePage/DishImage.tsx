@@ -23,7 +23,7 @@ export const DishImage = ({ imageUrl, altText, recipeObject,}) => {
     <div className="dish-image-container">
       {/*//@ts-ignore*/}
       <img src={imageUrl === undefined ? "undefined" : imageUrl} alt={altText} className="dish-image" onError={(e) => {e.target.src = alt_image}} />
-      <div>
+      <div className="fav-icon">
         <FavoriteButton recId={recipeObject.id} imgSrc={recipeObject.image} readyInMin={recipeObject.readyInMinutes} recipeTitle={recipeObject.title} setFavoriteRecipes={setFavoriteRecipes} isFavorite={isFavorite} setIsFavorite={setIsFavorite}/>
       </div>
     </div>

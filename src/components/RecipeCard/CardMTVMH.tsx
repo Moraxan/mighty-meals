@@ -33,7 +33,7 @@ const CardMTVMH = ( props ) => {
   }
 
   return (
-    <div className="topCard">
+    <div className="main-card">
     <Link to={`/recipe/${props.recId}`} onClick={() => {handleClick()}}>
     <div className="card card__wrapper">
       {/*//@ts-ignore*/}

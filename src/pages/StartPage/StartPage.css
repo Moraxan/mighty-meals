@@ -9,9 +9,9 @@
     flex-direction: row;
     align-self: center;
     justify-content: space-between;
-    row-gap: 10px;
+    
     column-gap: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
 }
 
 .matches{
@@ -74,8 +74,6 @@
 
     #switch-content{
         position: absolute;
-        /* background-color: #7c5fb4;
-        width: 100vw; */
     
         top: 10px;
         left: 35px;
@@ -89,5 +87,8 @@
     .main-div{
         top: 10px;
 
+    }
+    .red-fluff{
+        z-index: 2;
     }
 }

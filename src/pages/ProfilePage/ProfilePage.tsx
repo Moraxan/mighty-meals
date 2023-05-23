@@ -42,28 +42,30 @@ export const ProfilePage = () => {
 
 
   return (
-    <div className="profilepage-container">
+    <div className="outer-container">
       <div className="back-btn">
         <BackButton />
       </div>
+    <div className="profilepage-container">      
       <div className="profile-header">
-        Profile
+        user profile
       </div>
-      <div className="grid-container">
-        <div className="likedrecipes">
-          <div className="profile-header">
-            Liked recipes!
-          </div>
+      <div className="recipe-collection-container">
+      <div className="likedrecipes">
+        <div className="like-header">liked recipes</div>
+          <div className="recipes">
           {storageLikedRecipes.length > 0 && storageLikedRecipes.map((recipe: RecipeFrontST) => 
             <div className="liked-recipe-item" key={recipe.id + "-liked"}>
               <div className="liked-recipe-button" onClick={() => HandleLikedClick(recipe.id)}></div>
               {RenderSTCard(recipe)}
             </div>
           )}
-        </div>
+          </div>          
       </div>
-      <FavoriteRecipeDisplay favoriteRecipes={favoriteRecipes} setFavoriteRecipes={setFavoriteRecipes} ></FavoriteRecipeDisplay>
+          <FavoriteRecipeDisplay favoriteRecipes={favoriteRecipes} setFavoriteRecipes={setFavoriteRecipes} ></FavoriteRecipeDisplay>
+      </div>
     </div> 
+    </div>
   );
 
 }

@@ -13,7 +13,7 @@ export function FavoriteRecipeDisplay({favoriteRecipes, setFavoriteRecipes}){
 //@ts-ignore
       const renderCards = (recipes) => {
         return (
-          <div>
+          <>
             {/*//@ts-ignore*/}
             {recipes.map(recipe => (
               <Card
@@ -28,24 +28,16 @@ export function FavoriteRecipeDisplay({favoriteRecipes, setFavoriteRecipes}){
               showHeart={true}
               />
             ))}
-          </div>
+          </>
         );
       };
 
-    return (
-        <>
-        <div className="favorite-title">
-          Favorite recipes
-        </div>
-        <div className="favorite-outer-container">
-          <div className="favorite-outer-container">
-              <div className="cards-container">
-                {favoriteRecipes.length > 0 && <div className="cards-wrapper">
-                    {renderCards(favoriteRecipes)};
-                </div>}
-              </div>
+    return (        
+        <div className="faved-recipes">
+        <div className="fav-header">favorite recipes</div>
+                {favoriteRecipes.length > 0 && <div className="fav-recipes">                
+                    {renderCards(favoriteRecipes)}
+                </div>}              
           </div>
-        </div>
-        </>
     );
 }
