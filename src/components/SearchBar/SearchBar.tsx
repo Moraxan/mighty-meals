@@ -85,7 +85,7 @@ export default function SearchBar(props){
                     } else if(keyPress === "ArrowUp" && indexState !== 0){
                         setIndexState(indexState - 1);
 
-                        if(indexState - 1 === previousJump){
+                        if(indexState - 1 === previousJump && indexState > 4){
                             setPreviousJump(indexState - 7);
 
                             ingredientWindow?.scroll(0, (indexState - 6) * 40);
