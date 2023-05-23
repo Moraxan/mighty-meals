@@ -14,7 +14,7 @@
 }
 
 .accordion-collapse{
-    background-color: #e42427;
+    background-color: var(--accentcolourred);
 }
 
 .accordion-item{
@@ -27,13 +27,13 @@
 }
 
 .accordion-button{
-    background-color: #e42427;
+    background-color: var(--accentcolourred);
     padding: 10px 0px 10px 10px;
     font-size: 1.7rem;
 }
 
 .accordion-button:not(.collapsed){
-    background-color: #e42427;
+    background-color: var(--accentcolourred);
     padding: 10px 0px 10px 10px;
     color: black;
     box-shadow: none;

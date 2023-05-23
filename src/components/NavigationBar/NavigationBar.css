@@ -14,32 +14,33 @@
     overflow: visible;
     top: 0;
     width: 100%;
-    background-color: #7c5fb4;
+    background-color: var(--accentcolourpurpleNonStatic);
     border-bottom: 5px solid black;
     margin-bottom: 10px;
     padding: 3px 0px 3px 0px;
 }
 
 .mighty-navbar-text{
-    color: #eda037;
+    color: var(--accentcolouryellow);
     font-size: 3rem;
     -webkit-text-stroke: 1px black;
     margin-right: -80px;
 }
 
 .burger-button{
-    background-color: #eda037;
+    background-color: var(--accentcolouryellow);
     border: 3px solid black;
     border-radius: 20px;
 }
 
+
 .burger-button:hover{
-    background-color: #e42427;
+    background-color: var(--accentcolourred);
     border: 3px solid black;
 }
 
 .burger-button.show{
-    background-color: #e42427;
+    background-color: var(--accentcolourred);
     border: 3px solid black;
 }
 
@@ -90,7 +91,7 @@
     }
     
     #mighty-switch{
-        background-color: #7c5fb4;
+        background-color: var(--accentcolourpurple);
         height: 20px;
         width: 35px;
     }
@@ -124,14 +125,13 @@
         height: 30px;
         width: auto;
     }
-
-    .burger-button{
-        background-color: #eda037;
-        border: 2px solid black;
-        border-radius: 13px;
-    }
-
     .navbar-bottom-margin{
         margin-top: 10px;
+    }
+}
+@media screen and (max-width: 382px) and (max-height: 900px), screen and (max-width: 382px) and (max-height: 900px){
+    .mighty-navbar-text{
+        font-size: 1.7rem;
+        padding-right: 10px;
     }
 }

@@ -18,10 +18,14 @@ import './RecipePage.css';
 
 export const RecipePage = () => {
 //  ***************   |This loads the id to the router via useLoaderData and the loader in the route |***************
+if(JSON.parse(localStorage.getItem('favoriteRecipes')!) === null){
+  localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+}
+
   const recipeId = useLoaderData();
   const [recipeData, setRecipeData] = useState(null);
   const [noResultsReturned, setNoResultsReturned] = useState(false);
-
+ 
   const apiKey: string | null = isDevMode ? useApiCheckerStore((state) => state.apiKey) : useApiCheckerStore((state) => state.apiProdKey);
 
   useEffect(() => {
@@ -71,18 +75,18 @@ export const RecipePage = () => {
       </div>
       <div className="DishImage">
           {/*//@ts-ignore*/}
-          <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} />
+          <DishImage imageUrl={recipeData?.image} altText={recipeData?.title} recipeObject={recipeData} />
       </div>
       <div className="Ingredients">
           {/*//@ts-ignore*/}
           <Ingredients ingredients={recipeData?.extendedIngredients} noOfServings={recipeData?.servings} />
       </div>
       <div className="DishSummary">
-          <DishSummary recipeData={recipeData} />
+          <DishSummary recipeData={recipeData} recipeId={recipeId} />
       </div>
       <div className="Directions">
           {/*//@ts-ignore*/}
-          <Directions directions={recipeData.analyzedInstructions } recipeId={recipeId} />
+          <Directions recipeObject={recipeData} />
         </div>
       </div>
   );

@@ -37,10 +37,14 @@ export default function SearchBar(props){
         };
 
         //@ts-ignore
-        const ingredientClick = (event) => {
-            // This finction is triggered from the list items sorted above.
+        const ingredientClick = (event: object | string) => {
+            // This function is triggered from the list items sorted above.
             // When clicked this function adds the choice to ingredientChoices (if already existing in list it will be removed instead).
-            const ingredientListChoice = event.target.innerText;
+
+            setIndexState(-1);
+
+            //@ts-ignore
+            const ingredientListChoice = typeof(event) === "object" ? event.target.innerText : event;
             let tmpIngredientChoices = [...props.ingredientChoices];
 
             if(!tmpIngredientChoices.includes(ingredientListChoice)){
@@ -60,11 +64,56 @@ export default function SearchBar(props){
             props.setShow(!props.show);
         }
 
+        const [indexState, setIndexState] = useState(-1);
+        const [previousJump, setPreviousJump] = useState(0);
+
+        const handleScrollIngredients = (keyPress: string) => {
+            const length = filteredData.length;
+            const ingredientWindow = document.querySelector(".autocom-box");
+
+            if(length > 0){
+                if(keyPress === "ArrowDown" || keyPress === "ArrowUp"){
+                    if(keyPress === "ArrowDown" && indexState !== length - 1){
+                        setIndexState(indexState + 1);
+                        
+                        if(indexState === 5 || indexState - previousJump === 6){
+                            setPreviousJump(indexState);
+
+                            ingredientWindow?.scroll(0, (indexState + 1) * 40);
+                        }
+
+                    } else if(keyPress === "ArrowUp" && indexState !== 0){
+                        setIndexState(indexState - 1);
+
+                        if(indexState - 1 === previousJump && indexState > 4){
+                            setPreviousJump(indexState - 7);
+
+                            ingredientWindow?.scroll(0, (indexState - 6) * 40);
+                        }
+
+                    }
+                } else if(keyPress === "Enter" && indexState >= 0 && indexState < length){
+                    ingredientClick(filteredData[indexState]);
+                    setIndexState(-1);
+                    setPreviousJump(0);
+                    ingredientWindow?.scroll(0, 0);
+                } else{
+                    setIndexState(-1);
+                    setPreviousJump(0);
+                    ingredientWindow?.scroll(0, 0);
+                }
+            } else if(props.ingredientChoices.length > 0 && searchText.length < 1){
+                if(keyPress === "Enter"){
+                    props.getApiData();
+                }
+            }
+        }
+
     return (
         // First div uses ternary on received prop (showRed) to determine if the extra red fluff is needed.
         <div className={props.showRed === true ? "red-fluff" : ""}>
             <div className={props.showRed === true ? "wrapper wrapper-padding" : "wrapper no-fluff"}>
-                <div className="search-input">
+                <div className="search-input" onKeyDown={(e) => {handleScrollIngredients(e.key)}}>
                     <input type="text" placeholder={props.ingredientChoices.length > 0 ? `Search ingredients (${props.ingredientChoices.length})` : "Search ingredients"} onChange={handleChange} value={searchText}/>
                     {/* If showRed is true our fileted result div gets a second class allowing us to change direction from down to up when displayed on phone. */}
                     <div className={props.showRed === true ? "autocom-box mobile-change-direction" : "autocom-box"}>
@@ -73,7 +122,12 @@ export default function SearchBar(props){
                             <ul>
                                 {filteredData.map((ingredient: string, index: number) => {
                                     return (
-                                        <li key={index} onClick={ingredientClick} className={`${isItemSelected(props.ingredientChoices, ingredient.toLocaleLowerCase()) && "ingredient-selected"}`}>{ingredient}</li>     
+                                        <li key={index} onClick={ingredientClick} className={
+                                            `${isItemSelected(props.ingredientChoices, ingredient.toLocaleLowerCase()) ?
+                                                index === indexState ? "ingredient-selected-remove" : "ingredient-selected" :
+                                                index === indexState && "ingredient-toBe-selected"}`
+                                            }>{ingredient}
+                                        </li>     
                                     )
                                 })}
                             </ul>

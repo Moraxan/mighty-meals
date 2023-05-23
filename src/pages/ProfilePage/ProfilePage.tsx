@@ -1,80 +1,71 @@
-import './ProfilePage.css';
-import { useState, useEffect, useMemo } from "react";
+import { useState } from "react";
 import Card from '../../components/RecipeCard/Card';
 import { RecipeFrontST } from '../../components/Interface/Interface';
 import { BackButton } from '../RecipePage/BackButton';
-import CommentForm from '../../components/Comment/CommentForm';
-import { likedRecipeStore } from '../../components/Stores/likedRecipes';
-import { useStore } from 'zustand';
+import './ProfilePage.css';
+import { FavoriteRecipeDisplay } from "../../components/FavoriteRecipeDisplay/FavoriteRecipeDisplay";
 
-const apiKey = localStorage.getItem("storedApiKey");
 
 export const ProfilePage = () => {
 
-  const [recipes, setRecipes] = useState<RecipeFrontST[]>([]);
-  const { recipeIds } = likedRecipeStore();
+  
 
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      const response = await Promise.all(recipeIds.map((id) => 
-        fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`)
-          .then((response) => response.json())
-      ));
-      const fetchedRecipes = response.map((data: any) => ({
-        id: data.id,
-        title: data.title,
-        image: data.image,
-        readyInMinutes: data.readyInMinutes,
-      }));
-      setRecipes(fetchedRecipes);
-    };
+  const [storageLikedRecipes, setStorageLikedRecipes] = useState(JSON.parse(localStorage.getItem("cookedAndLiked")!) !== null ? JSON.parse(localStorage.getItem("cookedAndLiked")!) : []);
+  const [favoriteRecipes, setFavoriteRecipes] = useState(JSON.parse(localStorage.getItem("favoriteRecipes")!) !== null ? JSON.parse(localStorage.getItem("favoriteRecipes")!) : []);
 
-    if (recipeIds.length > 0) {
-      fetchRecipes();
-    }
-  }, [recipeIds]);
+  // function for checking if the recipe shown on the card is a favorite recipe. 
+  // function checkIfFavoriteRecipe(recipeId:number) {
+  //   const found = favoriteRecipes.find(recipe => recipe.id === recipeId)
+  //   return found? true: false; 
+  // }
 
-  // This maps over the liked recipes and displays the cards for them.
-  const LikedRecipes = () => {
-    return (
-      <div >
-        {recipes.map((recipe) => (
-          <div className="profilePage-card" key={recipe.id}>
-            <Card
-              recId={recipe.id}
-              recipeTitle={recipe.title}
-              imgSrc={recipe.image}
-              readyInMin={recipe.readyInMinutes}
-            />
-          </div>
+  const RenderSTCard = (recipe: RecipeFrontST) => (
+    <Card
+      key={recipe.id}
+      recId={recipe.id}
+      imgSrc={recipe.image}
+      recipeTitle={recipe.title}
+      readyInMin={recipe.readyInMinutes}
+    />
+  );
 
-        ))}
-      </div>
-    );
-  };
+  const HandleLikedClick = (recipeId: number) => {
+    const currentRecipeId = (input: RecipeFrontST) => input.id === recipeId;
+    let currentArray = storageLikedRecipes.splice(0);
+  
+    const indexInStorage: number = currentArray.findIndex(currentRecipeId);
+    currentArray.splice(indexInStorage, 1);
+  
+    localStorage.setItem("cookedAndLiked", JSON.stringify(currentArray));
+    setStorageLikedRecipes(currentArray);
+  }
+
 
   return (
-    <div className="profilepage-container">
+    <div className="outer-container">
       <div className="back-btn">
         <BackButton />
       </div>
+    <div className="profilepage-container">      
       <div className="profile-header">
-        Profile
+        user profile
       </div>
-      <div className="grid-container">
-        <div className="likedrecipes">
-          <div className="profile-header">
-            These are your liked recipes!
-          </div>
-          <div>
-            <LikedRecipes />
-          </div>
-        </div>
-        <div className="comments-box">
-          <CommentForm/>
-        </div>
+      <div className="recipe-collection-container">
+      <div className="likedrecipes">
+        <div className="like-header">liked recipes</div>
+          <div className="recipes">
+          {storageLikedRecipes.length > 0 && storageLikedRecipes.map((recipe: RecipeFrontST) => 
+            <div className="liked-recipe-item" key={recipe.id + "-liked"}>
+              <div className="liked-recipe-button" onClick={() => HandleLikedClick(recipe.id)}></div>
+              {RenderSTCard(recipe)}
+            </div>
+          )}
+          </div>          
       </div>
+          <FavoriteRecipeDisplay favoriteRecipes={favoriteRecipes} setFavoriteRecipes={setFavoriteRecipes} ></FavoriteRecipeDisplay>
+      </div>
+    </div> 
     </div>
-  )
-  }
+  );
 
+}

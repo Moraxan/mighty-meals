@@ -6,14 +6,9 @@ import SearchBarFreeText from "../../components/SearchBar/SearchBarFreeText";
 import SearchSwitch from "../../components/SearchSwitch/SearchSwitch";
 import NoResult from "../../components/NoResult/NoResult";
 import ModalSaveAPIKey from "../../components/ModalSaveAPIKey/ModalSaveAPIKey";
-import HaveCook from "../../components/HaveCooked/HaveCooked";
 import Card from "../../components/RecipeCard/Card";
 import CardMTVMH from "../../components/RecipeCard/CardMTVMH";
-import {
-  RecipeFrontST,
-  RecipeMTVMH,
-  Hero,
-} from "../../components/Interface/Interface";
+import { RecipeFrontST, RecipeMTVMH, Hero } from "../../components/Interface/Interface";
 import { useMediaQuery } from "../../components/DropdownNav/DropdownNav";
 import { useBackButtonStore } from "../../components/Stores/backButtonClick";
 import { useApiCheckerStore } from "../../components/Stores/checkIfApiExists";
@@ -23,9 +18,15 @@ import { isDevMode } from "../../main";
 import "./StartPage.css";
 import Sort from "../../components/Sort/Sort";
 import SuperHeroInfo from "../../components/SuperHeroInfo/SuperHeroInfo";
+import { SetHulkTheme, SetThorTheme, SetCaptainAmericaTheme } from "../../components/HeroThemes/HeroThemes";
 
 //@ts-ignore
 export default function StartPage(props) {
+
+  if(JSON.parse(localStorage.getItem('favoriteRecipes')!) === null){
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
+
   //***************************                   DEVMODE IS NOW SET IN MAIN.TSX FILE!!!                **************************
 
   //#region Zustand stores #############################################################################################################
@@ -151,12 +152,18 @@ export default function StartPage(props) {
         if (heroObject.id === "149") {
           cuisine = "american";
           minCalories = "1";
+          SetCaptainAmericaTheme();
+
         } else if (heroObject.id === "332") {
           cuisine = "";
           minCalories = "1000";
+          SetHulkTheme();
+
         } else if (heroObject.id === "659") {
           cuisine = "nordic";
           minCalories = "1";
+          SetThorTheme();
+
         }
 
         const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&cuisine=${cuisine}&minCalories=${minCalories}&number=${maxHits}&sort=popularity&sortDirection=desc&addRecipeInformation=true`;
@@ -335,6 +342,14 @@ export default function StartPage(props) {
     }
   }
 
+    // function for checking if the recipe shown on the card is a favorite recipe. 
+  function checkIfFavoriteRecipe(recipeId:number) {
+    const favoriteStorageArray = JSON.parse(localStorage.getItem('favoriteRecipes')!);
+    //@ts-ignore
+    const found = favoriteStorageArray.find(recipe => recipe.id === recipeId)
+    return found? true: false; 
+  }
+
   const renderSTCard = (recipe: RecipeFrontST) => (
     <Card
       key={recipe.id}
@@ -342,8 +357,9 @@ export default function StartPage(props) {
       imgSrc={recipe.image}
       recipeTitle={recipe.title}
       readyInMin={recipe.readyInMinutes}
-      handleRecipeClick={props.handleRecipeClick}
       persistSearchData={persistSearchData}
+      markAsFavorite={checkIfFavoriteRecipe(recipe.id)}
+      showHeart={true}
     />
   );
 
@@ -355,10 +371,11 @@ export default function StartPage(props) {
       recipeTitle={recipe.title}
       usedIngredientCount={recipe.usedIngredientCount}
       missedIngredientCount={recipe.missedIngredientCount}
-      handleRecipeClick={props.handleRecipeClick}
       persistSearchData={persistSearchData}
       ingredientChoices={ingredientChoices}
       totalNumberOfIngredients={totalNumberOfIngredients}
+      markAsFavorite={checkIfFavoriteRecipe(recipe.id)}
+      showHeart={true}
     />
   );
 
@@ -497,7 +514,7 @@ export default function StartPage(props) {
           {standardSearch &&
           !isHeroSelected && 
           <div className="sorting">
-            <Sort sortedBy={sortedBy} setSortedBy={setSortedBy} />
+            <Sort sortedBy={sortedBy} setSortedBy={setSortedBy} getApiData={getApiData} />
           </div>}
           
         </div>
@@ -543,7 +560,7 @@ export default function StartPage(props) {
           </div>
 
           {!matches &&
-            (recipesST.length > 7 || recipesMTVMH.length > 7) &&
+            (recipesST.length > 6 || recipesMTVMH.length > 6) &&
             !showMore && (
               <div className="show-more-button-container">
                 {" "}

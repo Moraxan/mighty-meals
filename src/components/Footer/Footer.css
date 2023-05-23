@@ -2,11 +2,12 @@
     bottom: 0;
     width: 100%;
     min-height: 40px;
-    background-color: #7c5fb4;
+    background-color: var(--accentcolourpurpleNonStatic);
     border-top: 5px solid black;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
 }
 
 .mighty-footer-p{

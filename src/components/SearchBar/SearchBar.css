@@ -4,7 +4,7 @@
 }
 
 .red-fluff{
-    background-color: #e42427;
+    background-color: var(--accentcolourred);
     border: 5px solid black;
     border-radius: 15px;
     margin-left: auto;
@@ -31,17 +31,25 @@
 
 .wrapper .search-input{
     position: relative;
-    background: #eda037;
+    background: var(--accentcolouryellow);
     width: 100%;
     border-radius: 15px;
 }
 
 .ingredient-selected{
+    background: var(--accentcolourpurple);
+}
+
+.ingredient-toBe-selected{
     background: #7c5fb4;
 }
 
+.ingredient-selected-remove{
+    background: #e42427;
+}
+
 .search-input input{
-    background: #eda037;
+    background: var(--accentcolouryellow);
     height: 45px;
     width: 100%;
     outline: none;
@@ -90,11 +98,11 @@
 }
 
 .search-icon:hover{
-    background: #7c5fb4;
+    background: var(--accentcolourpurple);
 }
 
 .icon:hover{
-    background: #7c5fb4;
+    background: var(--accentcolourpurple);
 }
 
 .search-input .search-icon{
@@ -123,7 +131,7 @@
     width: 100%;
 
     border-radius: 20px 20px 15px 15px;
-    background: #eda037;
+    background: var(--accentcolouryellow);
     z-index: 50;
     position: absolute;
 }
@@ -147,11 +155,11 @@
 }
 
 .autocom-box li:hover{
-    background: #7c5fb4;
+    background: var(--accentcolourpurple);
 }
 
 .autocom-box .ingredient-selected:hover{
-    background: #e42427;
+    background: var(--accentcolourred);
 }
 
 @media screen and (max-width: 570px){
@@ -176,7 +184,7 @@
         border: none;
         border-top: 3px solid black;
         border-radius: 0px;
-        background-color: #e42427;
+        background-color: var(--accentcolourred);
 
         margin-left: auto;
         margin-right: auto;
